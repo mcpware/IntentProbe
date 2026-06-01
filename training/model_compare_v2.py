@@ -7,12 +7,18 @@ v1's 5-fold on hard_v3 + best-of-all-layers is optimistic (overfit risk). v2:
   - report in-dist CV (mean +/- std) AND cross-set generalization
 Model selection metric = cross-set generalization, NOT the inflated in-dist number.
 """
-import json, time, gc
+import json, time, gc, ctypes
 from pathlib import Path
 import numpy as np, torch
 from transformers import AutoTokenizer, AutoModel, AutoModelForCausalLM
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score, StratifiedKFold
+
+def force_free():
+    """Force Python to return freed memory to the OS (glibc malloc_trim)."""
+    gc.collect()
+    try: ctypes.CDLL("libc.so.6").malloc_trim(0)
+    except Exception: pass
 
 SEED = 42
 torch.manual_seed(SEED); np.random.seed(SEED)
@@ -82,7 +88,8 @@ for name, repo in MODELS:
         print(f"  params={nparam:.0f}M  layer L{L}/{len(EMtr)-1}  in-dist={indist_m:.3f}±{indist_s:.3f}  "
               f"cross-set={cm:.3f}  [" + " ".join(f"{k}:{v:.2f}" for k, v in cross.items()) + "]", flush=True)
         rows.append((name, nparam, L, indist_m, indist_s, cm, cross))
-        del m, tok, EMtr; gc.collect()
+        del m, tok, EMtr; force_free()
+        import os; print(f"  [mem] RSS={os.popen('ps -o rss= -p ' + str(os.getpid())).read().strip()}KB", flush=True)
     except Exception as e:
         print(f"  SKIP {name}: {type(e).__name__}: {str(e)[:140]}", flush=True)
         rows.append((name, None, None, None, None, None, None))
