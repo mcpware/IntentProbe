@@ -236,8 +236,8 @@ Current artifact path:
 research/train_probe_artifact.py
   -> metadata.json
   -> probe_weights.npz
-  -> research/activation_scanner_core.py
-  -> research/activation_scanner_cli.py
+  -> intentprobe/scanner/core.py
+  -> intentprobe/scanner/cli.py
   -> JSON risk object
 ```
 
@@ -252,14 +252,14 @@ uses the pooled Qwen artifact and v3 policy-aware calibration queue:
 
 ```bash
 research/.venv-audit/bin/python -m research.validate_curated_dataset --pretty
-research/.venv-audit/bin/python -m research.train_probe_artifact --model qwen2.5-0.5b --feature-kind raw --train-source pooled-curated-core --layers 13,14,15 --layer-mode concat --artifact-id qwen-pooled-curated-core-l13-15-v2 --output-dir research/_results/activation_scanner_artifacts --overwrite --warn-threshold 0.30 --block-threshold 0.85 --pretty
-research/.venv-audit/bin/python -m research.calibrate_scanner_thresholds --artifact research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2 --pretty
+research/.venv-audit/bin/python -m research.train_probe_artifact --model qwen2.5-0.5b --feature-kind raw --train-source pooled-curated-core --layers 13,14,15 --layer-mode concat --artifact-id qwen-pooled-curated-core-l13-15-v2 --output-dir intentprobe/scanner/artifacts --overwrite --warn-threshold 0.30 --block-threshold 0.85 --pretty
+research/.venv-audit/bin/python -m research.calibrate_scanner_thresholds --artifact intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2 --pretty
 research/.venv-audit/bin/python -m research.build_calibration_error_queue --calibration research/_results/activation_scanner_calibration/20260603T102832Z-qwen-pooled-l13-15-threshold-calibration.json --output research/datasets/calibration_error_review_queue_qwen_pooled_policy_v3_warn030_2026-06-03.json --pretty
 research/.venv-audit/bin/python -m research.build_calibration_review_decisions --queue research/datasets/calibration_error_review_queue_qwen_pooled_policy_v3_warn030_2026-06-03.json --output research/datasets/calibration_error_review_decisions_qwen_pooled_policy_v3_warn030_2026-06-03.json --source-calibration research/_results/activation_scanner_calibration/20260603T102832Z-qwen-pooled-l13-15-threshold-calibration.json --decision-policy corroborated-block-v3 --pretty
 research/.venv-audit/bin/python -m research.materialize_calibration_review_outputs --pretty
 research/.venv-audit/bin/python -m research.build_policy_regression_cases --pretty
 research/.venv-audit/bin/python -m research.activation_scanner_cli_regression --pretty
-research/.venv-audit/bin/python -m research.activation_scanner_regression --artifact research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2 --cases research/fixtures/activation_scanner_policy_regression_cases.json --no-build --pretty
+research/.venv-audit/bin/python -m research.activation_scanner_regression --artifact intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2 --cases research/fixtures/activation_scanner_policy_regression_cases.json --no-build --pretty
 ```
 
 Runtime contract files:
@@ -267,7 +267,10 @@ Runtime contract files:
 - `research/schemas/activation_scanner_risk.schema.json`
 - `research/fixtures/activation_scanner_regression_cases.json`
 - `research/activation_scanner_regression.py`
-- `research/activation_scanner_cli.py`
+- `intentprobe/scanner/core.py`
+- `intentprobe/scanner/cli.py`
+- `intentprobe/scanner/hook.py`
+- `research/activation_scanner_cli.py` compatibility wrapper
 - `research/activation_scanner_cli_regression.py`
 - `research/calibrate_scanner_thresholds.py`
 - `research/build_calibration_error_queue.py`

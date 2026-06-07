@@ -36,10 +36,12 @@ Methodology: `research/benchmark-results-deberta-vs-probe-2026-05-31.md` and
 
 ## Status
 
-Research preview, installable via pip. Includes the reproducible scanner
-pipeline under `research/`: benchmark scripts, curated datasets,
-calibration/review artifacts, JSON risk schemas, regression fixtures, and a
-hook-facing scanner wrapper.
+Research preview, installable via pip. The product runtime now lives under
+`intentprobe/scanner/` with CLI entrypoints for `intentprobe` and
+`intentprobe-hook`. The reproducible research lane remains under `research/`:
+benchmark scripts, curated datasets, calibration/review artifacts, JSON risk
+schemas, regression fixtures, and compatibility wrappers for old
+`research.activation_scanner_*` commands.
 
 A few honest notes, because they shape what intentprobe is:
 
@@ -89,6 +91,12 @@ echo "A calculator that adds two numbers." | .venv/bin/intentprobe scan --format
 5. Decision: **allow** / **warn** / **block** with confidence score.
 
 `research/SCANNER_PIPELINE.md` has the full architecture.
+
+## Repository map
+
+- `intentprobe/scanner/` — product scanner runtime, hook normalizer, model registry, static checks, and shipped probe artifact.
+- `intentprobe/cli.py` and `intentprobe/hook.py` — installed console entrypoints.
+- `research/` — reproducible experiments, benchmarks, datasets, calibration ledgers, and compatibility wrappers.
 
 ## License
 

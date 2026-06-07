@@ -36,13 +36,6 @@ thoughts/
 research/.venv-audit/
 research/.venv-bench/
 research/_results/
-!research/_results/
-research/_results/*
-!research/_results/activation_scanner_artifacts/
-research/_results/activation_scanner_artifacts/*
-!research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2/
-!research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2/metadata.json
-!research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2/probe_weights.npz
 research/audit_sources/
 research/audit_logs/
 research/arxiv/
@@ -50,4 +43,10 @@ research/datasets/MCPTox-Benchmark/
 research/datasets/external_raw/
 research/datasets/external_imports/
 research/datasets/external_normalized/
+
+# Shipped probe artifact. Keep only the tiny default probe in git.
+intentprobe/scanner/artifacts/*
+!intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/
+!intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/metadata.json
+!intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/probe_weights.npz
 **/__pycache__/

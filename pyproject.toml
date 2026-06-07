@@ -39,4 +39,5 @@ include-package-data = true
 include = ["intentprobe*", "research*"]
 
 [tool.setuptools.package-data]
+intentprobe = ["scanner/artifacts/**/*.json", "scanner/artifacts/**/*.npz"]
 research = ["**/*.json", "**/*.npz", "**/*.md", "**/*.txt", "**/*.mjs", "**/*.ipynb"]

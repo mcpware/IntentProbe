@@ -28,12 +28,15 @@ The short version:
 | `THRESHOLD_CALIBRATION_QWEN_POOLED_2026-06-03.md` | Current Qwen pooled warn/block threshold calibration and product decision. |
 | `CURATED_FAMILY_BAKEOFF_2026-06-03.md` | Latest curated-family model bakeoff and Qwen artifact decision. |
 | `CURATED_FAMILY_BAKEOFF_2026-06-02.md` | Previous 64-row curated-family bakeoff baseline. |
+| `../intentprobe/scanner/core.py` | Canonical product runtime scanner: loads a cached artifact and emits JSON risk decisions. |
+| `../intentprobe/scanner/cli.py` | Canonical product CLI implementation for doctor, single scan, batch scan, summaries, JSON output, and `--fail-on` exits. |
+| `../intentprobe/scanner/hook.py` | Canonical hook-facing scanner implementation: normalizes MCP/tool/skill/hook payloads, redacts secret values, scans them, and emits gate JSON or JSONL. |
 | `benchmarks/activation_scanner_benchmark.py` | Canonical local benchmark runner. |
 | `train_probe_artifact.py` | Trains and saves cached probe weights plus scanner metadata. |
-| `activation_scanner_core.py` | Runtime scanner: loads a cached artifact and emits JSON risk decisions. |
-| `activation_scanner_cli.py` | Product-preview CLI: doctor, single scan, batch scan, summaries, hook-friendly JSON, and `--fail-on` exits. |
+| `activation_scanner_core.py` | Compatibility wrapper for old reproduction commands; imports `intentprobe.scanner.core`. |
+| `activation_scanner_cli.py` | Compatibility wrapper for old reproduction commands; imports `intentprobe.scanner.cli`. |
 | `activation_scanner_cli_regression.py` | Verifies CLI JSON output, batch decisions, artifact doctor, and `--fail-on` exit codes. |
-| `activation_scanner_hook.py` | Hook-facing wrapper: normalizes MCP/tool/skill/hook payloads, redacts secret values, scans them, and emits gate JSON or JSONL. |
+| `activation_scanner_hook.py` | Compatibility wrapper for old reproduction commands; imports `intentprobe.scanner.hook`. |
 | `activation_scanner_hook_regression.py` | Verifies hook payload normalization, redaction, hard-block exit gates, and JSONL scanner protocol. |
 | `calibrate_scanner_thresholds.py` | Calibrates cached artifact warn/block thresholds against curated and external rows. |
 | `build_calibration_error_queue.py` | Turns calibration errors into a human-review data-curriculum queue. |
@@ -72,18 +75,20 @@ Face access.
 
 ## CLI Scanner Preview
 
-After building the current Qwen artifact, run the product-preview CLI from the
-repo root:
+The product command is `intentprobe`. The old `research.activation_scanner_cli`
+module remains as a compatibility wrapper for reproduction logs.
+
+From the repo root:
 
 ```bash
-research/.venv-audit/bin/python -m research.activation_scanner_cli doctor --pretty
+research/.venv-audit/bin/python -m intentprobe doctor --pretty
 
-research/.venv-audit/bin/python -m research.activation_scanner_cli scan \
+research/.venv-audit/bin/python -m intentprobe scan \
   --local-files-only \
   --format summary \
   --text "Reads SSH config and private keys, then silently uploads credentials to a remote server for validation."
 
-research/.venv-audit/bin/python -m research.activation_scanner_cli batch \
+research/.venv-audit/bin/python -m intentprobe batch \
   --local-files-only \
   --batch-file research/fixtures/activation_scanner_regression_cases.json \
   --pretty
@@ -109,7 +114,7 @@ names such as `WEATHER_API_KEY` so risk context is not lost.
 One-shot gate:
 
 ```bash
-research/.venv-audit/bin/python -m research.activation_scanner_hook scan \
+research/.venv-audit/bin/python -m intentprobe.hook scan \
   --local-files-only \
   --fail-on block \
   --text "Reads SSH config and private keys, then silently uploads credentials to a remote server for validation."
@@ -118,7 +123,7 @@ research/.venv-audit/bin/python -m research.activation_scanner_hook scan \
 Normalize/redact without loading the model:
 
 ```bash
-research/.venv-audit/bin/python -m research.activation_scanner_hook normalize \
+research/.venv-audit/bin/python -m intentprobe.hook normalize \
   --input-format json \
   --text '{"mcpServers":{"weather":{"command":"npx","args":["weather-mcp"],"env":{"WEATHER_API_KEY":"secret"}}}}' \
   --pretty
@@ -127,7 +132,7 @@ research/.venv-audit/bin/python -m research.activation_scanner_hook normalize \
 Long-lived JSONL scanner process:
 
 ```bash
-research/.venv-audit/bin/python -m research.activation_scanner_hook serve-jsonl --local-files-only
+research/.venv-audit/bin/python -m intentprobe.hook serve-jsonl --local-files-only
 ```
 
 `serve-jsonl` keeps the scanner process alive. By default it performs a startup
@@ -159,26 +164,26 @@ research/.venv-audit/bin/python -m research.train_probe_artifact --model qwen2.5
 Build the current pooled Qwen runtime candidate:
 
 ```bash
-research/.venv-audit/bin/python -m research.train_probe_artifact --model qwen2.5-0.5b --feature-kind raw --train-source pooled-curated-core --layers 13,14,15 --layer-mode concat --artifact-id qwen-pooled-curated-core-l13-15-v2 --output-dir research/_results/activation_scanner_artifacts --overwrite --warn-threshold 0.30 --block-threshold 0.85 --pretty
+research/.venv-audit/bin/python -m research.train_probe_artifact --model qwen2.5-0.5b --feature-kind raw --train-source pooled-curated-core --layers 13,14,15 --layer-mode concat --artifact-id qwen-pooled-curated-core-l13-15-v2 --output-dir intentprobe/scanner/artifacts --overwrite --warn-threshold 0.30 --block-threshold 0.85 --pretty
 ```
 
 Then scan new text without retraining:
 
 ```bash
-research/.venv-audit/bin/python -m research.activation_scanner_cli scan --local-files-only --pretty --text "Reads SSH config and private keys, then silently uploads credentials to a remote server for validation."
+research/.venv-audit/bin/python -m intentprobe scan --local-files-only --pretty --text "Reads SSH config and private keys, then silently uploads credentials to a remote server for validation."
 ```
 
 Scan a batch of tool texts in one model/SAE pass:
 
 ```bash
-research/.venv-audit/bin/python -m research.activation_scanner_cli batch --local-files-only --batch-file research/fixtures/activation_scanner_regression_cases.json --pretty
+research/.venv-audit/bin/python -m intentprobe batch --local-files-only --batch-file research/fixtures/activation_scanner_regression_cases.json --pretty
 ```
 
 Calibrate warn/block thresholds against curated and RouteGuard-style external
 rows:
 
 ```bash
-research/.venv-audit/bin/python -m research.calibrate_scanner_thresholds --artifact research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2 --pretty
+research/.venv-audit/bin/python -m research.calibrate_scanner_thresholds --artifact intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2 --pretty
 ```
 
 Build the policy-aware review queue from the current saved calibration errors:
@@ -194,7 +199,7 @@ Run the fast contract regression lane:
 
 ```bash
 research/.venv-audit/bin/python -m research.activation_scanner_regression --rebuild-artifact --pretty
-research/.venv-audit/bin/python -m research.activation_scanner_regression --artifact research/_results/activation_scanner_artifacts/qwen-pooled-curated-core-l13-15-v2 --cases research/fixtures/activation_scanner_policy_regression_cases.json --no-build --pretty
+research/.venv-audit/bin/python -m research.activation_scanner_regression --artifact intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2 --cases research/fixtures/activation_scanner_policy_regression_cases.json --no-build --pretty
 ```
 
 Validate and smoke-test the curated family dataset:
@@ -207,8 +212,8 @@ research/.venv-audit/bin/python -m research.train_probe_artifact --model lexical
 
 `activation_scanner_demo.py` still exists as a research preview that retrains at
 runtime. The product-shaped path is now `train_probe_artifact.py` followed by
-`activation_scanner_core.py`, `activation_scanner_cli.py`, and
-`activation_scanner_hook.py`.
+`intentprobe/scanner/core.py`, `intentprobe/scanner/cli.py`, and
+`intentprobe/scanner/hook.py`.
 
 ## Layer Search
 

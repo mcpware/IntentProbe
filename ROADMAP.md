@@ -19,7 +19,8 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 - [x] **5. Hook wrapper preview.** `intentprobe-hook` normalizes MCP/tool/skill/hook payloads, redacts secret values, emits gate JSON, and supports a warm JSONL process for runtime scanning.
 - [x] **6. Product packaging.** `pyproject.toml` + `intentprobe/` package. `pip install -e .` works. CLI entrypoints: `intentprobe scan`, `intentprobe batch`, `intentprobe doctor`, `intentprobe-hook`.
 - [x] **7. Reproduction + adversarial audit (2026-06-07).** Independent reproduction confirmed all train metrics (accuracy 0.9949, F1 0.9956, CV selection 0.9616). Gradient-free adversarial evasion: 0/146 evaded (GPT-2), 0/15 evaded (Qwen production probe). Python 3.10 compat fix applied. All regression tests pass.
-- [ ] **8. Public launch.** Push to GitHub, honest README with benchmark table, crowdsource real poisoned samples.
+- [x] **8. Product runtime boundary.** Canonical scanner runtime moved to `intentprobe/scanner/`; default probe artifact ships with the package. Old `research.activation_scanner_*` modules remain compatibility wrappers so reproducibility commands keep working.
+- [ ] **9. Public launch.** Push to GitHub, honest README with benchmark table, crowdsource real poisoned samples.
 
 ## Key technical facts (do not relearn these)
 
@@ -33,7 +34,9 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 
 - Training / eval data: `research/datasets/`.
 - Product CLI wrappers: `intentprobe/cli.py` and `intentprobe/hook.py`.
-- Scanner runtime: `research/activation_scanner_core.py`, `research/activation_scanner_cli.py`, and `research/activation_scanner_hook.py`.
+- Scanner runtime: `intentprobe/scanner/core.py`, `intentprobe/scanner/cli.py`, and `intentprobe/scanner/hook.py`.
+- Default shipped probe artifact: `intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/`.
+- Research compatibility wrappers: `research/activation_scanner_core.py`, `research/activation_scanner_cli.py`, and `research/activation_scanner_hook.py`.
 - Benchmark harness: `research/benchmarks/`.
 - Reproducibility ledger: `research/PRODUCT_REPRODUCIBILITY_LEDGER_2026-06-03.md`.
 - Spike history: `training/model_compare.py` and `training/model_compare_v2.py`.
@@ -41,7 +44,7 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 
 ## Current status
 
-Step 5 done in research-preview form. The original v1 spike
+Step 8 done in research-preview form. The original v1 spike
 (in-distribution, optimistic) ran 5 of 8 models before OOM on 30GB Linux
 machine:
 
@@ -66,4 +69,4 @@ evasion rate on both GPT-2 and Qwen probes with camouflage suffixes. Python
 3.10 compat fix applied (datetime.UTC → timezone.utc). All regression suites
 pass (core 4/4, CLI 4/4, hook 3/3).
 
-Next: public GitHub push + crowdsource real-world poisoned samples.
+Next: public GitHub launch hygiene + crowdsource real-world poisoned samples.

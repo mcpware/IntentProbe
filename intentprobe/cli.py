@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from research.activation_scanner_cli import main
+from intentprobe.scanner.cli import main
 
 
 if __name__ == "__main__":
