@@ -65,27 +65,30 @@ Every MCP scanner we source-verified uses text patterns, regex, or text classifi
 
 ## Benchmarks
 
-Head-to-head, same test sets, same split, same seed. Every number is reproducible from `research/`.
+Short version: IntentProbe catches poisoned tools that text-only scanners miss,
+especially when the safe and malicious versions use almost the same words.
+Plain English: **caught** means recall. **F1** balances catching poison against
+false alarms. Head-to-head runs use the same test sets, split, and seed. Every
+number is reproducible from `research/`.
 
 ```
-  IntentProbe vs Snyk DeBERTa
-  ════════════════════════════
+  IntentProbe vs text-only baselines
+  ════════════════════════════════
 
-  MCPTox template attacks (n=249)
-  IntentProbe  ████████████████████████████████████████████████░░  99.2%
-  DeBERTa      ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  19.9%
+  MCPTox held-out poisoned recall (n=249)
+  IntentProbe  ██████████████████████████████████████████████████  100.0%
+  DeBERTa      ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   19.9%
 
-  Matched-vocabulary pairs (n=86)
-  IntentProbe  ████████████████████████████████████████████████░░  96.5%
-  DeBERTa      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   0.0%
+  Matched-vocabulary pairs F1 (n=86)
+  IntentProbe  ████████████████████████████████████████████████░░   96.6%
+  DeBERTa      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%
 
-  Novel attack phrasing
-  IntentProbe  ████████████████████████████████████░░░░░░░░░░░░░░  71-73%
-  DeBERTa      ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  0-20%
+  External RouteGuard poisoned recall (n=2,900)
+  IntentProbe  █████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░   41.5%
+  TF-IDF       █████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   10.7%
 
   Adversarial evasion (camouflage suffixes)
   IntentProbe  0/146 evaded ✅
-  DeBERTa      N/A
 ```
 
 <details open>
