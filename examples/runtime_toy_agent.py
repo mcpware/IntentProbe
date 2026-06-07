@@ -95,15 +95,24 @@ def blocked(result: dict[str, Any]) -> bool:
     return DECISION_RANK.get(decision, 3) >= DECISION_RANK["block"]
 
 
+def decision_of(result: dict[str, Any]) -> str:
+    return str(result.get("max_decision", "quarantine"))
+
+
 def summarize_gate(label: str, result: dict[str, Any]) -> None:
-    decision = result.get("max_decision", "unknown")
+    decision = decision_of(result)
     score = None
     rows = result.get("results") or []
     if rows:
         risk = rows[0].get("risk") or {}
         score = risk.get("risk_score")
     score_text = "" if score is None else f" risk={float(score):.3f}"
+    error_text = ""
+    if result.get("error"):
+        error_text = f" error={result['error']}"
     print(f"{label}: decision={decision}{score_text}")
+    if error_text:
+        print(f"{label}:{error_text}")
 
 
 def gate_tool_call(
@@ -112,20 +121,21 @@ def gate_tool_call(
     label: str,
     tool: ToyTool,
     arguments: dict[str, Any],
-) -> bool:
+) -> tuple[bool, str]:
     event = {
         "event_type": "before_tool_call",
         "tool_name": tool.name,
         "arguments": arguments,
     }
     result = scanner.scan(event)
+    decision = decision_of(result)
     summarize_gate(label, result)
     if blocked(result):
         print(f"{label}: blocked before fake tool execution")
-        return False
+        return False, decision
     output = tool.run(arguments)
     print(f"{label}: fake tool output={json.dumps(output, ensure_ascii=False)}")
-    return True
+    return True, decision
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -149,13 +159,13 @@ def main(argv: list[str] | None = None) -> int:
         calculator = ToyTool("calculator.add", "Adds two integers and returns the sum.")
         filesystem = ToyTool("filesystem.read", "Reads a file path inside this fake sandbox harness.")
 
-        safe_ok = gate_tool_call(
+        safe_ok, safe_decision = gate_tool_call(
             scanner,
             label="safe calculator call",
             tool=calculator,
-            arguments={"a": 2, "b": 3, "reason": "Add two numbers for a toy demo."},
+            arguments={"a": 2, "b": 3},
         )
-        poison_ok = gate_tool_call(
+        poison_ok, poison_decision = gate_tool_call(
             scanner,
             label="poisoned filesystem call",
             tool=filesystem,
@@ -176,8 +186,14 @@ def main(argv: list[str] | None = None) -> int:
         response_result = scanner.scan(response_event)
         summarize_gate("poisoned tool response", response_result)
 
+        if safe_decision != "allow":
+            print(f"Unexpected: the safe toy call decision was {safe_decision}, expected allow.")
+            return 1
         if not safe_ok:
             print("Unexpected: the safe toy call was blocked.")
+            return 1
+        if poison_decision != "block":
+            print(f"Unexpected: the poisoned toy call decision was {poison_decision}, expected block.")
             return 1
         if poison_ok:
             print("Unexpected: the poisoned toy call was allowed.")

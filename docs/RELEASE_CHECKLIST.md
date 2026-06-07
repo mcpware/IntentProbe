@@ -32,8 +32,8 @@ python examples/runtime_toy_agent.py --no-warmup
 The poisoned scan-path command and poisoned one-shot runtime scan command should
 exit with code `2` when run with `--fail-on block`. The JSONL server should keep
 the process alive and report `gate.exit_code=2` in the per-line JSON result.
-The toy-agent harness should block the poisoned fake filesystem call before
-execution.
+The toy-agent harness should allow the safe calculator call and block the
+poisoned fake filesystem call before execution.
 
 ## Regression suites
 

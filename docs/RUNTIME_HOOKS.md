@@ -11,6 +11,11 @@ should scan:
 - tool-call inputs/arguments before the tool runs;
 - tool responses/results before the agent trusts or summarizes the output.
 
+For runtime tool inputs and responses, the activation probe scans the body of
+the event, such as `arguments` or `response`. Wrapper metadata such as
+`tool_name` is preserved in the result subject for reporting, but is not mixed
+into the scanned text.
+
 ## Commands
 
 Normalize without loading the model:

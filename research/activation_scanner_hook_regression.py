@@ -106,10 +106,40 @@ def main(argv: list[str] | None = None) -> int:
             runtime_subject["subject"]["kind"] == "runtime_tool_input",
             f"runtime subject kind was not preserved: {runtime_subject['subject']['kind']}",
         )
-        assert_true("filesystem.read" in runtime_text, "runtime tool name was lost")
+        assert_true(runtime_subject["subject"]["name"] == "filesystem.read", "runtime tool name was lost from metadata")
+        assert_true("filesystem.read" not in runtime_text, "runtime tool name leaked into scanned runtime body")
+        assert_true("event_type" not in runtime_text, "runtime wrapper event_type leaked into scanned runtime body")
         assert_true("api_key" in runtime_text, "runtime secret key name was lost")
         assert_true("runtime-secret-that-must-not-appear" not in runtime_text, "runtime secret value was not redacted")
         checks.append({"name": "normalize_runtime_tool_input_redacts_values", "passed": True})
+
+        safe_runtime_payload = {
+            "event_type": "before_tool_call",
+            "tool_name": "calculator.add",
+            "arguments": {
+                "a": 2,
+                "b": 3,
+            },
+        }
+        safe_runtime_normalized, _safe_runtime_normalize_result = run_hook(
+            [
+                "normalize",
+                "--input-format",
+                "json",
+                "--text",
+                json.dumps(safe_runtime_payload),
+            ]
+        )
+        safe_runtime_subject = safe_runtime_normalized["subjects"][0]
+        safe_runtime_text = safe_runtime_subject["text"]
+        assert_true(
+            safe_runtime_subject["subject"]["name"] == "calculator.add",
+            "safe runtime tool name was not preserved in metadata",
+        )
+        assert_true('"a": 2' in safe_runtime_text and '"b": 3' in safe_runtime_text, "safe runtime arguments were not preserved")
+        assert_true("calculator.add" not in safe_runtime_text, "safe runtime tool name leaked into scanned body")
+        assert_true("before_tool_call" not in safe_runtime_text, "safe runtime event name leaked into scanned body")
+        checks.append({"name": "normalize_runtime_tool_input_scans_body_only", "passed": True})
 
         nested_runtime_payload = {
             "event_type": "before_tool_call",

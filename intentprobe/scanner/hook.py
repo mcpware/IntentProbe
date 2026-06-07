@@ -206,6 +206,15 @@ def runtime_part_subject(
 ) -> ScanSubject:
     event = runtime_event_name(payload)
     tool_name = tool_name_from_payload(payload)
+    if kind in {"runtime_tool_input", "runtime_tool_response"}:
+        return ScanSubject(
+            subject_id=subject_id,
+            kind=kind,
+            name=tool_name,
+            source=first_string(payload, ("source", "origin", "scope")),
+            path=first_string(payload, ("path", "file", "file_path")),
+            text=pretty_subject_text(value),
+        )
     part_payload = {
         "kind": kind,
         "event_type": event,
