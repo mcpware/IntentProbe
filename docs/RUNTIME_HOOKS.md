@@ -34,6 +34,16 @@ printf '%s\n' '{"event_type":"before_tool_call","tool_name":"filesystem.read","a
   intentprobe runtime serve-jsonl --local-files-only --fail-on block
 ```
 
+Run the safe toy-agent harness:
+
+```bash
+python examples/runtime_toy_agent.py
+```
+
+The toy harness uses the real runtime scanner, but only fake in-memory tools.
+It does not read local secrets, open network connections, install MCP servers,
+or execute shell commands.
+
 ## Event Shapes
 
 Tool definition:
