@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Sample reporting guide
+    url: https://github.com/mcpware/intentprobe/blob/main/docs/SAMPLE_REPORTING.md
+    about: How to submit useful redacted scanner samples.

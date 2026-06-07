@@ -1,0 +1,70 @@
+name: Missed detection
+description: Report a malicious or suspicious tool that intentprobe allowed.
+title: "[missed detection] "
+labels: ["missed-detection", "data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve intentprobe. Redact live secrets, private URLs, customer data, and proprietary code before submitting.
+  - type: textarea
+    id: sample
+    attributes:
+      label: Redacted sample
+      description: Paste the smallest redacted tool description, package.json, MCP config, SKILL.md, or README text that reproduces the miss.
+      placeholder: "REDACTED sample text..."
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: Paste the exact command you ran.
+      placeholder: "intentprobe scan-path ./sample --pretty"
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Actual output
+      description: Paste the decision JSON or summary output.
+      placeholder: "decision=allow risk=..."
+    validations:
+      required: true
+  - type: dropdown
+    id: expected
+    attributes:
+      label: Expected decision
+      options:
+        - warn
+        - block
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this should be suspicious
+      description: Explain the hidden intent or risky behavior.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: intentprobe version or commit
+      placeholder: "0.1.0 / git commit ..."
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "macOS 15, Python 3.11, CPU"
+    validations:
+      required: false
+  - type: checkboxes
+    id: redaction
+    attributes:
+      label: Redaction confirmation
+      options:
+        - label: I removed live secrets, private keys, private URLs, customer data, and personal data.
+          required: true

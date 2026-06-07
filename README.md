@@ -4,7 +4,7 @@
 
 intentprobe is a security scanner for AI agent tooling. Before your agent installs an MCP server, a Claude Code skill, or an npm package, intentprobe reads what the tool *actually intends to do* and flags it when the intent is malicious.
 
-It works differently from every scanner shipping today. Instead of matching a tool's text against regex rules, it runs the tool's description through a small local model and reads the model's internal activations: the signal that encodes whether the model understood the text as benign, or as something that quietly steals your keys.
+It works differently from text-pattern scanners. Instead of matching a tool's text against regex rules, it runs the tool's description through a small local model and reads the model's internal activations: the signal that encodes whether the model understood the text as benign, or as something that quietly steals your keys.
 
 ## Why activations, not text
 
@@ -49,6 +49,16 @@ A few honest notes, because they shape what intentprobe is:
 - The probe is strongest when safe and malicious descriptions look alike, exactly where text scanners fail. Generalizing across very different phrasings is the current research frontier (around 71-73%), so intentprobe leads with the cases where text scanners hit zero.
 - On fully novel attack families not seen in training, recall drops to ~41%. The probe still outperforms text classifiers (10.7%) by 4x, but this is the honest frontier.
 - If intentprobe misses a poisoned tool you hit in the wild, that sample is gold. Reporting it helps the underlying research.
+
+## Privacy
+
+intentprobe runs locally. It does not send tool descriptions, scan targets, or
+results to a hosted service. The first model-backed scan may download the local
+base model from Hugging Face, then scans run against your local model cache.
+
+If you report a missed detection or false positive, redact real secrets,
+tokens, private URLs, customer names, and personal data first. See
+`docs/SAMPLE_REPORTING.md`.
 
 ## Install
 
@@ -100,10 +110,24 @@ echo "A calculator that adds two numbers." | .venv/bin/intentprobe scan --format
 - `intentprobe/scanner/` — product scanner runtime, hook normalizer, model registry, static checks, and shipped probe artifact.
 - `intentprobe/cli.py` and `intentprobe/hook.py` — installed console entrypoints.
 - `research/` — reproducible experiments, benchmarks, datasets, calibration ledgers, and compatibility wrappers.
+- `docs/RELEASE_CHECKLIST.md` — commands to reproduce the local release gate.
+- `docs/REDDIT_LAUNCH.md` — launch post draft and follow-up replies.
+- `docs/SAMPLE_REPORTING.md` — how to submit useful redacted samples.
 
 `scan-path` currently extracts scanner subjects from `package.json`, MCP JSON
 configs, `SKILL.md`, README files, and JSON files whose names mention MCP,
 tools, or skills.
+
+## Help improve the scanner
+
+The fastest way to make intentprobe better is to submit real examples:
+
+- Missed malicious tool or MCP server: open a **Missed detection** issue.
+- Benign tool that got warned or blocked: open a **False positive** issue.
+- Benchmark or reproduction problem: include the exact command and platform.
+
+Please do not paste live credentials or private customer data into GitHub
+issues.
 
 ## License
 

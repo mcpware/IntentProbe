@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Local activation-probe scanner for AI agent tools, MCP servers, and skills."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 authors = [{ name = "mcpware" }]
 keywords = ["ai-security", "mcp", "tool-poisoning", "activation-probe", "scanner"]
 dependencies = [
@@ -40,4 +40,4 @@ include = ["intentprobe*", "research*"]
 
 [tool.setuptools.package-data]
 intentprobe = ["scanner/artifacts/**/*.json", "scanner/artifacts/**/*.npz"]
-research = ["**/*.json", "**/*.npz", "**/*.md", "**/*.txt", "**/*.mjs", "**/*.ipynb"]
+research = ["**/*.json", "**/*.md", "**/*.txt", "**/*.mjs", "**/*.ipynb"]

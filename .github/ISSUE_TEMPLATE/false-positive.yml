@@ -1,0 +1,70 @@
+name: False positive
+description: Report a benign tool that intentprobe warned or blocked.
+title: "[false positive] "
+labels: ["false-positive", "data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping tune intentprobe. Redact live secrets, private URLs, customer data, and proprietary code before submitting.
+  - type: textarea
+    id: sample
+    attributes:
+      label: Redacted sample
+      description: Paste the smallest redacted text or folder content that reproduces the warning or block.
+      placeholder: "REDACTED sample text..."
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: Paste the exact command you ran.
+      placeholder: "intentprobe scan-path ./sample --pretty"
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Actual output
+      description: Paste the decision JSON or summary output.
+      placeholder: "decision=warn risk=..."
+    validations:
+      required: true
+  - type: dropdown
+    id: actual_decision
+    attributes:
+      label: Actual decision
+      options:
+        - warn
+        - block
+    validations:
+      required: true
+  - type: textarea
+    id: benign_reason
+    attributes:
+      label: Why this should be allowed
+      description: Explain the legitimate purpose of the tool.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: intentprobe version or commit
+      placeholder: "0.1.0 / git commit ..."
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: "macOS 15, Python 3.11, CPU"
+    validations:
+      required: false
+  - type: checkboxes
+    id: redaction
+    attributes:
+      label: Redaction confirmation
+      options:
+        - label: I removed live secrets, private keys, private URLs, customer data, and personal data.
+          required: true

@@ -4,7 +4,7 @@
 
 ## What this is
 
-An activation-probe security scanner for AI agent tooling. Before an agent installs an MCP server, a Claude Code skill, or an npm package, intentprobe reads a small local model's internal activations to detect tool poisoning that text and regex scanners miss. It ships as a pre-install hook, so the agent runs it automatically before adding any tool.
+An activation-probe security scanner for AI agent tooling. Before an agent installs an MCP server, a Claude Code skill, or an npm package, intentprobe reads a small local model's internal activations to detect tool poisoning that text and regex scanners miss. It has a hook-facing wrapper so agents can run it before adding a tool.
 
 It is the first scanner to use model internals instead of regex / AST / LLM-as-judge. Apache-2.0, research preview.
 
@@ -21,7 +21,8 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 - [x] **7. Reproduction + adversarial audit (2026-06-07).** Independent reproduction confirmed all train metrics (accuracy 0.9949, F1 0.9956, CV selection 0.9616). Gradient-free adversarial evasion: 0/146 evaded (GPT-2), 0/15 evaded (Qwen production probe). Python 3.10 compat fix applied. All regression tests pass.
 - [x] **8. Product runtime boundary.** Canonical scanner runtime moved to `intentprobe/scanner/`; default probe artifact ships with the package. Old `research.activation_scanner_*` modules remain compatibility wrappers so reproducibility commands keep working.
 - [x] **9. Filesystem target scanner.** `intentprobe scan-path` scans local package folders, MCP configs, Claude Code skill folders, `package.json`, `SKILL.md`, README files, and MCP/tool/skill JSON. This is the first stranger-usable install-before-you-trust-it shape.
-- [ ] **10. Public launch.** Push to GitHub, honest README with benchmark table, crowdsource real poisoned samples.
+- [x] **10. Public launch hygiene.** Honest README with benchmark table, local privacy note, sample reporting guide, GitHub issue templates, SECURITY policy, package build gate, and Reddit launch draft.
+- [ ] **11. First public feedback loop.** Post publicly, ask users to scan real MCP servers / skills / packages, triage missed detections and false positives into the next data curriculum.
 
 ## Key technical facts (do not relearn these)
 
@@ -71,4 +72,5 @@ evasion rate on both GPT-2 and Qwen probes with camouflage suffixes. Python
 3.10 compat fix applied (datetime.UTC → timezone.utc). All regression suites
 pass (core 4/4, CLI 4/4, hook 3/3).
 
-Next: public GitHub launch hygiene + crowdsource real-world poisoned samples.
+Next: post publicly, collect redacted real-world poisoned and benign samples,
+then retrain/evaluate the probe against that feedback set.
