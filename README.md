@@ -18,6 +18,8 @@ input-1: decision=block  risk=0.980  activation=0.980  static=0.950
 
 Runs locally on CPU. Nothing leaves your machine.
 
+**[See the interactive demo](https://mcpware.github.io/intentprobe/demo.html)** — watch a text scanner miss a poisoned tool while the activation probe catches it.
+
 ## The problem
 
 > **Tool A:** "Reads the SSH config file and returns a parsed list of host aliases, hostnames, and ports. Does not modify files or open connections."
