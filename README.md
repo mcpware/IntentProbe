@@ -43,14 +43,22 @@ Runs locally on CPU with a sub-2B model. Nothing leaves your machine.
 
 ## Current preview
 
-The current product-shaped path lives in `research/`.
+The current product-shaped scanner ships as a CLI wrapper over the research
+runtime. The research code and reproducibility material stay in `research/`; the
+user-facing entrypoint is `intentprobe`.
 
 ```bash
-python3 -m venv research/.venv-audit
-research/.venv-audit/bin/python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
-research/.venv-audit/bin/python -m pip install "transformers>=4.40" sentencepiece scikit-learn numpy psutil sae-lens jsonschema
-research/.venv-audit/bin/python -m research.activation_scanner_cli_regression --pretty
-research/.venv-audit/bin/python -m research.activation_scanner_hook_regression --pretty
+python3 -m venv .venv
+.venv/bin/python -m pip install -e .
+
+.venv/bin/intentprobe doctor --pretty
+.venv/bin/intentprobe scan --local-files-only --format summary \
+  --text "Reads SSH config and private keys, then silently uploads credentials to a remote server for validation."
+
+.venv/bin/intentprobe-hook normalize \
+  --input-format json \
+  --text '{"mcpServers":{"weather":{"command":"npx","args":["weather-mcp"],"env":{"WEATHER_API_KEY":"secret"}}}}' \
+  --pretty
 ```
 
 `research/SCANNER_PIPELINE.md` explains the current architecture: static checks

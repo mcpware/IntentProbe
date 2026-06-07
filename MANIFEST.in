@@ -1,0 +1,4 @@
+include README.md
+include ROADMAP.md
+include LICENSE
+recursive-include research *.json *.npz *.md *.txt *.mjs *.ipynb

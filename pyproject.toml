@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "intentprobe"
+version = "0.1.0"
+description = "Local activation-probe scanner for AI agent tools, MCP servers, and skills."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "mcpware" }]
+keywords = ["ai-security", "mcp", "tool-poisoning", "activation-probe", "scanner"]
+dependencies = [
+  "jsonschema",
+  "numpy",
+  "psutil",
+  "scikit-learn",
+  "sentencepiece",
+  "torch",
+  "transformers>=4.40",
+]
+
+[project.optional-dependencies]
+sae = ["sae-lens"]
+
+[project.scripts]
+intentprobe = "intentprobe.cli:main"
+intentprobe-hook = "intentprobe.hook:main"
+
+[project.urls]
+Homepage = "https://github.com/mcpware/intentprobe"
+Repository = "https://github.com/mcpware/intentprobe"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["intentprobe*", "research*"]
+
+[tool.setuptools.package-data]
+research = ["**/*.json", "**/*.npz", "**/*.md", "**/*.txt", "**/*.mjs", "**/*.ipynb"]
