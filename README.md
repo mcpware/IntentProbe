@@ -18,7 +18,7 @@ input-1: decision=block  risk=0.980  activation=0.980  static=0.950
 
 Runs locally on CPU. Nothing leaves your machine.
 
-**[See the interactive demo](https://mcpware.github.io/intentprobe/demo.html)** — watch a text scanner miss a poisoned tool while the activation probe catches it.
+![IntentProbe demo: text scanner misses poisoned tool, activation probe catches it](docs/demo.gif)
 
 ## The problem
 
