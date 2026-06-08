@@ -1,27 +1,23 @@
-# intentprobe
+# IntentProbe
 
 <p align="center">
   <strong>See a tool's true intent before you install it.</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/mcpware/intentprobe/stargazers"><img src="https://img.shields.io/github/stars/mcpware/intentprobe?style=social" alt="Stars" /></a>
-  <a href="https://github.com/mcpware/intentprobe/network/members"><img src="https://img.shields.io/github/forks/mcpware/intentprobe?style=social" alt="Forks" /></a>
+  <a href="https://github.com/mcpware/IntentProbe/stargazers"><img src="https://img.shields.io/github/stars/mcpware/IntentProbe?style=social" alt="Stars" /></a>
+  <a href="https://github.com/mcpware/IntentProbe/network/members"><img src="https://img.shields.io/github/forks/mcpware/IntentProbe?style=social" alt="Forks" /></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python 3.10+" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License" /></a>
   <img src="https://img.shields.io/badge/runs-100%25%20local-brightgreen" alt="Runs locally" />
   <img src="https://img.shields.io/badge/telemetry-zero-blue" alt="Zero telemetry" />
 </p>
 
-MCP servers, Claude Code skills, and agent tools describe themselves in plain English. Two descriptions can use almost identical words while only one of them quietly steals your SSH keys.
+<p align="center">
+  <img src="docs/diagram.png" width="700" alt="DeBERTa reads words. IntentProbe reads intent." />
+</p>
 
-```
-Every other scanner:    Tool description  ──→  Text pattern matching  ──→  "Looks fine" ✅
-                        (reads the words)
-
-IntentProbe:            Tool description  ──→  Small local model  ──→  Read activations  ──→  "This is stealing keys" 🚫
-                        (reads what the model understood)
-```
+MCP servers, Claude Code skills, and agent tools describe themselves in plain English. Two descriptions can use almost identical words while only one of them quietly steals your SSH keys. Text scanners can't tell them apart. IntentProbe can.
 
 Text scanners read words. IntentProbe reads intent.
 
