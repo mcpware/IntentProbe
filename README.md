@@ -31,7 +31,22 @@ This is the public v0 install path:
 python3 -m pip install intentprobe
 ```
 
-Then scan a suspicious tool description:
+If your macOS Python blocks global installs with an "externally managed
+environment" error, use an app venv instead:
+
+```bash
+python3 -m venv .venv-intentprobe
+.venv-intentprobe/bin/python -m pip install intentprobe
+.venv-intentprobe/bin/intentprobe scan-config auto --format summary
+```
+
+Then scan the MCP tools already configured on your machine:
+
+```bash
+intentprobe scan-config auto --format summary
+```
+
+Or scan a suspicious tool description:
 
 ```bash
 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
@@ -160,6 +175,9 @@ Same test sets. Same split. Same seed. Every number is reproducible from `resear
 ## Try it
 
 ```bash
+# Scan Claude/Cursor/Claude Code MCP configs already on this machine
+intentprobe scan-config auto --format summary
+
 # Scan a suspicious tool description
 intentprobe scan --format summary \
   --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
@@ -196,6 +214,9 @@ python examples/runtime_toy_agent.py --allow-download
 Scan MCP servers, packages, and skills **before** you install them.
 
 ```bash
+# Scan installed MCP client configs
+intentprobe scan-config auto --format summary
+
 # Scan a folder (package.json, MCP configs, SKILL.md, READMEs)
 intentprobe scan-path ./some-mcp-server --format summary --fail-on block
 
@@ -276,6 +297,12 @@ blocked.
   ├── SKILL.md                 Claude Code skill instructions
   ├── README.md                tool documentation
   └── *-tool-*.json            tool/skill metadata
+
+  scan-config:
+  ├── Claude Desktop           claude_desktop_config.json
+  ├── Claude Code              ~/.claude/mcp.json
+  ├── Cursor                   ~/.cursor/mcp.json
+  └── local repo               .mcp.json
 
   runtime:
   ├── tool_definition          scan before registering

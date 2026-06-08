@@ -186,6 +186,55 @@ def print_subject_summary(results: list[dict[str, Any]]) -> None:
             print(f"  - {reason}")
 
 
+def print_config_summary(payload: dict[str, Any]) -> None:
+    inventory = payload.get("inventory") or {}
+    gate = payload.get("gate") or {}
+    decision_counts = inventory.get("decision_counts") or {}
+    print(
+        "configs_checked={configs_checked} configs_found={configs_found} "
+        "configs_with_mcp={configs_with_mcp_servers} mcp_servers={mcp_servers_found} "
+        "scanned={servers_scanned} decision={decision} "
+        "allow={allow} review={warn} block={block}".format(
+            decision=gate.get("decision", "allow"),
+            allow=decision_counts.get("allow", 0),
+            warn=decision_counts.get("warn", 0),
+            block=decision_counts.get("block", 0),
+            **inventory,
+        )
+    )
+
+    skipped = [
+        config
+        for config in payload.get("configs", [])
+        if config.get("exists") and config.get("status") == "no_mcp_servers"
+    ]
+    for config in skipped:
+        print(f"SKIP  {config.get('source')}: no MCP servers ({config.get('path')})")
+
+    for row in payload.get("results", []):
+        server = row.get("server") or {}
+        raw_decision = str(row.get("decision", "allow"))
+        decision = "REVIEW" if raw_decision == "warn" else raw_decision.upper()
+        name = server.get("name") or "unknown"
+        source = server.get("source") or "config"
+        activation = row.get("activation_score")
+        static_score = row.get("static_score")
+        flags = row.get("inventory_flags") or []
+        review_flags = [flag.get("id") for flag in flags if flag.get("level") == "review"]
+        info_flags = [flag.get("id") for flag in flags if flag.get("level") == "info"]
+        flag_text = ""
+        if review_flags:
+            flag_text = " review=" + ",".join(str(flag) for flag in review_flags)
+        elif info_flags:
+            flag_text = " info=" + ",".join(str(flag) for flag in info_flags[:2])
+        print(
+            f"{decision:<5} {source}/{name}: activation={float(activation or 0):.3f} "
+            f"static={float(static_score or 0):.3f}{flag_text}"
+        )
+        for reason in row.get("decision_reasons", [])[:2]:
+            print(f"  - {reason}")
+
+
 def command_scan_path(args: argparse.Namespace) -> int:
     from .hook import scan_subjects
     from .targets import collect_subjects_from_path
@@ -201,6 +250,30 @@ def command_scan_path(args: argparse.Namespace) -> int:
     payload["target_path"] = str(args.path)
     if args.format == "summary":
         print_subject_summary(payload["results"])
+    else:
+        print_json(payload, args.pretty)
+    return int(payload["gate"]["exit_code"])
+
+
+def command_scan_config(args: argparse.Namespace) -> int:
+    from .configs import build_config_scan_payload, collect_config_servers, config_candidates_from_target
+    from .hook import scan_subjects
+
+    target = args.target or "auto"
+    candidates = config_candidates_from_target(target, Path.cwd())
+    configs, servers = collect_config_servers(candidates, max_file_bytes=args.max_file_bytes)
+    scan_payload = None
+    if servers:
+        scan_payload = scan_subjects([server.subject for server in servers], args)
+    payload = build_config_scan_payload(
+        target=str(target),
+        configs=configs,
+        servers=servers,
+        scan_payload=scan_payload,
+        fail_on=args.fail_on,
+    )
+    if args.format == "summary":
+        print_config_summary(payload)
     else:
         print_json(payload, args.pretty)
     return int(payload["gate"]["exit_code"])
@@ -278,6 +351,20 @@ def build_parser() -> argparse.ArgumentParser:
     scan_path.add_argument("--no-readme", dest="include_readme", action="store_false")
     add_runtime_args(scan_path)
     scan_path.set_defaults(func=command_scan_path)
+
+    scan_config = subparsers.add_parser(
+        "scan-config",
+        help="Scan installed Claude/Cursor/Claude Code MCP client configs.",
+    )
+    scan_config.add_argument(
+        "target",
+        nargs="?",
+        default="auto",
+        help="Config path to scan, or 'auto' to scan common local MCP client config paths.",
+    )
+    scan_config.add_argument("--max-file-bytes", type=int, default=200_000, help="Maximum bytes read from each config file.")
+    add_runtime_args(scan_config)
+    scan_config.set_defaults(func=command_scan_config)
 
     doctor = subparsers.add_parser("doctor", help="Check the cached scanner artifact.")
     doctor.add_argument("--artifact", type=Path, default=DEFAULT_ARTIFACT)
