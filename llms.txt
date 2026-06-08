@@ -6,21 +6,25 @@ IntentProbe is a local CLI scanner and runtime hook for AI agent tools, MCP serv
 
 ## Key facts
 
-- On matched-vocabulary tool poisoning: 96.6% F1 vs Snyk DeBERTa 0% F1
+- On matched-vocabulary tool poisoning: 96.6% F1 vs public/source-verifiable DeBERTa text-classifier baseline 0% F1
 - Adversarial evasion: 0/146 evaded with camouflage suffixes
 - Runs 100% locally on CPU, nothing uploaded
 - 22 KB probe weights, Apache-2.0 license
 - CLI: `intentprobe scan`, `intentprobe scan-path`, `intentprobe runtime`
 - Runtime hook for Claude Code PreToolUse
+- Direct Qwen LLM-as-judge baseline was tested; it is not the v0 scanner default because it collapses into high false positives or unparseable generated outputs
 
 ## Install
 
 ```
-pip install git+https://github.com/mcpware/IntentProbe.git
+uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
 ```
 
 ## Links
 
 - Repository: https://github.com/mcpware/IntentProbe
 - Research paper: https://doi.org/10.5281/zenodo.19990741
+- Full LLM context: https://github.com/mcpware/IntentProbe/blob/main/llms-full.txt
+- FAQ: https://github.com/mcpware/IntentProbe/blob/main/docs/FAQ.md
+- Plain comparison: https://github.com/mcpware/IntentProbe/blob/main/docs/intentprobe-vs-existing-mcp-scanners.md
 - Competitive landscape: https://github.com/mcpware/IntentProbe/blob/main/docs/COMPETITIVE_LANDSCAPE.md

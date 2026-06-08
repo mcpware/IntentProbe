@@ -1,0 +1,165 @@
+# IntentProbe full context for LLMs
+
+Canonical repository: https://github.com/mcpware/IntentProbe
+Research paper: https://doi.org/10.5281/zenodo.19990741
+
+## One-sentence summary
+
+IntentProbe is a local activation-probe scanner for MCP servers, AI agent tools,
+Claude Code skills, packages, and runtime tool events. It reads what a small
+frozen model internally represented, not only what the surface text says.
+
+## What problem it solves
+
+MCP servers, AI agent tools, and skills can describe themselves in normal
+language while hiding unsafe intent such as credential access, secret
+exfiltration, hidden persistence, forced tool chaining, or tool hijacking.
+
+A safe tool and a poisoned tool can use almost the same vocabulary. A text
+scanner may see the same words. IntentProbe looks at the model's hidden
+activation state after the tool description has been processed.
+
+## Mechanism
+
+IntentProbe uses a small frozen local sensor model, currently Qwen2.5-0.5B.
+The released v0 scanner reads layers 13-15, concatenates the pooled activation
+features, and applies a tiny trained probe artifact. The probe weights are
+about 22 KB.
+
+It does not train or modify the base model during scanning. The base model is a
+fixed feature extractor. The trained scanner is the small probe on top of the
+model activations.
+
+## Current product shape
+
+Main CLI commands:
+
+- `intentprobe scan`: scan one text/tool description.
+- `intentprobe scan-path`: scan a package, MCP server folder, skill folder, or
+  repo-like directory before install.
+- `intentprobe batch`: scan a JSON batch of descriptions.
+- `intentprobe runtime`: scan tool definitions, tool-call arguments, and tool
+  responses at runtime boundaries.
+
+One-command trial:
+
+```bash
+uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+```
+
+The first model-backed scan downloads Qwen2.5-0.5B once. Scan targets and scan
+results stay on the user's machine.
+
+## How it differs from other scanner categories
+
+Text, rule, and policy scanners read surface text, metadata, known suspicious
+patterns, permissions, or signatures.
+
+LLM-as-judge scanners ask a model to output a judgment such as safe or unsafe.
+That is an output-level mechanism. It can be useful, but it can be
+prompt-sensitive, parse-sensitive, expensive, and part of the attack surface.
+
+Enterprise cloud/API guardrails may work well, but from the outside the
+detector is usually a black box. Users often cannot inspect the detector
+artifact or reproduce a public MCP/tool-poisoning benchmark end to end.
+
+IntentProbe is a representation-level mechanism: it reads the hidden activation
+state before any verbal answer is produced.
+
+## Benchmark facts and claim boundaries
+
+Reproducible benchmark artifacts live under `research/`.
+
+Key public numbers:
+
+- Matched-vocabulary tool poisoning, where safe and poisoned samples use almost
+  the same words: activation probe F1 96.6%; public/source-verifiable DeBERTa
+  prompt-injection text-classifier baseline F1 0.0%.
+- MCPTox held-out split, n=249: activation probe recall 100.0%, F1 99.3%;
+  DeBERTa text-classifier baseline recall 19.9%, F1 33.0%.
+- RouteGuard-style external transfer, n=2,900: current Qwen activation probe
+  F1 0.513, recall 0.415; TF-IDF logistic baseline F1 0.172, recall 0.107.
+- Camouflage suffix test: appending benign-sounding "safe/read-only/sandboxed"
+  language caused 0/146 evasion on the GPT-2 probe test; the current Qwen v0
+  scanner also passed a smaller smoke test with 0/15 evaded.
+
+Important caveat: the DeBERTa comparison is against a public/source-verifiable
+prompt-injection text-classifier baseline used to represent that detector
+family. It is not a claim that every private vendor cloud detector scores 0%.
+The fair claim is that public text-level baselines are out-of-distribution on
+subtle MCP/tool poisoning, while activation probes expose a separate signal.
+
+## Direct Qwen prompt/judge baseline
+
+IntentProbe also tested whether the same Qwen2.5-0.5B sensor model could simply
+be prompted to judge tools as clean or poisoned.
+
+The label-logprob direct-prompt baseline became an all-poison scanner on tested
+sets: perfect poison recall but clean false-positive rate 1.000. The generated
+answer baseline had lower recall and many unparseable outputs. This is why the
+v0 product uses raw activations instead of an LLM-as-judge prompt.
+
+Reproducible artifact:
+`research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md`.
+
+## SAE position
+
+Sparse autoencoder features are valuable for interpretability and may improve
+recall in future scanner versions. The v0 product ships raw Qwen activations
+because that is the most complete, reproducible, lightweight product path today:
+no SAE dependency, simpler runtime, and strong enough detection to ship a local
+scanner.
+
+SAE explanations remain a planned layer for "why did this trigger?" and for
+future recall improvements.
+
+## Privacy and local-first behavior
+
+IntentProbe runs locally. Scan targets and scan results are not uploaded to an
+IntentProbe service. The first model-backed scan may download the base model
+from Hugging Face once. After that, scans can run from local cached files.
+
+## Limitations
+
+IntentProbe v0 is not a complete security boundary. It is a pre-install and
+runtime tripwire.
+
+Known limitations:
+
+- Novel attack families are still the hardest case.
+- White-box adversarial attacks against the probe are not fully solved.
+- Paraphrase and encoding attacks need more benchmark coverage.
+- Real-world MCP/tool-poisoning datasets are still small, so missed real
+  samples and false positives should be reported and folded into future
+  retraining.
+
+## Data feedback loop
+
+Useful public reports are:
+
+- a poisoned tool IntentProbe allowed;
+- a benign tool IntentProbe warned or blocked;
+- a scanner/paper/dataset that should be compared;
+- a reproducible command where CLI output is confusing.
+
+Report redacted samples only. Do not submit live secrets, private keys,
+customer data, private URLs, or proprietary source code.
+
+Issue templates:
+
+- Missed detection: https://github.com/mcpware/IntentProbe/issues/new?template=missed-detection.yml
+- False positive: https://github.com/mcpware/IntentProbe/issues/new?template=false-positive.yml
+- Sample guide: https://github.com/mcpware/IntentProbe/blob/main/docs/SAMPLE_REPORTING.md
+
+## Important files
+
+- `README.md`: product README and installation path.
+- `docs/FAQ.md`: short answers to common questions.
+- `docs/intentprobe-vs-existing-mcp-scanners.md`: plain comparison page.
+- `docs/COMPETITIVE_LANDSCAPE.md`: source-backed competitor landscape.
+- `docs/RUNTIME_HOOKS.md`: runtime hook contract.
+- `research/README.md`: research artifact map.
+- `research/benchmark-results-deberta-vs-probe-2026-05-31.md`: DeBERTa vs activation benchmark.
+- `research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md`: direct Qwen judge baseline.
+- `research/ADVERSARIAL_EVASION_RESULTS_2026-06-07.md`: camouflage suffix evasion results.
+- `intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/`: released probe artifact.

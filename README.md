@@ -17,11 +17,11 @@
   <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
 </p>
 
-Every MCP scanner on the market reads text: patterns, classifiers, rules, or asks an LLM "is this safe?" IntentProbe does something none of them do. It runs the tool description through a small local model, slices open the hidden layers, and reads the activation state directly. Same words, completely different activations when the intent is malicious.
+Every public/source-verifiable MCP scanner we found reads text: patterns, classifiers, rules, or asks an LLM "is this safe?" IntentProbe does something different. It runs the tool description through a small local model, slices open the hidden layers, and reads the activation state directly. Same words, completely different activations when the intent is malicious.
 
-On matched-vocabulary tool poisoning, where safe and poisoned descriptions use almost identical words, Snyk's shipped scanner catches **0%**. IntentProbe catches **96.5%**. ([Reproduce it yourself.](research/benchmark-results-deberta-vs-probe-2026-05-31.md))
+On matched-vocabulary tool poisoning, where safe and poisoned descriptions use almost identical words, the public/source-verifiable DeBERTa text-classifier baseline catches **0%**. IntentProbe scores **96.6% F1**. ([Reproduce it yourself.](research/benchmark-results-deberta-vs-probe-2026-05-31.md))
 
-Runs locally. 22 KB probe. Any CPU. Nothing uploaded. See the [full competitive landscape](docs/COMPETITIVE_LANDSCAPE.md).
+Runs locally. 22 KB probe. Any CPU. Nothing uploaded. See the [plain comparison](docs/intentprobe-vs-existing-mcp-scanners.md), [FAQ](docs/FAQ.md), and [full competitive landscape](docs/COMPETITIVE_LANDSCAPE.md).
 
 ## Break it in one command
 
@@ -59,7 +59,7 @@ First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). Scan data stays on
                     │  Almost identical words       │  Steals your SSH keys
 ```
 
-Real pair from our benchmark. IntentProbe scores the safe tool at 0.081 (allow) and the poisoned tool at 0.982 (warn). Snyk's DeBERTa scores both at 0.0%. It sees no difference.
+Real pair from our benchmark. IntentProbe scores the safe tool at 0.081 (allow) and the poisoned tool at 0.982 (warn). The DeBERTa text-classifier baseline scores both at 0.0%. It sees no difference.
 
 The words are almost identical. The intent is not. Text scanners fail here because there is no text difference to find.
 
@@ -82,7 +82,13 @@ The words are almost identical. The intent is not. Text scanners fail here becau
 | **Red-team framework** | garak, Giskard, Promptfoo red team | Generate attacks to test your app | Audit tool, not a pre-install scanner. | IntentProbe is a **CLI + runtime hook** that blocks before install and before each tool call. |
 | **IntentProbe** | | Frozen local model + activation probe on layers 13-15 | Still improving on novel attack families | **First activation-probe scanner for MCP tool poisoning.** |
 
+Fast comparison: [docs/intentprobe-vs-existing-mcp-scanners.md](docs/intentprobe-vs-existing-mcp-scanners.md)
+
+FAQ for common questions: [docs/FAQ.md](docs/FAQ.md)
+
 Full source-backed comparison: [docs/COMPETITIVE_LANDSCAPE.md](docs/COMPETITIVE_LANDSCAPE.md)
+
+AI-readable context: [llms.txt](llms.txt) and [llms-full.txt](llms-full.txt)
 
 ## Why not just ask Qwen?
 
@@ -106,16 +112,16 @@ recall and many unparseable outputs. Full reproducible baseline:
 Same test sets. Same split. Same seed. Every number is reproducible from `research/`.
 
 ```
-  IntentProbe vs Snyk DeBERTa
-  ═══════════════════════════
+  IntentProbe vs DeBERTa text-classifier baseline
+  ════════════════════════════════════════════════
 
   MCPTox poisoned recall (n=249)
   IntentProbe  ██████████████████████████████████████████████████  100.0%
-  Snyk         ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   19.9%
+  DeBERTa      ██████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   19.9%
 
   Matched-vocabulary F1 (n=86)          ◀ the hard test
   IntentProbe  ████████████████████████████████████████████████░░   96.6%
-  Snyk         ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%
+  DeBERTa      ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0.0%
 
   Novel attack families (n=2,900)
   IntentProbe  █████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░   41.5%
@@ -130,8 +136,8 @@ Same test sets. Same split. Same seed. Every number is reproducible from `resear
 
 | Test | IntentProbe | Opponent | Takeaway |
 |---|---|---|---|
-| MCPTox held-out (n=249) | recall 100%, F1 99.3% | Snyk DeBERTa recall 19.9%, F1 33.0% | Clear win |
-| Same-words matched (n=86) | F1 96.6% | Snyk DeBERTa F1 0% | Text scanner blind |
+| MCPTox held-out (n=249) | recall 100%, F1 99.3% | DeBERTa text baseline recall 19.9%, F1 33.0% | Clear win |
+| Same-words matched (n=86) | F1 96.6% | DeBERTa text baseline F1 0% | Text scanner blind |
 | Curated family holdout (n=76) | Qwen macro F1 0.829 | TF-IDF macro F1 0.823 | Slight edge |
 | RouteGuard external (n=2,900) | F1 0.513, recall 0.415 | TF-IDF F1 0.172, recall 0.107 | 4x better on novel families |
 | Hard-block policy (n=2,900) | Block precision 1.000, clean FPR 0.000 | -- | Zero false positives |
@@ -304,7 +310,7 @@ Full event schema: [docs/RUNTIME_HOOKS.md](docs/RUNTIME_HOOKS.md)
 
 ## The story
 
-I source-read Snyk's shipped MCP scanner. It uses a DeBERTa text classifier trained on prompt injection, not tool poisoning. On matched-vocabulary attacks it scores 0%. I checked every other public scanner I could find. Rules, regex, text classifiers, opaque cloud APIs. None of them read model internals.
+I source-read public MCP scanner paths and the DeBERTa prompt-injection classifier baseline used in Snyk/Invariant-style scanner code. It is trained on prompt injection, not tool poisoning. On matched-vocabulary attacks it scores 0%. I checked every other public scanner I could find. Rules, regex, text classifiers, opaque cloud APIs. I did not find another product-shaped MCP/tool scanner that uses model internals as the main signal.
 
 So I built one that does. Feed the description into a small model, slice it open, read the activations. The signal is there. A 22 KB probe catches what every text scanner misses.
 

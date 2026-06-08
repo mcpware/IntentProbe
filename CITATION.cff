@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use IntentProbe, please cite the research paper and the repository."
+title: "IntentProbe: Local Activation-Probe Scanner for MCP Tool Poisoning"
+type: software
+authors:
+  - name: "mcpware"
+version: 0.1.0
+date-released: 2026-06-08
+license: Apache-2.0
+repository-code: "https://github.com/mcpware/IntentProbe"
+url: "https://github.com/mcpware/IntentProbe"
+abstract: "IntentProbe is a local activation-probe scanner for MCP servers, AI agent tools, Claude Code skills, and runtime tool events. It reads internal activations from a small frozen local model to detect poisoned tool intent that surface text analysis can miss."
+keywords:
+  - mcp-security
+  - model-context-protocol
+  - ai-security
+  - llm-security
+  - agent-security
+  - tool-poisoning
+  - activation-probing
+  - prompt-injection
+  - local-scanner
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19990741
+    description: "Research paper: Can Model Internals Detect MCP Tool Poisoning That Text Analysis Cannot?"
+preferred-citation:
+  type: article
+  title: "Can Model Internals Detect MCP Tool Poisoning That Text Analysis Cannot?"
+  authors:
+    - name: "mcpware"
+  doi: 10.5281/zenodo.19990741
+  year: 2026
