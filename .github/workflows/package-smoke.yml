@@ -29,8 +29,16 @@ jobs:
           python -m venv /tmp/intentprobe-wheel-smoke
           /tmp/intentprobe-wheel-smoke/bin/python -m pip install --upgrade pip
           /tmp/intentprobe-wheel-smoke/bin/python -m pip install --no-deps dist/*.whl
+          export EXPECTED_INTENTPROBE_VERSION="$(python - <<'PY'
+          import tomllib
+
+          with open("pyproject.toml", "rb") as handle:
+              print(tomllib.load(handle)["project"]["version"])
+          PY
+          )"
           cd /tmp
           /tmp/intentprobe-wheel-smoke/bin/python - <<'PY'
+          import os
           from importlib.resources import files
           import intentprobe
 
@@ -39,7 +47,7 @@ jobs:
               "artifacts",
               "qwen-pooled-curated-core-l13-15-v2",
           )
-          assert intentprobe.__version__ == "0.1.0"
+          assert intentprobe.__version__ == os.environ["EXPECTED_INTENTPROBE_VERSION"]
           assert artifact.joinpath("metadata.json").is_file()
           assert artifact.joinpath("probe_weights.npz").is_file()
           print(f"intentprobe {intentprobe.__version__} artifact OK: {artifact}")
