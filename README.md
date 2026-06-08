@@ -98,7 +98,7 @@ Head-to-head, same test sets, same split, same seed. Every number is reproducibl
   DeBERTa      N/A
 ```
 
-<details>
+<details open>
 <summary><strong>Full end-to-end benchmark table</strong></summary>
 
 | Test | IntentProbe | Opponent / baseline | Takeaway |
