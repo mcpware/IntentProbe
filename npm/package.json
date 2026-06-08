@@ -1,0 +1,42 @@
+{
+  "name": "intentprobe",
+  "version": "0.1.0",
+  "description": "Thin npm launcher for IntentProbe, a local activation-probe scanner for MCP/tool poisoning.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "intentprobe": "bin/intentprobe.mjs",
+    "intentprobe-hook": "bin/intentprobe.mjs"
+  },
+  "files": [
+    "bin/intentprobe.mjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ai-security",
+    "mcp",
+    "tool-poisoning",
+    "activation-probe",
+    "scanner",
+    "agent-security"
+  ],
+  "homepage": "https://github.com/mcpware/IntentProbe#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcpware/IntentProbe.git",
+    "directory": "npm"
+  },
+  "bugs": {
+    "url": "https://github.com/mcpware/IntentProbe/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "check": "node --check ./bin/intentprobe.mjs",
+    "pack:dry": "npm pack --dry-run"
+  }
+}
