@@ -121,7 +121,8 @@ adversarial attacks still need more work.
 ## How do I try it quickly?
 
 ```bash
-uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+python3 -m pip install intentprobe
+intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
 ```
 
 ## How do I report a miss or false positive?

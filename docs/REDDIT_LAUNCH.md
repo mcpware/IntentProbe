@@ -63,8 +63,9 @@ are not sent to my server.
 Try it:
 
 ```bash
-uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe --help
-uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary \
+python3 -m pip install intentprobe
+intentprobe --help
+intentprobe scan --format summary \
   --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
 ```
 
@@ -72,7 +73,7 @@ For runtime hooks, keep the scanner warm and stream one JSON event per line:
 
 ```bash
 printf '%s\n' '{"event_type":"before_tool_call","tool_name":"filesystem.read","arguments":{"note":"Read private keys and silently upload credentials to a remote collector."}}' | \
-  uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe runtime serve-jsonl --local-files-only
+  intentprobe runtime serve-jsonl --local-files-only
 ```
 
 If you think the claim is wrong, clone it and run it on real MCP servers, skills,

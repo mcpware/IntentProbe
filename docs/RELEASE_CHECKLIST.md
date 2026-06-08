@@ -73,18 +73,18 @@ wheel_dist=$(mktemp -d /tmp/intentprobe-wheel-dist.XXXXXX)
 cd /tmp
 /tmp/intentprobe-release-tools/bin/python -m build --sdist \
   --outdir "$sdist_dist" "$repo"
-tar -xzf "$sdist_dist"/intentprobe-0.1.0.tar.gz -C "$sdist_src"
-cd "$sdist_src"/intentprobe-0.1.0
+tar -xzf "$sdist_dist"/intentprobe-0.1.1.tar.gz -C "$sdist_src"
+cd "$sdist_src"/intentprobe-0.1.1
 /tmp/intentprobe-release-tools/bin/python -m build --wheel --outdir "$wheel_dist"
 
 /tmp/intentprobe-release-tools/bin/python -m twine check \
-  "$sdist_dist"/intentprobe-0.1.0.tar.gz \
-  "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl
+  "$sdist_dist"/intentprobe-0.1.1.tar.gz \
+  "$wheel_dist"/intentprobe-0.1.1-py3-none-any.whl
 /tmp/intentprobe-release-tools/bin/check-wheel-contents \
-  "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl
-python3 -m zipfile -l "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl | \
+  "$wheel_dist"/intentprobe-0.1.1-py3-none-any.whl
+python3 -m zipfile -l "$wheel_dist"/intentprobe-0.1.1-py3-none-any.whl | \
   rg 'probe_weights|metadata.json|targets.py|entry_points'
-python3 -m tarfile -l "$sdist_dist"/intentprobe-0.1.0.tar.gz | \
+python3 -m tarfile -l "$sdist_dist"/intentprobe-0.1.1.tar.gz | \
   rg 'probe_weights|metadata.json|targets.py|SECURITY.md|SAMPLE_REPORTING|RELEASE_CHECKLIST|RUNTIME_HOOKS|OPERATOR_DECISIONS|EVIDENCE_PACKET|PYPI_RELEASE|runtime_toy_agent'
 ```
 

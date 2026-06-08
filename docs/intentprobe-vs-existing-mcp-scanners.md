@@ -88,7 +88,8 @@ Use it with other controls, not instead of them:
 Try a one-command scan:
 
 ```bash
-uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+python3 -m pip install intentprobe
+intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
 ```
 
 Then read:
