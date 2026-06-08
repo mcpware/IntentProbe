@@ -184,7 +184,88 @@ First scan downloads Qwen2.5-0.5B (~1 GB, once). After that, everything stays lo
   └──────────────────────────────────────────────────────────┘
 ```
 
-For runtime hook integration, see [docs/RUNTIME_HOOKS.md](docs/RUNTIME_HOOKS.md).
+## Setup: Static Scanner
+
+Scan MCP servers, packages, and skills **before** you install them.
+
+```bash
+# Scan a folder (package.json, MCP configs, SKILL.md, READMEs)
+intentprobe scan-path ./some-mcp-server --format summary --fail-on block
+
+# Scan a single tool description
+intentprobe scan --format summary \
+  --text "Reads SSH config and returns host aliases."
+
+# Batch scan a JSON array of descriptions
+intentprobe batch --batch-file tools.json --format summary
+
+# CI gate: exit code 2 if any tool is blocked
+intentprobe scan-path ./my-mcp-package --fail-on block
+```
+
+```
+  ┌─────────────────────────────────────────────────────────────┐
+  │  Static scan workflow                                       │
+  │                                                             │
+  │  You find a new MCP server on GitHub                        │
+  │       │                                                     │
+  │       ▼                                                     │
+  │  git clone <repo>                                           │
+  │       │                                                     │
+  │       ▼                                                     │
+  │  intentprobe scan-path ./repo --fail-on block               │
+  │       │                                                     │
+  │       ├──→ allow  ──→ safe to install                       │
+  │       ├──→ warn   ──→ review the flagged descriptions       │
+  │       └──→ block  ──→ do NOT install (exit code 2)          │
+  └─────────────────────────────────────────────────────────────┘
+```
+
+## Setup: Runtime Hook
+
+Scan tool calls **as they happen** inside Claude Code. The model stays warm in memory for sub-second latency.
+
+**Step 1:** Add to your Claude Code `settings.json` or `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "command": "intentprobe runtime scan --input-format jsonl --fail-on block",
+        "timeout": 10000
+      }
+    ]
+  }
+}
+```
+
+**Step 2:** That's it. Every tool call is now scanned before execution.
+
+```
+  ┌─────────────────────────────────────────────────────────────┐
+  │  Runtime hook workflow                                      │
+  │                                                             │
+  │  Claude Code wants to call a tool                           │
+  │       │                                                     │
+  │       ▼                                                     │
+  │  PreToolUse hook fires ──→ intentprobe runtime scan         │
+  │       │                                                     │
+  │       ├──→ allow  ──→ tool executes normally                │
+  │       ├──→ warn   ──→ logged, tool still executes           │
+  │       └──→ block  ──→ tool call STOPPED (exit code 2)       │
+  │                                                             │
+  │  Model stays warm via JSONL protocol. <1s per scan.         │
+  └─────────────────────────────────────────────────────────────┘
+```
+
+**Test it safely** (no real tools, everything in memory):
+
+```bash
+.venv/bin/python examples/runtime_toy_agent.py --allow-download
+```
+
+For the full event schema and JSONL protocol, see [docs/RUNTIME_HOOKS.md](docs/RUNTIME_HOOKS.md).
 
 ## What it scans
 
