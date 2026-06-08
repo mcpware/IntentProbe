@@ -29,15 +29,15 @@ intentprobe = "intentprobe.cli:main"
 intentprobe-hook = "intentprobe.hook:main"
 
 [project.urls]
-Homepage = "https://github.com/mcpware/intentprobe"
-Repository = "https://github.com/mcpware/intentprobe"
+Homepage = "https://github.com/mcpware/IntentProbe"
+Repository = "https://github.com/mcpware/IntentProbe"
+Issues = "https://github.com/mcpware/IntentProbe/issues"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
-include = ["intentprobe*", "research*"]
+include = ["intentprobe*"]
 
 [tool.setuptools.package-data]
 intentprobe = ["scanner/artifacts/**/*.json", "scanner/artifacts/**/*.npz"]
-research = ["**/*.json", "**/*.md", "**/*.txt", "**/*.mjs", "**/*.ipynb"]

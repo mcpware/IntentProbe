@@ -3,11 +3,19 @@
 This checklist is the local gate before telling strangers to download and try
 intentprobe.
 
+## CI package smoke
+
+The GitHub workflow `.github/workflows/package-smoke.yml` must pass on `main`.
+It builds/checks the Python wheel/sdist from a clean checkout and dry-runs the
+npm launcher package.
+
 ## Clean checkout
 
 ```bash
 git status --short --branch
-python -m pip install -e .
+python3 -m venv /tmp/intentprobe-editable-smoke
+/tmp/intentprobe-editable-smoke/bin/python -m pip install --upgrade pip
+/tmp/intentprobe-editable-smoke/bin/python -m pip install -e .
 ```
 
 ## CLI smoke tests
@@ -53,13 +61,36 @@ python -m research.activation_scanner_regression \
 ## Package build
 
 ```bash
-python -m pip install build
-python -m build --sdist --wheel
-python -m zipfile -l dist/intentprobe-0.1.0-py3-none-any.whl | \
+python3 -m venv /tmp/intentprobe-release-tools
+/tmp/intentprobe-release-tools/bin/python -m pip install --upgrade pip
+/tmp/intentprobe-release-tools/bin/python -m pip install build twine check-wheel-contents
+
+repo=/path/to/IntentProbe
+sdist_dist=$(mktemp -d /tmp/intentprobe-sdist-dist.XXXXXX)
+sdist_src=$(mktemp -d /tmp/intentprobe-sdist-src.XXXXXX)
+wheel_dist=$(mktemp -d /tmp/intentprobe-wheel-dist.XXXXXX)
+
+cd /tmp
+/tmp/intentprobe-release-tools/bin/python -m build --sdist \
+  --outdir "$sdist_dist" "$repo"
+tar -xzf "$sdist_dist"/intentprobe-0.1.0.tar.gz -C "$sdist_src"
+cd "$sdist_src"/intentprobe-0.1.0
+/tmp/intentprobe-release-tools/bin/python -m build --wheel --outdir "$wheel_dist"
+
+/tmp/intentprobe-release-tools/bin/python -m twine check \
+  "$sdist_dist"/intentprobe-0.1.0.tar.gz \
+  "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl
+/tmp/intentprobe-release-tools/bin/check-wheel-contents \
+  "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl
+python3 -m zipfile -l "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl | \
   rg 'probe_weights|metadata.json|targets.py|entry_points'
-python -m tarfile -l dist/intentprobe-0.1.0.tar.gz | \
+python3 -m tarfile -l "$sdist_dist"/intentprobe-0.1.0.tar.gz | \
   rg 'probe_weights|metadata.json|targets.py|SECURITY.md|SAMPLE_REPORTING|RELEASE_CHECKLIST|RUNTIME_HOOKS|runtime_toy_agent'
 ```
+
+Build the release wheel from the freshly extracted sdist. The repo can have an
+ignored `build/` directory from setuptools, and direct local wheel builds may
+reuse stale `build/lib` contents.
 
 ## Hygiene
 

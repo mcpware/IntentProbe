@@ -1,0 +1,61 @@
+name: Package smoke
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  python-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build and check Python distributions
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine check-wheel-contents
+          python -m build --sdist --wheel
+          python -m twine check dist/*
+          check-wheel-contents dist/*.whl
+
+      - name: Verify wheel import and bundled probe artifact
+        run: |
+          python -m venv /tmp/intentprobe-wheel-smoke
+          /tmp/intentprobe-wheel-smoke/bin/python -m pip install --upgrade pip
+          /tmp/intentprobe-wheel-smoke/bin/python -m pip install --no-deps dist/*.whl
+          cd /tmp
+          /tmp/intentprobe-wheel-smoke/bin/python - <<'PY'
+          from importlib.resources import files
+          import intentprobe
+
+          artifact = files("intentprobe").joinpath(
+              "scanner",
+              "artifacts",
+              "qwen-pooled-curated-core-l13-15-v2",
+          )
+          assert intentprobe.__version__ == "0.1.0"
+          assert artifact.joinpath("metadata.json").is_file()
+          assert artifact.joinpath("probe_weights.npz").is_file()
+          print(f"intentprobe {intentprobe.__version__} artifact OK: {artifact}")
+          PY
+
+  npm-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check npm launcher package
+        run: |
+          npm --prefix npm run check
+          npm --prefix npm run pack:dry
+          npm publish ./npm --dry-run
