@@ -38,40 +38,18 @@
 
 Every MCP scanner we source-verified uses text patterns, regex, or text classifiers. On matched-vocabulary tool poisoning where safe and poisoned descriptions share the same words, Snyk's shipped classifier catches **zero**.
 
-## Three approaches to scanning
+## Competitive landscape
 
-```
-  ┌─────────────────────────────────────────────────────────────────────────────────┐
-  │                                                                                 │
-  │  ① Text Classifier (Snyk DeBERTa)                                              │
-  │  ─────────────────────────────────                                              │
-  │  Tool description ──→ Tokenize ──→ Pattern match ──→ "SAFE" ✅                  │
-  │                                                                                 │
-  │  Reads WORDS. If the words look normal, it passes.                              │
-  │  Matched-vocabulary recall: 0-20%                                               │
-  │                                                                                 │
-  ├─────────────────────────────────────────────────────────────────────────────────┤
-  │                                                                                 │
-  │  ② LLM-as-Judge                                                                │
-  │  ──────────────                                                                │
-  │  Tool description ──→ "Is this safe?" ──→ LLM says "Yes" ──→ "SAFE" ✅          │
-  │                                                                                 │
-  │  Asks the model. Like asking a patient "are you sick?"                           │
-  │  The model can be fooled by the same poisoning it's judging.                    │
-  │                                                                                 │
-  ├─────────────────────────────────────────────────────────────────────────────────┤
-  │                                                                                 │
-  │  ③ Activation Probing (IntentProbe)          ◀── first to productize this       │
-  │  ──────────────────────────────────                                             │
-  │  Tool description ──→ Frozen model ──→ ✂️ Slice open layers 13-15 ──→           │
-  │  ──→ Read internal activations ──→ 22KB probe ──→ "BLOCK" 🚫                    │
-  │                                                                                 │
-  │  Reads INTENT. Like doing an MRI instead of asking the patient.                 │
-  │  Same words, completely different activation patterns inside.                    │
-  │  Matched-vocabulary recall: 96.5%                                               │
-  │                                                                                 │
-  └─────────────────────────────────────────────────────────────────────────────────┘
-```
+> **Others read text, ask the cloud, ask another LLM, or match patterns. We read the model's internal activations after it processes the tool description — detecting whether it entered a "this tool wants to steal / escalate / exfiltrate" state.**
+
+| Type | Representatives | How they scan | Biggest gap | How IntentProbe differs |
+|---|---|---|---|---|
+| **Enterprise cloud scanner** | Lakera, Azure Prompt Shields, Google Model Armor, AWS Bedrock Guardrails, Cisco, HiddenLayer | Send prompt / tool call / output to their cloud API | You don't know what model they use or how to verify results; requires uploading your content | **Runs locally.** No upload. Benchmark scripts, model artifacts, and datasets are public and reproducible. |
+| **MCP / agent scanner** | Snyk Agent Scan, Invariant MCP-Scan, MEDUSA, ClawGuard | Mostly static rules, pattern matching, metadata scan, proxy, policy checks; some call vendor APIs | Fast and practical, but fundamentally "read the text / rules / known patterns" | **Activation probe.** Reads what the model *understood* from the tool description, not the text itself. |
+| **Text classifier** | ProtectAI DeBERTa, Meta Prompt Guard | Classify text as benign / injection / jailbreak | Learns text patterns; fails when words are the same but intent differs | Same-words benchmark: IntentProbe **96.5% F1** vs DeBERTa **0% F1**. |
+| **LLM-as-judge** | NeMo self-check, OpenAI Guardrails, Promptfoo grader | Ask another LLM: "is this poisoned?" | Expensive, slow, burns tokens; non-deterministic; the judge LLM can be fooled by the same poisoning | **Fixed local artifact.** Same input always gets the same deterministic score. |
+| **Red-team / eval framework** | garak, Giskard, Promptfoo red team | Generate attacks, test if app/model breaks | Great for audits, but not a "scan before install" daily workflow | IntentProbe is a **CLI scanner + runtime hook** — blocks before install and before each tool call. |
+| **IntentProbe** | **Us** | Small local model reads tool description, extract layers 13-15 activations, probe classifies intent | v0 still improving wild-data generalization | **First product-shaped activation-probe scanner for MCP/tool poisoning.** Local, reproducible, fundamentally different from text scanning. |
 
 ## Benchmarks
 
