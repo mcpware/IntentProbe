@@ -75,6 +75,10 @@ Yes. See [`docs/RUNTIME_HOOKS.md`](RUNTIME_HOOKS.md). Runtime scanning is
 event-boundary scanning: tool definitions before trust, tool arguments before
 execution, and tool responses before the agent trusts them.
 
+The runtime output is structured JSON, so a host can consume it directly. See
+[`docs/OPERATOR_DECISIONS.md`](OPERATOR_DECISIONS.md) for `allow`, `warn`,
+`block`, replay receipts, and suggested operator mappings.
+
 ## What are the headline benchmarks?
 
 The highest-signal public numbers are:
@@ -87,6 +91,9 @@ The highest-signal public numbers are:
 | Camouflage suffix evasion | 0/146 evaded | N/A |
 
 Benchmark artifacts are under [`research/`](../research/).
+
+For a compact reviewer packet, see
+[`docs/EVIDENCE_PACKET.md`](EVIDENCE_PACKET.md).
 
 ## Is this a claim about every private cloud scanner?
 

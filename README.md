@@ -21,7 +21,7 @@ Every public/source-verifiable MCP scanner we found reads text: patterns, classi
 
 On matched-vocabulary tool poisoning, where safe and poisoned descriptions use almost identical words, the public/source-verifiable DeBERTa text-classifier baseline catches **0%**. IntentProbe scores **96.6% F1**. ([Reproduce it yourself.](research/benchmark-results-deberta-vs-probe-2026-05-31.md))
 
-Runs locally. 22 KB probe. Any CPU. Nothing uploaded. See the [plain comparison](docs/intentprobe-vs-existing-mcp-scanners.md), [FAQ](docs/FAQ.md), and [full competitive landscape](docs/COMPETITIVE_LANDSCAPE.md).
+Runs locally. 22 KB probe. Any CPU. Nothing uploaded. See the [plain comparison](docs/intentprobe-vs-existing-mcp-scanners.md), [FAQ](docs/FAQ.md), [operator decisions](docs/OPERATOR_DECISIONS.md), [evidence packet](docs/EVIDENCE_PACKET.md), and [full competitive landscape](docs/COMPETITIVE_LANDSCAPE.md).
 
 ## Break it in one command
 
@@ -279,6 +279,14 @@ Every tool call is now scanned before execution. Model stays warm via JSONL prot
 Test safely with the in-memory demo: `python examples/runtime_toy_agent.py --allow-download`
 
 Full event schema: [docs/RUNTIME_HOOKS.md](docs/RUNTIME_HOOKS.md)
+
+Operator decisions and replay receipts: [docs/OPERATOR_DECISIONS.md](docs/OPERATOR_DECISIONS.md)
+
+The runtime output is structured JSON, not just a score. It includes the gate
+decision, fail level, subject hash, activation score, static evidence spans,
+thresholds, decision-policy reasons, scanner version, and artifact id, so a
+downstream runtime can log and replay why a tool call was allowed, warned, or
+blocked.
 
 ## What it scans
 

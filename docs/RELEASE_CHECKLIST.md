@@ -85,7 +85,7 @@ cd "$sdist_src"/intentprobe-0.1.0
 python3 -m zipfile -l "$wheel_dist"/intentprobe-0.1.0-py3-none-any.whl | \
   rg 'probe_weights|metadata.json|targets.py|entry_points'
 python3 -m tarfile -l "$sdist_dist"/intentprobe-0.1.0.tar.gz | \
-  rg 'probe_weights|metadata.json|targets.py|SECURITY.md|SAMPLE_REPORTING|RELEASE_CHECKLIST|RUNTIME_HOOKS|runtime_toy_agent'
+  rg 'probe_weights|metadata.json|targets.py|SECURITY.md|SAMPLE_REPORTING|RELEASE_CHECKLIST|RUNTIME_HOOKS|OPERATOR_DECISIONS|EVIDENCE_PACKET|runtime_toy_agent'
 ```
 
 Build the release wheel from the freshly extracted sdist. The repo can have an
@@ -117,6 +117,8 @@ Safe to say:
 - it can scan text, package folders, MCP configs, and Claude Code skill folders.
 - it has `intentprobe runtime` for runtime tool definitions, tool inputs, and
   tool responses.
+- runtime verdicts are structured JSON with gate decision, subject hash,
+  evidence spans, thresholds, policy reasons, and scanner artifact id.
 - current benchmarks show strong wins on matched-vocabulary tool poisoning.
 - novel attack-family generalization is still the open frontier.
 

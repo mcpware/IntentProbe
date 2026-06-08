@@ -50,6 +50,13 @@ uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 i
 The first model-backed scan downloads Qwen2.5-0.5B once. Scan targets and scan
 results stay on the user's machine.
 
+Runtime output is structured JSON, not only a score. It contains the gate
+decision, selected `--fail-on` level, subject hash, activation score, static
+evidence spans, thresholds, policy reasons, scanner version, model id, and
+scanner artifact id. A host runtime can use this as an audit receipt. To replay
+a verdict later, store the normalized scanned input or a redacted copy beside
+the JSON receipt.
+
 ## How it differs from other scanner categories
 
 Text, rule, and policy scanners read surface text, metadata, known suspicious
@@ -158,6 +165,10 @@ Issue templates:
 - `docs/intentprobe-vs-existing-mcp-scanners.md`: plain comparison page.
 - `docs/COMPETITIVE_LANDSCAPE.md`: source-backed competitor landscape.
 - `docs/RUNTIME_HOOKS.md`: runtime hook contract.
+- `docs/OPERATOR_DECISIONS.md`: allow/warn/block semantics, operator mapping,
+  and replay receipts.
+- `docs/EVIDENCE_PACKET.md`: compact reviewer packet for integrators and
+  security reviewers.
 - `research/README.md`: research artifact map.
 - `research/benchmark-results-deberta-vs-probe-2026-05-31.md`: DeBERTa vs activation benchmark.
 - `research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md`: direct Qwen judge baseline.

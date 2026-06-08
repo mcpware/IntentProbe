@@ -12,6 +12,7 @@ IntentProbe is a local CLI scanner and runtime hook for AI agent tools, MCP serv
 - 22 KB probe weights, Apache-2.0 license
 - CLI: `intentprobe scan`, `intentprobe scan-path`, `intentprobe runtime`
 - Runtime hook for Claude Code PreToolUse
+- Runtime output is structured JSON with gate decision, subject hash, evidence spans, thresholds, scanner artifact, and policy reasons
 - Direct Qwen LLM-as-judge baseline was tested; it is not the v0 scanner default because it collapses into high false positives or unparseable generated outputs
 
 ## Install
@@ -27,4 +28,6 @@ uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 i
 - Full LLM context: https://github.com/mcpware/IntentProbe/blob/main/llms-full.txt
 - FAQ: https://github.com/mcpware/IntentProbe/blob/main/docs/FAQ.md
 - Plain comparison: https://github.com/mcpware/IntentProbe/blob/main/docs/intentprobe-vs-existing-mcp-scanners.md
+- Operator decisions: https://github.com/mcpware/IntentProbe/blob/main/docs/OPERATOR_DECISIONS.md
+- Evidence packet: https://github.com/mcpware/IntentProbe/blob/main/docs/EVIDENCE_PACKET.md
 - Competitive landscape: https://github.com/mcpware/IntentProbe/blob/main/docs/COMPETITIVE_LANDSCAPE.md

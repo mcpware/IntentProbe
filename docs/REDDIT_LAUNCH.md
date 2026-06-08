@@ -153,6 +153,18 @@ latency, and model/prompt drift.
 IntentProbe runs a small local model and returns a deterministic probe score for
 a fixed scanner artifact.
 
+## Short reply: does it make runtime decisions or only scanner scores?
+
+The runtime layer is already built in. `intentprobe runtime scan` and
+`intentprobe runtime serve-jsonl` return structured JSON with the decision,
+activation score, static findings, thresholds, policy reasons, scanner artifact,
+and subject hash. A downstream runtime can consume the verdict directly instead
+of only getting a score.
+
+`block` is the high-confidence tier, `warn` is the review tier, and `--fail-on`
+chooses the enforcement level. Store the normalized input or a redacted copy
+beside the JSON receipt if you need to replay the decision later.
+
 ## Short reply: does it upload my code?
 
 No. The scanner runs locally. The first model-backed scan may download the local

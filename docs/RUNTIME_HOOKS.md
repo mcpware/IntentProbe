@@ -4,6 +4,9 @@
 `intentprobe-hook` exposes the same lower-level commands for hosts that want a
 dedicated hook binary.
 
+For operator policy, gate semantics, and replayable verdict receipts, see
+[Operator Decisions and Replay Receipts](OPERATOR_DECISIONS.md).
+
 Runtime scanning is event-boundary scanning, not per-token monitoring. The host
 should scan:
 
@@ -120,6 +123,11 @@ Gate semantics:
 - `quarantine`: scanner error or invalid payload; fail closed when configured.
 
 Exit code `2` means the decision reached the selected `--fail-on` level.
+
+The output also includes subject hashes, activation score, static evidence
+spans, thresholds, decision-policy reasons, scanner version, and artifact id.
+Store the normalized input or a redacted copy beside the JSON result if you need
+to replay a verdict later.
 
 ## Redaction
 
