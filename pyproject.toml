@@ -7,7 +7,7 @@ name = "intentprobe"
 version = "0.1.0"
 description = "Local activation-probe scanner for AI agent tools, MCP servers, and skills."
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.14"
 license = "Apache-2.0"
 authors = [{ name = "mcpware" }]
 keywords = ["ai-security", "mcp", "tool-poisoning", "activation-probe", "scanner"]

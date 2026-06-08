@@ -120,6 +120,20 @@ Same test sets. Same split. Same seed. Every number is reproducible from `resear
 
 ## Install
 
+No registry account needed:
+
+```bash
+uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe --help
+```
+
+Install the CLI:
+
+```bash
+uv tool install --python 3.11 git+https://github.com/mcpware/IntentProbe.git@v0.1.0
+```
+
+Or run from source:
+
 ```bash
 git clone https://github.com/mcpware/IntentProbe.git
 cd IntentProbe
@@ -127,11 +141,17 @@ python3 -m venv .venv
 .venv/bin/pip install -e .
 ```
 
-First scan downloads Qwen2.5-0.5B (~1 GB, once). After that, everything stays local.
+First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). After that,
+everything stays local. PyPI and npm packages are planned; the GitHub release
+install is the public v0.1.0 path.
 
 ## Try it
 
 ```bash
+# One-command GitHub release scan
+uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary \
+  --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+
 # Scan a tool description
 intentprobe scan --format summary \
   --text "A calculator that adds two numbers and returns the sum."
