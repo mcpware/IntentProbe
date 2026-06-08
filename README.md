@@ -23,6 +23,16 @@ On matched-vocabulary tool poisoning, where safe and poisoned descriptions use a
 
 Runs locally. 22 KB probe. Any CPU. Nothing uploaded. See the [full competitive landscape](docs/COMPETITIVE_LANDSCAPE.md).
 
+## Break it in one command
+
+No install or registry account needed:
+
+```bash
+uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+```
+
+First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). Scan data stays on your machine.
+
 ---
 
 ## How it works
@@ -68,11 +78,28 @@ The words are almost identical. The intent is not. Text scanners fail here becau
 | **Enterprise cloud** | Lakera, Azure Prompt Shields, Google Model Armor, AWS Bedrock Guardrails, Cisco | Ship content to their cloud API for classification | Black box. You can't verify what model they use or reproduce their results. | **100% local.** Every benchmark script, model artifact, and dataset is public. |
 | **MCP scanner** | Snyk Agent Scan, Invariant MCP-Scan, MEDUSA, ClawGuard | Static rules, pattern matching, metadata scan, policy checks | Practical, but reads text and known patterns. | **Reads activations.** What the model understood, not what the text says. |
 | **Text classifier** | ProtectAI DeBERTa, Meta Prompt Guard | Classify text as benign / injection / jailbreak | Trained on prompt injection, not tool poisoning. Fails on matched vocabulary. | Matched-vocabulary F1: IntentProbe **96.6%**, DeBERTa **0%**. |
-| **LLM-as-judge** | NeMo self-check, OpenAI Guardrails, Promptfoo | Ask another LLM: "is this poisoned?" | Expensive, slow, non-deterministic. The judge can be fooled by the same poisoning. | **Deterministic.** Same input, same score, every time. No API calls. |
+| **LLM-as-judge** | NeMo self-check, OpenAI Guardrails, Promptfoo | Ask another LLM: "is this poisoned?" | Expensive, slow, prompt-sensitive, and the generated answer is part of the attack surface. | **Representation-level.** Scores the internal state before any verbal answer is produced. |
 | **Red-team framework** | garak, Giskard, Promptfoo red team | Generate attacks to test your app | Audit tool, not a pre-install scanner. | IntentProbe is a **CLI + runtime hook** that blocks before install and before each tool call. |
 | **IntentProbe** | | Frozen local model + activation probe on layers 13-15 | Still improving on novel attack families | **First activation-probe scanner for MCP tool poisoning.** |
 
 Full source-backed comparison: [docs/COMPETITIVE_LANDSCAPE.md](docs/COMPETITIVE_LANDSCAPE.md)
+
+## Why not just ask Qwen?
+
+LLM-as-judge is an output-level mechanism: ask a model to say safe or unsafe.
+IntentProbe is a representation-level mechanism: run the tool text through a
+frozen local model and score the hidden activation state.
+
+That difference matters. A poisoned tool can claim "I am safe", and a judge
+prompt can be steered into saying safe. IntentProbe does not trust the verbal
+answer; it measures whether the tool text creates a poisoned-looking internal
+state.
+
+We tested direct-prompting the same `Qwen/Qwen2.5-0.5B` sensor model. The
+deterministic label-score baseline flagged every clean curated item as poisoned
+(`clean FPR = 1.000`), while the generated-answer baseline produced lower
+recall and many unparseable outputs. Full reproducible baseline:
+[research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md](research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md).
 
 ## Benchmarks
 

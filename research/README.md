@@ -24,6 +24,7 @@ The short version:
 | `SCANNER_PIPELINE.md` | Product methodology: frozen sensor model, activation probe, SAE explanations, update loop. |
 | `LIVING_PLAN.md` | Current roadmap, model choices, benchmark results, and next actions. |
 | `PRODUCT_REPRODUCIBILITY_LEDGER_2026-06-03.md` | Peer-review ledger for the current product-shaped scanner path: commands, artifacts, metrics, and claim boundaries. |
+| `QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md` | Direct-prompt / LLM-as-judge baseline for the same Qwen sensor model. |
 | `ROUTEGUARD_EXTERNAL_QWEN_FIXED_LAYERS_2026-06-03.md` | Latest RouteGuard-style external-transfer gate and Qwen pooled artifact decision. |
 | `THRESHOLD_CALIBRATION_QWEN_POOLED_2026-06-03.md` | Current Qwen pooled warn/block threshold calibration and product decision. |
 | `CURATED_FAMILY_BAKEOFF_2026-06-03.md` | Latest curated-family model bakeoff and Qwen artifact decision. |
