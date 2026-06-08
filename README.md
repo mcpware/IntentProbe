@@ -23,12 +23,18 @@ On matched-vocabulary tool poisoning, where safe and poisoned descriptions use a
 
 Runs locally. 22 KB probe. Any CPU. Nothing uploaded. See the [plain comparison](docs/intentprobe-vs-existing-mcp-scanners.md), [FAQ](docs/FAQ.md), [operator decisions](docs/OPERATOR_DECISIONS.md), [evidence packet](docs/EVIDENCE_PACKET.md), and [full competitive landscape](docs/COMPETITIVE_LANDSCAPE.md).
 
-## Break it in one command
+## Install in one command
 
-No install or registry account needed:
+This is the public v0 install path:
 
 ```bash
-uvx --python 3.11 --from intentprobe intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+python3 -m pip install intentprobe
+```
+
+Then scan a suspicious tool description:
+
+```bash
+intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
 ```
 
 First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). Scan data stays on your machine.
@@ -151,41 +157,14 @@ Same test sets. Same split. Same seed. Every number is reproducible from `resear
 >
 > Five rounds of experiments. Each round removes a text-level shortcut. If the probe is just doing fancy word counting, accuracy should drop. It never did. TF-IDF went from 93% to 30% as confounds were removed. The activation probe stayed above 93% throughout.
 
-## Install
-
-One-line install:
-
-```bash
-pipx install intentprobe
-```
-
-Or run without installing:
-
-```bash
-uvx --python 3.11 --from intentprobe intentprobe --help
-```
-
-Or run from source:
-
-```bash
-git clone https://github.com/mcpware/IntentProbe.git
-cd IntentProbe
-python3 -m venv .venv
-.venv/bin/pip install -e .
-```
-
-First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). After that,
-everything stays local. The Python package is live on PyPI; the npm package is
-a thin launcher and will be published after registry auth is refreshed.
-
 ## Try it
 
 ```bash
-# One-command PyPI scan
-uvx --python 3.11 --from intentprobe intentprobe scan --format summary \
+# Scan a suspicious tool description
+intentprobe scan --format summary \
   --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
 
-# Scan a tool description
+# Scan a safe tool description
 intentprobe scan --format summary \
   --text "A calculator that adds two numbers and returns the sum."
 
