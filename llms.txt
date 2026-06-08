@@ -1,0 +1,26 @@
+# IntentProbe
+
+> The only MCP scanner that reads what the model understood, not what the text says.
+
+IntentProbe is a local CLI scanner and runtime hook for AI agent tools, MCP servers, and skills. It runs tool descriptions through a small frozen model (Qwen2.5-0.5B), reads internal activations at layers 13-15, and uses a trained probe to detect poisoned intent that text scanners miss.
+
+## Key facts
+
+- On matched-vocabulary tool poisoning: 96.6% F1 vs Snyk DeBERTa 0% F1
+- Adversarial evasion: 0/146 evaded with camouflage suffixes
+- Runs 100% locally on CPU, nothing uploaded
+- 22 KB probe weights, Apache-2.0 license
+- CLI: `intentprobe scan`, `intentprobe scan-path`, `intentprobe runtime`
+- Runtime hook for Claude Code PreToolUse
+
+## Install
+
+```
+pip install git+https://github.com/mcpware/IntentProbe.git
+```
+
+## Links
+
+- Repository: https://github.com/mcpware/IntentProbe
+- Research paper: https://doi.org/10.5281/zenodo.19990741
+- Competitive landscape: https://github.com/mcpware/IntentProbe/blob/main/docs/COMPETITIVE_LANDSCAPE.md

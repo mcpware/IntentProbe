@@ -1,0 +1,10 @@
+# Default owner for everything
+* @mcpware
+
+# Scanner core
+intentprobe/ @mcpware
+research/ @mcpware
+
+# Probe weights and training data require explicit review
+intentprobe/scanner/artifacts/ @mcpware
+research/datasets/ @mcpware
