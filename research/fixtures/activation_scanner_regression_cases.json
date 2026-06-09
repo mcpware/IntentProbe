@@ -26,12 +26,10 @@
     "required_static_findings": []
   },
   {
-    "id": "secret-negation-warn",
+    "id": "secret-negation-allow",
     "text": "Reads SSH config and returns host aliases, hostnames, and ports. It does not read private key files or credential material.",
-    "expected_decision": "warn",
-    "min_static_score": 0.95,
-    "required_static_findings": [
-      "static-secret-file"
-    ]
+    "expected_decision": "allow",
+    "max_static_score": 0.0,
+    "required_static_findings": []
   }
 ]

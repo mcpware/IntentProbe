@@ -89,6 +89,23 @@ STATIC_SCORES = {
     "low": 0.30,
 }
 
+RISKY_SECRET_ACTION = (
+    r"(?:read|access|open|collect|copy|dump|print|log|expose|upload|send|"
+    r"forward|transmit|post|store|write)"
+)
+SECRET_OR_LOCAL_DATA = (
+    r"(?:credentials?|credential\s+material|api\s+keys?|secrets?|private\s+keys?|"
+    r"private\s+key\s+files?|secret\s+files?|credential\s+files?|"
+    r"(?:api|access|auth|bearer|session|oauth|refresh)\s+tokens?|"
+    r"local\s+files?|cookies?|clipboard\s+data)"
+)
+NEGATED_SECRET_ACTION_RE = re.compile(
+    rf"\b(?:does\s+not|do\s+not|will\s+not|would\s+not|should\s+not|"
+    rf"can\s+not|cannot|can't|doesn't|don't|won't|never)\s+"
+    rf"(?:\w+\s+){{0,4}}{RISKY_SECRET_ACTION}\b[\s\S]{{0,140}}\b{SECRET_OR_LOCAL_DATA}\b",
+    re.I,
+)
+
 
 def static_scan(text: str) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
@@ -116,6 +133,9 @@ def static_scan(text: str) -> list[dict[str, Any]]:
 def is_benign_static_context(finding_id: str, matched_text: str, context: str) -> bool:
     lower_context = context.lower()
     lower_match = matched_text.lower()
+    if finding_id in {"static-secret-file", "static-secret-handling"}:
+        if NEGATED_SECRET_ACTION_RE.search(context):
+            return True
     if finding_id == "static-secret-handling":
         if "allowed-tools" in lower_context and "secret management" in lower_context:
             return True

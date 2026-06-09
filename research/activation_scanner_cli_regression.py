@@ -87,7 +87,7 @@ def main(argv: list[str] | None = None) -> int:
             ]
         )
         decisions = [row.get("decision") for row in (batch or {}).get("results", [])]
-        assert_true(decisions == ["block", "allow", "allow", "warn"], f"unexpected batch decisions: {decisions}")
+        assert_true(decisions == ["block", "allow", "allow", "allow"], f"unexpected batch decisions: {decisions}")
         checks.append({"name": "batch_json", "passed": True, "decisions": decisions})
 
         safe_path, _safe_path_result = run_cli(
@@ -101,8 +101,8 @@ def main(argv: list[str] | None = None) -> int:
         )
         assert_true(bool(safe_path and safe_path.get("count", 0) >= 2), "safe scan-path did not scan package files")
         assert_true(
-            safe_path.get("max_decision") in {"allow", "warn"},
-            f"safe package was hard-blocked: {safe_path.get('max_decision')}",
+            safe_path.get("max_decision") == "allow",
+            f"safe package was flagged: {safe_path.get('max_decision')}",
         )
         checks.append(
             {

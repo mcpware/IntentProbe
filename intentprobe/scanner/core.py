@@ -23,8 +23,9 @@ except ImportError:
     from intentprobe.scanner.static_checks import static_scan, static_score  # type: ignore
 
 
-CORE_VERSION = "activation-scanner-core-2026-06-03-static-v3"
-DECISION_POLICY_NAME = "corroborated-block-v3"
+CORE_VERSION = "activation-scanner-core-2026-06-03-static-v4"
+DECISION_POLICY_NAME = "corroborated-block-v4"
+ACTIVATION_ONLY_WARN_MIN = 0.50
 STATIC_BLOCK_BUNDLE_MAX_SPAN = 900
 STATIC_BLOCK_BUNDLES = (
     frozenset(("static-secret-file", "static-exfiltration", "static-hidden-action")),
@@ -300,6 +301,12 @@ def choose_runtime_decision(
         return "block", reasons
 
     if risk_score >= warn_threshold:
+        if static_risk_score <= 0 and activation_score < ACTIVATION_ONLY_WARN_MIN:
+            reasons.append(
+                "activation-only score below product review floor "
+                f"(activation={activation_score:.3f}, floor={ACTIVATION_ONLY_WARN_MIN:.2f})"
+            )
+            return "allow", reasons
         if risk_score >= block_threshold:
             reasons.append("high risk score without block corroboration; downgraded to warn")
         else:
@@ -419,6 +426,7 @@ def build_risk_output(
             "static_block_bundles": [sorted(bundle) for bundle in STATIC_BLOCK_BUNDLES],
             "static_block_bundle_max_span": STATIC_BLOCK_BUNDLE_MAX_SPAN,
             "static_activation_corroborators": sorted(STATIC_ACTIVATION_CORROBORATORS),
+            "activation_only_warn_min": ACTIVATION_ONLY_WARN_MIN,
             "policy_reasons": decision_policy_reasons,
         },
         "elapsed_seconds": elapsed_seconds,
