@@ -34,6 +34,8 @@ Done:
   landscape.
 - GitHub Action metadata and workflow docs added for CI gating.
 - No-video demo script added for copy-paste CLI and Action proof.
+- Action supports an optional Hugging Face token secret for reliable first-run
+  model downloads in CI.
 
 Not done yet:
 
@@ -49,7 +51,7 @@ Not done yet:
 | Milestone | Status | Evidence target |
 |---|---|---|
 | M0. One-command install | Done | PyPI package installs and scans locally. |
-| M1. CI gate | In progress | `action.yml`, docs, and one green action run. |
+| M1. CI gate | In progress | `action.yml`, docs, optional HF token, and one green action run. |
 | M2. No-video demo | In progress | `docs/DEMO_SCRIPT.md` plus action smoke workflow. |
 | M3. Demo repo | Next | A tiny MCP repo with one safe PR and one poisoned PR. |
 | M4. Runtime receipt demo | Next | `serve-jsonl` demo showing allow/warn/block receipts. |
@@ -159,3 +161,4 @@ Do not say:
 | 2026-06-08 | Build GitHub Action before more posting. | CI turns IntentProbe from "try this CLI" into an admission gate people can wire into repos. |
 | 2026-06-08 | Keep the public pack framed as a demo/evidence pack. | It still serves the acquisition path, but reads better to users, partners, and buyers. |
 | 2026-06-08 | Defer video and prioritize runnable proof. | Security scanner videos are low-signal; action smoke, demo script, and reproducible commands create stronger trust. |
+| 2026-06-08 | Add optional `hf-token` input to the Action. | The first public action smoke hit Hugging Face anonymous rate limits; CI should use a secret without uploading scan content anywhere. |

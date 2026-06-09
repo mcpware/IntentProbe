@@ -30,6 +30,7 @@ jobs:
           paths: |
             research/fixtures/scan_path/safe-weather-package
           fail-on: block
+          hf-token: ${{ secrets.HF_TOKEN }}
 
       - name: Poisoned fixture blocks
         id: poisoned
@@ -40,6 +41,7 @@ jobs:
             research/fixtures/scan_path/poisoned-skill
           fail-on: block
           local-files-only: "true"
+          hf-token: ${{ secrets.HF_TOKEN }}
 
       - name: Assert poisoned fixture was blocked
         if: steps.poisoned.outcome != 'failure'

@@ -31,6 +31,7 @@ jobs:
           paths: |
             .
           fail-on: block
+          hf-token: ${{ secrets.HF_TOKEN }}
 ```
 
 Use `paths` to narrow the scan once you know where your agent tooling lives:
@@ -45,6 +46,7 @@ Use `paths` to narrow the scan once you know where your agent tooling lives:
             skills/**
             packages/**/package.json
           fail-on: block
+          hf-token: ${{ secrets.HF_TOKEN }}
 ```
 
 ## Inputs
@@ -59,6 +61,14 @@ Use `paths` to narrow the scan once you know where your agent tooling lives:
 | `max-files` | `200` | Maximum candidate files read under each scanned directory. |
 | `max-file-bytes` | `200000` | Maximum bytes read from each candidate file. |
 | `local-files-only` | `false` | Set `true` only when the runner cache already has the model. |
+| `hf-token` | empty | Optional Hugging Face token passed as a GitHub secret to avoid anonymous download rate limits. |
+
+## Optional Hugging Face token
+
+The scanner runs locally in the GitHub Actions runner, but the first
+model-backed scan downloads Qwen2.5-0.5B from Hugging Face. Public runners can
+hit anonymous rate limits, so CI workflows should add an `HF_TOKEN` repository
+secret and pass it with `hf-token: ${{ secrets.HF_TOKEN }}`.
 
 ## What gets uploaded?
 

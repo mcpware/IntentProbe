@@ -55,6 +55,7 @@ jobs:
           paths: |
             .
           fail-on: block
+          hf-token: ${{ secrets.HF_TOKEN }}
 ```
 
 For a narrower scan:
@@ -76,6 +77,8 @@ For a narrower scan:
 - The same scanner can run as a GitHub Action gate before a pull request
   merges.
 - Scan targets and results stay inside the local machine or GitHub runner.
+- CI can pass an optional Hugging Face secret so first-run model downloads do
+  not depend on anonymous rate limits.
 
 ## What this does not prove
 

@@ -39,6 +39,10 @@ inputs:
     description: Set true to require the model to already exist in the runner cache.
     required: false
     default: "false"
+  hf-token:
+    description: Optional Hugging Face token used to avoid anonymous CI rate limits.
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -55,6 +59,19 @@ runs:
           ~/.cache/huggingface/hub
           ~/.cache/torch
         key: ${{ runner.os }}-intentprobe-${{ inputs.intentprobe-version }}-qwen25-05b-v1
+
+    - name: Configure optional Hugging Face token
+      shell: bash
+      env:
+        INPUT_HF_TOKEN: ${{ inputs.hf-token }}
+      run: |
+        set -euo pipefail
+        if [ -n "$INPUT_HF_TOKEN" ]; then
+          {
+            printf 'HF_TOKEN=%s\n' "$INPUT_HF_TOKEN"
+            printf 'HUGGING_FACE_HUB_TOKEN=%s\n' "$INPUT_HF_TOKEN"
+          } >> "$GITHUB_ENV"
+        fi
 
     - name: Install IntentProbe
       shell: bash
