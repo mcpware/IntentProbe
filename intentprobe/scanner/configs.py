@@ -8,6 +8,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
+    import tomli as tomllib
+
 from .core import CORE_VERSION, DECISION_POLICY_NAME
 from .hook import ScanSubject, max_decision, object_subject
 
@@ -20,13 +25,9 @@ DECISION_RANK = {
 }
 
 REVIEW_FLAG_IDS = {
-    "env-secrets",
-    "remote-http",
     "browser-access",
     "filesystem-access",
     "code-execution",
-    "email-or-identity",
-    "repo-or-ticketing-access",
 }
 
 
@@ -57,7 +58,9 @@ def default_config_candidates(cwd: Path | None = None) -> list[ConfigCandidate]:
     working_dir = cwd or Path.cwd()
     candidates = [
         ConfigCandidate("Claude Desktop", home / "Library/Application Support/Claude/claude_desktop_config.json"),
-        ConfigCandidate("Claude Code", home / ".claude/mcp.json"),
+        ConfigCandidate("Claude Code Global", home / ".claude.json"),
+        ConfigCandidate("Claude Code MCP", home / ".claude/mcp.json"),
+        ConfigCandidate("Codex", home / ".codex/config.toml"),
         ConfigCandidate("Cursor", home / ".cursor/mcp.json"),
         ConfigCandidate("Cursor User", home / "Library/Application Support/Cursor/User/mcp.json"),
         ConfigCandidate("Windsurf", home / ".codeium/windsurf/mcp_config.json"),
@@ -85,7 +88,7 @@ def config_candidates_from_target(target: str | Path | None, cwd: Path | None = 
     return [ConfigCandidate("custom", Path(target).expanduser())]
 
 
-def load_json_config(path: Path, max_file_bytes: int) -> tuple[dict[str, Any] | None, str | None]:
+def load_structured_config(path: Path, max_file_bytes: int) -> tuple[dict[str, Any] | None, str | None]:
     try:
         raw = path.read_bytes()
     except OSError as exc:
@@ -93,11 +96,21 @@ def load_json_config(path: Path, max_file_bytes: int) -> tuple[dict[str, Any] | 
     if len(raw) > max_file_bytes:
         return None, f"file_too_large: {len(raw)} bytes > {max_file_bytes}"
     try:
-        payload = json.loads(raw.decode("utf-8"))
+        text = raw.decode("utf-8")
     except UnicodeDecodeError as exc:
         return None, f"decode_error: {exc}"
-    except json.JSONDecodeError as exc:
-        return None, f"json_error: {exc}"
+
+    if path.suffix == ".toml":
+        try:
+            payload = tomllib.loads(text)
+        except tomllib.TOMLDecodeError as exc:
+            return None, f"toml_error: {exc}"
+    else:
+        try:
+            payload = json.loads(text)
+        except json.JSONDecodeError as exc:
+            return None, f"json_error: {exc}"
+
     if not isinstance(payload, dict):
         return None, f"unsupported_json_type: {type(payload).__name__}"
     return payload, None
@@ -147,7 +160,7 @@ def collect_config_servers(
             configs.append(public_config)
             continue
 
-        payload, error = load_json_config(path, max_file_bytes)
+        payload, error = load_structured_config(path, max_file_bytes)
         if error is not None or payload is None:
             public_config.update({"status": "invalid", "error": error})
             configs.append(public_config)
@@ -194,7 +207,7 @@ def inventory_flags(server: ConfigServer) -> list[dict[str, str]]:
         flags.append(
             {
                 "id": "env-secrets",
-                "level": "review",
+                "level": "info",
                 "reason": "server config includes environment variables; values are redacted",
             }
         )
@@ -203,7 +216,7 @@ def inventory_flags(server: ConfigServer) -> list[dict[str, str]]:
         flags.append(
             {
                 "id": "remote-http",
-                "level": "review",
+                "level": "info",
                 "reason": "server connects to a remote MCP endpoint",
             }
         )
@@ -248,7 +261,7 @@ def inventory_flags(server: ConfigServer) -> list[dict[str, str]]:
         flags.append(
             {
                 "id": "email-or-identity",
-                "level": "review",
+                "level": "info",
                 "reason": "server appears connected to email, calendar, OAuth, or identity data",
             }
         )
@@ -257,7 +270,7 @@ def inventory_flags(server: ConfigServer) -> list[dict[str, str]]:
         flags.append(
             {
                 "id": "repo-or-ticketing-access",
-                "level": "review",
+                "level": "info",
                 "reason": "server appears connected to code repositories or ticketing systems",
             }
         )
@@ -276,7 +289,7 @@ def product_decision_for_config_scan(risk: dict[str, Any], flags: list[dict[str,
 
     scanner_decision = str(risk.get("decision", "allow"))
     static_score = float(risk.get("static_score") or 0.0)
-    review_flags = [flag for flag in flags if flag.get("id") in REVIEW_FLAG_IDS]
+    review_flags = [flag for flag in flags if flag.get("level") == "review" and flag.get("id") in REVIEW_FLAG_IDS]
     reasons: list[str] = []
 
     if scanner_decision == "block":

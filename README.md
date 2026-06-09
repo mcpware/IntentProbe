@@ -40,7 +40,9 @@ python3 -m venv .venv-intentprobe
 .venv-intentprobe/bin/intentprobe scan-config auto --format summary
 ```
 
-Then scan the MCP tools already configured on your machine:
+Then scan the MCP tools already configured on your machine. `scan-config auto`
+checks common Claude Desktop, Claude Code, Codex, Cursor, Windsurf, and repo MCP
+config locations:
 
 ```bash
 intentprobe scan-config auto --format summary
@@ -175,7 +177,7 @@ Same test sets. Same split. Same seed. Every number is reproducible from `resear
 ## Try it
 
 ```bash
-# Scan Claude/Cursor/Claude Code MCP configs already on this machine
+# Scan Claude/Cursor/Codex MCP configs already on this machine
 intentprobe scan-config auto --format summary
 
 # Scan a suspicious tool description
@@ -300,8 +302,10 @@ blocked.
 
   scan-config:
   ├── Claude Desktop           claude_desktop_config.json
-  ├── Claude Code              ~/.claude/mcp.json
+  ├── Claude Code              ~/.claude.json, ~/.claude/mcp.json
+  ├── Codex                    ~/.codex/config.toml
   ├── Cursor                   ~/.cursor/mcp.json
+  ├── Windsurf                 ~/.codeium/windsurf/mcp_config.json
   └── local repo               .mcp.json
 
   runtime:
