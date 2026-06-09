@@ -1,0 +1,48 @@
+name: IntentProbe action smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths:
+      - "action.yml"
+      - ".github/workflows/intentprobe-action-smoke.yml"
+      - "docs/GITHUB_ACTION.md"
+      - "docs/DEMO_SCRIPT.md"
+      - "docs/V0_2_DEMO_PACK.md"
+  pull_request:
+    paths:
+      - "action.yml"
+      - ".github/workflows/intentprobe-action-smoke.yml"
+      - "docs/GITHUB_ACTION.md"
+      - "docs/DEMO_SCRIPT.md"
+      - "docs/V0_2_DEMO_PACK.md"
+
+jobs:
+  action-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Safe fixture passes
+        uses: ./
+        with:
+          paths: |
+            research/fixtures/scan_path/safe-weather-package
+          fail-on: block
+
+      - name: Poisoned fixture blocks
+        id: poisoned
+        uses: ./
+        continue-on-error: true
+        with:
+          paths: |
+            research/fixtures/scan_path/poisoned-skill
+          fail-on: block
+          local-files-only: "true"
+
+      - name: Assert poisoned fixture was blocked
+        if: steps.poisoned.outcome != 'failure'
+        run: |
+          echo "Expected poisoned fixture to fail with a block verdict."
+          exit 1

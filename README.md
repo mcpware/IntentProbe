@@ -82,6 +82,9 @@ jobs:
 See [docs/GITHUB_ACTION.md](docs/GITHUB_ACTION.md) for target paths, inputs,
 and exit behavior.
 
+Want the quickest proof without a video? Run the
+[demo script](docs/DEMO_SCRIPT.md).
+
 ---
 
 ## How it works

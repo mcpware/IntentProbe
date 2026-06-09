@@ -33,15 +33,16 @@ Done:
 - Public README, FAQ, evidence packet, operator decision docs, and competitive
   landscape.
 - GitHub Action metadata and workflow docs added for CI gating.
+- No-video demo script added for copy-paste CLI and Action proof.
 
 Not done yet:
 
 - No broad external user feedback loop yet.
 - No public demo repo showing a poisoned MCP pull request being blocked.
-- No short video that a non-research person can understand in 60 seconds.
 - No GitHub Action Marketplace listing yet.
 - No calibrated enterprise policy pack for allow/warn/redact/block/review.
 - No public download or usage dashboard.
+- No short video yet. This is deliberately optional, not a v0.2 blocker.
 
 ## v0.2 milestones
 
@@ -49,8 +50,8 @@ Not done yet:
 |---|---|---|
 | M0. One-command install | Done | PyPI package installs and scans locally. |
 | M1. CI gate | In progress | `action.yml`, docs, and one green action run. |
-| M2. Demo repo | Next | A tiny MCP repo with one safe PR and one poisoned PR. |
-| M3. 60-second demo | Next | GIF/video: install, scan, block, JSON evidence. |
+| M2. No-video demo | In progress | `docs/DEMO_SCRIPT.md` plus action smoke workflow. |
+| M3. Demo repo | Next | A tiny MCP repo with one safe PR and one poisoned PR. |
 | M4. Runtime receipt demo | Next | `serve-jsonl` demo showing allow/warn/block receipts. |
 | M5. Public challenge loop | Open | Issues convert misses and false positives into labeled samples. |
 | M6. v0.2 release page | Open | Release notes with action usage, demo links, and benchmark links. |
@@ -59,12 +60,13 @@ Not done yet:
 ## Immediate build sequence
 
 1. Finish the GitHub Action and README/docs entrypoint.
-2. Push and verify the action metadata is visible from GitHub.
-3. Create a tiny demo repository or fixture workflow:
+2. Add and run an action smoke workflow:
+   safe fixture passes, poisoned fixture blocks.
+3. Push and verify the action metadata is visible from GitHub.
+4. Create a tiny demo repository or fixture workflow:
    `safe-weather-mcp` passes, `credential-health-check` blocks.
-4. Record the exact command/output as a short terminal demo.
-5. Add a `docs/DEMO_SCRIPT.md` that anyone can follow without knowing
-   activation probing.
+5. Record exact command/output in a text demo script anyone can follow without
+   knowing activation probing.
 6. Cut a v0.2 release once the action, demo script, and smoke evidence are all
    in one place.
 
@@ -72,8 +74,8 @@ Not done yet:
 
 - Make the CI install path copy-pasteable.
 - Add a "scan this repo in GitHub Actions" section to README.
-- Produce a 60-second demo: clone, install, scan safe, scan poisoned, show
-  block, show JSON.
+- Produce no-video proof: clone, install, scan safe, scan poisoned, show block,
+  show JSON, and link the green action smoke.
 - Reply to technical comments with concrete product behavior, not research
   abstraction.
 - Track every external comment, star burst, install question, and failure case
@@ -128,6 +130,11 @@ integration example.
 Do not spend a week polishing wording while the product surface stands still.
 The repo needs fresh proof more than perfect prose.
 
+Video is optional. For scanners, a terminal video is weaker than a runnable
+workflow because most scanner demos look the same. Prioritize reproducible proof
+first: green CI, expected block, expected allow, clear JSON, and public issue
+loop.
+
 ## Claim boundaries
 
 Safe to say:
@@ -151,3 +158,4 @@ Do not say:
 |---|---|---|
 | 2026-06-08 | Build GitHub Action before more posting. | CI turns IntentProbe from "try this CLI" into an admission gate people can wire into repos. |
 | 2026-06-08 | Keep the public pack framed as a demo/evidence pack. | It still serves the acquisition path, but reads better to users, partners, and buyers. |
+| 2026-06-08 | Defer video and prioritize runnable proof. | Security scanner videos are low-signal; action smoke, demo script, and reproducible commands create stronger trust. |

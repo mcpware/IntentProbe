@@ -24,7 +24,7 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 - [x] **10. Public launch hygiene.** Honest README with benchmark table, local privacy note, sample reporting guide, GitHub issue templates, SECURITY policy, package build gate, and Reddit launch draft.
 - [x] **11. CI gate preview.** Root `action.yml` lets a repo run IntentProbe from GitHub Actions with `uses: mcpware/IntentProbe@main`; docs live in `docs/GITHUB_ACTION.md`.
 - [ ] **12. First public feedback loop.** Post publicly, ask users to scan real MCP servers / skills / packages, triage missed detections and false positives into the next data curriculum.
-- [ ] **13. v0.2 demo pack.** Follow `docs/V0_2_DEMO_PACK.md`: demo repo, short scan video, runtime receipt demo, action verification, and buyer-grade evidence packet.
+- [ ] **13. v0.2 demo pack.** Follow `docs/V0_2_DEMO_PACK.md`: action smoke, no-video demo script, demo repo, runtime receipt demo, and buyer-grade evidence packet.
 
 ## Key technical facts (do not relearn these)
 
@@ -42,6 +42,7 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 - Scanner runtime: `intentprobe/scanner/core.py`, `intentprobe/scanner/cli.py`, and `intentprobe/scanner/hook.py`.
 - Filesystem target extraction: `intentprobe/scanner/targets.py`.
 - GitHub Action metadata: `action.yml`.
+- No-video demo script: `docs/DEMO_SCRIPT.md`.
 - v0.2 demo pack living plan: `docs/V0_2_DEMO_PACK.md`.
 - Default shipped probe artifact: `intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/`.
 - Research compatibility wrappers: `research/activation_scanner_core.py`, `research/activation_scanner_cli.py`, and `research/activation_scanner_hook.py`.
