@@ -36,11 +36,14 @@ Done:
 - No-video demo script added for copy-paste CLI and Action proof.
 - Action supports an optional Hugging Face token secret for reliable first-run
   model downloads in CI.
+- Public demo repo added:
+  https://github.com/mcpware/intentprobe-demo
+- Live demo PRs added:
+  safe PR passes, poisoned PR blocks.
 
 Not done yet:
 
 - No broad external user feedback loop yet.
-- No public demo repo showing a poisoned MCP pull request being blocked.
 - No GitHub Action Marketplace listing yet.
 - No calibrated enterprise policy pack for allow/warn/redact/block/review.
 - No public download or usage dashboard.
@@ -51,9 +54,9 @@ Not done yet:
 | Milestone | Status | Evidence target |
 |---|---|---|
 | M0. One-command install | Done | PyPI package installs and scans locally. |
-| M1. CI gate | In progress | `action.yml`, docs, optional HF token, and one green action run. |
-| M2. No-video demo | In progress | `docs/DEMO_SCRIPT.md` plus action smoke workflow. |
-| M3. Demo repo | Next | A tiny MCP repo with one safe PR and one poisoned PR. |
+| M1. CI gate | Done | `action.yml`, docs, optional HF token, and green action smoke: https://github.com/mcpware/IntentProbe/actions/runs/27186986017 |
+| M2. No-video demo | Done | `docs/DEMO_SCRIPT.md` plus action smoke workflow. |
+| M3. Demo repo | Done | https://github.com/mcpware/intentprobe-demo with safe PR #1 and poisoned PR #2. |
 | M4. Runtime receipt demo | Next | `serve-jsonl` demo showing allow/warn/block receipts. |
 | M5. Public challenge loop | Open | Issues convert misses and false positives into labeled samples. |
 | M6. v0.2 release page | Open | Release notes with action usage, demo links, and benchmark links. |
@@ -162,3 +165,4 @@ Do not say:
 | 2026-06-08 | Keep the public pack framed as a demo/evidence pack. | It still serves the acquisition path, but reads better to users, partners, and buyers. |
 | 2026-06-08 | Defer video and prioritize runnable proof. | Security scanner videos are low-signal; action smoke, demo script, and reproducible commands create stronger trust. |
 | 2026-06-08 | Add optional `hf-token` input to the Action. | The first public action smoke hit Hugging Face anonymous rate limits; CI should use a secret without uploading scan content anywhere. |
+| 2026-06-08 | Add public demo repo with red/green PRs. | A live safe PR and blocked poisoned PR are stronger proof than a terminal video. |

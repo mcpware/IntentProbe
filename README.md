@@ -83,7 +83,9 @@ See [docs/GITHUB_ACTION.md](docs/GITHUB_ACTION.md) for target paths, inputs,
 and exit behavior.
 
 Want the quickest proof without a video? Run the
-[demo script](docs/DEMO_SCRIPT.md).
+[demo script](docs/DEMO_SCRIPT.md), or inspect the
+[live demo repo](https://github.com/mcpware/intentprobe-demo):
+safe PR passes, poisoned PR blocks.
 
 ---
 

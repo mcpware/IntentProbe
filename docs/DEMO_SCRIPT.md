@@ -58,6 +58,12 @@ jobs:
           hf-token: ${{ secrets.HF_TOKEN }}
 ```
 
+Live proof repo:
+
+- Demo repo: https://github.com/mcpware/intentprobe-demo
+- Safe PR passes: https://github.com/mcpware/intentprobe-demo/pull/1
+- Poisoned PR is blocked: https://github.com/mcpware/intentprobe-demo/pull/2
+
 For a narrower scan:
 
 ```yaml
