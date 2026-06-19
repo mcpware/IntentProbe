@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "sensor": "Qwen/Qwen2.5-0.5B",
+    "layers": [
+      13,
+      14,
+      15
+    ],
+    "seed": 42,
+    "probe_dim": 2688,
+    "probe_params_bytes": 10756,
+    "deberta": "protectai/deberta-v3-base-prompt-injection-v2",
+    "deberta_mode": "zero-shot (PI is its home task; not OOD)",
+    "train": {
+      "dataset": "deepset/prompt-injections",
+      "split": "train",
+      "n": 546
+    },
+    "note": "Paper's 0.957 fine-tuned-DeBERTa tie NOT reproduced here (CPU-prohibitive); zero-shot only."
+  },
+  "exp1_in_distribution_deepset_test": {
+    "probe_qwen0.5b": {
+      "n": 116,
+      "pos": 60,
+      "acc": 0.9655,
+      "precision": 0.9667,
+      "recall": 0.9667,
+      "f1": 0.9667,
+      "f1_ci95": [
+        0.928,
+        0.9928
+      ],
+      "recall_ci95": [
+        0.9138,
+        1.0
+      ]
+    },
+    "deberta_zeroshot": {
+      "n": 116,
+      "pos": 60,
+      "acc": 0.6724,
+      "precision": 1.0,
+      "recall": 0.3667,
+      "f1": 0.5366,
+      "f1_ci95": [
+        0.3896,
+        0.6591
+      ],
+      "recall_ci95": [
+        0.2419,
+        0.4915
+      ]
+    }
+  },
+  "exp2_heldout_crossdataset_safeguard": {
+    "eval_source": "xTRam1/safe-guard-prompt-injection",
+    "probe_qwen0.5b": {
+      "n": 1500,
+      "pos": 454,
+      "acc": 0.464,
+      "precision": 0.3589,
+      "recall": 0.9802,
+      "f1": 0.5254,
+      "f1_ci95": [
+        0.4985,
+        0.5558
+      ],
+      "recall_ci95": [
+        0.9663,
+        0.9913
+      ]
+    },
+    "deberta_zeroshot": {
+      "n": 1500,
+      "pos": 454,
+      "acc": 0.95,
+      "precision": 0.9974,
+      "recall": 0.837,
+      "f1": 0.9102,
+      "f1_ci95": [
+        0.8898,
+        0.9298
+      ],
+      "recall_ci95": [
+        0.8049,
+        0.8703
+      ]
+    }
+  }
+}

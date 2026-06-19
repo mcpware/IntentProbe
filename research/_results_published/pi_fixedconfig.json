@@ -1,0 +1,56 @@
+{
+  "SHIPPED 0.5B concat L13-15": {
+    "per_source": {
+      "deepset": 0.933,
+      "safeguard": 0.999,
+      "spml": 0.99,
+      "jayavibhav": 1.0
+    },
+    "mean": 0.98
+  },
+  "0.5B L14": {
+    "per_source": {
+      "deepset": 0.937,
+      "safeguard": 0.999,
+      "spml": 0.99,
+      "jayavibhav": 1.0
+    },
+    "mean": 0.982
+  },
+  "1.5B L16": {
+    "per_source": {
+      "deepset": 0.948,
+      "safeguard": 0.999,
+      "spml": 0.995,
+      "jayavibhav": 0.999
+    },
+    "mean": 0.985
+  },
+  "1.5B L20": {
+    "per_source": {
+      "deepset": 0.941,
+      "safeguard": 0.999,
+      "spml": 0.994,
+      "jayavibhav": 1.0
+    },
+    "mean": 0.984
+  },
+  "1.5B concat L16-18": {
+    "per_source": {
+      "deepset": 0.94,
+      "safeguard": 0.998,
+      "spml": 0.994,
+      "jayavibhav": 0.999
+    },
+    "mean": 0.983
+  },
+  "TF-IDF (same data)": {
+    "per_source": {
+      "deepset": 0.732,
+      "safeguard": 0.993,
+      "spml": 0.935,
+      "jayavibhav": 0.997
+    },
+    "mean": 0.914
+  }
+}

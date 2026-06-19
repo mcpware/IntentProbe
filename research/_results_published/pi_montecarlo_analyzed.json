@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "models_searched": [
+      "Qwen/Qwen2.5-0.5B",
+      "Qwen/Qwen2.5-1.5B"
+    ],
+    "mean_probe_heldout": 0.984,
+    "mean_tfidf_heldout": 0.914,
+    "mean_length_heldout": 0.651,
+    "probe_minus_tfidf": 0.07
+  },
+  "folds": [
+    {
+      "held_out": "deepset",
+      "n_test": 613,
+      "best_config": "Qwen/Qwen2.5-0.5B L14",
+      "inner_val_auroc": 0.994,
+      "probe": 0.946,
+      "tfidf": 0.732,
+      "length": 0.813
+    },
+    {
+      "held_out": "safeguard",
+      "n_test": 700,
+      "best_config": "Qwen/Qwen2.5-1.5B L25",
+      "inner_val_auroc": 0.943,
+      "probe": 0.999,
+      "tfidf": 0.993,
+      "length": 0.408
+    },
+    {
+      "held_out": "spml",
+      "n_test": 700,
+      "best_config": "Qwen/Qwen2.5-1.5B L14",
+      "inner_val_auroc": 0.979,
+      "probe": 0.992,
+      "tfidf": 0.935,
+      "length": 0.991
+    },
+    {
+      "held_out": "jayavibhav",
+      "n_test": 537,
+      "best_config": "Qwen/Qwen2.5-1.5B L20",
+      "inner_val_auroc": 0.946,
+      "probe": 1.0,
+      "tfidf": 0.997,
+      "length": 0.394
+    }
+  ]
+}

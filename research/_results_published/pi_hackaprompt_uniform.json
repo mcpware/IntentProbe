@@ -1,0 +1,14 @@
+{
+  "n": 3866,
+  "sampling": "uniform-random offsets",
+  "probe_0.5B_L13-15": {
+    "recall@fpr1": 0.883,
+    "recall@fpr5": 0.903,
+    "recall@fpr10": 0.918
+  },
+  "tfidf": {
+    "recall@fpr1": 0.303,
+    "recall@fpr5": 0.528,
+    "recall@fpr10": 0.631
+  }
+}

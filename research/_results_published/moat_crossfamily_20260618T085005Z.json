@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "sensor": "Qwen/Qwen2.5-0.5B",
+    "test": "leave-one-family-out, routeguard skill-text",
+    "seed": 42
+  },
+  "summary": {
+    "sensor": "Qwen/Qwen2.5-0.5B",
+    "n_families": 5,
+    "mean_auroc_probe": 0.813,
+    "mean_auroc_tfidf": 0.816,
+    "mean_auroc_deberta": 0.397,
+    "mean_f1_probe": 0.81,
+    "mean_f1_tfidf": 0.79
+  },
+  "per_family": {
+    "credential_forwarding": {
+      "n_test": 273,
+      "pos": 197,
+      "probe": {
+        "f1": 0.777,
+        "auroc": 0.802
+      },
+      "tfidf": {
+        "f1": 0.748,
+        "auroc": 0.823
+      },
+      "deberta_zs": {
+        "f1": 0.0,
+        "auroc": 0.517
+      }
+    },
+    "instruction_chaining": {
+      "n_test": 95,
+      "pos": 72,
+      "probe": {
+        "f1": 0.723,
+        "auroc": 0.621
+      },
+      "tfidf": {
+        "f1": 0.746,
+        "auroc": 0.633
+      },
+      "deberta_zs": {
+        "f1": 0.0,
+        "auroc": 0.364
+      }
+    },
+    "live_system_access": {
+      "n_test": 524,
+      "pos": 290,
+      "probe": {
+        "f1": 0.814,
+        "auroc": 0.865
+      },
+      "tfidf": {
+        "f1": 0.776,
+        "auroc": 0.868
+      },
+      "deberta_zs": {
+        "f1": 0.0,
+        "auroc": 0.332
+      }
+    },
+    "network_exfiltration": {
+      "n_test": 302,
+      "pos": 212,
+      "probe": {
+        "f1": 0.863,
+        "auroc": 0.876
+      },
+      "tfidf": {
+        "f1": 0.82,
+        "auroc": 0.871
+      },
+      "deberta_zs": {
+        "f1": 0.0,
+        "auroc": 0.517
+      }
+    },
+    "secret_file_access": {
+      "n_test": 59,
+      "pos": 38,
+      "probe": {
+        "f1": 0.872,
+        "auroc": 0.902
+      },
+      "tfidf": {
+        "f1": 0.861,
+        "auroc": 0.887
+      },
+      "deberta_zs": {
+        "f1": 0.0,
+        "auroc": 0.256
+      }
+    }
+  }
+}

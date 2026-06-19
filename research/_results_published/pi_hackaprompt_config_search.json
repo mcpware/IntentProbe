@@ -1,0 +1,79 @@
+{
+  "integrity": "config selected by inner leave-one-SOURCE-out AUROC on 4 PI training sources; HackAPrompt evaluated once; p-hack ceiling reported but NOT used",
+  "tfidf_fixed": {
+    "recall@fpr1": 0.303,
+    "recall@fpr5": 0.528,
+    "recall@fpr10": 0.631
+  },
+  "honest_selected": {
+    "combo": [
+      12,
+      24
+    ],
+    "inner_loso_auroc": 0.9862,
+    "hackaprompt_recall": {
+      "recall@fpr1": 0.872,
+      "recall@fpr5": 0.888,
+      "recall@fpr10": 0.901
+    }
+  },
+  "shipped_L13_15": {
+    "combo": [
+      13,
+      14,
+      15
+    ],
+    "hackaprompt_recall": {
+      "recall@fpr1": 0.883,
+      "recall@fpr5": 0.903,
+      "recall@fpr10": 0.918
+    }
+  },
+  "phack_ceiling_NOT_USED": {
+    "combo": [
+      22
+    ],
+    "hackaprompt_recall": {
+      "recall@fpr1": 0.931,
+      "recall@fpr5": 0.943,
+      "recall@fpr10": 0.963
+    }
+  },
+  "top5_by_inner": [
+    {
+      "combo": [
+        12,
+        24
+      ],
+      "inner_auroc": 0.9862
+    },
+    {
+      "combo": [
+        13,
+        24
+      ],
+      "inner_auroc": 0.9853
+    },
+    {
+      "combo": [
+        12,
+        22
+      ],
+      "inner_auroc": 0.9848
+    },
+    {
+      "combo": [
+        12,
+        21
+      ],
+      "inner_auroc": 0.9846
+    },
+    {
+      "combo": [
+        12,
+        23
+      ],
+      "inner_auroc": 0.9844
+    }
+  ]
+}

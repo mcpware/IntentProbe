@@ -1,0 +1,54 @@
+{
+  "summary": {
+    "mean_heldout_auroc": 0.982,
+    "greedy_was": 0.984,
+    "shipped_fixed": 0.98,
+    "note": "exhaustive over all singles+pairs (candidates 4..L-1); triples+ not enumerated"
+  },
+  "folds": [
+    {
+      "held_out": "deepset",
+      "best_model": "Qwen/Qwen2.5-0.5B",
+      "best_subset": [
+        4,
+        14
+      ],
+      "n_layers": 2,
+      "inner_auroc": 0.994,
+      "heldout_auroc": 0.938
+    },
+    {
+      "held_out": "safeguard",
+      "best_model": "Qwen/Qwen2.5-1.5B",
+      "best_subset": [
+        15,
+        25
+      ],
+      "n_layers": 2,
+      "inner_auroc": 0.948,
+      "heldout_auroc": 0.999
+    },
+    {
+      "held_out": "spml",
+      "best_model": "Qwen/Qwen2.5-1.5B",
+      "best_subset": [
+        12,
+        16
+      ],
+      "n_layers": 2,
+      "inner_auroc": 0.98,
+      "heldout_auroc": 0.993
+    },
+    {
+      "held_out": "jayavibhav",
+      "best_model": "Qwen/Qwen2.5-1.5B",
+      "best_subset": [
+        16,
+        23
+      ],
+      "n_layers": 2,
+      "inner_auroc": 0.949,
+      "heldout_auroc": 0.999
+    }
+  ]
+}

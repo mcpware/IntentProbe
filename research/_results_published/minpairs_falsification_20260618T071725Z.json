@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "sensor": "Qwen/Qwen2.5-0.5B",
+    "layers": [
+      13,
+      14,
+      15
+    ],
+    "seed": 42,
+    "cv": "GroupKFold(5) by pair_id",
+    "pairs_total": 93
+  },
+  "ALL_pairs": {
+    "n_rows": 186,
+    "n_pos": 93,
+    "scores": {
+      "probe_qwen0.5b": {
+        "f1": 0.667,
+        "f1_ci": [
+          0.577,
+          0.741
+        ],
+        "auroc": 0.737
+      },
+      "tfidf_logreg": {
+        "f1": 0.615,
+        "f1_ci": [
+          0.511,
+          0.712
+        ],
+        "auroc": 0.821
+      },
+      "length_only": {
+        "f1": 0.528,
+        "f1_ci": [
+          0.442,
+          0.612
+        ],
+        "auroc": 0.502
+      },
+      "framing_counter": {
+        "f1": 0.667,
+        "f1_ci": [
+          0.601,
+          0.73
+        ],
+        "auroc": 0.5
+      },
+      "deberta_zeroshot": {
+        "f1": 0.021,
+        "f1_ci": [
+          0.0,
+          0.068
+        ],
+        "auroc": 0.56
+      },
+      "static_keyword": {
+        "f1": 0.542,
+        "f1_ci": [
+          0.444,
+          0.624
+        ],
+        "auroc": null
+      }
+    }
+  },
+  "innocuous_swap_subset_STRONGEST": {
+    "n_rows": 150,
+    "n_pos": 75,
+    "scores": {
+      "probe_qwen0.5b": {
+        "f1": 0.68,
+        "f1_ci": [
+          0.591,
+          0.76
+        ],
+        "auroc": 0.756
+      },
+      "tfidf_logreg": {
+        "f1": 0.667,
+        "f1_ci": [
+          0.558,
+          0.763
+        ],
+        "auroc": 0.853
+      },
+      "length_only": {
+        "f1": 0.532,
+        "f1_ci": [
+          0.434,
+          0.616
+        ],
+        "auroc": 0.497
+      },
+      "framing_counter": {
+        "f1": 0.667,
+        "f1_ci": [
+          0.592,
+          0.739
+        ],
+        "auroc": 0.5
+      },
+      "deberta_zeroshot": {
+        "f1": 0.026,
+        "f1_ci": [
+          0.0,
+          0.092
+        ],
+        "auroc": 0.511
+      },
+      "static_keyword": {
+        "f1": 0.459,
+        "f1_ci": [
+          0.342,
+          0.56
+        ],
+        "auroc": null
+      }
+    }
+  },
+  "keyword_flaggable_subset": {
+    "n_rows": 36,
+    "n_pos": 18,
+    "scores": {
+      "probe_qwen0.5b": {
+        "f1": 0.606,
+        "f1_ci": [
+          0.385,
+          0.778
+        ],
+        "auroc": 0.676
+      },
+      "tfidf_logreg": {
+        "f1": 0.348,
+        "f1_ci": [
+          0.091,
+          0.593
+        ],
+        "auroc": 0.647
+      },
+      "length_only": {
+        "f1": 0.514,
+        "f1_ci": [
+          0.276,
+          0.7
+        ],
+        "auroc": 0.511
+      },
+      "framing_counter": {
+        "f1": 0.667,
+        "f1_ci": [
+          0.5,
+          0.8
+        ],
+        "auroc": 0.5
+      },
+      "deberta_zeroshot": {
+        "f1": 0.0,
+        "f1_ci": [
+          0.0,
+          0.0
+        ],
+        "auroc": 0.778
+      },
+      "static_keyword": {
+        "f1": 0.773,
+        "f1_ci": [
+          0.615,
+          0.894
+        ],
+        "auroc": null
+      }
+    }
+  }
+}

@@ -122,8 +122,12 @@ Safe to say:
   tool responses.
 - runtime verdicts are structured JSON with gate decision, subject hash,
   evidence spans, thresholds, policy reasons, and scanner artifact id.
-- current benchmarks show strong wins on matched-vocabulary tool poisoning.
-- novel attack-family generalization is still the open frontier.
+- its edge is generalization to unseen sources/wording: on held-out real attacks
+  (HackAPrompt) it recalls 90.3% at a 5% clean false-positive rate vs a same-data text
+  classifier's 52.8%; curated cross-source AUROC 0.984 vs 0.914 (CI-backed).
+- on matched-vocabulary / same-distribution it TIES a text classifier (~0.79 vs ~0.82);
+  tool-poisoning generalization is PARTIAL and on SYNTHETIC attacks (MCPTox the one
+  significant win). novel attack-family generalization is still the open frontier.
 
 Do not say:
 
@@ -131,3 +135,10 @@ Do not say:
 - "catches all poisoned tools".
 - "zero false positives".
 - "replaces sandboxing, permissions, or code review".
+- "first" or "only" activation-probe / probe-based detector (it is not; use the
+  deployment-niche "only one we found" absence claim).
+- "96.5% / 96.6% / 100%" (those are GPT-2 research numbers, not the shipped product).
+- "beats / ties fine-tuned DeBERTa", "DeBERTa 0%", "Snyk catches 0%", "4x better on
+  novel families", "strong wins on matched-vocabulary" (refuted).
+- "reads activations not the words" (the block tier needs static corroboration; say
+  "not just the text").

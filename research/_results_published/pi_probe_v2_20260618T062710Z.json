@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "sensor": "Qwen/Qwen2.5-0.5B",
+    "layers": [
+      13,
+      14,
+      15
+    ],
+    "seed": 42,
+    "deberta_note": "see v1 for DeBERTa zero-shot (deepset 0.54 / safeguard 0.91)"
+  },
+  "exp1_deepset_test": {
+    "auroc": 0.9955,
+    "probe_thr0.5": {
+      "n": 116,
+      "pos": 60,
+      "acc": 0.9655,
+      "precision": 0.9667,
+      "recall": 0.9667,
+      "f1": 0.9667,
+      "f1_ci95": [
+        0.928,
+        0.9928
+      ]
+    }
+  },
+  "exp2_safeguard_heldout": {
+    "auroc_full": 0.5785,
+    "out_of_box_thr0.5": {
+      "n": 1500,
+      "pos": 454,
+      "acc": 0.464,
+      "precision": 0.3589,
+      "recall": 0.9802,
+      "f1": 0.5254,
+      "f1_ci95": [
+        0.4985,
+        0.5558
+      ]
+    },
+    "recalibrated": {
+      "calib_best_threshold": 0.92,
+      "metrics_on_heldout_half": {
+        "n": 750,
+        "pos": 227,
+        "acc": 0.468,
+        "precision": 0.3557,
+        "recall": 0.9339,
+        "f1": 0.5152,
+        "f1_ci95": [
+          0.4769,
+          0.558
+        ]
+      },
+      "auroc_heldout_half": 0.5724
+    }
+  },
+  "interpretation_hint": "AUROC>=0.85 => signal transfers, threshold was the issue (recalibrated F1 recovers). AUROC~0.5-0.65 => probe genuinely does not generalize to this corpus."
+}

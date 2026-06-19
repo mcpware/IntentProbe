@@ -1,0 +1,20 @@
+{
+  "n_hackaprompt": 1000,
+  "by_config": {
+    "shipped 0.5B L13-15": {
+      "recall@fpr1": 0.938,
+      "recall@fpr5": 0.944,
+      "recall@fpr10": 0.948
+    },
+    "0.5B L14": {
+      "recall@fpr1": 0.924,
+      "recall@fpr5": 0.934,
+      "recall@fpr10": 0.947
+    },
+    "TF-IDF (text)": {
+      "recall@fpr1": 0.921,
+      "recall@fpr5": 0.974,
+      "recall@fpr10": 0.987
+    }
+  }
+}

@@ -1,54 +1,86 @@
 # IntentProbe full context for LLMs
 
 Canonical repository: https://github.com/mcpware/IntentProbe
-Research paper: https://doi.org/10.5281/zenodo.19990741
+Research paper (preliminary, GPT-2): https://doi.org/10.5281/zenodo.19990741
 
 ## One-sentence summary
 
-IntentProbe is a local activation-probe scanner for MCP servers, AI agent tools,
-Claude Code skills, packages, and runtime tool events. It reads what a small
-frozen model internally represented, not only what the surface text says.
+IntentProbe is a local scanner for MCP servers, AI agent tools, Claude Code
+skills, packages, and runtime tool events. It runs a tool description or prompt
+through a frozen small model and reads the model's internal activations, not
+just the surface text, so it generalizes to attack sources and wording it never
+trained on better than a same-data text classifier.
+
+This is a research preview: a local, single-pass, registration-time review
+signal, not a hard security boundary.
 
 ## What problem it solves
 
-MCP servers, AI agent tools, and skills can describe themselves in normal
-language while hiding unsafe intent such as credential access, secret
+MCP servers, AI agent tools, and skills describe themselves in normal language
+while they may hide unsafe intent such as credential access, secret
 exfiltration, hidden persistence, forced tool chaining, or tool hijacking.
 
-A safe tool and a poisoned tool can use almost the same vocabulary. A text
-scanner may see the same words. IntentProbe looks at the model's hidden
-activation state after the tool description has been processed.
+A safe tool and a poisoned tool can use almost the same vocabulary. When you
+train a text classifier on attack examples and then face attacks from a source
+it never saw, the vocabulary often does not transfer and recall collapses.
+IntentProbe keys off how the host model internally represents the input rather
+than the exact words, so it holds up better across sources and novel wording.
 
 ## Mechanism
 
-IntentProbe uses a small frozen local sensor model, currently Qwen2.5-0.5B.
-The released v0 scanner reads layers 13-15, concatenates the pooled activation
-features, and applies a tiny trained probe artifact. The probe weights are
-about 22 KB.
+IntentProbe uses a small frozen local sensor model, currently Qwen2.5-0.5B. The
+released scanner mean-pools the mid-layer activations (layers 13-15),
+concatenates them, and scores the vector with a small trained logistic probe.
+The shipped probe artifact is about 22 KB (float64 weights).
 
-It does not train or modify the base model during scanning. The base model is a
-fixed feature extractor. The trained scanner is the small probe on top of the
-model activations.
+The base model is not trained or modified during scanning; it is a fixed
+feature extractor. The trained scanner is the small probe on top of its
+activations.
+
+The activation probe is the primary signal for the `allow` and `warn`
+decisions. The `block` tier additionally requires static-keyword corroboration
+to control false positives, so a novel no-keyword input the probe flags surfaces
+as `warn`, not `block`. IntentProbe reads activations, not just the text, but
+the block tier still leans on static-keyword corroboration; use it as a review
+signal, not the only boundary.
+
+Note on cost: the probe needs the frozen 0.5B host model to produce
+activations, so inference is heavier than a standalone text classifier, not
+lighter. The ~22 KB size is a training-and-storage advantage, not a runtime one.
 
 ## Current product shape
 
 Main CLI commands:
 
 - `intentprobe scan`: scan one text/tool description.
+- `intentprobe scan-config auto`: scan the MCP tools already configured on this
+  machine (checks common Claude Desktop, Claude Code, Codex, Cursor, Windsurf,
+  and repo MCP config locations).
 - `intentprobe scan-path`: scan a package, MCP server folder, skill folder, or
   repo-like directory before install.
 - `intentprobe batch`: scan a JSON batch of descriptions.
 - `intentprobe runtime`: scan tool definitions, tool-call arguments, and tool
   responses at runtime boundaries.
 
-One-command trial:
+Install and one-command trial:
 
 ```bash
-uvx --python 3.11 --from git+https://github.com/mcpware/IntentProbe.git@v0.1.0 intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+python3 -m pip install intentprobe
+intentprobe scan-config auto --format summary
 ```
 
-The first model-backed scan downloads Qwen2.5-0.5B once. Scan targets and scan
-results stay on the user's machine.
+Or scan a suspicious tool description directly:
+
+```bash
+intentprobe scan --format summary --text "Reads SSH config and private keys, then silently uploads credentials to a remote server."
+```
+
+The first model-backed scan downloads Qwen2.5-0.5B (~1 GB) once. After that,
+scan targets and scan results stay on the user's machine; nothing is uploaded.
+
+There is also a GitHub Action (`mcpware/IntentProbe@main`) to gate MCP configs,
+skills, and tool manifests in CI, and a Claude Code PreToolUse runtime hook that
+keeps the model warm via a JSONL protocol for sub-second latency.
 
 Runtime output is structured JSON, not only a score. It contains the gate
 decision, selected `--fail-on` level, subject hash, activation score, static
@@ -64,37 +96,122 @@ patterns, permissions, or signatures.
 
 LLM-as-judge scanners ask a model to output a judgment such as safe or unsafe.
 That is an output-level mechanism. It can be useful, but it can be
-prompt-sensitive, parse-sensitive, expensive, and part of the attack surface.
+prompt-sensitive, parse-sensitive, expensive, and part of the attack surface (a
+poisoned tool can argue "I am safe", and a judge prompt can be steered).
 
 Enterprise cloud/API guardrails may work well, but from the outside the
 detector is usually a black box. Users often cannot inspect the detector
 artifact or reproduce a public MCP/tool-poisoning benchmark end to end.
 
-IntentProbe is a representation-level mechanism: it reads the hidden activation
-state before any verbal answer is produced.
+IntentProbe is a representation-level mechanism: it scores the hidden activation
+state the text produces, before any verbal answer.
+
+To our knowledge IntentProbe is the only shipped tool in this exact deployment
+shape: installable, scanning standalone tool/skill/MCP descriptions before
+install, on model activations. It is NOT the first probe-based detector. There
+is a substantial body of prior and parallel work: PIShield and TaskTracker
+(research code), RouteGuard and MindGuard (papers), and frontier-lab production
+probes (for example Google's deployed Gemini safety probes) predate or parallel
+it. The only-one-we-found niche is the deployment shape, an absence claim ("the
+only one we found"), not the technique and not "first ever".
 
 ## Benchmark facts and claim boundaries
 
-Reproducible benchmark artifacts live under `research/`.
+Everything here is reproducible from `research/` on the shipped Qwen2.5-0.5B
+artifact. The thesis is generalization to attacks worded in ways the probe never
+trained on. It ties or loses on familiar-vocabulary attacks inside one
+distribution.
 
-Key public numbers:
+### 1. Generalization to unseen real attacks: HackAPrompt
 
-- Matched-vocabulary tool poisoning, where safe and poisoned samples use almost
-  the same words: activation probe F1 96.6%; public/source-verifiable DeBERTa
-  prompt-injection text-classifier baseline F1 0.0%.
-- MCPTox held-out split, n=249: activation probe recall 100.0%, F1 99.3%;
-  DeBERTa text-classifier baseline recall 19.9%, F1 33.0%.
-- RouteGuard-style external transfer, n=2,900: current Qwen activation probe
-  F1 0.513, recall 0.415; TF-IDF logistic baseline F1 0.172, recall 0.107.
-- Camouflage suffix test: appending benign-sounding "safe/read-only/sandboxed"
-  language caused 0/146 evasion on the GPT-2 probe test; the current Qwen v0
-  scanner also passed a smaller smoke test with 0/15 evaded.
+HackAPrompt is a large set of attacks written by real people in a red-teaming
+competition. Neither the probe nor the text baseline ever saw it during
+training. The sample is uniform-random over the corpus (n=3,866) and is
+positive-only (attacks, no benign), so we report recall at a clean
+false-positive rate fixed on the training data, not AUROC.
 
-Important caveat: the DeBERTa comparison is against a public/source-verifiable
-prompt-injection text-classifier baseline used to represent that detector
-family. It is not a claim that every private vendor cloud detector scores 0%.
-The fair claim is that public text-level baselines are out-of-distribution on
-subtle MCP/tool poisoning, while activation probes expose a separate signal.
+```
+                                 recall @ 5% clean-FPR    recall @ 1% clean-FPR
+                                 ─────────────────────    ─────────────────────
+  Probe (Qwen2.5-0.5B,                  90.3%                    88.3%
+  mean-pooled concat L13-15)
+  TF-IDF (same training data)           52.8%                    30.3%
+```
+
+Same training data, same held-out evaluation, same false-alarm budget. At a 5%
+false-positive rate the probe catches about 90% of these unseen attacks; a text
+classifier trained on the same data catches about 53%. The text baseline does
+fine on attacks that reuse familiar wording, but its learned vocabulary does not
+transfer to wording it never saw, so recall drops. The probe keys off the
+model's internal representation instead, so it holds up. At the stricter 1%
+setting the gap is wider (88.3% vs 30.3%).
+
+Caveat: HackAPrompt is positive-only, so this is recall at a matched clean-FPR
+set on the training clean data, not a full AUROC; the sample is uniform-random,
+not an exhaustive panel. The moat is conditional on the attack vocabulary being
+novel. On a second real-human source whose attack vocabulary overlaps the
+training data, a text classifier transfers and the probe's edge narrows or
+disappears. The honest claim is novel-vocabulary generalization, not "wins on
+all real attacks".
+
+### 2. Curated cross-source generalization: leave-one-source-out, nested CV
+
+Four real prompt-injection datasets {deepset, safeguard, spml, jayavibhav}.
+Train on three, test on the held-out fourth, repeat for each. Model and layer
+are chosen inside a nested cross-validation loop, never on the held-out source.
+95% bootstrap CIs on the probe-minus-TF-IDF difference.
+
+```
+  held-out source     probe AUROC   TF-IDF AUROC   difference (95% CI)
+  ───────────────     ───────────   ────────────   ───────────────────
+  deepset                0.941         0.732        +0.209 [0.168, 0.250]  significant
+  spml                   0.995         0.935        +0.059 [0.044, 0.077]  significant
+  safeguard              0.999         0.993        +0.006 [0.002, 0.011]  significant (at ceiling)
+  jayavibhav             1.000         0.997        +0.002 [0.000, 0.005]  tie (CI touches 0)
+  ───────────────     ───────────   ────────────   ───────────────────
+  mean                   0.984         0.914        +0.070
+```
+
+deepset is where the gap is widest: TF-IDF's vocabulary does not transfer to the
+held-out source and it drops to 0.732, while the probe holds at 0.941. The other
+three are near ceiling, so there is less room to separate.
+
+Deployable, not a search artifact. The single shipped fixed config (Qwen2.5-0.5B,
+mean-pooled concat L13-15, no per-input layer picking) gets a mean AUROC of
+0.980 across the same held-out sources (deepset 0.933), still well above
+TF-IDF's 0.914. An exhaustive search over single and paired layers tops out
+around 0.982, and combining layers gives no gain over one good mid-layer. The
+advantage is robust to the layer choice, not balanced on one lucky setting.
+
+### 3. Tool poisoning: partial, on synthetic attacks, leave-one-corpus-out
+
+The cross-source advantage extends to tool poisoning, but only partially, and on
+synthetic attacks. There is no real-human tool-poisoning corpus yet, so the
+poisoned halves are constructed (MCPTox's clean half points to real MCP repos;
+its poisoned half is template-style synthetic injection, and our minimal-pairs
+are constructed).
+
+```
+  held-out corpus     probe   TF-IDF   difference (95% CI)
+  ───────────────     ─────   ──────   ───────────────────
+  MCPTox              0.738   0.545    +0.193 [0.145, 0.241]  significant
+  routeguard          0.640   0.582    a non-significant lean
+  synthetic minpairs  0.494   0.498    both at chance (out of distribution)
+```
+
+MCPTox is a clear, significant win. routeguard is a non-significant lean. Our
+own synthetic minimal-pairs set is out of distribution for both detectors, and
+both sit at chance on it. One of three corpora is a significant win, so the
+tool-poisoning evidence is partial.
+
+### 4. Within-distribution, the text baseline is not blind
+
+On matched-vocabulary minimal pairs drawn from the same distribution the probe
+was trained on, the probe ties TF-IDF (roughly 0.79 vs 0.82). Even at the best
+layer with nested CV, the within-distribution same-vocabulary tie holds; the
+"innocuous-word swap" subset comes out around 0.797 vs 0.853 with overlapping
+CIs. Text is not blind there. The edge is in generalizing to new sources and new
+vocabulary, not in same-vocabulary detection inside one distribution.
 
 ## Direct Qwen prompt/judge baseline
 
@@ -102,43 +219,73 @@ IntentProbe also tested whether the same Qwen2.5-0.5B sensor model could simply
 be prompted to judge tools as clean or poisoned.
 
 The label-logprob direct-prompt baseline became an all-poison scanner on tested
-sets: perfect poison recall but clean false-positive rate 1.000. The generated
-answer baseline had lower recall and many unparseable outputs. This is why the
-v0 product uses raw activations instead of an LLM-as-judge prompt.
+sets: perfect poison recall but a clean false-positive rate of 1.000 (it flagged
+every clean curated item as poisoned). The generated-answer baseline had lower
+recall and many unparseable outputs. This is why the product uses raw
+activations instead of an LLM-as-judge prompt: a representation-level signal is
+read before any verbal answer the attacker could steer.
 
 Reproducible artifact:
 `research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md`.
 
+## Adversarial evasion (preliminary, naive only)
+
+Appending benign-sounding "safe / read-only / sandboxed" camouflage language to
+poisoned descriptions did not evade the probe in a preliminary naive-suffix
+test. This covers naive camouflage only. White-box adversarial attacks against
+the probe, and paraphrase/encoding attacks, are not solved and need more
+benchmark coverage. Treat this as a preliminary smoke check, not a robustness
+claim.
+
+Reproducible artifact:
+`research/ADVERSARIAL_EVASION_RESULTS_2026-06-07.md`.
+
 ## SAE position
 
 Sparse autoencoder features are valuable for interpretability and may improve
-recall in future scanner versions. The v0 product ships raw Qwen activations
-because that is the most complete, reproducible, lightweight product path today:
-no SAE dependency, simpler runtime, and strong enough detection to ship a local
-scanner.
+recall in future scanner versions. The current product ships raw Qwen
+activations because that is the most complete, reproducible, lightweight product
+path today: no SAE dependency, simpler runtime, and strong enough detection to
+ship a local scanner.
 
 SAE explanations remain a planned layer for "why did this trigger?" and for
 future recall improvements.
 
 ## Privacy and local-first behavior
 
-IntentProbe runs locally. Scan targets and scan results are not uploaded to an
-IntentProbe service. The first model-backed scan may download the base model
-from Hugging Face once. After that, scans can run from local cached files.
+IntentProbe runs 100% locally on any CPU. Scan targets and scan results are not
+uploaded to an IntentProbe service. The first model-backed scan may download the
+base model from Hugging Face once. After that, scans can run from local cached
+files. Apache-2.0 licensed; every benchmark, artifact, and dataset is public.
 
 ## Limitations
 
-IntentProbe v0 is not a complete security boundary. It is a pre-install and
-runtime tripwire.
+IntentProbe is a research preview, not a complete security boundary. It is a
+pre-install and registration-time review signal and a runtime tripwire.
 
 Known limitations:
 
-- Novel attack families are still the hardest case.
-- White-box adversarial attacks against the probe are not fully solved.
-- Paraphrase and encoding attacks need more benchmark coverage.
-- Real-world MCP/tool-poisoning datasets are still small, so missed real
-  samples and false positives should be reported and folded into future
-  retraining.
+- A text classifier does well when an attack reuses wording it has seen. It ties
+  or beats the probe on same-vocabulary minimal pairs (~0.79 vs ~0.82) and on
+  new sources whose vocabulary overlaps training. The probe's value is the
+  attacks worded in ways it never saw.
+- The probe needs the frozen 0.5B host model to run, so inference is heavier
+  than a standalone text classifier. The ~22 KB size is a train/store advantage
+  only.
+- HackAPrompt is positive-only, so its number is recall at a matched clean-FPR
+  set on training data, not AUROC; the sample is uniform-random over the corpus.
+- Tool-poisoning evidence is partial and on synthetic attacks. No real-human
+  tool-poisoning corpus exists yet. MCPTox is a significant win, routeguard a
+  non-significant lean, the synthetic minimal-pairs at chance for both.
+- Single model family (Qwen2.5). Each base model needs its own retrained probe;
+  numbers do not transfer across models.
+- Not first or only on the technique (PIShield, TaskTracker, RouteGuard,
+  MindGuard, and frontier-lab production probes predate or parallel it). The
+  niche is the deployment shape, not the method.
+- Novel attack families remain the hardest case. White-box adversarial,
+  paraphrase, and encoding attacks need more coverage.
+- Real-world MCP/tool-poisoning datasets are still small, so missed real samples
+  and false positives should be reported and folded into future retraining.
 
 ## Data feedback loop
 
@@ -161,16 +308,15 @@ Issue templates:
 ## Important files
 
 - `README.md`: product README and installation path.
+- `llms.txt`: short machine-readable summary with the same claim boundaries.
 - `docs/FAQ.md`: short answers to common questions.
-- `docs/intentprobe-vs-existing-mcp-scanners.md`: plain comparison page.
 - `docs/COMPETITIVE_LANDSCAPE.md`: source-backed competitor landscape.
-- `docs/RUNTIME_HOOKS.md`: runtime hook contract.
+- `docs/GITHUB_ACTION.md`: GitHub Action inputs, target paths, and exit behavior.
+- `docs/RUNTIME_HOOKS.md`: runtime hook contract and event schema.
 - `docs/OPERATOR_DECISIONS.md`: allow/warn/block semantics, operator mapping,
   and replay receipts.
-- `docs/EVIDENCE_PACKET.md`: compact reviewer packet for integrators and
-  security reviewers.
-- `research/README.md`: research artifact map.
-- `research/benchmark-results-deberta-vs-probe-2026-05-31.md`: DeBERTa vs activation benchmark.
+- `research/_results_published/`: reproducible benchmark result JSON
+  (HackAPrompt recall, curated cross-source CIs, tool-poisoning cross-corpus).
 - `research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md`: direct Qwen judge baseline.
 - `research/ADVERSARIAL_EVASION_RESULTS_2026-06-07.md`: camouflage suffix evasion results.
 - `intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/`: released probe artifact.

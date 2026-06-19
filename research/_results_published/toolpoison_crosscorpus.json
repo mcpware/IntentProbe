@@ -1,0 +1,46 @@
+{
+  "summary": {
+    "mean_probe": 0.624,
+    "mean_tfidf": 0.542,
+    "mean_diff": 0.082,
+    "n_sig_wins": 1
+  },
+  "folds": [
+    {
+      "held_out_corpus": "routeguard",
+      "n": 700,
+      "best_config": "Qwen/Qwen2.5-0.5B L10",
+      "probe": 0.64,
+      "tfidf": 0.582,
+      "diff_ci95": [
+        -0.002,
+        0.12
+      ],
+      "verdict": "tie"
+    },
+    {
+      "held_out_corpus": "mcptox",
+      "n": 692,
+      "best_config": "Qwen/Qwen2.5-0.5B L17",
+      "probe": 0.738,
+      "tfidf": 0.545,
+      "diff_ci95": [
+        0.145,
+        0.241
+      ],
+      "verdict": "SIGNIFICANT win"
+    },
+    {
+      "held_out_corpus": "minpairs",
+      "n": 186,
+      "best_config": "Qwen/Qwen2.5-1.5B L26",
+      "probe": 0.494,
+      "tfidf": 0.498,
+      "diff_ci95": [
+        -0.104,
+        0.089
+      ],
+      "verdict": "tie"
+    }
+  ]
+}

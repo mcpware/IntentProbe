@@ -2,7 +2,22 @@ include README.md
 include ROADMAP.md
 include SECURITY.md
 include LICENSE
-recursive-include docs *.md
+include llms.txt
+include llms-full.txt
 recursive-include examples *.py
 recursive-include intentprobe *.json *.npz
-recursive-include research *.json *.md *.txt *.mjs *.ipynb
+include docs/RUNTIME_HOOKS.md
+include docs/GITHUB_ACTION.md
+include docs/DEMO_SCRIPT.md
+include docs/COMPETITIVE_LANDSCAPE.md
+include docs/FAQ.md
+
+# belt-and-suspenders: never ship research notes, marketing drafts, build junk, or a venv
+prune research
+prune docs/articles
+prune build
+prune dist
+prune intentprobe.egg-info
+recursive-exclude docs *.html
+global-exclude *.pyc
+global-exclude __pycache__

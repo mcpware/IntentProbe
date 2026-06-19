@@ -1,0 +1,32 @@
+{
+  "all": {
+    "subset": "ALL_pairs",
+    "n": 186,
+    "probe_auroc": 0.792,
+    "tfidf_auroc": 0.821,
+    "length_auroc": 0.502,
+    "probe_minus_tfidf_ci95": [
+      -0.109,
+      0.05
+    ],
+    "verdict": "tie"
+  },
+  "innocuous": {
+    "subset": "innocuous_swap (strongest)",
+    "n": 150,
+    "probe_auroc": 0.797,
+    "tfidf_auroc": 0.853,
+    "length_auroc": 0.497,
+    "probe_minus_tfidf_ci95": [
+      -0.133,
+      0.026
+    ],
+    "verdict": "tie"
+  },
+  "configs_picked": [
+    "Qwen/Qwen2.5-1.5B L11",
+    "Qwen/Qwen2.5-1.5B L16",
+    "Qwen/Qwen2.5-1.5B L17",
+    "Qwen/Qwen2.5-1.5B L18"
+  ]
+}

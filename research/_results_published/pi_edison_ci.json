@@ -1,0 +1,58 @@
+{
+  "summary": {
+    "mean_probe": 0.984,
+    "mean_tfidf": 0.914,
+    "mean_diff": 0.07,
+    "n_significant_wins": 3
+  },
+  "folds": [
+    {
+      "held_out": "deepset",
+      "best_config": "Qwen/Qwen2.5-1.5B L20",
+      "probe_auroc": 0.941,
+      "tfidf_auroc": 0.732,
+      "diff": 0.209,
+      "diff_ci95": [
+        0.168,
+        0.25
+      ],
+      "verdict": "SIGNIFICANT win"
+    },
+    {
+      "held_out": "safeguard",
+      "best_config": "Qwen/Qwen2.5-0.5B L14",
+      "probe_auroc": 0.999,
+      "tfidf_auroc": 0.993,
+      "diff": 0.006,
+      "diff_ci95": [
+        0.002,
+        0.011
+      ],
+      "verdict": "SIGNIFICANT win"
+    },
+    {
+      "held_out": "spml",
+      "best_config": "Qwen/Qwen2.5-1.5B L16",
+      "probe_auroc": 0.995,
+      "tfidf_auroc": 0.935,
+      "diff": 0.059,
+      "diff_ci95": [
+        0.044,
+        0.077
+      ],
+      "verdict": "SIGNIFICANT win"
+    },
+    {
+      "held_out": "jayavibhav",
+      "best_config": "Qwen/Qwen2.5-0.5B L14",
+      "probe_auroc": 1.0,
+      "tfidf_auroc": 0.997,
+      "diff": 0.002,
+      "diff_ci95": [
+        0.0,
+        0.005
+      ],
+      "verdict": "tie (CI crosses 0)"
+    }
+  ]
+}
