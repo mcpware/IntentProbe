@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python 3.10+" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License" /></a>
   <a href="https://doi.org/10.5281/zenodo.19990741"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19990741-blue" alt="DOI" /></a>
-  <img src="https://img.shields.io/badge/runs-100%25%20local-brightgreen" alt="Runs locally" />
+  <img src="https://img.shields.io/badge/runs-local-brightgreen" alt="Runs locally" />
   <img src="https://img.shields.io/badge/telemetry-zero-blue" alt="Zero telemetry" />
   <img src="https://img.shields.io/badge/status-research%20preview-orange" alt="Research preview" />
 </p>

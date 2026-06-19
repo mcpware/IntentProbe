@@ -124,8 +124,10 @@ Safe to say:
   evidence spans, thresholds, policy reasons, and scanner artifact id.
 - its edge is generalization to unseen sources/wording: on held-out real attacks
   (HackAPrompt) it recalls 90.3% at a 5% clean false-positive rate vs a same-data text
-  classifier's 52.8%; curated cross-source AUROC 0.984 vs 0.914 (CI-backed).
-- on matched-vocabulary / same-distribution it TIES a text classifier (~0.79 vs ~0.82);
+  classifier's 52.8%; curated cross-source AUROC 0.980 vs 0.914 for the SHIPPED 0.5B config
+  (0.984 is a nested-CV upper bound that may pick a larger 1.5B sensor — label it as such).
+- on matched-vocabulary / same-distribution a text classifier slightly BEATS the shipped 0.5B
+  probe (~0.74 vs ~0.82);
   tool-poisoning generalization is PARTIAL and on SYNTHETIC attacks (MCPTox the one
   significant win). novel attack-family generalization is still the open frontier.
 
