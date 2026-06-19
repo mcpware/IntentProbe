@@ -47,7 +47,7 @@ Backed by research: a 60-rule regex scanner catches **0 / 485** on the MCPTox be
 - Default shipped probe artifact: `intentprobe/scanner/artifacts/qwen-pooled-curated-core-l13-15-v2/`.
 - Research compatibility wrappers: `research/activation_scanner_core.py`, `research/activation_scanner_cli.py`, and `research/activation_scanner_hook.py`.
 - Benchmark harness: `research/benchmarks/`.
-- Reproducibility ledger: `research/PRODUCT_REPRODUCIBILITY_LEDGER_2026-06-03.md`.
+- Reproducible benchmark results: `research/_results_published/` (result JSONs) + the `research/exp_*.py` scripts.
 - Spike history: `training/model_compare.py` and `training/model_compare_v2.py`.
 - Research paper: "Can Model Internals Detect MCP Tool Poisoning That Text Analysis Cannot?"
 
@@ -69,8 +69,8 @@ TF-IDF baseline: 0.790 (matches paper's 0.795). GPT-2 0.985 matches paper exactl
 
 **These in-dist numbers are optimistic (overfit risk).** model_compare_v2.py tests cross-set generalization: trains on hard_v3, tests on independent held-out sets (hard_v1/v2/neutral/matched). Selection metric = cross-set, not in-dist.
 
-The current product-candidate scanner is documented in
-`research/LIVING_PLAN.md` and `research/SCANNER_PIPELINE.md`.
+The shipped scanner is the artifact in `intentprobe/scanner/artifacts/` (see its
+`metadata.json`); current benchmarks are the result JSONs in `research/_results_published/`.
 
 **2026-06-07 audit**: independent reproduction on separate machine (30GB Linux,
 Python 3.10) confirmed all claimed numbers. Adversarial evasion test: 0%
