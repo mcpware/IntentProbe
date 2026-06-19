@@ -301,6 +301,9 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
 > minimal-pairs set both the probe and TF-IDF sit at chance (it is out of distribution), and
 > within-distribution the probe ties TF-IDF. Probe weights and all benchmark scripts are in `research/`.
 > Run them yourself.
+>
+> A published **[erratum](docs/ERRATUM.md)** corrects the paper's preliminary numbers (pair leakage in
+> the matched-pair headline, the GPT-2-research vs shipped-product mix-up, and dataset counts).
 
 ## License
 

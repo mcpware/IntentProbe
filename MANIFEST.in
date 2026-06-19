@@ -11,6 +11,7 @@ include docs/GITHUB_ACTION.md
 include docs/DEMO_SCRIPT.md
 include docs/COMPETITIVE_LANDSCAPE.md
 include docs/FAQ.md
+include docs/ERRATUM.md
 
 # belt-and-suspenders: never ship research notes, marketing drafts, build junk, or a venv
 prune research
