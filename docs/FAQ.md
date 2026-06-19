@@ -54,11 +54,11 @@ where it does not appear).
 
 ## Does IntentProbe upload my tool descriptions?
 
-No. IntentProbe runs locally. Scan targets and scan results stay on your
-machine.
+No. IntentProbe runs locally, CPU-only after a one-time ~1 GB model download.
+Scan inputs and scan results are never uploaded — they stay on your machine.
 
-The first model-backed scan may download Qwen2.5-0.5B once from Hugging Face
-(~1 GB). After the model is cached, scans can run from local files.
+The first model-backed scan downloads Qwen2.5-0.5B once from Hugging Face
+(~1 GB). After the model is cached, scans run from local files.
 
 ## What model does v0 use?
 
@@ -102,10 +102,14 @@ The runtime output is structured JSON, so a host can consume it directly. See
 
 ## What are the benchmarks?
 
-Everything here is reproducible from [`research/`](../research/), on the
-**shipped Qwen2.5-0.5B** artifact. The thesis is generalization to attacks the
-probe never trained on — and the results show both where that holds and where it
-does not.
+Reproducible from [`research/`](../research/): the experiment scripts and result
+JSONs are committed, and the datasets are downloaded from their original sources
+(deepset, SafeGuard, SPML, jayavibhav, HackAPrompt on Hugging Face). The headline
+numbers run on the **shipped Qwen2.5-0.5B** artifact; the cross-source section
+below also reports a research upper bound that lets the loop pick a larger 1.5B
+sensor (clearly labeled as such, not the shipped product). The thesis is
+generalization to attacks the probe never trained on — and the results show both
+where that holds and where it does not.
 
 **1. Generalization to unseen real attacks (HackAPrompt, n=3,866 uniform-random,
 a source neither detector trained on):**
@@ -127,28 +131,32 @@ recall drops; the probe holds up. Caveat: this is recall at a matched FPR set on
 the training clean data, not a full AUROC, and the sample is uniform-random over
 the corpus.
 
-**2. Curated cross-source generalization (leave-one-source-out, nested CV, 4 PI
-datasets):**
+**2. Curated cross-source generalization (leave-one-source-out, 4 PI datasets):**
 
 Train on three of {deepset, safeguard, spml, jayavibhav}, test on the held-out
-fourth, repeat for each. Model and layer are chosen inside a nested
-cross-validation loop, never on the held-out source. 95% bootstrap CIs on the
-probe-minus-TF-IDF difference.
+fourth, repeat for each. The product number is the **shipped fixed config**
+(Qwen2.5-0.5B, mean-pooled concat L13-15, no per-input picking):
 
-| held-out source | probe AUROC | TF-IDF AUROC | difference (95% CI) |
-|---|---:|---:|---|
-| deepset | 0.941 | 0.732 | +0.209 [0.168, 0.250] significant |
-| spml | 0.995 | 0.935 | +0.059 [0.044, 0.077] significant |
-| safeguard | 0.999 | 0.993 | +0.006 [0.002, 0.011] significant (at ceiling) |
-| jayavibhav | 1.000 | 0.997 | +0.002 [0.000, 0.005] tie (CI touches 0) |
-| **mean** | **0.984** | **0.914** | **+0.070** |
+| held-out source | probe AUROC (shipped 0.5B) | TF-IDF AUROC (same data) |
+|---|---:|---:|
+| deepset | 0.933 | 0.732 |
+| safeguard | 0.999 | 0.993 |
+| spml | 0.990 | 0.935 |
+| jayavibhav | 1.000 | 0.997 |
+| **mean** | **0.980** | **0.914** |
 
 deepset is where the gap is widest: TF-IDF's vocabulary does not transfer and it
-drops to 0.732, while the probe holds at 0.941. The single **shipped fixed
-config** (Qwen2.5-0.5B, mean-pooled concat L13-15, no per-input layer picking)
-reaches mean AUROC **0.980** across the same held-out sources (deepset 0.933) —
-still above TF-IDF's 0.914, so the advantage is not balanced on one lucky
-setting.
+drops to 0.732, while the shipped probe holds at 0.933. The other three sources
+are near ceiling, so there is less room to separate.
+
+A **research upper bound** — a nested cross-validation that is additionally free
+to pick a larger **1.5B** sensor per fold (model and layer selected on the
+training sources only, never the held-out one) — reaches mean **0.984** (deepset
+0.941, spml 0.995), with 95% bootstrap CIs on the probe-minus-TF-IDF difference:
+deepset +0.209 [0.168, 0.250], spml +0.059 [0.044, 0.077], safeguard +0.006,
+jayavibhav +0.002 (3/4 significant). That is not the shipped 0.5B artifact — on
+the deepset and spml folds the nested CV picked Qwen2.5-1.5B. Read 0.984 as the
+research ceiling, not the product number.
 
 **3. Tool poisoning — partial, and on synthetic attacks:**
 
@@ -165,20 +173,25 @@ are constructed). Leave-one-corpus-out:
 MCPTox is a clear win. The synthetic minimal-pairs set is out of distribution for
 both detectors, and both sit at chance on it.
 
-**4. Within-distribution, the text baseline is not blind.** On matched-vocabulary
-minimal pairs drawn from the same distribution the probe was trained on, the
-probe **ties** TF-IDF (roughly 0.79 vs 0.82). The edge is generalizing to new
-sources and new vocabulary, not same-vocabulary detection inside one
-distribution.
+**4. Within-distribution, the text baseline is not blind — it wins.** On
+matched-vocabulary minimal pairs drawn from the same distribution the probe was
+trained on, the shipped 0.5B probe scores AUROC ~0.74 vs TF-IDF ~0.82 — a text
+classifier is slightly **better** there. (A nested CV free to pick a 1.5B sensor
+closes it to roughly a tie, ~0.79 vs ~0.82, but that is not the shipped config.)
+The edge is generalizing to new sources and new vocabulary, not same-vocabulary
+detection inside one distribution.
 
 ## Is this a claim about every private cloud scanner?
 
-No. The comparison baseline is a TF-IDF text classifier trained on the same data,
-plus the public/source-verifiable PI datasets above. Private cloud/API scanners
-may work well, but their detector artifacts and MCP/tool-poisoning benchmarks are
-usually not reproducible by users, so we do not benchmark against them. The
-honest comparison is "activation probe vs same-data text classifier," reproducible
-end to end.
+No. The only JSON-backed comparison is against a TF-IDF text classifier trained
+on the same data, evaluated on the PI datasets above. Private cloud/API scanners
+(and named text classifiers like ProtectAI DeBERTa or Meta Prompt Guard) may work
+well, but their detector artifacts and MCP/tool-poisoning benchmarks are usually
+not reproducible by users, so we do not benchmark against them and make no
+head-to-head claim. The honest comparison is "activation probe vs same-data
+TF-IDF text classifier": the experiment scripts and result JSONs are committed,
+and the datasets are downloaded from their original sources (deepset, SafeGuard,
+SPML, jayavibhav, HackAPrompt on Hugging Face).
 
 ## Is this the first activation-probe scanner?
 

@@ -32,9 +32,9 @@ recall collapses. The probe holds up better across sources, because it keys off 
 internally represents the input rather than the exact words.
 
 This is a **research preview**: a local, single-pass, registration-time review signal, not a hard
-security boundary. Runs 100% local, any CPU, nothing uploaded. To our knowledge it is the only shipped
-tool in this exact deployment shape — installable, scanning standalone tool/skill/MCP *descriptions*
-before install, on model activations. It is **not** the first probe-based detector; there is a
+security boundary. Runs locally (CPU-only, after a one-time ~1 GB model download); scan inputs and
+results are never uploaded. We have not found another shipped tool in this exact deployment shape —
+installable, scanning standalone tool/skill/MCP *descriptions* before install, on model activations. It is **not** the first probe-based detector; there is a
 substantial body of prior and parallel work (see [Competitive landscape](#competitive-landscape)).
 
 ## Install in one command
@@ -114,8 +114,11 @@ judge; the deterministic label baseline flagged every clean curated item as pois
 
 ## Benchmarks
 
-Everything here is reproducible from `research/`, on the **shipped Qwen2.5-0.5B** artifact. The point is
-generalization to attacks it never trained on; the curated cross-source result backs it up with CIs.
+Reproducible from `research/`: the experiment scripts and result JSONs are committed; the PI datasets are
+downloaded from their original public sources (deepset, SafeGuard, SPML, jayavibhav, HackAPrompt on
+Hugging Face). The point is generalization to attacks the probe never trained on. The HackAPrompt headline
+runs on the shipped Qwen2.5-0.5B; the cross-source section below also reports a research upper bound that
+lets the loop pick a larger 1.5B sensor.
 
 **1. Generalization to unseen attacks: HackAPrompt (n=3,866 real attacks, a source neither detector trained on)**
 
@@ -139,32 +142,33 @@ instead, so it holds up. At the stricter 1% setting the gap is wider still (88% 
 so this is recall at a matched FPR set on the training clean data, not a full AUROC; the sample is
 uniform-random over the corpus, not an exhaustive panel.
 
-**2. Curated cross-source generalization: leave-one-source-out, nested CV, 4 real PI datasets**
+**2. Curated cross-source generalization: leave-one-source-out, 4 real PI datasets**
 
 Train on three of {deepset, safeguard, spml, jayavibhav}, test on the held-out fourth, repeat for each.
-Model and layer are chosen inside a nested cross-validation loop, never on the held-out source. 95%
-bootstrap CIs on the probe-minus-TF-IDF difference.
+The **shipped fixed config** (Qwen2.5-0.5B, mean-pooled concat L13-15, no per-input picking) is the
+product number:
 
 ```
-  held-out source     probe AUROC   TF-IDF AUROC   difference (95% CI)
-  ───────────────     ───────────   ────────────   ───────────────────
-  deepset                0.941         0.732        +0.209 [0.168, 0.250]  significant
-  spml                   0.995         0.935        +0.059 [0.044, 0.077]  significant
-  safeguard              0.999         0.993        +0.006 [0.002, 0.011]  significant (at ceiling)
-  jayavibhav             1.000         0.997        +0.002 [0.000, 0.005]  tie (CI touches 0)
-  ───────────────     ───────────   ────────────   ───────────────────
-  mean                   0.984         0.914        +0.070
+  held-out source     probe (shipped 0.5B)   TF-IDF (same data)
+  ───────────────     ────────────────────   ──────────────────
+  deepset                   0.933                   0.732
+  safeguard                 0.999                   0.993
+  spml                      0.990                   0.935
+  jayavibhav                1.000                   0.997
+  ───────────────     ────────────────────   ──────────────────
+  mean                      0.980                   0.914
 ```
 
-deepset is where the gap is widest: TF-IDF's vocabulary does not transfer to the held-out source and it
-drops to 0.732, while the probe holds at 0.941. The other three are near ceiling, so there is less room
-to separate.
+deepset is where the gap is widest: TF-IDF's vocabulary does not transfer to the held-out source
+(0.732) while the probe holds (0.933). The other three are near ceiling, so there is less room to
+separate.
 
-**Deployable, not a search artifact.** The single **shipped fixed config** (Qwen2.5-0.5B, mean-pooled
-concat L13-15, no per-input layer picking) gets a mean AUROC of **0.980** across the same held-out
-sources (deepset 0.933), still well above TF-IDF's 0.914. An exhaustive search over single and paired
-layers tops out around 0.982, and combining layers gives no gain over one good mid-layer. The advantage
-is robust to the layer choice, not balanced on one lucky setting.
+A nested cross-validation that is additionally free to pick a **larger 1.5B sensor** per fold (model +
+layer selected on the training sources only, never the held-out one) reaches mean **0.984**, with 95%
+bootstrap CIs on the probe-minus-TF-IDF difference: deepset +0.209 [0.168, 0.250], spml +0.059 [0.044,
+0.077], safeguard +0.006, jayavibhav +0.002 (3/4 significant). That is a research upper bound, not the
+shipped 0.5B artifact. An exhaustive single+pair search tops out around 0.982; combining layers gives no
+gain over one good mid-layer.
 
 **3. Tool poisoning: partial, leave-one-corpus-out**
 
@@ -182,20 +186,21 @@ The cross-source advantage extends to tool poisoning, but only partially — and
 MCPTox is a clear win. Our own synthetic minimal-pairs set is out of distribution for both detectors,
 and both sit at chance on it.
 
-**Within-distribution, the text baseline is not blind.** On matched-vocabulary minimal pairs drawn from
-the same distribution the probe was trained on, the probe **ties** TF-IDF (roughly 0.79 vs 0.82). The
-edge is in generalizing to new sources and new vocabulary, not in same-vocabulary detection inside one
-distribution.
+**Within-distribution, the text baseline is not blind — it wins.** On matched-vocabulary minimal pairs
+from the distribution the probe was trained on, the shipped 0.5B probe scores AUROC ~0.74 vs TF-IDF
+~0.82 — a text classifier is slightly **better** there. (A nested CV free to pick a 1.5B sensor closes
+it to roughly a tie, ~0.79 vs ~0.82, but that is not the shipped config.) The edge is generalizing to
+new sources and new vocabulary, not same-vocabulary detection inside one distribution.
 
 ## Competitive landscape
 
 | Type | Who | How they scan | How IntentProbe differs |
 |---|---|---|---|
 | **MCP scanner** | Snyk Agent Scan (formerly Invariant MCP-Scan), Cisco AI Defense, NVIDIA SkillSpector | Static rules, AST, YARA signatures, LLM-as-judge | Adds a model-internal **activation** signal; static keywords still corroborate the block tier |
-| **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Keys off model activations rather than surface vocabulary, so it transfers better to attack sources it never trained on |
+| **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Keys off model activations rather than surface vocabulary; **measured against our same-data TF-IDF baseline** (not these products), it transfers better to attack sources it never trained on |
 | **Probe-based** | PIShield, TaskTracker (research code); RouteGuard, MindGuard (papers); frontier-lab production probes (e.g. Google Gemini) | Linear probe / classifier on model internals | Same family of method — IntentProbe is **not** first or only on the technique. The only-one-we-found niche is the deployment shape: installable, pre-install, scans the tool *description*, on activations |
 | **LLM-as-judge** | NeMo, OpenAI Guardrails, Promptfoo | Ask another LLM "is this poisoned?" | Deterministic, local, no API call; scores state not the verbal answer |
-| **Enterprise cloud** | Lakera, Azure, Google Model Armor, AWS Bedrock | Ship content to a vendor cloud | 100% local; every benchmark, artifact, and dataset is public |
+| **Enterprise cloud** | Lakera, Azure, Google Model Armor, AWS Bedrock | Ship content to a vendor cloud | Runs locally; benchmarks, scripts, and the probe artifact are public (datasets from their original sources) |
 
 Full source-backed comparison: [docs/COMPETITIVE_LANDSCAPE.md](docs/COMPETITIVE_LANDSCAPE.md).
 
@@ -268,9 +273,10 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
 
 ```
   a text classifier does well when an attack reuses wording it has seen — that is
-  pattern-matching, not intent, and it ties or beats the probe there (same-vocabulary
-  minimal pairs ~0.79 vs ~0.82; or a new source whose vocabulary overlaps training).
-  the probe's value is the attacks worded in ways it never saw.
+  pattern-matching, not intent, and it ties or beats the probe there (on the shipped
+  config, same-vocabulary minimal pairs run ~0.74 probe vs ~0.82 TF-IDF — text wins; or a
+  new source whose vocabulary overlaps training). the probe's value is the attacks worded
+  in ways it never saw.
 
   the probe needs the frozen 0.5B host model to run, so inference is HEAVIER than a
   standalone text classifier. the ~22 KB size is a train/store advantage only.
@@ -299,8 +305,8 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
 > different model from the shipped product. Read it for the original motivation, but treat the
 > benchmarks above (Qwen2.5-0.5B, real data, cross-source) as the current evidence. On the synthetic
 > minimal-pairs set both the probe and TF-IDF sit at chance (it is out of distribution), and
-> within-distribution the probe ties TF-IDF. Probe weights and all benchmark scripts are in `research/`.
-> Run them yourself.
+> within-distribution a text classifier is comparable or slightly better. Probe weights, scripts, and
+> result JSONs are in `research/`; the PI datasets download from their original sources. Run the scripts yourself.
 >
 > A published **[erratum](docs/ERRATUM.md)** corrects the paper's preliminary numbers (pair leakage in
 > the matched-pair headline, the GPT-2-research vs shipped-product mix-up, and dataset counts).

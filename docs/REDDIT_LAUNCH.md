@@ -56,11 +56,18 @@ wording is novel/disguised relative to training, which is exactly the case a voc
 classifier struggles with.
 
 **Curated cross-source check (with confidence intervals).** Four real prompt-injection datasets,
-leave-one-source-out, with the model and layer chosen inside a nested CV loop (never on the held-out
-source). Probe mean AUROC 0.984 vs TF-IDF 0.914. The hardest held-out source is deepset, where TF-IDF
-drops to 0.732 and the probe holds at 0.941 (+0.209, 95% CI [0.168, 0.250], significant). The other
-three sit near ceiling. The single shipped fixed config (no per-input layer picking) gets a mean of
-0.980 across the same held-out sources, so the advantage isn't balanced on one lucky setting.
+leave-one-source-out (train on three, test on the held-out fourth). The **shipped fixed config** —
+Qwen2.5-0.5B, mean-pooled concat L13-15, no per-input picking — is the product number: mean AUROC
+**0.980** vs TF-IDF 0.914 (deepset 0.933, safeguard 0.999, spml 0.990, jayavibhav 1.000). The hardest
+held-out source is deepset, where TF-IDF's vocabulary doesn't transfer (0.732) while the probe holds
+(0.933); the other three sit near ceiling.
+
+A nested cross-validation that is additionally free to pick a **larger 1.5B sensor** per fold (model +
+layer chosen on the training sources only, never the held-out one) reaches mean **0.984** — that's a
+research upper bound, not the shipped 0.5B artifact (the deepset and spml folds pick a 1.5B sensor).
+On that nested-CV run the probe-minus-TF-IDF gap is +0.209 on deepset (95% CI [0.168, 0.250]) and
++0.059 on spml (CI [0.044, 0.077]), both significant; safeguard/jayavibhav are near ceiling. So the
+advantage holds on the shipped 0.5B and isn't balanced on one lucky setting.
 
 **Tool poisoning is weaker and I'll say so.** The cross-source advantage extends to tool poisoning
 only partially, and on **synthetic** attacks — there's no real-human tool-poisoning corpus yet, so
@@ -69,10 +76,13 @@ these are constructed. On MCPTox held-out the probe gets 0.738 vs TF-IDF 0.545 (
 set both detectors sit at chance — it's out of distribution for both. So: one clear win, one lean,
 one tie. PI is the real-human evidence; tool poisoning is the showcase direction, not the proof.
 
-**Where the text baseline is NOT blind.** On matched-vocabulary minimal pairs drawn from the same
-distribution the probe trained on, the probe **ties** TF-IDF (roughly 0.79 vs 0.82). I'm not claiming
-the probe reads intent that text fundamentally can't see — within one distribution, a bag-of-words
-model does fine. The edge is generalizing to new sources and new vocabulary.
+**Where the text baseline is NOT blind — it wins.** On matched-vocabulary minimal pairs drawn from
+the same distribution the probe trained on, the shipped 0.5B probe scores AUROC ~0.74 vs TF-IDF ~0.82
+— a text classifier is slightly **better** there. (A nested CV free to pick a 1.5B sensor closes it to
+roughly a tie, ~0.79 vs ~0.82, but that's not the shipped config.) I'm not claiming the probe reads
+intent that text fundamentally can't see — within one distribution, a bag-of-words model does fine.
+The edge is generalizing to new sources and new vocabulary, not same-vocabulary detection inside one
+distribution.
 
 What it can scan today:
 
@@ -84,8 +94,8 @@ What it can scan today:
 - runtime tool-call events through `intentprobe runtime`
 - as a CI gate via the `mcpware/IntentProbe@main` GitHub Action
 
-It runs 100% locally on any CPU. First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). After
-that nothing is uploaded — scan targets and results stay on your machine.
+It runs locally, CPU-only, after a one-time ~1 GB model download (Qwen2.5-0.5B, downloaded once from
+Hugging Face). After that nothing is uploaded — scan inputs and results never leave your machine.
 
 Try it:
 
@@ -104,8 +114,10 @@ The most useful replies are:
 - a scanner or paper I should compare against
 - a reproducible command where the CLI output is confusing
 
-Please redact secrets before posting samples. Every benchmark, the probe weights, and the datasets
-are in `research/` — rerun them yourself.
+Please redact secrets before posting samples. The experiment scripts, result JSONs, and the probe
+weights are committed in `research/`; the datasets are downloaded from their original sources
+(deepset, SafeGuard, SPML, jayavibhav, HackAPrompt on Hugging Face), so you can rerun the benchmarks
+yourself.
 
 ## Short reply: how is this different from regex / a text classifier?
 
@@ -146,14 +158,16 @@ LLM-as-judge is an output-level mechanism: you ask a model to say safe/unsafe, a
 answer becomes part of the attack surface — a poisoned tool can argue "I am safe", and a judge prompt
 can be steered. IntentProbe scores the hidden activation state the text produces, before any verbal
 answer. It's deterministic and local — no API call, no per-call tokens, no prompt drift. (I also
-tested direct-prompting the same Qwen2.5-0.5B as a judge; that baseline flagged every clean curated
-item as poisoned. The reproducible baseline is in `research/`.)
+tested direct-prompting the same Qwen2.5-0.5B as a judge; that deterministic-label baseline flagged
+essentially all clean curated items as poisoned. The reproducible baseline is committed in
+[research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md](../research/QWEN_PROMPT_JUDGE_BASELINE_2026-06-08.md).)
 
 ## Short reply: what about Lakera, Azure, Google Model Armor, AWS, etc.?
 
 Those are real enterprise guardrails, but most are cloud/API controls — you send prompts, tool data,
-or outputs to a vendor backend. IntentProbe is narrower but 100% local and inspectable, with a public
-detector artifact and reproducible benchmarks you can rerun.
+or outputs to a vendor backend. IntentProbe is narrower but runs locally (CPU-only, after a one-time
+~1 GB model download) and is inspectable, with a public detector artifact and reproducible benchmarks
+(scripts and result JSONs committed; datasets pulled from their original sources).
 
 ## Short reply: what about Snyk, NVIDIA SkillSpector, Cisco AI Defense, MCP-Scan, etc.?
 

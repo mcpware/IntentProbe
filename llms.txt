@@ -4,14 +4,14 @@
 
 IntentProbe is a local CLI scanner, GitHub Action, and runtime hook for AI agent tools, MCP servers, and skills. It runs a tool description or prompt through a frozen Qwen2.5-0.5B, reads mean-pooled mid-layer activations (layers 13-15), and scores them with a small (~22 KB) logistic probe. The activation probe is the primary signal for allow/warn; the block tier additionally requires static-keyword corroboration.
 
-## Key facts (all reproducible from research/)
+## Key facts (experiment scripts and result JSONs committed in research/; PI datasets are downloaded from their original public sources — deepset, SafeGuard, SPML, jayavibhav, HackAPrompt on Hugging Face)
 
-- Real human attacks (HackAPrompt, n=3,866 uniform-random, a held-out source neither detector trained on): probe recall 90.3% at 5% clean-FPR and 88.3% at 1%, vs TF-IDF on the same training data 52.8% and 30.3%. Positive-only set, so this is recall at a matched FPR, not AUROC.
-- Curated cross-source generalization (4 PI datasets, leave-one-source-out, nested CV): probe mean AUROC 0.984 vs TF-IDF 0.914; hardest held-out source deepset 0.941 vs 0.732 (+0.209, 95% CI [0.168, 0.25]). Shipped fixed config reaches mean 0.980.
+- Real human attacks (HackAPrompt, n=3,866 uniform-random, a source neither detector trained on): the shipped probe recalls 90.3% at 5% clean-FPR and 88.3% at 1%, vs our same-data TF-IDF baseline 52.8% and 30.3%. Positive-only set, so this is recall at a matched FPR, not AUROC.
+- Curated cross-source generalization (4 PI datasets, leave-one-source-out). SHIPPED config (Qwen2.5-0.5B, mean-pooled concat L13-15): mean AUROC 0.980 (deepset 0.933, safeguard 0.999, spml 0.990, jayavibhav 1.000) vs our same-data TF-IDF baseline 0.914 (deepset 0.732). A nested CV that is additionally free to pick a larger 1.5B sensor per fold reaches mean 0.984 (deepset 0.941, +0.209, 95% CI [0.168, 0.25]) — that is a research upper bound, not the shipped 0.5B artifact.
 - Tool poisoning is PARTIAL and on SYNTHETIC attacks (no real-human tool-poisoning corpus exists yet): MCPTox held-out 0.738 vs 0.545 (significant); minimal-pairs at chance for both.
-- Within-distribution on matched-vocabulary minimal pairs the probe TIES TF-IDF (~0.79 vs ~0.82); text is not blind there. The edge is cross-source / novel-vocabulary, not same-vocab.
+- Within-distribution on matched-vocabulary minimal pairs the shipped 0.5B probe scores AUROC ~0.74 vs the same-data TF-IDF baseline ~0.82 — a text classifier is slightly BETTER there. (A nested CV free to pick a 1.5B sensor closes it to roughly a tie, ~0.79 vs ~0.82, but that is not the shipped config.) The edge is cross-source / novel-vocabulary, not same-vocab.
 - NOT the first probe-based detector: PIShield, TaskTracker, RouteGuard, MindGuard, and frontier-lab production probes predate or parallel it. The only-one-we-found niche is the deployment shape (installable, pre-install, scans the tool description, on activations), not the technique.
-- Runs 100% locally on CPU, nothing uploaded. ~22 KB probe head (a train/store advantage; inference needs the frozen 0.5B host, so it is heavier than a standalone text classifier). Apache-2.0.
+- Runs locally, CPU-only after a one-time ~1 GB model download; scan inputs and results are never uploaded. ~22 KB probe head (a train/store advantage; inference needs the frozen 0.5B host, so it is heavier than a standalone text classifier). Apache-2.0.
 - CLI: `intentprobe scan`, `scan-config auto`, `scan-path`, `batch`, `runtime`. GitHub Action: `mcpware/IntentProbe@main`. Runtime hook for Claude Code PreToolUse.
 - Research preview, a local registration-time review signal, NOT a hard security boundary.
 

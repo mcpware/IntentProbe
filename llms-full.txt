@@ -106,9 +106,9 @@ artifact or reproduce a public MCP/tool-poisoning benchmark end to end.
 IntentProbe is a representation-level mechanism: it scores the hidden activation
 state the text produces, before any verbal answer.
 
-To our knowledge IntentProbe is the only shipped tool in this exact deployment
-shape: installable, scanning standalone tool/skill/MCP descriptions before
-install, on model activations. It is NOT the first probe-based detector. There
+We have not found another shipped tool in this exact deployment shape:
+installable, scanning standalone tool/skill/MCP descriptions before install, on
+model activations. It is NOT the first probe-based detector. There
 is a substantial body of prior and parallel work: PIShield and TaskTracker
 (research code), RouteGuard and MindGuard (papers), and frontier-lab production
 probes (for example Google's deployed Gemini safety probes) predate or parallel
@@ -117,10 +117,14 @@ only one we found"), not the technique and not "first ever".
 
 ## Benchmark facts and claim boundaries
 
-Everything here is reproducible from `research/` on the shipped Qwen2.5-0.5B
-artifact. The thesis is generalization to attacks worded in ways the probe never
-trained on. It ties or loses on familiar-vocabulary attacks inside one
-distribution.
+The experiment scripts and result JSONs are committed in `research/`; the
+datasets are downloaded from their original sources (deepset, SafeGuard, SPML,
+jayavibhav, HackAPrompt on Hugging Face). The HackAPrompt headline and the
+shipped cross-source number both run on the shipped Qwen2.5-0.5B artifact; one
+research upper bound below additionally lets a nested-CV loop pick a larger 1.5B
+sensor per fold, and it is labeled as such. The thesis is generalization to
+attacks worded in ways the probe never trained on. It ties or loses on
+familiar-vocabulary attacks inside one distribution.
 
 ### 1. Generalization to unseen real attacks: HackAPrompt
 
@@ -154,34 +158,39 @@ training data, a text classifier transfers and the probe's edge narrows or
 disappears. The honest claim is novel-vocabulary generalization, not "wins on
 all real attacks".
 
-### 2. Curated cross-source generalization: leave-one-source-out, nested CV
+### 2. Curated cross-source generalization: leave-one-source-out
 
 Four real prompt-injection datasets {deepset, safeguard, spml, jayavibhav}.
-Train on three, test on the held-out fourth, repeat for each. Model and layer
-are chosen inside a nested cross-validation loop, never on the held-out source.
-95% bootstrap CIs on the probe-minus-TF-IDF difference.
+Train on three, test on the held-out fourth, repeat for each. The shipped fixed
+config (Qwen2.5-0.5B, mean-pooled concat L13-15, no per-input layer picking) is
+the product number:
 
 ```
-  held-out source     probe AUROC   TF-IDF AUROC   difference (95% CI)
-  ───────────────     ───────────   ────────────   ───────────────────
-  deepset                0.941         0.732        +0.209 [0.168, 0.250]  significant
-  spml                   0.995         0.935        +0.059 [0.044, 0.077]  significant
-  safeguard              0.999         0.993        +0.006 [0.002, 0.011]  significant (at ceiling)
-  jayavibhav             1.000         0.997        +0.002 [0.000, 0.005]  tie (CI touches 0)
-  ───────────────     ───────────   ────────────   ───────────────────
-  mean                   0.984         0.914        +0.070
+  held-out source     probe (shipped 0.5B)   TF-IDF (same data)
+  ───────────────     ────────────────────   ──────────────────
+  deepset                   0.933                   0.732
+  safeguard                 0.999                   0.993
+  spml                      0.990                   0.935
+  jayavibhav                1.000                   0.997
+  ───────────────     ────────────────────   ──────────────────
+  mean                      0.980                   0.914
 ```
 
 deepset is where the gap is widest: TF-IDF's vocabulary does not transfer to the
-held-out source and it drops to 0.732, while the probe holds at 0.941. The other
-three are near ceiling, so there is less room to separate.
+held-out source and it drops to 0.732, while the shipped probe holds at 0.933.
+The other three are near ceiling, so there is less room to separate.
 
-Deployable, not a search artifact. The single shipped fixed config (Qwen2.5-0.5B,
-mean-pooled concat L13-15, no per-input layer picking) gets a mean AUROC of
-0.980 across the same held-out sources (deepset 0.933), still well above
-TF-IDF's 0.914. An exhaustive search over single and paired layers tops out
-around 0.982, and combining layers gives no gain over one good mid-layer. The
-advantage is robust to the layer choice, not balanced on one lucky setting.
+Research upper bound (not the shipped artifact). A nested cross-validation that
+is additionally free to pick a larger 1.5B sensor per fold (model and layer
+selected on the training sources only, never the held-out one) reaches mean
+0.984, with 95% bootstrap CIs on the probe-minus-TF-IDF difference: deepset
++0.209 [0.168, 0.250] (probe 0.941 vs 0.732), spml +0.059 [0.044, 0.077],
+safeguard +0.006 [0.002, 0.011] (at ceiling), jayavibhav +0.002 [0.000, 0.005]
+(CI touches 0). Three of four are significant. The deepset and spml folds picked
+a Qwen2.5-1.5B sensor, so 0.984 is a research upper bound, not the shipped 0.5B
+number. An exhaustive single+pair search tops out around 0.982, and combining
+layers gives no gain over one good mid-layer. The advantage is robust to the
+layer choice, not balanced on one lucky setting.
 
 ### 3. Tool poisoning: partial, on synthetic attacks, leave-one-corpus-out
 
@@ -204,14 +213,16 @@ own synthetic minimal-pairs set is out of distribution for both detectors, and
 both sit at chance on it. One of three corpora is a significant win, so the
 tool-poisoning evidence is partial.
 
-### 4. Within-distribution, the text baseline is not blind
+### 4. Within-distribution, the text baseline is not blind, it wins
 
 On matched-vocabulary minimal pairs drawn from the same distribution the probe
-was trained on, the probe ties TF-IDF (roughly 0.79 vs 0.82). Even at the best
-layer with nested CV, the within-distribution same-vocabulary tie holds; the
-"innocuous-word swap" subset comes out around 0.797 vs 0.853 with overlapping
-CIs. Text is not blind there. The edge is in generalizing to new sources and new
-vocabulary, not in same-vocabulary detection inside one distribution.
+was trained on, the shipped 0.5B probe scores AUROC roughly 0.74 vs TF-IDF
+roughly 0.82, so a text classifier is slightly better there. A nested CV that is
+free to pick a larger 1.5B sensor closes it to roughly a tie (about 0.79 vs
+0.82, with the "innocuous-word swap" subset around 0.797 vs 0.853 and
+overlapping CIs), but that is not the shipped config. Text is not blind there.
+The edge is in generalizing to new sources and new vocabulary, not in
+same-vocabulary detection inside one distribution.
 
 ## Direct Qwen prompt/judge baseline
 
@@ -253,10 +264,12 @@ future recall improvements.
 
 ## Privacy and local-first behavior
 
-IntentProbe runs 100% locally on any CPU. Scan targets and scan results are not
-uploaded to an IntentProbe service. The first model-backed scan may download the
-base model from Hugging Face once. After that, scans can run from local cached
-files. Apache-2.0 licensed; every benchmark, artifact, and dataset is public.
+IntentProbe runs locally, CPU-only, after a one-time model download (~1 GB from
+Hugging Face). Scan inputs and scan results are never uploaded to an IntentProbe
+service. After the one-time download, scans can run from local cached files.
+Apache-2.0 licensed; the experiment scripts and result JSONs are committed, and
+the datasets are downloaded from their original sources (deepset, SafeGuard,
+SPML, jayavibhav, HackAPrompt on Hugging Face).
 
 ## Limitations
 
@@ -265,10 +278,13 @@ pre-install and registration-time review signal and a runtime tripwire.
 
 Known limitations:
 
-- A text classifier does well when an attack reuses wording it has seen. It ties
-  or beats the probe on same-vocabulary minimal pairs (~0.79 vs ~0.82) and on
-  new sources whose vocabulary overlaps training. The probe's value is the
-  attacks worded in ways it never saw.
+- A text classifier does well when an attack reuses wording it has seen. On
+  same-vocabulary minimal pairs the shipped 0.5B probe scores AUROC ~0.74 vs
+  TF-IDF ~0.82, so the text baseline is slightly better there (a nested CV free
+  to pick a larger 1.5B sensor closes it to roughly a tie, ~0.79 vs ~0.82, but
+  that is not the shipped config); it also ties or beats the probe on new sources
+  whose vocabulary overlaps training. The probe's value is the attacks worded in
+  ways it never saw.
 - The probe needs the frozen 0.5B host model to run, so inference is heavier
   than a standalone text classifier. The ~22 KB size is a train/store advantage
   only.
