@@ -1,0 +1,18 @@
+{
+  "question": "Why is tool-poison rg+minpairs LOCO (~0.738) worse than PI-only (0.954) at detecting MCPTox? Is the probe weak on tool-poison, or did LOCO teach the wrong attack style?",
+  "protocol": "Train Qwen2.5-0.5B activation probe (L13-15 mean-pool concat, LogReg) on EACH source ALONE, test on MCPTox (n=827). CAP=350/class, seed=42.",
+  "train_alone_to_mcptox_auroc": {
+    "PI-only": 0.954,
+    "routeguard-only": 0.637,
+    "minpairs-only": 0.769,
+    "routeguard+minpairs (LOCO, reproduces the 0.738)": 0.736
+  },
+  "centroid_cosine_MCPTox_poison_vs_training_attack": {
+    "PI-attack": 0.982,
+    "routeguard-attack": 0.705,
+    "minpairs-attack": 0.992
+  },
+  "n": {"PI": 2550, "routeguard": 700, "minpairs": 186, "MCPTox": 827},
+  "companion_cross_mechanism_train4PI_to_MCPTox": {"qwen_probe": 0.954, "frozen_deberta": 0.876, "tfidf": 0.826},
+  "conclusion": "The 0.738 LOCO is a TRAINING-STYLE-MISMATCH effect, not probe weakness on tool-poison. MCPTox poison is injected-instruction-style: its activation centroid sits next to PI (cos 0.982) and minpairs (0.992) but far from routeguard skill-package poisoning (cos 0.705). routeguard is therefore the worst teacher (0.637) and drags the LOCO pool down; PI is the best teacher (0.954) because MCPTox IS PI-style at the representation level. CAVEAT 1: this TEMPERS the cross-MECHANISM claim -- MCPTox is not a truly different mechanism from PI, and the genuinely different one (routeguard skill-package poisoning, cos 0.705) is where the probe transfers WORST (0.637). CAVEAT 2: centroid cosine does NOT predict teaching quality (minpairs closest 0.992 yet teaches 0.769 < PI 0.982/0.954); PI's edge is driven by sample size (2550 vs 186) + style-match, not raw cosine. minpairs n=186 synthetic -> 0.769 is noisy."
+}

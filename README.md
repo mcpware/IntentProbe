@@ -16,6 +16,10 @@
 </p>
 
 <p align="center">
+  <img src="docs/demo.svg" width="700" alt="IntentProbe blocks a poisoned MCP tool description (risk 0.950) and passes a clean one (0.000)." />
+</p>
+
+<p align="center">
   <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
 </p>
 
@@ -33,9 +37,9 @@ internally represents the input rather than the exact words.
 
 This is a **research preview**: a local, single-pass, registration-time review signal, not a hard
 security boundary. Runs locally (CPU-only, after a one-time ~1 GB model download); scan inputs and
-results are never uploaded. We have not found another shipped tool in this exact deployment shape —
-installable, scanning standalone tool/skill/MCP *descriptions* before install, on model activations. It is **not** the first probe-based detector; there is a
-substantial body of prior and parallel work (see [Competitive landscape](#competitive-landscape)).
+results are never uploaded. It vets a standalone tool, skill, or MCP *description* on the host model's
+activations, before you install it. See the [Competitive landscape](#competitive-landscape) for how it
+fits alongside text scanners, LLM-judges, and other probe-based work.
 
 ## Install in one command
 
@@ -197,8 +201,8 @@ new sources and new vocabulary, not same-vocabulary detection inside one distrib
 | Type | Who | How they scan | How IntentProbe differs |
 |---|---|---|---|
 | **MCP scanner** | Snyk Agent Scan (formerly Invariant MCP-Scan), Cisco AI Defense, NVIDIA SkillSpector | Static rules, AST, YARA signatures, LLM-as-judge | Adds a model-internal **activation** signal; static keywords still corroborate the block tier |
-| **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Keys off model activations rather than surface vocabulary; **measured against our same-data TF-IDF baseline** (not these products), it transfers better to attack sources it never trained on |
-| **Probe-based** | PIShield, TaskTracker (research code); RouteGuard, MindGuard (papers); frontier-lab production probes (e.g. Google Gemini) | Linear probe / classifier on model internals | Same family of method — IntentProbe is **not** first or only on the technique. The only-one-we-found niche is the deployment shape: installable, pre-install, scans the tool *description*, on activations |
+| **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Reads the host model's internal activations instead of classifying the surface text, a different and complementary signal |
+| **Probe-based** | PIShield, TaskTracker (research code); RouteGuard, MindGuard (papers); frontier-lab production probes (e.g. Google Gemini) | Linear probe / classifier on model internals | Same family of method; IntentProbe's angle is the deployment shape: installable, pre-install, scans the tool *description* on activations |
 | **LLM-as-judge** | NeMo, OpenAI Guardrails, Promptfoo | Ask another LLM "is this poisoned?" | Deterministic, local, no API call; scores state not the verbal answer |
 | **Enterprise cloud** | Lakera, Azure, Google Model Armor, AWS Bedrock | Ship content to a vendor cloud | Runs locally; benchmarks, scripts, and the probe artifact are public (datasets from their original sources) |
 

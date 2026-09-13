@@ -1,0 +1,14 @@
+{
+  "test": "MCPTox tool-poison zero-shot",
+  "n": 827,
+  "n_poison": 485,
+  "our_probe_PItrained": 0.954,
+  "frozen_deberta_features_samedata": 0.876,
+  "tfidf_samedata": 0.826,
+  "protectai_deberta_offshelf_zeroshot": 0.949,
+  "id2label": {
+    "0": "SAFE",
+    "1": "INJECTION"
+  },
+  "verdict": "tie"
+}

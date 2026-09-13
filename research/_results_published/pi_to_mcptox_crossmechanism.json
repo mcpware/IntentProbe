@@ -1,0 +1,8 @@
+{
+  "train": "4 PI sources",
+  "test": "MCPTox tool-poison",
+  "n_test": 827,
+  "qwen_probe": 0.954,
+  "frozen_deberta": 0.876,
+  "tfidf": 0.826
+}

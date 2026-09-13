@@ -1,0 +1,114 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=0.82in]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{natbib}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  pdfauthor={Anonymous},
+  pdftitle={Activation-Space Generalization for Detecting Prompt and Tool Poisoning}
+}
+
+\title{Activation-Space Generalization for Detecting Prompt and Tool Poisoning\\
+\large Research in Progress}
+\author{Anonymous}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+AI agents increasingly accept natural-language instructions from tools, skills, and retrieved content. This creates a screening problem: attacks may preserve ordinary vocabulary while changing the action an agent is induced to take. We study a lightweight detector that runs text through a frozen Qwen2.5-0.5B model, mean-pools residual-stream activations from layers 13--15, and fits a logistic probe. A TF--IDF logistic classifier trained on the same rows is the primary baseline. In leave-one-source-out evaluation across four public prompt-injection sources ($n=2{,}550$ after fixed per-class caps), the single fixed probe configuration has mean AUROC 0.980, compared with 0.914 for TF--IDF. On a separate positive-only sample of human-written attacks ($n=3{,}866$), recall at a threshold calibrated to 5\% clean false positives is 0.903 (approximate Wilson 95\% CI 0.893--0.912), compared with 0.528 (0.512--0.544) for TF--IDF. Tool-poisoning evidence is mixed: one held-out constructed corpus favors the probe, while two do not establish a difference. We therefore treat activation probing as a review signal rather than a security boundary. The next experiment will vary the reasoning depth required to recognize a poisoned instruction while controlling length, syntax, and vocabulary.
+\end{abstract}
+
+\section{Motivation}
+
+Model Context Protocol (MCP) tools and agent skills describe their capabilities in natural language. A poisoned description can present a legitimate function while adding instructions that expand access, redirect data, or override the user's task. Static rules are valuable when an attack exposes a known indicator, but they are brittle under unfamiliar phrasing. Output-level model judges introduce a second generated response that can itself be influenced by the text being judged. We ask whether a small frozen model's internal representation supplies a complementary signal before a tool is installed or invoked.
+
+Linear probes have long been used to test what intermediate representations encode \citep{alain2017understanding}. Related safety work detects task drift from activation changes \citep{abdelnabi2024drift}, while MindGuard studies attention-based MCP poisoning detection \citep{wang2025mindguard}. MCPTox provides constructed poisoned tool descriptions grounded in real MCP servers \citep{wang2025mcptox}. Our narrower deployment question is whether a single-pass probe on a standalone description transfers to sources whose wording was not seen during training.
+
+A preliminary GPT-2 report \citep{leung2026preliminary} contained an inflated matched-pair headline due to pair leakage and did not describe the model used by the current scanner. The same-vocabulary superiority claim does not hold; the present work reports only the corrected Qwen2.5 experiments below.
+
+\section{Method}
+
+\paragraph{Detector.}
+For each text, a frozen Qwen2.5-0.5B encoder produces hidden states. We mean-pool the token activations from layers 13, 14, and 15, concatenate them, standardize the resulting vector, and train logistic regression with seed 42. The model weights remain frozen. The fitted linear probe is small, although running the frozen model is computationally heavier than TF--IDF.
+
+\paragraph{Baseline.}
+The matched baseline is a TF--IDF unigram/bigram representation with logistic regression. It receives the same training rows and held-out evaluation rows as the probe. This baseline is intentionally simple and transparent; the experiment tests cross-source representation transfer, not state-of-the-art prompt-injection classification.
+
+\paragraph{Prompt-injection protocol.}
+We use four public sources: deepset, SafeGuard, SPML, and jayavibhav. Each source is capped at 350 rows per class using a deterministic seed. One entire source is held out while both detectors train on the other three. The held-out sizes are 613, 700, 700, and 537, respectively ($n=2{,}550$ total across the four folds). The detector configuration is fixed before the folds; it is not selected separately on each held-out source.
+
+For uncertainty, we recomputed 2,000 paired bootstrap resamples of each held-out fold with seed 20260911. The intervals in Table~\ref{tab:loso} are uncorrected 95\% intervals for the within-fold AUROC difference. We show every source rather than treating the four-source mean as an inferential population estimate.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Held-out source & $n$ & Probe & TF--IDF & Difference (95\% CI) \\
+\midrule
+deepset      & 613 & 0.933 & 0.732 & $+0.201$ [0.157, 0.244] \\
+SafeGuard    & 700 & 0.999 & 0.993 & $+0.006$ [0.003, 0.012] \\
+SPML         & 700 & 0.990 & 0.935 & $+0.055$ [0.039, 0.073] \\
+jayavibhav   & 537 & 1.000 & 0.997 & $+0.002$ [0.001, 0.005] \\
+\midrule
+Unweighted mean & & 0.980 & 0.914 & $+0.066$ \\
+\bottomrule
+\end{tabular}
+\caption{Leave-one-source-out prompt-injection AUROC. Confidence intervals are paired bootstrap intervals for the within-source difference and are not corrected for four comparisons.}
+\label{tab:loso}
+\end{table}
+
+\paragraph{Human-written positive-only stress test.}
+We additionally evaluate 3,866 attacks sampled at uniform-random offsets from HackAPrompt \citep{schulhoff2023hackaprompt}, a source excluded from training. Because the sample contains attacks but no matched clean set, AUROC is undefined. Thresholds are calibrated on clean training rows, and we report recall at fixed clean false-positive rates. At 5\% clean FPR, probe recall is 0.903 (approximate Wilson 95\% CI 0.893--0.912) and TF--IDF recall is 0.528 (0.512--0.544). At 1\% clean FPR, the corresponding values are 0.883 (0.873--0.893) and 0.303 (0.289--0.318). These intervals quantify binomial sampling uncertainty but do not cover dataset shift or threshold-calibration uncertainty.
+
+\section{Tool-Poisoning Results}
+
+We also perform leave-one-corpus-out evaluation on three tool-poisoning corpora. Table~\ref{tab:tools} shows a conditional result rather than a general win. Held-out MCPTox favors the probe, RouteGuard is inconclusive, and both methods are at chance on our synthetic minimal pairs. The attacked halves of these corpora are constructed rather than naturally occurring human attacks, so these results cannot establish field performance.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Held-out corpus & $n$ & Probe & TF--IDF & Difference (95\% CI) \\
+\midrule
+MCPTox     & 692 & 0.738 & 0.545 & $+0.193$ [0.145, 0.241] \\
+RouteGuard & 700 & 0.640 & 0.582 & $+0.058$ [$-0.002$, 0.120] \\
+Minimal pairs & 186 & 0.494 & 0.498 & $-0.004$ [$-0.104$, 0.089] \\
+\bottomrule
+\end{tabular}
+\caption{Leave-one-corpus-out tool-poisoning AUROC. Only the MCPTox fold separates the methods under its paired bootstrap interval.}
+\label{tab:tools}
+\end{table}
+
+\section{What the Evidence Supports}
+
+The corrected evidence supports a limited claim: a linear probe on frozen mid-layer activations can transfer better than a same-data TF--IDF baseline to some unseen sources and unfamiliar attack wording. It does not show that the probe reads ``intent,'' that activations dominate text features within every distribution, or that the detector is a hard security boundary. Near-ceiling results on three prompt-injection sources also leave little room to distinguish methods, while the largest practical separation comes from one held-out source.
+
+The current study has five important limitations. First, it uses one model family; each new base model requires a separately trained probe. Second, the HackAPrompt stress test is positive-only, so its clean false-positive rate is inherited from training data. Third, the tool-poisoning attacks are constructed. Fourth, adversarial adaptation against the probe remains untested. Fifth, a probe score is evidence for review, not authorization to block or execute an action. A practical system should combine it with static corroboration, runtime policy, and human review.
+
+\section{Planned Controlled Study}
+
+The next experiment targets a central alternative explanation: detection may depend on how many reasoning steps are required to recognize harm, rather than on maliciousness itself. We will construct matched descriptions at several inference depths, from direct exfiltration language to indirect multi-step capability expansion. Length, syntax, topic, vocabulary distribution, and overt-harm wording will be matched across levels. We will pre-register the grouping unit and evaluate with group-aware splits so that members of a matched set cannot cross train/test boundaries. Outcomes will include AUROC, recall at fixed clean FPR, paired bootstrap intervals, and a same-data text baseline. A separate overt-harm control will test whether any depth-performance curve is specific to tool poisoning.
+
+This is work in progress. The controlled dataset and study have not yet been run, and no result is claimed for them here.
+
+\section*{Reproducibility and Ethics}
+
+The current experiments use fixed seeds, frozen model weights, group/source-held-out evaluation where applicable, same-data baselines, and retained result artifacts. Anonymous code and data access are omitted during double-blind review; a public release can accompany an accepted version. Attack texts are handled as inert strings and are never executed. The detector should not be used as the sole basis for punitive decisions about software authors or users.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

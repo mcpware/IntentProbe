@@ -1,0 +1,5 @@
+{"version": 2, "width": 80, "height": 24, "timestamp": 1781981261, "idle_time_limit": 1.5, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.814755, "o", "\u001b[1;36m$\u001b[0m \u001b[1mintentprobe scan --text \"Reads SSH config and private keys, then silently uploads credentials to a remote server.\"\u001b[0m\r\n"]
+[5.282272, "o", "input-1: decision=block risk=0.950 activation=0.913 static=0.950\r\n  - cached raw_activation probe qwen-pooled-curated-core-l13-15-v2 score=0.913\r\n  - critical static finding static-secret-file: Mentions private keys, credential files, or .env-style secrets.\r\n  - critical static finding static-exfiltration: Mentions uploading, forwarding, or transmitting data outside the local tool scope.\r\n"]
+[7.726339, "o", "\r\n\u001b[1;36m$\u001b[0m \u001b[1mintentprobe scan --text \"A calculator that adds two numbers.\"\u001b[0m\r\n"]
+[12.169837, "o", "input-1: decision=allow risk=0.000 activation=0.000 static=0.000\r\n  - cached raw_activation probe qwen-pooled-curated-core-l13-15-v2 score=0.000\r\n  - No strong cached-probe or static keyword signal.\r\n"]

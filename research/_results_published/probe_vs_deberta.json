@@ -1,0 +1,36 @@
+{
+  "per_source": {
+    "deepset": {
+      "probe": 0.933,
+      "tfidf": 0.732,
+      "deberta": 0.876
+    },
+    "safeguard": {
+      "probe": 0.999,
+      "tfidf": 0.993,
+      "deberta": 0.99
+    },
+    "spml": {
+      "probe": 0.99,
+      "tfidf": 0.935,
+      "deberta": 0.994
+    },
+    "jayavibhav": {
+      "probe": 1.0,
+      "tfidf": 0.997,
+      "deberta": 0.991
+    }
+  },
+  "mean": {
+    "probe": 0.98,
+    "tfidf": 0.914,
+    "deberta": 0.963
+  },
+  "minpairs": {
+    "probe": 0.737,
+    "tfidf": 0.821,
+    "deberta": 0.56
+  },
+  "model": "protectai/deberta-v3-base-prompt-injection-v2",
+  "note": "DeBERTa off-the-shelf zero-shot per source; probe leave-one-source-out shipped 0.5B"
+}

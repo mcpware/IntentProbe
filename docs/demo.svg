@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="terminal" baseProfile="full" viewBox="0 0 640 410" width="640" version="1.1">
+    <defs>
+        <termtosvg:template_settings xmlns:termtosvg="https://github.com/nbedos/termtosvg">
+            <termtosvg:screen_geometry columns="80" rows="24"/>
+            <termtosvg:animation type="css"/>
+        </termtosvg:template_settings>
+        <style type="text/css" id="generated-style"><![CDATA[#screen {
+                font-family: 'DejaVu Sans Mono', monospace;
+                font-style: normal;
+                font-size: 14px;
+            }
+
+        text {
+            dominant-baseline: text-before-edge;
+            white-space: pre;
+        }
+    
+            :root {
+                --animation-duration: 6314ms;
+            }
+
+            @keyframes roll {
+                0.000%{transform:translateY(0px)}
+12.892%{transform:translateY(-442px)}
+36.649%{transform:translateY(-884px)}
+60.405%{transform:translateY(-1326px)}
+84.162%{transform:translateY(-1768px)}
+100.000%{transform:translateY(-1768px)}
+            }
+
+            #screen_view {
+                animation-duration: 6314ms;
+                animation-iteration-count:infinite;
+                animation-name:roll;
+                animation-timing-function: steps(1,end);
+                animation-fill-mode: forwards;
+            }
+        ]]></style>
+        <style type="text/css" id="user-style">
+            /* The colors defined below are the default 16 colors used for rendering text of the terminal. Adjust
+               them as needed.
+               PowerShell colors based on https://en.wikipedia.org/wiki/ANSI_escape_code#Colors */
+            .foreground {fill: #cccccc;}
+            .background {fill: #0c0c0c;}
+            .color0 {fill: #0c0c0c;}
+            .color1 {fill: #c50f1f;}
+            .color2 {fill: #13a10e;}
+            .color3 {fill: #c19c00;}
+            .color4 {fill: #0037da;}
+            .color5 {fill: #881798;}
+            .color6 {fill: #3a96dd;}
+            .color7 {fill: #cccccc;}
+            .color8 {fill: #767676;}
+            .color9 {fill: #e74856;}
+            .color10 {fill: #16c60c;}
+            .color11 {fill: #f9f1a5;}
+            .color12 {fill: #3b78ff;}
+            .color13 {fill: #b4009e;}
+            .color14 {fill: #61d6d6;}
+            .color15 {fill: #f2f2f2;}
+        </style>
+    </defs>
+    <svg id="screen" width="640" height="408" viewBox="0 0 640 408" preserveAspectRatio="xMidYMin slice">
+    <rect class="background" height="100%" width="100%" x="0" y="0"/><defs><g id="g1"><text x="0" textLength="8" class="background"> </text></g><g id="g2"><text x="0" textLength="8" font-weight="bold" class="color14">$</text><text x="8" textLength="8" class="foreground"> </text><text x="16" textLength="624" font-weight="bold" class="foreground">intentprobe scan --text "Reads SSH config and private keys, then silently uplo</text></g><g id="g3"><text x="0" textLength="288" font-weight="bold" class="foreground">ads credentials to a remote server."</text></g><g id="g4"><text x="0" textLength="512" class="foreground">input-1: decision=block risk=0.950 activation=0.913 static=0.950</text></g><g id="g5"><text x="0" textLength="624" class="foreground">  - cached raw_activation probe qwen-pooled-curated-core-l13-15-v2 score=0.913</text></g><g id="g6"><text x="0" textLength="640" class="foreground">  - critical static finding static-secret-file: Mentions private keys, credentia</text></g><g id="g7"><text x="0" textLength="248" class="foreground">l files, or .env-style secrets.</text></g><g id="g8"><text x="0" textLength="640" class="foreground">  - critical static finding static-exfiltration: Mentions uploading, forwarding,</text></g><g id="g9"><text x="0" textLength="408" class="foreground"> or transmitting data outside the local tool scope.</text></g><g id="g10"><text x="0" textLength="8" font-weight="bold" class="color14">$</text><text x="8" textLength="8" class="foreground"> </text><text x="16" textLength="488" font-weight="bold" class="foreground">intentprobe scan --text "A calculator that adds two numbers."</text></g><g id="g11"><text x="0" textLength="512" class="foreground">input-1: decision=allow risk=0.000 activation=0.000 static=0.000</text></g><g id="g12"><text x="0" textLength="624" class="foreground">  - cached raw_activation probe qwen-pooled-curated-core-l13-15-v2 score=0.000</text></g><g id="g13"><text x="0" textLength="416" class="foreground">  - No strong cached-probe or static keyword signal.</text></g></defs><g id="screen_view"><g><rect x="0" y="0" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="0"/></g><g><use xlink:href="#g2" y="442"/><use xlink:href="#g3" y="459"/><rect x="0" y="476" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="476"/></g><g><use xlink:href="#g2" y="884"/><use xlink:href="#g3" y="901"/><use xlink:href="#g4" y="918"/><use xlink:href="#g5" y="935"/><use xlink:href="#g6" y="952"/><use xlink:href="#g7" y="969"/><use xlink:href="#g8" y="986"/><use xlink:href="#g9" y="1003"/><rect x="0" y="1020" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="1020"/></g><g><use xlink:href="#g2" y="1326"/><use xlink:href="#g3" y="1343"/><use xlink:href="#g4" y="1360"/><use xlink:href="#g5" y="1377"/><use xlink:href="#g6" y="1394"/><use xlink:href="#g7" y="1411"/><use xlink:href="#g8" y="1428"/><use xlink:href="#g9" y="1445"/><use xlink:href="#g10" y="1479"/><rect x="0" y="1496" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="1496"/></g><g><use xlink:href="#g2" y="1768"/><use xlink:href="#g3" y="1785"/><use xlink:href="#g4" y="1802"/><use xlink:href="#g5" y="1819"/><use xlink:href="#g6" y="1836"/><use xlink:href="#g7" y="1853"/><use xlink:href="#g8" y="1870"/><use xlink:href="#g9" y="1887"/><use xlink:href="#g10" y="1921"/><use xlink:href="#g11" y="1938"/><use xlink:href="#g12" y="1955"/><use xlink:href="#g13" y="1972"/><rect x="0" y="1989" width="8" height="17" class="foreground"/><use xlink:href="#g1" y="1989"/></g></g></svg>
+</svg>

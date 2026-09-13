@@ -106,14 +106,12 @@ artifact or reproduce a public MCP/tool-poisoning benchmark end to end.
 IntentProbe is a representation-level mechanism: it scores the hidden activation
 state the text produces, before any verbal answer.
 
-We have not found another shipped tool in this exact deployment shape:
-installable, scanning standalone tool/skill/MCP descriptions before install, on
-model activations. It is NOT the first probe-based detector. There
-is a substantial body of prior and parallel work: PIShield and TaskTracker
-(research code), RouteGuard and MindGuard (papers), and frontier-lab production
-probes (for example Google's deployed Gemini safety probes) predate or parallel
-it. The only-one-we-found niche is the deployment shape, an absence claim ("the
-only one we found"), not the technique and not "first ever".
+IntentProbe's angle is the deployment shape: installable, scanning a standalone
+tool/skill/MCP description before install, on model activations. It is the same
+family of method as prior and parallel work, and does not claim to be first on the
+technique: PIShield and TaskTracker (research code), RouteGuard and MindGuard
+(papers), and frontier-lab production probes (for example Google's deployed Gemini
+safety probes) predate or parallel it.
 
 ## Benchmark facts and claim boundaries
 

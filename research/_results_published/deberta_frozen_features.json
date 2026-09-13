@@ -1,0 +1,43 @@
+{
+  "loso": {
+    "deepset": {
+      "probe": 0.933,
+      "tfidf": 0.732,
+      "frozen_deberta": 0.896
+    },
+    "safeguard": {
+      "probe": 0.999,
+      "tfidf": 0.993,
+      "frozen_deberta": 0.994
+    },
+    "spml": {
+      "probe": 0.99,
+      "tfidf": 0.935,
+      "frozen_deberta": 0.978
+    },
+    "jayavibhav": {
+      "probe": 1.0,
+      "tfidf": 0.997,
+      "frozen_deberta": 0.999
+    }
+  },
+  "loso_mean": {
+    "probe": 0.98,
+    "tfidf": 0.914,
+    "frozen_deberta": 0.967
+  },
+  "hackaprompt": {
+    "probe": {
+      "@5": 0.903,
+      "@1": 0.883
+    },
+    "tfidf": {
+      "@5": 0.528,
+      "@1": 0.303
+    },
+    "frozen_deberta": {
+      "@5": 0.935,
+      "@1": 0.92
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "n": 2135,
+  "by_tag": {
+    "mcp": {
+      "n": 0,
+      "fp_block_0.85": null
+    },
+    "sensitive": {
+      "n": 878,
+      "fp_block_0.85": 0.0182
+    },
+    "general": {
+      "n": 1257,
+      "fp_block_0.85": 0.0016
+    }
+  },
+  "overall_fp_block_0.85": 0.0084,
+  "overall_clopper95_upper": 0.0133
+}

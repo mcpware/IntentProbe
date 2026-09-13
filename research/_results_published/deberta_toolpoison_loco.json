@@ -1,0 +1,19 @@
+{
+  "loco": {
+    "routeguard": {
+      "probe": 0.64,
+      "tfidf": 0.582,
+      "frozen_deberta": 0.554
+    },
+    "mcptox": {
+      "probe": 0.738,
+      "tfidf": 0.545,
+      "frozen_deberta": 0.34
+    },
+    "minpairs": {
+      "probe": 0.494,
+      "tfidf": 0.498,
+      "frozen_deberta": 0.537
+    }
+  }
+}

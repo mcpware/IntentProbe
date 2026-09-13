@@ -1,0 +1,5 @@
+# Local TruthGuard config (untracked): this machine has no bare `python`; the deps
+# (numpy/torch/sklearn/pytest) live in research/.venv-audit. Point the pre-commit
+# test gate at that interpreter so it runs the real suite (tests/ — 12 tests).
+test_command: research/.venv-audit/bin/python -m pytest -q
+skip_on_no_tests: false
