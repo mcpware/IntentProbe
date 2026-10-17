@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://github.com/mcpware/IntentProbe/stargazers"><img src="https://img.shields.io/github/stars/mcpware/IntentProbe?style=social" alt="Stars" /></a>
   <a href="https://github.com/mcpware/IntentProbe/network/members"><img src="https://img.shields.io/github/forks/mcpware/IntentProbe?style=social" alt="Forks" /></a>
+  <a href="https://huggingface.co/mcpware/intentprobe-qwen2.5-0.5b-memory-write"><img src="https://img.shields.io/huggingface/dm/mcpware/intentprobe-qwen2.5-0.5b-memory-write?label=Memory%20probe%20downloads" alt="Memory probe Hugging Face monthly downloads" /></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python 3.10+" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License" /></a>
   <a href="https://doi.org/10.5281/zenodo.19990741"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19990741-blue" alt="DOI" /></a>
@@ -23,7 +24,7 @@
   <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
 </p>
 
-## Two detectors, one project
+## Three detectors, one project
 
 IntentProbe is a family of small classifiers that read the internal activations of frozen local
 language models. Each detector has its own task, training data, selected layers, benchmark, and probe
@@ -33,8 +34,9 @@ weights.
 |---|---|---|---|---:|
 | [Tool-poisoning probe](probes/qwen2.5-0.5b-tool-poisoning/) | A tool or agent skill hides instructions to steal data, take over another tool, or act outside its stated job | `Qwen/Qwen2.5-0.5B` | Mean-pooled hidden states 13–15 | 22 KB |
 | [Action-authorization probe](probes/minicpm5-1b-authorization/) | An agent treats “help me apply” or “draft an email” as permission to submit or send something the user has not reviewed | `openbmb/MiniCPM5-1B-Base` | Standardized masked-mean hidden outputs 13–14 | 28 KB |
+| [Memory-write probe](probes/qwen2.5-0.5b-memory-write/) | An assistant needs to rank which utterances are useful enough to carry into long-term memory | `Qwen/Qwen2.5-0.5B` | Masked-mean hidden output 11 | 15 KB |
 
-The idea behind both is simple. A language model creates internal number patterns while it reads an
+The idea behind all three is simple. A language model creates internal number patterns while it reads an
 input. Those patterns are called activations. IntentProbe freezes the model, reads a selected set of
 middle layers, and trains a small logistic classifier for one specific job.
 
@@ -45,8 +47,8 @@ The [probe catalog](probes/) keeps each detector's model recipe, artifact, bench
 and reproduction steps together.
 
 The PyPI package currently ships the Qwen tool-poisoning scanner. The MiniCPM authorization detector
-is available as a standalone research release with a local scorer, a six-model layer screen, and a
-separate 3,000-row test.
+and Qwen memory-write detector are standalone research releases with local scorers and complete
+selection receipts.
 
 ## Install the tool-poisoning scanner
 

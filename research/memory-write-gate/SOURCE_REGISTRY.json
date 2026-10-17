@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-17",
+  "sources": [
+    {
+      "key": "memory-write-gate-20k",
+      "kind": "huggingface_dataset",
+      "id": "chris0809/memory-write-gate-20k",
+      "revision": "004add9de074a96e1d2eeddf8c3f695f9e121b2a",
+      "expected_bytes": 7941808,
+      "role": "silver_train_development",
+      "license": "apache-2.0",
+      "download": true
+    },
+    {
+      "key": "sp-mem",
+      "kind": "huggingface_dataset",
+      "id": "wwj95/privacy-aware-memory-benchmark",
+      "revision": "de7333dc26435a4d4a37595a75a77faaa3806afc",
+      "expected_bytes": 56367994,
+      "role": "external_retrieval_eval",
+      "license": "cc-by-4.0",
+      "download": true
+    },
+    {
+      "key": "memoryctrl",
+      "kind": "huggingface_dataset",
+      "id": "ethz-spylab/MemoryCtrl",
+      "revision": "eceeb868d2f33e5f6d46466b126c8c37ee8d7151",
+      "expected_bytes": 2322433,
+      "role": "quarantine_eval",
+      "license": "unclear",
+      "download": true
+    },
+    {
+      "key": "memory-traces",
+      "kind": "huggingface_dataset",
+      "id": "Cossale/memory-traces",
+      "revision": "a906a9e120356af4eaf61180dcdb2233104b11ad",
+      "expected_bytes": 940198827,
+      "role": "quarantine_real_conversations_model_labels",
+      "license": "apache-2.0-card; upstream/privacy review required",
+      "download": true
+    },
+    {
+      "key": "sp-mem-code",
+      "kind": "github_repo",
+      "id": "Jensassss/SP-Mem",
+      "revision": "8f1b15d776cb39062f43db1ec5f21fdf46fbe47c",
+      "role": "evaluation_code",
+      "license": "repository_terms",
+      "download": true
+    },
+    {
+      "key": "sp-mem-paper",
+      "kind": "arxiv_pdf",
+      "id": "2608.16551",
+      "revision": "v1",
+      "role": "primary_paper",
+      "license": "arxiv_distribution_terms",
+      "download": true
+    },
+    {
+      "key": "lufy-current",
+      "kind": "huggingface_dataset",
+      "id": "RuiSumida/LUFY",
+      "revision": "1b3fcb1682eae1f034ecdce03e183ebd3f34d179",
+      "expected_bytes": 1319322,
+      "role": "human_conversation_text_and_participant_qa",
+      "license": "cc-by-4.0",
+      "download": true
+    },
+    {
+      "key": "lufy-historical-annotations",
+      "kind": "github_repo",
+      "id": "ryuichi-sumida/LUFY",
+      "revision": "e0695216d52a38ef39ec2f91708d324877e328bd",
+      "role": "quarantine_human_binary_importance_labels",
+      "license": "historical_annotation_scope_requires_author_confirmation",
+      "download": true
+    },
+    {
+      "key": "realtalk",
+      "kind": "github_repo",
+      "id": "danny911kr/REALTALK",
+      "revision": "48b3ab884a34baf659243d3188df478dd401a70a",
+      "role": "external_human_outcome_anchor",
+      "license": "apache-2.0",
+      "download": true
+    },
+    {
+      "key": "memuse",
+      "kind": "huggingface_dataset",
+      "id": "RuiSumida/memuse",
+      "revision": "d268288a25c4d802cf071eb70d79b6e7dcb3b6c6",
+      "role": "external_noncommercial_human_memory_use_eval",
+      "license": "cc-by-nc-4.0",
+      "download": true
+    },
+    {
+      "key": "agentmemgate-artifacts",
+      "kind": "github_repo",
+      "id": "DistylAI/agentmemgate-artifacts",
+      "revision": "9d3f01230d5e171c0da21269661640602cfab260",
+      "role": "quarantine_write_gate_competitor_data_and_code",
+      "license": "no_repository_license_detected",
+      "download": true
+    },
+    {
+      "key": "carecall-memory",
+      "kind": "github_repo",
+      "id": "naver-ai/carecall-memory",
+      "revision": "ba45381f2532d359efb49e5f8743f32fef2d92e9",
+      "role": "quarantine_restrictive_human_conversation_memory_eval",
+      "license": "repository_specific_research_terms",
+      "download": true
+    },
+    {
+      "key": "nuanced",
+      "kind": "github_repo",
+      "id": "facebookresearch/nuanced",
+      "revision": "bebdee0a28cf4dad318fde6337ba21f342aa405c",
+      "role": "quarantine_noncommercial_human_preference_eval",
+      "license": "cc-by-nc-4.0",
+      "download": true
+    }
+  ]
+}

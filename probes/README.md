@@ -8,6 +8,7 @@ and reproducible research trail.
 | --- | --- | --- | --- | ---: | --- |
 | [Qwen2.5-0.5B tool-poisoning](qwen2.5-0.5b-tool-poisoning/) | Review MCP tool and agent-skill descriptions | `Qwen/Qwen2.5-0.5B` | Mean-pooled hidden states 13–15 | 22 KB | [Release benchmark](../hf/intentprobe-qwen2.5-0.5b/README.md) |
 | [MiniCPM5-1B authorization](minicpm5-1b-authorization/) | Score whether a proposed action is supported by the request and history | `openbmb/MiniCPM5-1B-Base` | Standardized masked-mean hidden outputs 13–14 | 28 KB | [Six-backbone screen and held-out test](../research/authorization-send-detector/experiments/EXP002-activation-screen/README.md) |
+| [Qwen2.5-0.5B memory write](qwen2.5-0.5b-memory-write/) | Rank whether one utterance is worth carrying into long-term memory | `Qwen/Qwen2.5-0.5B` | Masked-mean hidden output 11 | 15 KB | [216-candidate development screen](../research/memory-write-gate/experiments/EXP002-qwen-activation-screen/README.md) |
 
 ## What belongs to one probe
 

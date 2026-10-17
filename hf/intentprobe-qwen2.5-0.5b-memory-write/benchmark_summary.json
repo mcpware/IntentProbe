@@ -1,0 +1,26 @@
+{
+  "experiment_id": "MEM-EXP002",
+  "selection_split": "validation",
+  "selection_rows": 3200,
+  "selection_seed_families": 32,
+  "candidate_count": 216,
+  "activation_probe": {
+    "auprc": 0.8896986887514576,
+    "auprc_seed_bootstrap_95ci": [0.7637569606931061, 0.9678661910848998],
+    "auroc": 0.902970703125,
+    "auroc_seed_bootstrap_95ci": [0.8229292990430622, 0.9622983357843137],
+    "balanced_accuracy_at_0_5": 0.8209375000000001,
+    "macro_f1_at_0_5": 0.8208920058698503
+  },
+  "tfidf_word_char": {
+    "auprc": 0.836641701604848,
+    "auroc": 0.8610867187500001
+  },
+  "paired_activation_minus_tfidf": {
+    "auprc_difference": 0.05305698714660967,
+    "auprc_difference_seed_bootstrap_95ci": [-0.019915906801275404, 0.1469202161291378],
+    "auroc_difference": 0.04188398437499996,
+    "auroc_difference_seed_bootstrap_95ci": [-0.019356224025973947, 0.09977162611060049]
+  },
+  "claim_boundary": "Development-only selection on synthetic silver data; independent human LUFY evaluation is in progress."
+}

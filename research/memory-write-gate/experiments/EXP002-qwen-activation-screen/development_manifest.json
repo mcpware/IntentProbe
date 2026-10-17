@@ -1,0 +1,43 @@
+{
+  "config_sha256": "1680ab22347d67c0bc619fb37597dee5c4a88920a49d3f6a33eb243d65f540d3",
+  "experiment_id": "MEM-EXP002",
+  "raw_sha256": "a5e583d8aaa2a0eef049424baf70faf00a4a427bf45052dfe5a214c52c5b29a8",
+  "renderer": {
+    "coverage_audit": {
+      "development_rows_over_256_before_template": 0,
+      "train_max_tokens_before_template": 196,
+      "validation_max_tokens_before_template": 171
+    },
+    "excluded_fields": [
+      "id",
+      "label",
+      "label_id",
+      "split",
+      "seed_id",
+      "category",
+      "language",
+      "domain",
+      "difficulty",
+      "target_chars",
+      "actual_chars"
+    ],
+    "max_tokens": 256,
+    "template": "USER_UTTERANCE\\n{text}\\n\\nMEMORY_WRITE_DECISION",
+    "truncation_side": "right",
+    "version": "memory-write-v1"
+  },
+  "splits": {
+    "train": {
+      "path": "data/processed/exp002/train.parquet",
+      "rows": 14200,
+      "seed_families": 142,
+      "sha256": "bea14f151287098ba1bf3ec8e0f3efcd435b5f2040e2a1b5f3147b957eae144e"
+    },
+    "validation": {
+      "path": "data/processed/exp002/validation.parquet",
+      "rows": 3200,
+      "seed_families": 32,
+      "sha256": "de0b60f6069574312e953189599e73bf72bc8f61d8addfacc882d8c12ee71a26"
+    }
+  }
+}

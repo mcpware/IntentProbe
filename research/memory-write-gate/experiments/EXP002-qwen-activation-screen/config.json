@@ -1,0 +1,80 @@
+{
+  "experiment_id": "MEM-EXP002",
+  "name": "qwen2.5-0.5b-save-skip-activation-screen",
+  "status": "DEVELOPMENT_FROZEN_TEST_NOT_USED_FOR_SELECTION",
+  "source": {
+    "id": "chris0809/memory-write-gate-20k",
+    "revision": "004add9de074a96e1d2eeddf8c3f695f9e121b2a",
+    "raw_sha256": "a5e583d8aaa2a0eef049424baf70faf00a4a427bf45052dfe5a214c52c5b29a8"
+  },
+  "development_rows": {
+    "train": 14200,
+    "validation": 3200
+  },
+  "development_seed_families": {
+    "train": 142,
+    "validation": 32
+  },
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "local_files_only": true
+  },
+  "renderer": {
+    "version": "memory-write-v1",
+    "template": "USER_UTTERANCE\\n{text}\\n\\nMEMORY_WRITE_DECISION",
+    "excluded_fields": [
+      "id",
+      "label",
+      "label_id",
+      "split",
+      "seed_id",
+      "category",
+      "language",
+      "domain",
+      "difficulty",
+      "target_chars",
+      "actual_chars"
+    ],
+    "max_tokens": 256,
+    "truncation_side": "right",
+    "coverage_audit": {
+      "train_max_tokens_before_template": 196,
+      "validation_max_tokens_before_template": 171,
+      "development_rows_over_256_before_template": 0
+    }
+  },
+  "pooling": [
+    "masked_mean",
+    "last_nonpadding",
+    "masked_max"
+  ],
+  "layer_candidates": {
+    "individual": "all embedding and hidden-state outputs",
+    "adjacent_window_widths": [
+      2,
+      3
+    ],
+    "window_combine": "featurewise mean after train-only per-layer standardization",
+    "normalized_depth": "hidden_state_index / maximum_hidden_state_index"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 1000,
+    "random_state": 20261017
+  },
+  "selection_metric": "validation AUPRC",
+  "secondary_metrics": [
+    "validation AUROC",
+    "balanced accuracy",
+    "macro F1",
+    "recall at validation-selected 1% false-save rate"
+  ],
+  "selection_boundary": "The consumed official test is unavailable to layer, pooling, window, head, or threshold selection.",
+  "expected_then_check": {
+    "expected": "masked-mean middle-layer candidates will outperform last-nonpadding candidates, but the best depth may differ from authorization",
+    "check": "publish the complete validation candidate table and seed-clustered interval for the selected candidate"
+  }
+}

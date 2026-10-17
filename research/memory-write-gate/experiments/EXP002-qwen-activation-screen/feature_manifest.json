@@ -1,0 +1,73 @@
+{
+  "batch_size": 64,
+  "config_sha256": "1680ab22347d67c0bc619fb37597dee5c4a88920a49d3f6a33eb243d65f540d3",
+  "experiment_id": "MEM-EXP002",
+  "finished_at": "2026-10-17T10:20:10.313304+00:00",
+  "load_seconds": 1.4076747389044613,
+  "max_tokens": 256,
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "local_files_only": true,
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987"
+  },
+  "model_class": "Qwen2Model",
+  "peak_rss_kib": 9163064,
+  "splits": {
+    "train": {
+      "elapsed_seconds": 885.3840271309018,
+      "feature_dtype": "float16",
+      "features": {
+        "last_nonpadding": {
+          "bytes": 636160128,
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/train_last_nonpadding.npy",
+          "sha256": "ae9bbb33fa8abd79da03c3b701cb32bb08c34fb4be93d78b6d8a63cced124362"
+        },
+        "masked_max": {
+          "bytes": 636160128,
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/train_masked_max.npy",
+          "sha256": "0802c80b849ecc3e021b66964c0bb0ed607a8e654df09d8dcb352de48dc467d3"
+        },
+        "masked_mean": {
+          "bytes": 636160128,
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/train_masked_mean.npy",
+          "sha256": "2a125c4bb75fcb070deb91dc673c7e9296ed8277e7279bd0de0adf580a155a11"
+        }
+      },
+      "hidden_size": 896,
+      "hidden_state_count": 25,
+      "input_path": "data/processed/exp002/train.parquet",
+      "input_sha256": "bea14f151287098ba1bf3ec8e0f3efcd435b5f2040e2a1b5f3147b957eae144e",
+      "resumed_from_row": 8448,
+      "rows": 14200
+    },
+    "validation": {
+      "elapsed_seconds": 291.35332454694435,
+      "feature_dtype": "float16",
+      "features": {
+        "last_nonpadding": {
+          "bytes": 143360128,
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/validation_last_nonpadding.npy",
+          "sha256": "851fd6dc62fb3bdcece30a69efa94bd5bdd5a406af2673eccd3834a45536a66c"
+        },
+        "masked_max": {
+          "bytes": 143360128,
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/validation_masked_max.npy",
+          "sha256": "2c00f474c951d09567b785e0774b264aee717e611816851b60c7fdbdcd52c2a2"
+        },
+        "masked_mean": {
+          "bytes": 143360128,
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/validation_masked_mean.npy",
+          "sha256": "97b99472f271f53442b751a3e5c16d6c5426c6d596279d2478d3988debae0c0f"
+        }
+      },
+      "hidden_size": 896,
+      "hidden_state_count": 25,
+      "input_path": "data/processed/exp002/validation.parquet",
+      "input_sha256": "de0b60f6069574312e953189599e73bf72bc8f61d8addfacc882d8c12ee71a26",
+      "resumed_from_row": 0,
+      "rows": 3200
+    }
+  },
+  "started_at": "2026-10-17T10:00:32.299986+00:00",
+  "status": "COMPLETED"
+}

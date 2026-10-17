@@ -1,0 +1,21 @@
+{
+  "artifact": "probe.npz",
+  "artifact_bytes": 15305,
+  "artifact_sha256": "2a988fbfa76e36d4fe0b1aa4fcca1b8b19a9a5c90d702452f8d36e1defb6ca92",
+  "experiment_id": "MEM-EXP002",
+  "backbone_id": "Qwen/Qwen2.5-0.5B",
+  "backbone_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+  "hidden_state_output": 11,
+  "normalized_depth": 0.4583333333333333,
+  "pooling": "masked_mean",
+  "maximum_tokens": 256,
+  "training_rows": 14200,
+  "training_seed_families": 142,
+  "validation_rows": 3200,
+  "validation_seed_families": 32,
+  "source_dataset": "chris0809/memory-write-gate-20k",
+  "source_revision": "004add9de074a96e1d2eeddf8c3f695f9e121b2a",
+  "source_license": "apache-2.0",
+  "safe_threshold": 0.9999999404417301,
+  "status": "research_preview"
+}

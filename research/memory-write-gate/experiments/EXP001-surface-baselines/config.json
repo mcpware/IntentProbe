@@ -1,0 +1,65 @@
+{
+  "experiment_id": "MEM-EXP001",
+  "name": "save-skip-surface-baselines",
+  "status_at_registration": "PREREGISTERED_TEST_UNOPENED",
+  "registered_date": "2026-10-17",
+  "source": {
+    "id": "chris0809/memory-write-gate-20k",
+    "revision": "004add9de074a96e1d2eeddf8c3f695f9e121b2a",
+    "raw_sha256": "a5e583d8aaa2a0eef049424baf70faf00a4a427bf45052dfe5a214c52c5b29a8"
+  },
+  "prediction_target": "SAVE versus SKIP",
+  "positive_label": "SAVE",
+  "input_fields": [
+    "text"
+  ],
+  "excluded_fields": [
+    "id",
+    "label",
+    "label_id",
+    "split",
+    "seed_id",
+    "category",
+    "language",
+    "domain",
+    "difficulty",
+    "target_chars",
+    "actual_chars"
+  ],
+  "split_policy": {
+    "train": "official train",
+    "validation": "official validation; model and safe-threshold selection only",
+    "test": "official test; one-shot evaluation after this config is frozen",
+    "independence_unit": "seed_id"
+  },
+  "baselines": {
+    "label_prior": "constant training positive rate",
+    "explicit_keyword": "frozen English and Traditional/Simplified Chinese memory-request regex",
+    "length_only": "character count with class-weighted logistic regression",
+    "tfidf_word_char": "word 1-2 gram plus character 2-5 gram TF-IDF with class-weighted logistic regression"
+  },
+  "primary_metric": "test AUPRC for tfidf_word_char",
+  "secondary_metrics": [
+    "AUROC",
+    "balanced_accuracy",
+    "macro_f1",
+    "Brier score",
+    "10-bin ECE"
+  ],
+  "operating_point": {
+    "selection_split": "validation",
+    "target_max_false_save_rate": 0.01,
+    "rule": "lowest observed-score threshold whose validation false-save rate is at most 1%; ties stay together"
+  },
+  "uncertainty": {
+    "unit": "seed_id",
+    "method": "cluster bootstrap",
+    "resamples": 2000,
+    "confidence": 0.95,
+    "seed": 20261017
+  },
+  "expect_then_check": {
+    "expected": "surface text will be materially predictive because the silver generator uses category- and cue-specific language",
+    "failure_condition": "seed-held-out TF-IDF AUPRC is near the 0.5 balanced-class prior or the safe operating point has negligible SAVE recall"
+  }
+}

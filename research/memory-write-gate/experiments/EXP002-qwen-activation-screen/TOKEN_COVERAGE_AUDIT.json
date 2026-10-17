@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MEM-EXP002",
+  "model_tokenizer": "Qwen/Qwen2.5-0.5B",
+  "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+  "max_tokens": 256,
+  "splits": {
+    "train": {
+      "rows": 14200,
+      "maximum_rendered_tokens": 205,
+      "p99_rendered_tokens": 144.0,
+      "rows_over_cap": 0
+    },
+    "validation": {
+      "rows": 3200,
+      "maximum_rendered_tokens": 180,
+      "p99_rendered_tokens": 124.01,
+      "rows_over_cap": 0
+    }
+  },
+  "status": "PASS_COMPLETE_DEVELOPMENT_COVERAGE"
+}

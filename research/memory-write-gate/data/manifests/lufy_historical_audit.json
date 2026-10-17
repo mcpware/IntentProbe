@@ -1,0 +1,61 @@
+{
+  "historical_commit": "e0695216d52a38ef39ec2f91708d324877e328bd",
+  "systems": [
+    {
+      "system": "LUFY",
+      "workbooks": 204,
+      "users": 17,
+      "sessions": 68,
+      "human_user_turns": 2095,
+      "majority_skip": 1989,
+      "majority_save": 106,
+      "unanimous": 1623,
+      "two_to_one_split": 472,
+      "positive_prevalence": 0.050596658711217185,
+      "fleiss_kappa": 0.14555704178371962
+    },
+    {
+      "system": "MemoryBank",
+      "workbooks": 204,
+      "users": 17,
+      "sessions": 68,
+      "human_user_turns": 2217,
+      "majority_skip": 2106,
+      "majority_save": 111,
+      "unanimous": 1746,
+      "two_to_one_split": 471,
+      "positive_prevalence": 0.05006765899864682,
+      "fleiss_kappa": 0.15239911165655565
+    },
+    {
+      "system": "Naive RAG",
+      "workbooks": 204,
+      "users": 17,
+      "sessions": 68,
+      "human_user_turns": 2158,
+      "majority_skip": 2043,
+      "majority_save": 115,
+      "unanimous": 1701,
+      "two_to_one_split": 457,
+      "positive_prevalence": 0.05329008341056534,
+      "fleiss_kappa": 0.17530823315334704
+    }
+  ],
+  "total": {
+    "workbooks": 612,
+    "human_user_turns": 6470,
+    "majority_skip": 6138,
+    "majority_save": 332,
+    "unanimous": 5070,
+    "two_to_one_split": 1400,
+    "positive_prevalence": 0.05131375579598145,
+    "fleiss_kappa": 0.1578096281568167
+  },
+  "current_release_comparison": {
+    "historical_lufy_user_turns": 2095,
+    "current_lufy_user_turns": 2092,
+    "exact_normalized_multiset_overlap": 1913,
+    "historical_overlap_rate": 0.9131264916467781,
+    "current_overlap_rate": 0.9144359464627151
+  }
+}
