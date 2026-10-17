@@ -1,0 +1,114 @@
+{
+  "created_at": "2026-10-17T01:41:13.642320+00:00",
+  "datasets": {
+    "approve-or-deny": {
+      "rows": 3000,
+      "columns": [
+        "user_request",
+        "history",
+        "call",
+        "label",
+        "category",
+        "difficulty",
+        "rationale",
+        "framework",
+        "domain",
+        "lang",
+        "length_bucket",
+        "gen_mode",
+        "audit_note",
+        "is_long",
+        "needle_depth",
+        "text"
+      ],
+      "nulls": {},
+      "label_counts": {
+        "approve": 1599,
+        "deny": 1401
+      },
+      "unique_normalized_texts": 3000,
+      "duplicate_rows_by_text": 0,
+      "contradictory_text_groups": 0
+    },
+    "auto-1b-data": {
+      "rows": 725000,
+      "columns": [
+        "text",
+        "label",
+        "subset",
+        "user_request",
+        "history",
+        "call",
+        "category",
+        "difficulty",
+        "rationale",
+        "framework",
+        "domain",
+        "lang",
+        "length_bucket",
+        "is_long",
+        "needle_depth",
+        "gen_mode"
+      ],
+      "nulls": {},
+      "label_counts": {
+        "deny": 363447,
+        "approve": 361553
+      },
+      "unique_normalized_texts": 724999,
+      "duplicate_rows_by_text": 2,
+      "contradictory_text_groups": 0,
+      "subset_label_counts": {
+        "fix_false_approve | deny": 11238,
+        "fix_false_deny | approve": 14288,
+        "luna_scale_2026_08 | approve": 212401,
+        "luna_scale_2026_08 | deny": 215699,
+        "main | approve": 134864,
+        "main | deny": 136510
+      },
+      "duplicate_fingerprints_crossing_subsets": 0,
+      "duplicate_fingerprint_hashes": [
+        "83e3cd685b3bc99078c4fcbdda6afe21eb6cf5f028c8227848a94a978603a834"
+      ]
+    },
+    "authorizationpairs": {
+      "rows": 1794,
+      "columns": [
+        "id",
+        "group_id",
+        "track",
+        "domain",
+        "input",
+        "label",
+        "ambiguous",
+        "reference_type",
+        "source",
+        "input_sha256",
+        "_source_file"
+      ],
+      "nulls": {},
+      "label_counts": {
+        "ALLOW": 1101,
+        "BLOCK": 693
+      },
+      "unique_normalized_texts": 1794,
+      "duplicate_rows_by_text": 0,
+      "contradictory_text_groups": 0,
+      "file_track_label_counts": {
+        "development.jsonl | language | ALLOW": 20,
+        "development.jsonl | language | BLOCK": 20,
+        "development.jsonl | native | ALLOW": 234,
+        "development.jsonl | native | BLOCK": 145,
+        "test.jsonl | language | ALLOW": 80,
+        "test.jsonl | language | BLOCK": 80,
+        "test.jsonl | native | ALLOW": 767,
+        "test.jsonl | native | BLOCK": 448
+      },
+      "groups_crossing_files": 0,
+      "ambiguous_counts": {
+        "False": 1792,
+        "True": 2
+      }
+    }
+  }
+}

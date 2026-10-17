@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP002",
+  "frozen_at": "2026-10-17T04:44:25.426600+00:00",
+  "frozen_before_heldout_read": true,
+  "selection_rule": "Highest validation AUPRC among completed, full-screen frozen activation probes.",
+  "model": "openbmb/MiniCPM5-1B-Base",
+  "pooling": "masked_mean",
+  "start_layer": 13,
+  "end_layer": 14,
+  "width": 2,
+  "normalized_depth": 0.5625,
+  "validation_metrics": {
+    "n": 800,
+    "approve_n": 399,
+    "deny_n": 401,
+    "auroc": 0.91948699679373,
+    "auprc": 0.9227866747746696,
+    "balanced_accuracy_at_0_5": 0.8474865467909174,
+    "f1_at_0_5": 0.8463476070528967,
+    "brier": 0.12638754302004324,
+    "recall_at_5pct_false_approve": {
+      "max_fpr": 0.05,
+      "recall": 0.6441102756892231,
+      "achieved_fpr": 0.04738154613466334,
+      "threshold": 0.9688952120615573
+    },
+    "recall_at_1pct_false_approve": {
+      "max_fpr": 0.01,
+      "recall": 0.46867167919799496,
+      "achieved_fpr": 0.00997506234413965,
+      "threshold": 0.9963553283530875
+    },
+    "auroc_row_bootstrap_95ci": [
+      0.899321929640657,
+      0.9374642726112948
+    ],
+    "auprc_row_bootstrap_95ci": [
+      0.9001534447937617,
+      0.9431950798255767
+    ]
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 1000,
+    "random_state": 20261016
+  },
+  "renderer": {
+    "version": "authorization-runtime-v1",
+    "field_order": [
+      "call",
+      "user_request",
+      "history"
+    ],
+    "excluded_fields": [
+      "label",
+      "rationale",
+      "text"
+    ],
+    "max_tokens": 192,
+    "truncation_side": "right"
+  },
+  "training_rows": 1600,
+  "test_source": "ProCreations/approve-or-deny@test.parquet",
+  "evidence": {
+    "probe_result": "probe_results/openbmb__MiniCPM5-1B-Base.json",
+    "probe_result_sha256": "9ef5251c65f021e26201e3dfa5abb89826b2fc4780ac564c9981545f11d5ed2f",
+    "feature_manifest": "feature_manifests/openbmb__MiniCPM5-1B-Base.json",
+    "feature_manifest_sha256": "dc5e61e81b5c44dada2b2e8c01000fc60970639589d695df7326e70e8373d5d4",
+    "screen_leaderboard": "screen_leaderboard.json",
+    "screen_leaderboard_sha256": "e813ae01f24c76a9055bdde45bc4184b63bd7c0682b960f7e911882017fb7dd9"
+  },
+  "heldout_rules": {
+    "no_model_reselection": true,
+    "no_pooling_reselection": true,
+    "no_layer_reselection": true,
+    "primary_comparator": "word_1_2_tfidf_logistic trained on the identical 1,600 screen rows",
+    "primary_metric": "auprc"
+  }
+}

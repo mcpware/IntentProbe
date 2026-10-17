@@ -1,0 +1,297 @@
+{
+  "schema_version": 1,
+  "experiment_id": "EXP002",
+  "completed_at": "2026-10-17T05:05:01.699214+00:00",
+  "one_shot_heldout": true,
+  "frozen_selection_sha256": "1293df7db9a5d984faffd11d59217bd2651fbf4a3efc66527eae83dbf74c0181",
+  "test": {
+    "source": "data/raw/huggingface/approve-or-deny/test.parquet",
+    "sha256": "13607db717323399fb394885fdbf80663e5262b219683361c79e148853bc2ec1",
+    "rows": 3000,
+    "approve_n": 1599,
+    "deny_n": 1401,
+    "exact_rendered_overlap": {
+      "train_test_exact_rendered": 0,
+      "validation_test_exact_rendered": 0,
+      "test_unique_rendered": 3000
+    }
+  },
+  "activation": {
+    "model": "openbmb/MiniCPM5-1B-Base",
+    "pooling": "masked_mean",
+    "start_layer": 13,
+    "end_layer": 14,
+    "metrics": {
+      "n": 3000,
+      "approve_n": 1599,
+      "deny_n": 1401,
+      "auroc": 0.8137259234559073,
+      "auprc": 0.8223098622891658,
+      "balanced_accuracy_at_0_5": 0.7393084275102346,
+      "f1_at_0_5": 0.7356475300400535,
+      "brier": 0.22231963124401374,
+      "recall_at_5pct_false_approve": {
+        "max_fpr": 0.05,
+        "recall": 0.3058161350844278,
+        "achieved_fpr": 0.049964311206281226,
+        "threshold": 0.9965277817813085
+      },
+      "recall_at_1pct_false_approve": {
+        "max_fpr": 0.01,
+        "recall": 0.1294559099437148,
+        "achieved_fpr": 0.009992862241256246,
+        "threshold": 0.9999300925611537
+      },
+      "auroc_row_bootstrap_95ci": [
+        0.798634799100703,
+        0.8290454173328651
+      ],
+      "auprc_row_bootstrap_95ci": [
+        0.8024215024252173,
+        0.8414256930606252
+      ]
+    },
+    "validation_frozen_operating_points": {
+      "5pct": {
+        "threshold_from_validation": 0.9688952120615573,
+        "approve_recall": 0.4459036898061288,
+        "false_approve_rate": 0.09493219129193434,
+        "approved_rows": 846,
+        "true_approves": 713,
+        "false_approves": 133
+      },
+      "1pct": {
+        "threshold_from_validation": 0.9963553283530875,
+        "approve_recall": 0.3058161350844278,
+        "false_approve_rate": 0.05067808708065667,
+        "approved_rows": 560,
+        "true_approves": 489,
+        "false_approves": 71
+      }
+    },
+    "subgroups": {
+      "category": [
+        {
+          "value": "abuse_spam_privacy",
+          "n": 92,
+          "approve_n": 1,
+          "auprc": 0.012345679012345678,
+          "auroc": 0.1208791208791209
+        },
+        {
+          "value": "obfuscated_payload",
+          "n": 93,
+          "approve_n": 1,
+          "auprc": 0.018518518518518517,
+          "auroc": 0.42391304347826086
+        },
+        {
+          "value": "privilege_escalation",
+          "n": 107,
+          "approve_n": 1,
+          "auprc": 1.0,
+          "auroc": 1.0
+        },
+        {
+          "value": "recovery_action",
+          "n": 178,
+          "approve_n": 176,
+          "auprc": 0.9829074294196392,
+          "auroc": 0.35511363636363635
+        }
+      ],
+      "difficulty": [
+        {
+          "value": "easy",
+          "n": 870,
+          "approve_n": 533,
+          "auprc": 0.859696845468234,
+          "auroc": 0.8132679363771497
+        },
+        {
+          "value": "hard",
+          "n": 1065,
+          "approve_n": 533,
+          "auprc": 0.7933479764313554,
+          "auroc": 0.8023635542890999
+        },
+        {
+          "value": "medium",
+          "n": 1065,
+          "approve_n": 533,
+          "auprc": 0.8198232077017871,
+          "auroc": 0.8252549760893793
+        }
+      ],
+      "lang": [
+        {
+          "value": "English",
+          "n": 2104,
+          "approve_n": 1128,
+          "auprc": 0.8232077570627439,
+          "auroc": 0.8155456124287874
+        },
+        {
+          "value": "French",
+          "n": 91,
+          "approve_n": 46,
+          "auprc": 0.8015229775970528,
+          "auroc": 0.7922705314009661
+        },
+        {
+          "value": "German",
+          "n": 82,
+          "approve_n": 47,
+          "auprc": 0.8383366831173478,
+          "auroc": 0.7720364741641338
+        },
+        {
+          "value": "Hindi",
+          "n": 78,
+          "approve_n": 39,
+          "auprc": 0.9051081498670517,
+          "auroc": 0.8994082840236686
+        },
+        {
+          "value": "Italian",
+          "n": 97,
+          "approve_n": 50,
+          "auprc": 0.8707880456471891,
+          "auroc": 0.8438297872340426
+        },
+        {
+          "value": "Japanese",
+          "n": 112,
+          "approve_n": 62,
+          "auprc": 0.7965848557494108,
+          "auroc": 0.7993548387096774
+        },
+        {
+          "value": "Korean",
+          "n": 97,
+          "approve_n": 47,
+          "auprc": 0.8415810606079291,
+          "auroc": 0.8446808510638297
+        },
+        {
+          "value": "Mandarin Chinese",
+          "n": 83,
+          "approve_n": 47,
+          "auprc": 0.8400149437039843,
+          "auroc": 0.8026004728132388
+        },
+        {
+          "value": "Portuguese",
+          "n": 77,
+          "approve_n": 40,
+          "auprc": 0.8499256957572597,
+          "auroc": 0.8195945945945945
+        },
+        {
+          "value": "Russian",
+          "n": 90,
+          "approve_n": 43,
+          "auprc": 0.7007481540569913,
+          "auroc": 0.7402276100940128
+        },
+        {
+          "value": "Spanish",
+          "n": 89,
+          "approve_n": 50,
+          "auprc": 0.831739627192591,
+          "auroc": 0.7882051282051281
+        }
+      ]
+    },
+    "selected_feature_path": ".cache/exp002/heldout/frozen_test_selected_layers.npy",
+    "selected_feature_sha256": "d2bb65dd73168f39727e7dd23843dccd94e80a0f46042eddfd9ee3f6c07f97b1",
+    "extraction_seconds": 1146.3097576659638,
+    "examples_per_second": 2.6170936607120847
+  },
+  "matched_surface": {
+    "model": "word_1_2_tfidf_logistic",
+    "metrics": {
+      "n": 3000,
+      "approve_n": 1599,
+      "deny_n": 1401,
+      "auroc": 0.7897088606860372,
+      "auprc": 0.8078664465343413,
+      "balanced_accuracy_at_0_5": 0.7025094645609609,
+      "f1_at_0_5": 0.6620132255694342,
+      "brier": 0.21072243052088174,
+      "recall_at_5pct_false_approve": {
+        "max_fpr": 0.05,
+        "recall": 0.31894934333958724,
+        "achieved_fpr": 0.049964311206281226,
+        "threshold": 0.5644356305082174
+      },
+      "recall_at_1pct_false_approve": {
+        "max_fpr": 0.01,
+        "recall": 0.14196372732958099,
+        "achieved_fpr": 0.009992862241256246,
+        "threshold": 0.6406971472332934
+      },
+      "auroc_row_bootstrap_95ci": [
+        0.7728669419676745,
+        0.805103095513381
+      ],
+      "auprc_row_bootstrap_95ci": [
+        0.787603980829738,
+        0.8281306450788726
+      ]
+    },
+    "validation_frozen_operating_points": {
+      "5pct": {
+        "threshold_from_validation": 0.5961660552883777,
+        "approve_recall": 0.2320200125078174,
+        "false_approve_rate": 0.024982155603140613,
+        "approved_rows": 406,
+        "true_approves": 371,
+        "false_approves": 35
+      },
+      "1pct": {
+        "threshold_from_validation": 0.6588680316633306,
+        "approve_recall": 0.11006879299562226,
+        "false_approve_rate": 0.006423982869379015,
+        "approved_rows": 185,
+        "true_approves": 176,
+        "false_approves": 9
+      }
+    },
+    "vocabulary_size": 35587,
+    "elapsed_seconds": 5.354158202186227
+  },
+  "paired_comparison": {
+    "auprc": {
+      "activation_minus_surface": 0.014443415754824551,
+      "paired_row_bootstrap_95ci": [
+        -0.005324288623696355,
+        0.03358794717641096
+      ],
+      "two_sided_bootstrap_p": 0.14392803598200898,
+      "resamples": 2000
+    },
+    "auroc": {
+      "activation_minus_surface": 0.024017062769870146,
+      "paired_row_bootstrap_95ci": [
+        0.005569442530464855,
+        0.04286677759691618
+      ],
+      "two_sided_bootstrap_p": 0.014992503748125937,
+      "resamples": 2000
+    }
+  },
+  "artifacts": {
+    "activation_head_coefficients_shape": [
+      1,
+      1536
+    ],
+    "normalization_shape": [
+      1,
+      2,
+      1536
+    ]
+  },
+  "elapsed_seconds": 1170.6518718278967,
+  "peak_rss_kib": 5541088
+}

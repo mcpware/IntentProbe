@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP002",
+  "as_of": "2026-10-16",
+  "purpose": "Compare frozen hidden-state probes with a matched surface-text baseline before opening the held-out test.",
+  "source": {
+    "id": "ProCreations/auto-1b-data",
+    "revision": "d265bbf7bac76cd55daaf81a1d185dfe089a412b",
+    "train_file": "train.parquet",
+    "validation_file": "validation.parquet"
+  },
+  "screen_rows": {
+    "train": 1600,
+    "validation": 800
+  },
+  "sampling_seed": 20261016,
+  "renderer": {
+    "version": "authorization-runtime-v1",
+    "field_order": ["call", "user_request", "history"],
+    "excluded_fields": ["label", "rationale", "text"],
+    "max_tokens": 192,
+    "truncation_side": "right"
+  },
+  "pooling": ["masked_mean", "last_nonpadding"],
+  "layer_candidates": {
+    "individual": "all embedding/hidden-state outputs",
+    "adjacent_window_widths": [2, 3],
+    "window_combine": "featurewise mean after per-layer train-only standardization",
+    "normalized_depth": "hidden_state_index / maximum_hidden_state_index"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 1000,
+    "random_state": 20261016
+  },
+  "selection_metric": "auprc",
+  "secondary_metrics": ["AUROC", "balanced_accuracy", "recall_at_5pct_false_approve"],
+  "multiple_comparison_sensitivity": "Benjamini-Hochberg table across the frozen model/pooling/layer candidate family",
+  "heldout_test_policy": "Do not load approve-or-deny/test.parquet until model/pooling/depth rules are frozen.",
+  "activation_models": [
+    "Qwen/Qwen2.5-0.5B",
+    "LiquidAI/LFM2.5-230M",
+    "ibm-granite/granite-4.0-350m-base",
+    "Qwen/Qwen3-0.6B-Base",
+    "tiiuae/Falcon-H1-0.5B-Base",
+    "Qwen/Qwen3.5-0.8B",
+    "openbmb/MiniCPM5-1B-Base"
+  ],
+  "dedicated_encoder_baselines": [
+    "ProCreations/auto-0.4b",
+    "ProCreations/auto-1b"
+  ]
+}

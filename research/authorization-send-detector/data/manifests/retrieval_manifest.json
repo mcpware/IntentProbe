@@ -1,0 +1,3692 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-17T01:52:15.014234+00:00",
+  "registry_sha256": "c16302eaa09b86646b9dc95f183c88561e83ae85a33f9335dc97e4b8a9780bc4",
+  "records": [
+    {
+      "source": {
+        "key": "auto-1b-data",
+        "kind": "huggingface_dataset",
+        "id": "ProCreations/auto-1b-data",
+        "revision": "d265bbf7bac76cd55daaf81a1d185dfe089a412b",
+        "expected_bytes": 1109811493,
+        "role": "silver_train",
+        "license": "apache-2.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:33:30.281494+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/auto-1b-data",
+      "file_count": 13,
+      "total_bytes": 1109811945,
+      "files": [
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "889aa5e4b2c92974cae710493f5b75dff15e677766d0b38ef77153c608ff7876"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "80bc703f64a99aea1ada62dc0ebf1b946262d979bf86d6bd010664b5b3b428c6"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/train.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/train.parquet.metadata",
+          "bytes": 124,
+          "sha256": "4427c7c63ea1f212118b3b4a66513fbc26e6dac9207572ebcf0d2ff069398bf4"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/validation.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.cache/huggingface/download/validation.parquet.metadata",
+          "bytes": 125,
+          "sha256": "bfc0a0604507af1f9276e6521c0d638b5940318331c5d5472603581d6f745777"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/.gitattributes",
+          "bytes": 2504,
+          "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/README.md",
+          "bytes": 4966,
+          "sha256": "4c6c127deb1994fa6df8131d095798590141ac59f97b13685fd58832036f929a"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/train.parquet",
+          "bytes": 1080627270,
+          "sha256": "46f9ce380dcb3baf6abc234ed61974c4019460c3d49713a2a85fd55a6faed6d6"
+        },
+        {
+          "path": "data/raw/huggingface/auto-1b-data/validation.parquet",
+          "bytes": 29176753,
+          "sha256": "b81f3cb92538b96b722ea4cd8efdcdb299dc59209601a7b7e3cb45a08e2a7f4f"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:26.899377+00:00"
+    },
+    {
+      "source": {
+        "key": "approve-or-deny",
+        "kind": "huggingface_dataset",
+        "id": "ProCreations/approve-or-deny",
+        "revision": "a38b625913dd46ca9702063f1597c979e6ace34e",
+        "expected_bytes": 26121133,
+        "role": "silver_heldout",
+        "license": "apache-2.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:26.899418+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/approve-or-deny",
+      "file_count": 10,
+      "total_bytes": 26121461,
+      "files": [
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "ed2a9f82d0e4eec453e0c429e5579477f480bd3abe3c11d341ed5483f893fedf"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "39beef6c56f80a696757989a54f018fbee96e759e0d73936e556acf0609e4cf3"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/download/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.cache/huggingface/download/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "7385508ae3b5c4c79a3fc3100d4a525427914e68e10223cf010e394c49c7bfe1"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/.gitattributes",
+          "bytes": 2504,
+          "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/README.md",
+          "bytes": 8053,
+          "sha256": "d0f52e03fb0c7aec9a0b3dca1ad72c46f0fabe14ad789c62721549ab644151ec"
+        },
+        {
+          "path": "data/raw/huggingface/approve-or-deny/test.parquet",
+          "bytes": 26110576,
+          "sha256": "13607db717323399fb394885fdbf80663e5262b219683361c79e148853bc2ec1"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:40.776222+00:00"
+    },
+    {
+      "source": {
+        "key": "authorizationpairs",
+        "kind": "huggingface_dataset",
+        "id": "Egbertjing/authorizationpairs",
+        "revision": "3af4e426ed1fe4f4327a1852422cb46172cba10f",
+        "expected_bytes": 13644312,
+        "role": "external_eval",
+        "license": "apache-2.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:40.776245+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/authorizationpairs",
+      "file_count": 28,
+      "total_bytes": 13645218,
+      "files": [
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "380eeedc655f98bcbb04ac0a73f64359bd30dbb6e442eccab7a4d145c727da37"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/LICENSE.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/LICENSE.metadata",
+          "bytes": 101,
+          "sha256": "a3340009555eff8b6a6a2de6c24b185d09ca1dd27e8d580dc92444ae873dfad1"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/NOTICE.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/NOTICE.metadata",
+          "bytes": 99,
+          "sha256": "504c47f73c2eb2c3427189e73dc6a8632ed20fd3cfaac7c49e8c4f45af88b9a5"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "224f01d4218e523e371e5fefb2f6142c6aa7882397e4d1693e56b771b4ef7637"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/data/development.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/data/development.jsonl.metadata",
+          "bytes": 101,
+          "sha256": "e2f93b17385e88d03997637684504fe4adf7008798b229050a5e0e5e8b2fa8b6"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/data/test.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/data/test.jsonl.metadata",
+          "bytes": 101,
+          "sha256": "18861dc741da3c97e12bc2141f633cca3f3ea22d6de50c692d8185c25445da22"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/licenses/cedar.txt.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/licenses/cedar.txt.metadata",
+          "bytes": 101,
+          "sha256": "b57f4e08a832ef1d296bf96b1f4641767b86174c780b9757c86777bf715431c1"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/licenses/openfga.txt.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/licenses/openfga.txt.metadata",
+          "bytes": 100,
+          "sha256": "fce2c9f26ca9c1558e0593166b2c70820fc8e0fb014f04882c6e2008fe6d88c4"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/manifest.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.cache/huggingface/download/manifest.json.metadata",
+          "bytes": 100,
+          "sha256": "90676581fbe6d2dade2a2eed649d1f781deb1da9ee2b8245a9400fb4e75e4213"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/.gitattributes",
+          "bytes": 2504,
+          "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/LICENSE",
+          "bytes": 10174,
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/NOTICE",
+          "bytes": 501,
+          "sha256": "c5519247c5d9efeca0cbd9bf8aa65592335359d7899275dd68ef56f3743240ef"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/README.md",
+          "bytes": 4225,
+          "sha256": "ff19b4e395ebaac2ba896d0e499a179c7ebaceefb79eab8f9c2c9c5e9186c020"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/data/development.jsonl",
+          "bytes": 3470551,
+          "sha256": "2d18a58e86ebf3649dd012d776e7140227fe5caeb802e60dde9528058000681f"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/data/test.jsonl",
+          "bytes": 10134901,
+          "sha256": "0c8f6a12f2c983c128fa86cf05d5ae7834b2619475c9da233e100cae8c9f7396"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/licenses/cedar.txt",
+          "bytes": 10142,
+          "sha256": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/licenses/openfga.txt",
+          "bytes": 10174,
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "data/raw/huggingface/authorizationpairs/manifest.json",
+          "bytes": 1140,
+          "sha256": "0a9f75f3c23615ed4434b720b75521c42f1a86d307297c6a204100e20a6cf62b"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:43.076470+00:00"
+    },
+    {
+      "source": {
+        "key": "safeclawbench",
+        "kind": "huggingface_dataset",
+        "id": "sairights/safeclawbench",
+        "revision": "e6c29204c24a5910600aae854baae57a51586655",
+        "expected_bytes": 3744775,
+        "role": "external_eval_only",
+        "license": "mit",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:43.076492+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/safeclawbench",
+      "file_count": 253,
+      "total_bytes": 3753266,
+      "files": [
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/.env.example.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/.env.example.metadata",
+          "bytes": 101,
+          "sha256": "d4e99e0fe46b0a58c99b57e3cd67fa995b4c49acd2a76d183b4338eb608a481d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 100,
+          "sha256": "05cb1bfa11f81bd117cdc44e2f2f45416cd286b7c1b79e135bf79fbcf9076795"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/.gitignore.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/.gitignore.metadata",
+          "bytes": 101,
+          "sha256": "0c4b3f681b613e33747504e9529e9c1c19758fcf2cdf7af292bbf31a9df6de9b"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/CITATION.cff.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/CITATION.cff.metadata",
+          "bytes": 101,
+          "sha256": "f977d69f4988332b78a60590a3b4f9f3e5a4650588d29f23f495c48f7cd1b00e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/COMPLIANCE_REPORT.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/COMPLIANCE_REPORT.md.metadata",
+          "bytes": 101,
+          "sha256": "2a1d20c3840f35fb3674ba96383033b8e9e6f332b4a083a7e7d4b6311f4662fb"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/LICENSE.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/LICENSE.metadata",
+          "bytes": 101,
+          "sha256": "ce012a581d2e52d506a5dacb2e793fbc2b6eddd6f5dbcaea8a3e3c72d9a6ab0a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/Makefile.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/Makefile.metadata",
+          "bytes": 101,
+          "sha256": "788d31de12ae0960c5e7ae6edbb09d29ec4c8981ef476a97fe4aac67edc3d310"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "2c10be3c652524f6673c1f3844c58dac243c0e24e05410499eebc736281deae3"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/REPRODUCIBILITY.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/REPRODUCIBILITY.md.metadata",
+          "bytes": 101,
+          "sha256": "b1ea6325c491fd3b55b2dcdb0039a9c4484acf6d715822f73869474557dbffcb"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "9d23541836138fe4064b8af0caaaaa059cfb22c65d7d8e85e3c27850c6b11807"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/agents/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/agents/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "692df00214c3968425feff4364e3a287ebaf5c336852c5385069a041b4ed9022"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/agents/api_wrapper.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/agents/api_wrapper.py.metadata",
+          "bytes": 100,
+          "sha256": "990a411bc2f1c2285cedb76e9ec481a002660da463fd92d3b943d74412c7b289"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/analysis.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/analysis.py.metadata",
+          "bytes": 101,
+          "sha256": "63b9c63592813d3808c610211e16efe0c8450094affe7aaab5a66023177e62e6"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "0eb2338fdcc3454dfa5d80915f54994dcbee36c5b3a38a292fbe5d7c51d06607"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/benchmark.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/benchmark.json.metadata",
+          "bytes": 101,
+          "sha256": "9212910639735fadb62275bcae30510dfa50f4f22381cdb52e6634d7ee09e420"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/benchmark_stats.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/benchmark_stats.json.metadata",
+          "bytes": 100,
+          "sha256": "902f3fee05a25ae5fd1ddab48890723a8520a8e39f77cd2e4be6e627195cc17e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/generator.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/generator.py.metadata",
+          "bytes": 99,
+          "sha256": "1dc5878727dcd8b2117ad202e331d0e8d8f3610c83122a249fdccb432b58925f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/generator_v2.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark/generator_v2.py.metadata",
+          "bytes": 101,
+          "sha256": "963975214d3b286ea223422731809e6086c3a686859f26b3e39938e7b5da9bc4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark_v5_600.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/benchmark_v5_600.json.metadata",
+          "bytes": 100,
+          "sha256": "1da870a2ae3d2a17b0284418d2ee098a6584c4f55edf5e3ecceafa1a73d4b407"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/configs/models.yaml.example.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/configs/models.yaml.example.metadata",
+          "bytes": 101,
+          "sha256": "25826307efcd0cf8ee8f3277234cda052e6b074cbe692c4f52350a6bdb4838c8"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/croissant.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/croissant.json.metadata",
+          "bytes": 101,
+          "sha256": "85797dd3158550db755f2383d334f7a1cc6db47ce057166814c1dcd7d535562c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "97bd5304329d9a0cbbb76a1d2b656bb8c3d7d3219eb36c3b7da49eb27fb593c8"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/agent_shield.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/agent_shield.py.metadata",
+          "bytes": 101,
+          "sha256": "38d0fc12c335be7f3cb559d04685961a7416ab6903aed385fadb59ad2ead33d5"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/baselines.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/baselines.py.metadata",
+          "bytes": 101,
+          "sha256": "b3f43f9ff990cf538f4e0b8165af645bbc36e7d178c958b79934e0f841d9b4c7"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/defense_stack.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/defense_stack.py.metadata",
+          "bytes": 101,
+          "sha256": "7cac4d855d36c54c355e09ceea3663395deee29239b18bdcee21dcc591cda569"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/length_control.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/defenses/length_control.py.metadata",
+          "bytes": 101,
+          "sha256": "81682764225d7b09267b717d6c5209c225c4f1b714950072296cd24083cd9b56"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/evaluator/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/evaluator/__init__.py.metadata",
+          "bytes": 100,
+          "sha256": "1bd79a5d381fa8da2de65eb959218a500772d42eab3240d51e6fa1e43c8634d3"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/evaluator/judge.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/evaluator/judge.py.metadata",
+          "bytes": 101,
+          "sha256": "76ef6452cf1c128e8f5fcff78da86debe614e41b177e8c646a7e51dd82a7d333"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/evaluator/trace_judge.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/evaluator/trace_judge.py.metadata",
+          "bytes": 101,
+          "sha256": "7c11557b26c8b9563a05955e7820d50ae67be0d0d207fbfea06a6911a9a8bb0f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/README.md.metadata",
+          "bytes": 101,
+          "sha256": "1738a982e67da15bbc384fc32b0b8eb4e047a1b6b197b6639bd230f854be5300"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "dbc2d084c4a647cc49b57ebfef1ba5666dd1079a65d05cfe432e39fd835ceff1"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/exec_full_600.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/exec_full_600.json.metadata",
+          "bytes": 101,
+          "sha256": "b3af4d0b8bf7be2b25142fd9d0f4f99ec6d7ea3128beedebf89b2b86d18d6e57"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/exec_subset_150.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/exec_subset_150.json.metadata",
+          "bytes": 100,
+          "sha256": "d8b7c1b888a293acb4cc602a04dbbdd660080639dd51a6e45a291d6f4697216b"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/exec_subset_60.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/exec_subset_60.json.metadata",
+          "bytes": 100,
+          "sha256": "1b4ebb357e53451dccc8e4b0d20ecdc9531ca9263d45eff477444054c36f0daa"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/tiny_subset.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures/tiny_subset.json.metadata",
+          "bytes": 101,
+          "sha256": "04b3efa400e5f1a3b74b2573a3ee78214bc8c3d0e3b6355653624d0c474736e4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/fixtures.py.metadata",
+          "bytes": 101,
+          "sha256": "c061d010b8c58a582f10defd107d04babe2c2c267fdca4b3f73fcda496ae4a27"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/metrics.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/metrics.py.metadata",
+          "bytes": 101,
+          "sha256": "2721c5249602dfaf5c76a92d902f544623261e4c10aa360ccad500315c0eb507"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/runner.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/runner.py.metadata",
+          "bytes": 100,
+          "sha256": "967ad87a68934351ef36aef94c7c93559ee66c8f1b1a29df2e91778e92a7f6ee"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/schema.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/schema.py.metadata",
+          "bytes": 101,
+          "sha256": "774fcecb6f868920b01a54e1ab45e0f147b1a672626d015370e106af9e436d32"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/self_test.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/self_test.py.metadata",
+          "bytes": 100,
+          "sha256": "cfc67bfb7440ee3f65b49841a675d52aa9aff82b4c10a24e45b431d04f06d10c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/state.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/state.py.metadata",
+          "bytes": 100,
+          "sha256": "86b2e0a9d9e37583961ca711eb970fe43230c76d6cd86ab191fee9bb9d3a9e23"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/tools.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/tools.py.metadata",
+          "bytes": 101,
+          "sha256": "a83f17c132a925005be7be992bded3d728e08595e0a5ee2b79f137dae4a16dbc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/trajectory.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/executable/trajectory.py.metadata",
+          "bytes": 101,
+          "sha256": "dba76b7d8f5c51cc063f14a54e29f6847f5d2942cd50eb8af0c0416777355ae7"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/VERSIONS.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/VERSIONS.md.metadata",
+          "bytes": 101,
+          "sha256": "dbdd8d5356cc973c9f5f0f5caaaf154114c52261c6ae52ab6339113e64307db4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "8bd391f3a8180fb4237801b3d74816b1a009494a89032210f6ba1b27af44871e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/base.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/base.py.metadata",
+          "bytes": 101,
+          "sha256": "74a0df25aef4f2b4dd47cbd2f50c1586aed6714eebbac3c91ef9880fb10a5d9e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/hermes.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/hermes.py.metadata",
+          "bytes": 101,
+          "sha256": "f9a11be802531e2f8e6db74ea5460077e6ddbda623db58d9dc5e920aa64e362c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/native_tooluse.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/native_tooluse.py.metadata",
+          "bytes": 101,
+          "sha256": "593ff06216dcc39ddce8c524472737ccbe91d325c97a02f4e073d9d0339c37ff"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/no_harness.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/no_harness.py.metadata",
+          "bytes": 100,
+          "sha256": "e37f40f4d139b260b57413173beeb35353790fef0505d018cf460c34250a3be9"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/react.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/react.py.metadata",
+          "bytes": 101,
+          "sha256": "985084a0c47661dbcb966980e25f74d146eac423125c28c648416d791d928e77"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/registry.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/harnesses/registry.py.metadata",
+          "bytes": 101,
+          "sha256": "325158a12c00f0e9c7f606af8d0cd3c447df274564e32b6c372d6af6b1483ea2"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/paper.pdf.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/paper.pdf.metadata",
+          "bytes": 125,
+          "sha256": "41de7a0bf679c6abe6647eb7326c0872d546f0dd6383e64aeab8c2cfd8dfe2df"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/pyproject.toml.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/pyproject.toml.metadata",
+          "bytes": 100,
+          "sha256": "7b5afa70cda547956b80074c5712488eebea6e7986270764605fc076fa87e8d0"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/requirements.txt.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/requirements.txt.metadata",
+          "bytes": 101,
+          "sha256": "b8c15cc749e2ce9a35e3fbc15bfe17d294820f87fd0a04311722bf6e93cefbd5"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/run_ablation.sh.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/run_ablation.sh.metadata",
+          "bytes": 101,
+          "sha256": "fa11167d7d8001ab847b93b3f2cdbd57b024faafd802e354ce1ca09c73f79aac"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/run_benchmark.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/run_benchmark.py.metadata",
+          "bytes": 101,
+          "sha256": "14eddeeadf658532e9b7d2f743a75d87221897711ad48fbf1474d30b15c644a5"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/run_benchmark_harness.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/run_benchmark_harness.py.metadata",
+          "bytes": 101,
+          "sha256": "58ff5f5298130637619daa909f81234c74df18bc679c082bce51aeda3ebcec23"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/analyze_harness.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/analyze_harness.py.metadata",
+          "bytes": 101,
+          "sha256": "572529aa2f020143ee0c24d0a9675a29d1521d1d0fed156133102755536a021d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/analyze_significance.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/analyze_significance.py.metadata",
+          "bytes": 101,
+          "sha256": "db9a27a0f9d7ee899ba08268f4e73f61aa9602495d3b894a1c786801a75769fc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/assemble_v3.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/assemble_v3.py.metadata",
+          "bytes": 101,
+          "sha256": "62ebbfacbb16ef84ada168e9676d3300cec49134cc6fb0aca58f6d28ab28ee7a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/assemble_v4.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/assemble_v4.py.metadata",
+          "bytes": 101,
+          "sha256": "18fc9bd50b202983362038f907047c0a17788c404582e3c5099f117d8f4014c4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/build_representative_splits.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/build_representative_splits.py.metadata",
+          "bytes": 101,
+          "sha256": "4d5a10c78019d12679888c98d05d9f65e327726a23a09ae7bff12c2ebfa52b0a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/check_neurips_dataset_release.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/check_neurips_dataset_release.py.metadata",
+          "bytes": 101,
+          "sha256": "04ea0dd75a3a3d64d697e925177e490af878b905e15097153b4b27636805cfd5"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_elite_samples.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_elite_samples.py.metadata",
+          "bytes": 101,
+          "sha256": "22868a5c0bc1174fc8acf0239a9e933f9d0c2dfb5179252194d9a85e5d0961b6"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_exec_150.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_exec_150.py.metadata",
+          "bytes": 100,
+          "sha256": "274e2f73bf753a3b5a0c280ce7a4d96b22990e8e392dde4c187937fdbbd308db"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_exec_oracles.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_exec_oracles.py.metadata",
+          "bytes": 101,
+          "sha256": "c1217c525b9a885ad95c12d38a83f13d43e77f0401d6459943b9763dfd4b6193"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_exec_tables.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_exec_tables.py.metadata",
+          "bytes": 101,
+          "sha256": "307653c77686d9c785bc0df6c48c7519aec085d83cd02e10b76fb43bda4825ba"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_hard_samples.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/generate_hard_samples.py.metadata",
+          "bytes": 101,
+          "sha256": "1b098e27c5fa360fe808b5a476b631753893f0261f4e92178153feb66e658608"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/merge_results.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/merge_results.py.metadata",
+          "bytes": 101,
+          "sha256": "f8fbca127a13394e0b193cab975263577a815fe3f3ae1ace498660dbba91c808"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/merge_v4_results.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/merge_v4_results.py.metadata",
+          "bytes": 101,
+          "sha256": "1c5f9030f1e304f13c3fd17b52358543767b4c71bacaa558ba38e8954dc51daf"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/pilot_elite.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/pilot_elite.py.metadata",
+          "bytes": 101,
+          "sha256": "e7ab46a48ca9d73135d05ece0a76a783c349dbc03790770f711a147a1a1e41e4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/rebuild_benchmark.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/rebuild_benchmark.py.metadata",
+          "bytes": 101,
+          "sha256": "5a80c606604f234958387af00bfe9ea590b31f8b50a60ffeca09a4c8a719cda7"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/rerun_failed.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/rerun_failed.py.metadata",
+          "bytes": 100,
+          "sha256": "6e15d74e0067b2b9394138dae47010aa889b7c973d4dca3ca45b429762f34647"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_all.sh.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_all.sh.metadata",
+          "bytes": 100,
+          "sha256": "3b5ec32e8f78628500395f7c813dfd29e3bbe4dbf5aea5a4dfb2846c1928bfb7"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_exec_150_model.sh.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_exec_150_model.sh.metadata",
+          "bytes": 101,
+          "sha256": "43954c8a52e17f99ff1d17b87ab2fe7abffc467b10fb58ba9ab231ba79dfedb1"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_exec_subset.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_exec_subset.py.metadata",
+          "bytes": 101,
+          "sha256": "e77108354ab38136d2ab97bf588431a1ca70cd64cd25d3143b67e4e3f751f55a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_harness_ablation.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_harness_ablation.py.metadata",
+          "bytes": 101,
+          "sha256": "e7c8cf66be6c8e96b632a33673aa339bf0ca919f56a6f6d4f0b86756a74c9bf2"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_harness_experiment.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_harness_experiment.py.metadata",
+          "bytes": 100,
+          "sha256": "ebb40aa82c0e67cf907a7104e8683893aa594821bab6f3b68a7bf2e0bf56b24f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_multijudge.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_multijudge.py.metadata",
+          "bytes": 101,
+          "sha256": "cc352a4e2fa45671044ca8fb311837ee395909cc220a1b986bb4122a57dbda3d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_realexec_local_smoke.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_realexec_local_smoke.py.metadata",
+          "bytes": 101,
+          "sha256": "6435973a5ae9309be2ccbd58f44fcd43bde4745c6d14cda982d382842a416c22"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_utility_eval.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_utility_eval.py.metadata",
+          "bytes": 101,
+          "sha256": "7574879a8ab95838a6cee598e7f6a3d03388e417800d5d05f173214f3e22004f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_v3_incremental.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_v3_incremental.py.metadata",
+          "bytes": 101,
+          "sha256": "00511d0e92cfa4f7b2520dcbf2837e0cf243ae6ea11233e08a3addcb47fc53ad"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_v4_incremental.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/run_v4_incremental.py.metadata",
+          "bytes": 101,
+          "sha256": "a1d583d75182ac2dbafc33d30d8fd721c8413ed8cb03d0675a234c477d87a49c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/summarize_realexec_and_harness_0503.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.cache/huggingface/download/scripts/summarize_realexec_and_harness_0503.py.metadata",
+          "bytes": 101,
+          "sha256": "76bd8e0f8006b41f5937deae9aff99c9c5acb259431a385aa75c7d3b3232424f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.env.example",
+          "bytes": 520,
+          "sha256": "2deb325a92ff3b6eac8af84492a8da6d3d8447e78cc9425356f668e0973539ab"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.gitattributes",
+          "bytes": 2546,
+          "sha256": "2c79a921f40a81443ef3dd7b127f8904121589bf1a92ebe20fc1e90c4cc3cf48"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/.gitignore",
+          "bytes": 462,
+          "sha256": "60befbc48b8cb0eb40d09db1280a5f3685217f3ee1d66519bd0c8514bdcb0b74"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/CITATION.cff",
+          "bytes": 985,
+          "sha256": "1db2ce671c2ccdc16c7688319b7dfd1703724e42344be4f232660453c64752cb"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/COMPLIANCE_REPORT.md",
+          "bytes": 6713,
+          "sha256": "901389590bc0fab7c45a9d3e492d9206e2b2031a2f899af75a33653f6bb4ac36"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/LICENSE",
+          "bytes": 1077,
+          "sha256": "b6d40713351ebc3a4c07cb5e5890ecafe2ddb911336184408994e80b9e6fa8bc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/Makefile",
+          "bytes": 657,
+          "sha256": "3dd91ed886b6c3214de7f3798deaa70c993af93c228bf071d1ec5f83264a9fc2"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/README.md",
+          "bytes": 19462,
+          "sha256": "d32393f98f210b41bd7373f1a5651f8cb9411f9f74d50e7a0100e66761d87d6d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/REPRODUCIBILITY.md",
+          "bytes": 4401,
+          "sha256": "84ad9178ad710a89ac8552a7dc028a206267945ef62c4915986e9f0a8c321088"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/__init__.py",
+          "bytes": 90,
+          "sha256": "b47708db5ae56756c1eb009edf831cd6fb459a4ece8aba68e8cfde84f13cbc44"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/agents/__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/agents/api_wrapper.py",
+          "bytes": 4466,
+          "sha256": "dd07f953832cf04a6d779da3a537232244d1400eb4eadc33225cb688af6e9783"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/analysis.py",
+          "bytes": 39961,
+          "sha256": "e8adfe976b08bf8eda217376c99a6bafffc7ec96732d01a8336c0e88cc77d3c3"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/benchmark/__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/benchmark/benchmark.json",
+          "bytes": 39879,
+          "sha256": "29bd43627584c4c77b0ac3fa029a608819e4774768f91c0f4ed7fd4efcd2d2bc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/benchmark/benchmark_stats.json",
+          "bytes": 365,
+          "sha256": "58575d128831a6fcafac2fefb91abfdecece252bc822de3fd22f4105e1d57ac3"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/benchmark/generator.py",
+          "bytes": 12142,
+          "sha256": "7706bc317680daa4887fc663fe989cfb3d0e30d67c190d8128dca63684993984"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/benchmark/generator_v2.py",
+          "bytes": 21018,
+          "sha256": "624f81847aac42e6d525768a2972895359b31079679d8de3d5abd1915b21bd0c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/benchmark_v5_600.json",
+          "bytes": 427158,
+          "sha256": "b3e3172e77ce9669b24539e08ffb2bc676fa6281d1a329a3bd408d3f648cdb60"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/configs/models.yaml.example",
+          "bytes": 557,
+          "sha256": "fa55114dabc8da88cfe9d2d3b21580a5c29770e0bc343067acffc7332635c8db"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/croissant.json",
+          "bytes": 16399,
+          "sha256": "2940fe5da2b50572c39c0c4532e4bcd2f8564291aa5bef3b678cca052694746a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/defenses/__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/defenses/agent_shield.py",
+          "bytes": 11197,
+          "sha256": "056b71270d96528bf792cde51af60c30bb8c32eddbd64c8c5bf26427f866626e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/defenses/baselines.py",
+          "bytes": 5540,
+          "sha256": "51d455fa88d2ee6a16bbbebda980504dfd5cb5a590c247aaa79bf3de0dd34fb4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/defenses/defense_stack.py",
+          "bytes": 4396,
+          "sha256": "778365bcb5d7974cdcea860a6970b69e0f8c1b5045c2b55c6054c6c29d17d1ab"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/defenses/length_control.py",
+          "bytes": 6644,
+          "sha256": "490466d58df2b4e44992d3e776612bd372778674ab6378806f879f65e975ae3a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/evaluator/__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/evaluator/judge.py",
+          "bytes": 5639,
+          "sha256": "77c28569523e6ab2f91f6acc52803e916c052d996380a8015b4b1c604662d87a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/evaluator/trace_judge.py",
+          "bytes": 5832,
+          "sha256": "dfa46402613bbca7afceecca8234f32057c0ec5785394215eaaa54d660d73726"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/README.md",
+          "bytes": 1258,
+          "sha256": "dc735486e910d03f54cc2ed866222a96e1d5ac66df7321a7126e6139c4c8722d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/__init__.py",
+          "bytes": 435,
+          "sha256": "3cdd14a1526c79fb5bfa352498a3774fb51ac03286e7c933900090e3642139c8"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/fixtures/exec_full_600.json",
+          "bytes": 1608468,
+          "sha256": "1191dbfd8a1cd05ffd0235c623f51dbcb6a26332ea458ebfa2d7bb8720aa93e4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/fixtures/exec_subset_150.json",
+          "bytes": 403014,
+          "sha256": "bebbf795c8895abfeffd0a7117d7e212f023fcd4999d4833bf2bd44e8b089a27"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/fixtures/exec_subset_60.json",
+          "bytes": 160086,
+          "sha256": "a95f1d225e5314933a83dc718662a2608c97a8ed38111d6a5697ef969018555f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/fixtures/tiny_subset.json",
+          "bytes": 5533,
+          "sha256": "f020845d3d24f273f4d2813057e7009d21d088f1408a0e7be2b5818e404ba5de"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/fixtures.py",
+          "bytes": 749,
+          "sha256": "d39e183ba800e79e2df9ba4782108e85fb0c1d7e51da09c0da74bc03ff6a1732"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/metrics.py",
+          "bytes": 16620,
+          "sha256": "8d9e98c998009668c501a17f03ba0904f2da41e7b4a2b8eb043ba0775edb9d3d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/runner.py",
+          "bytes": 19255,
+          "sha256": "37590f3e1784d452a2bc0cb201b4afd9c77fcaa5763321085faae06b5cf62271"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/schema.py",
+          "bytes": 3859,
+          "sha256": "fb6b81f519844c20c6967340ddadacc7df69662313fdd80c93ef9c22df256fef"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/self_test.py",
+          "bytes": 11353,
+          "sha256": "5632181939ec0beb337d3d1c97c6a765e058506f826df851667c058e6bfde90d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/state.py",
+          "bytes": 3780,
+          "sha256": "603f90a3e0fa61f1d8c25b1c0901df4766d730cf28580ddfa988c85854e61088"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/tools.py",
+          "bytes": 18741,
+          "sha256": "0373db450fda62bd7b90f0d6fdec4006db2a1494f0ece65c663c45a1bb724ad8"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/executable/trajectory.py",
+          "bytes": 3100,
+          "sha256": "3efb545347715157287c4d7f8571d078c93d127b7d75bd2bea460b8758f23fbc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/VERSIONS.md",
+          "bytes": 1805,
+          "sha256": "bdd7de2f7ec9342d87c2dd87d9097b05bdfa0522fe08117cbbaf6cb9cc9cde15"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/__init__.py",
+          "bytes": 373,
+          "sha256": "a9384a3ad338faaf8d775fe3e67c7cf53d7bda9f2d8eb8597418fae7c7d55e77"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/base.py",
+          "bytes": 10086,
+          "sha256": "aaa704beb6750e2284c299e2968529cbe768d7a6b9e1b72ecdfaf3a9ab37c6a8"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/hermes.py",
+          "bytes": 9484,
+          "sha256": "ffe4e1e162d2a8bf14e2906277a177bd1b8ff5a47f8bab5123246d5938025aea"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/native_tooluse.py",
+          "bytes": 10543,
+          "sha256": "13dccc37e1be481d589b0c0bb46e47c307ef0ff62b3d940e0229c681ceb7a8af"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/no_harness.py",
+          "bytes": 1981,
+          "sha256": "d0e3f01252c827c43a9e0e8f3bb6288035fccb8c3b4182e5d04f0c7aabae80bf"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/react.py",
+          "bytes": 5843,
+          "sha256": "5f7e43f549de9ac3d54d47dcd8cca06ad75e0edde869a2571fea4d4e924033ce"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/harnesses/registry.py",
+          "bytes": 1030,
+          "sha256": "00311cfafdffde4899fb66b764ec6952e906fd5446b3dfc39b9d28d4b95206cc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/paper.pdf",
+          "bytes": 437982,
+          "sha256": "2ce2f4da3084c0f1271d9315012e677fe7a7ce57491127f8a6192adc32e88c6b"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/pyproject.toml",
+          "bytes": 1062,
+          "sha256": "0617b62d9fb64b0c217416f2285d03e62204da7597e2fa4a5a04bf688dbd835c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/requirements.txt",
+          "bytes": 43,
+          "sha256": "c697cae93a3e66ab767efe42830b7b1f488e5f0e504411bee0fd6e1f9199469d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/run_ablation.sh",
+          "bytes": 690,
+          "sha256": "07ff1cee3d7a95f0c9396de4e4266ea50d645823ffae7d71aca6ec7a826568b2"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/run_benchmark.py",
+          "bytes": 7992,
+          "sha256": "1b2296d775f3fc1808304859a12dc1ccba99e65f7dc7199cfb287a8f4e28bc4a"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/run_benchmark_harness.py",
+          "bytes": 12683,
+          "sha256": "ed11c272038b1380d0df4574e43d39cd790c5b559dc8671143bc8781b4d056a4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/analyze_harness.py",
+          "bytes": 6907,
+          "sha256": "713c49119dd2fd8b33d2e7c80728ecd97eef65845708d1b67c4d978b9eb4dc27"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/analyze_significance.py",
+          "bytes": 3259,
+          "sha256": "9bf1406787b90bf10c66d539a25dcacbd21ab1d8105ad201b885d16633ba5e38"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/assemble_v3.py",
+          "bytes": 3329,
+          "sha256": "fee1447d0adc28de51ca6666b9d90ca126807ea032f867205e991cc417f9ee52"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/assemble_v4.py",
+          "bytes": 2672,
+          "sha256": "00bf1becf2c395edb4080da2a2395008a395d0e5d753af96eee70468814c21e4"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/build_representative_splits.py",
+          "bytes": 3090,
+          "sha256": "a5a4774874280b978a676590e2f95fdc809071a525832bcc1c0f39542b99e34b"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/check_neurips_dataset_release.py",
+          "bytes": 14054,
+          "sha256": "be1b05e04f6a8e7f6dfb7d02ca0b3e6f41baa221758dc73cdf5463adc54dad5b"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/generate_elite_samples.py",
+          "bytes": 29529,
+          "sha256": "66edc56be31f8cbd692dd64f103d49243480735e0dd2fe004833e1809eeab592"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/generate_exec_150.py",
+          "bytes": 49224,
+          "sha256": "90e77e14935ee34284508b887835ff674a76cffd9661acc8b7add0f2ca5dac88"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/generate_exec_oracles.py",
+          "bytes": 45469,
+          "sha256": "78f22f0c665c85de1187cacf196fe1d20b4f0802390ce448007a0861b0f02959"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/generate_exec_tables.py",
+          "bytes": 7200,
+          "sha256": "1b1afa834d1098f574c2a55a7b4dd116a2b85a78890fd1c0c882098dc8749a01"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/generate_hard_samples.py",
+          "bytes": 9924,
+          "sha256": "d19109ef854d3c35314c6de0c640256b1961c4338973c272ec80b94e5c56e90f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/merge_results.py",
+          "bytes": 2461,
+          "sha256": "c82ce0dfa1a6d1f2bea8036fdb590bbea03b3d3706645332fc48218631187d6e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/merge_v4_results.py",
+          "bytes": 2123,
+          "sha256": "abf9ec1d5ed05fe9f2468ef791733e0d91a4d71675289bacf474aeb5d639e3b2"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/pilot_elite.py",
+          "bytes": 6349,
+          "sha256": "b6ff5e02660e797530117590cf396086246f25c79f303bca05fb61ae17685dfc"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/rebuild_benchmark.py",
+          "bytes": 3132,
+          "sha256": "ebb72b6813c5cb46dea604cb350e0af31226e27c2de9353373cf78d70476908f"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/rerun_failed.py",
+          "bytes": 5396,
+          "sha256": "905d3b3edb3e9b1bbb6328a3cfa343d934baa805e59320f1699995c2c1bec70c"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_all.sh",
+          "bytes": 2404,
+          "sha256": "e9dd5c5e350f5b4f0a337f1dc7f1a2ece3cdc042ce1e13d461d8d8efab3069d6"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_exec_150_model.sh",
+          "bytes": 848,
+          "sha256": "de4fe333582ef3d14d6664eaf7a22eb78cbfe79d28647dcbcf5a3908befac768"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_exec_subset.py",
+          "bytes": 27212,
+          "sha256": "c7eeab01109222e8b20265952428f91073cef0afacede0bd5c5f4d0cf02ee751"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_harness_ablation.py",
+          "bytes": 10929,
+          "sha256": "5a93d6f9fdde198c1e13347e9a3fab88ec6c7c0963ddebfc1b3975a28bab1902"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_harness_experiment.py",
+          "bytes": 3357,
+          "sha256": "df34610557379bb62ba89e2de4e70c36c03336c0502ae7cc40aaabb3fbb859bb"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_multijudge.py",
+          "bytes": 10032,
+          "sha256": "e0b9bb8c2c3ad28c364bf14315817efb473398af4b0105c1a13824a041cfc240"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_realexec_local_smoke.py",
+          "bytes": 39603,
+          "sha256": "d90d9a078b7adbdae965eb0bda2c217e31bba3962837d9acaf696d789623e243"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_utility_eval.py",
+          "bytes": 23121,
+          "sha256": "204093941c43d8e4c35736827b1955a41898ca48fbfce0bdf8542ccf5a9b4e8e"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_v3_incremental.py",
+          "bytes": 6965,
+          "sha256": "f27de3ebe5187b0f5fd64fd53b59de42ef512bc58266a75f028e37f0ef573d9d"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/run_v4_incremental.py",
+          "bytes": 5859,
+          "sha256": "d6bd7f0b26240e5864ee2dfedb9a60dde1f05aac3535bde3a64c5d5f5c4a07d0"
+        },
+        {
+          "path": "data/raw/huggingface/safeclawbench/scripts/summarize_realexec_and_harness_0503.py",
+          "bytes": 24373,
+          "sha256": "39157b3e2ebcb1324ebb3572b51531daac8d750f1bd69cd9a9f4934996f17bed"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:50.364339+00:00"
+    },
+    {
+      "source": {
+        "key": "compass",
+        "kind": "huggingface_dataset",
+        "id": "AIM-Intelligence/COMPASS-Policy-Alignment-Testbed-Dataset",
+        "revision": "b96038806b975a69cfefaac001f3ebfad25ba834",
+        "expected_bytes": 2560387,
+        "role": "auxiliary_policy_eval",
+        "license": "cc-by-4.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:50.364362+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/compass",
+      "file_count": 31,
+      "total_bytes": 2561590,
+      "files": [
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "620aaad38f757c54b9b89f8115b55e53bd5ac279d9f7174e5f0f9bb5d276fffc"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "653ff293e9706da9fbb30740079dfb03388df619c9192f83c8d809e628ff0112"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/automotive/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/automotive/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "04483be71d02a12ffc2b64ac549def8a53c026debd99d9cca79b8e66e2f44418"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/education/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/education/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "49c8a5a305cf17bbfcc1ee20778156e1ff02fa18771793a188a4cb26ed3f397b"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/financial/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/financial/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "99c9e35232c8b8f786fbd211e4794087cc5fcbf13541468e960f5fd268c806f1"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/government/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/government/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "0e850f9a388bd9d63deab1472b672d856aecd652aa404eb6191af3d8e7e8ba64"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/healthcare/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/healthcare/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "2fd4d2072c7bac8a58bc6423acba35ebd78f28c529ec2750054e61f5df61af9e"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/hr_recruiting/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/hr_recruiting/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "21b28eac4e5b1c93bc843ae345d05c42671b7214134aefda8bddfefc4067864a"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/telecom/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/telecom/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "7cfe3967ae00fb78be04c8ea2787055a7671e96cd61d0515a5b83d05afc7c2f6"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/travel/test.parquet.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.cache/huggingface/download/travel/test.parquet.metadata",
+          "bytes": 125,
+          "sha256": "ff5019ffbca6b1dacf277b150f6868a03112e3f20a3506b126bc0683ade5e6eb"
+        },
+        {
+          "path": "data/raw/huggingface/compass/.gitattributes",
+          "bytes": 2461,
+          "sha256": "e7a120ab07b1bc5b486be249e9fc6c83d59448d0093e1dfebe95d1566d9cafc0"
+        },
+        {
+          "path": "data/raw/huggingface/compass/README.md",
+          "bytes": 4488,
+          "sha256": "36de9db79bf78d7400eacc0a15940b2fb8e4717a961b223150bd2a391a41b623"
+        },
+        {
+          "path": "data/raw/huggingface/compass/automotive/test.parquet",
+          "bytes": 349298,
+          "sha256": "ce8b3efff61adeb587af8f755c2e48bdd1dde71515966b14162c457a6005f04c"
+        },
+        {
+          "path": "data/raw/huggingface/compass/education/test.parquet",
+          "bytes": 284656,
+          "sha256": "dc79a388aa12e7ab8a84e27c50412caf0874085fc9f66d73917aed0338f28aae"
+        },
+        {
+          "path": "data/raw/huggingface/compass/financial/test.parquet",
+          "bytes": 273077,
+          "sha256": "6a892480ed18491ea240bd0c5bcae89d3831297f9ad45d66ed7063ba0007882b"
+        },
+        {
+          "path": "data/raw/huggingface/compass/government/test.parquet",
+          "bytes": 275160,
+          "sha256": "82eef7cd31861885914d055866a9a93f715e461b3e50d741f861bb35a35545da"
+        },
+        {
+          "path": "data/raw/huggingface/compass/healthcare/test.parquet",
+          "bytes": 293047,
+          "sha256": "ec68dc447bb64fb811fe0ef568cb218697e3f7d078fef0645af8834ee2f8c2fb"
+        },
+        {
+          "path": "data/raw/huggingface/compass/hr_recruiting/test.parquet",
+          "bytes": 418633,
+          "sha256": "ad3879ca320ff337a9331e43bf51354a56b53b43dfd5271a2a80801be3e7040f"
+        },
+        {
+          "path": "data/raw/huggingface/compass/telecom/test.parquet",
+          "bytes": 226784,
+          "sha256": "060b9e6ed9a9a41d0d7321eae95ad4d0eee08cbda6c296b030a34990873f2f19"
+        },
+        {
+          "path": "data/raw/huggingface/compass/travel/test.parquet",
+          "bytes": 432783,
+          "sha256": "0576945b9edd855a1d6b006dc838ab86cf395ed11d702ada7f3e93211f6a70d1"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:51.778468+00:00"
+    },
+    {
+      "source": {
+        "key": "agentcibench",
+        "kind": "huggingface_dataset",
+        "id": "UKPLab/agentcibench",
+        "revision": "f5523cb986828ee77bc505120a933f114bbcf4f3",
+        "expected_bytes": 440638,
+        "role": "auxiliary_privacy_eval",
+        "license": "cc-by-4.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:51.778489+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/agentcibench",
+      "file_count": 37,
+      "total_bytes": 441850,
+      "files": [
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "ef61708cbcee9a2de3cb3b97264e9e51c5ae8ef877f8d10ffdbb2a6decb84348"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/logs/turns-2026-06-09.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/logs/turns-2026-06-09.jsonl.metadata",
+          "bytes": 100,
+          "sha256": "6e142e09c74b3b31ff9cd1384cb3390f6f6ecf032d0adf9f3186eeba24fd6ce6"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/metrics.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/metrics.json.metadata",
+          "bytes": 101,
+          "sha256": "d17f45d473d7720d6f06418dc45bc6ab9e85de6366d9091d53c06aa35807c4b9"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/hud-state.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/hud-state.json.metadata",
+          "bytes": 101,
+          "sha256": "d56b9bccfea41f5d47f0771a141bf3d8c2ab7d51d5ec75046fa238457f714382"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/notify-hook-state.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/notify-hook-state.json.metadata",
+          "bytes": 101,
+          "sha256": "3eee405a8a5445283a7553e0e91cbbe55ad2de571622d9b440893bb7c23baa19"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/team-leader-nudge.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/team-leader-nudge.json.metadata",
+          "bytes": 101,
+          "sha256": "6082ba7bfa495f479b00932eb4fee6c213ed8e37ed176f973f667efc6df79b4c"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/tmux-hook-state.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/.omx/state/tmux-hook-state.json.metadata",
+          "bytes": 101,
+          "sha256": "c132b2c5a782e129360fdcfec0d57f7b64ae306e5675ccedc0c03910d48f25a5"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "88aa4ac2a85eb06d31cc3f830670d28901144664a189d2f45e4a8e426aebbd25"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/data/seeds-00000-of-00001.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/data/seeds-00000-of-00001.jsonl.metadata",
+          "bytes": 101,
+          "sha256": "6b408c701a72c80452601ea9d5634e2df7452c16582e9ed0f2bc045ce65c8285"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/data/test-00000-of-00001.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/data/test-00000-of-00001.jsonl.metadata",
+          "bytes": 101,
+          "sha256": "213e3869fd26ecd667def79c7bcfbae16ee9168a13a62bc163a41da4a4d79603"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/data/test_e2e-00000-of-00001.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/data/test_e2e-00000-of-00001.jsonl.metadata",
+          "bytes": 101,
+          "sha256": "74d182917b25d66c79a28fd1b4bcce5edd79bd2fd731c21c90cdd645666dc313"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/dedup_stats.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.cache/huggingface/download/dedup_stats.json.metadata",
+          "bytes": 101,
+          "sha256": "92bc9aade84498273aba9f70829fc5764e399fc4461afde65bad62706ddc29af"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.gitattributes",
+          "bytes": 2504,
+          "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.omx/logs/turns-2026-06-09.jsonl",
+          "bytes": 2579,
+          "sha256": "6da4409d87171f5d856d34236c12220729b6dfd1f8d897ff2916ab6b4265340a"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.omx/metrics.json",
+          "bytes": 179,
+          "sha256": "d1bb4edfe0fe7ec75ac41084a8e30ac61554d639f8f2648cfc547c8a05390c9a"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.omx/state/hud-state.json",
+          "bytes": 194,
+          "sha256": "b4d123506bcdda16ec4483c5d8ec1870ff06a8434d49483263e50565a3556576"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.omx/state/notify-hook-state.json",
+          "bytes": 537,
+          "sha256": "e8f856b4fb8c4f5e3a64a94e6dbf7c38671ba41d16d83aab928239d17d158bc2"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.omx/state/team-leader-nudge.json",
+          "bytes": 91,
+          "sha256": "05a821e65d035c79ac1d80d8185fa594dc34c83e7f04f585414766230b58f60e"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/.omx/state/tmux-hook-state.json",
+          "bytes": 195,
+          "sha256": "7ee0c798c541065a69df2b8475f048376b3d2e800f8fd01bd80520564a617310"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/README.md",
+          "bytes": 7015,
+          "sha256": "3e34a24a57ba5602f25711c464635970a14582ae8e39b146f932f81e65950cde"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/data/seeds-00000-of-00001.jsonl",
+          "bytes": 44223,
+          "sha256": "1b1a458c15ac64d63b7f6c20fab23740115a2b09d151ceeeb6f2c353c97f5418"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/data/test-00000-of-00001.jsonl",
+          "bytes": 272282,
+          "sha256": "709d43e4e09d2f3558d9290b8bdf4c15e95e4fefc29a56be6d12b52e646c99d7"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/data/test_e2e-00000-of-00001.jsonl",
+          "bytes": 110672,
+          "sha256": "9aced6b0d1e1368c28b3b110ba85e79a935b501a03a3c1b48fb97996dd4c05b2"
+        },
+        {
+          "path": "data/raw/huggingface/agentcibench/dedup_stats.json",
+          "bytes": 167,
+          "sha256": "83868875c541108b8083ea312d6c00f9af580434f02c208b5b80e163faf0969a"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:53.092510+00:00"
+    },
+    {
+      "source": {
+        "key": "nvidia-agentic-ipi",
+        "kind": "huggingface_dataset",
+        "id": "nvidia/Nemotron-RL-Agentic-Indirect-Prompt-Injection-v1",
+        "revision": "d738d4f361cc38bb4d7a42b9066776dade5332f5",
+        "expected_bytes": 11719170,
+        "role": "positive_attack_pool",
+        "license": "cc-by-4.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:53.092528+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/nvidia-agentic-ipi",
+      "file_count": 10,
+      "total_bytes": 11719496,
+      "files": [
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 100,
+          "sha256": "f74ece85ad61ab5047033acc8e942e820b3d5f593497ec58abbdedff84b74a6d"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/download/README.md.metadata",
+          "bytes": 100,
+          "sha256": "cd7d12048f607eae1fee2a2c9524c77c703264caf525a5ee667ecf1f21268f97"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/download/train.jsonl.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.cache/huggingface/download/train.jsonl.metadata",
+          "bytes": 125,
+          "sha256": "6d1c97fda846ba04ba6d0ad06eecb33f37e17e182e07825277ead2785f2e6d30"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/.gitattributes",
+          "bytes": 2552,
+          "sha256": "9e96c8bab736cf7d695a0c43856cc9930aabd1176c17355cbe0d8f22ca31bfe2"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/README.md",
+          "bytes": 13239,
+          "sha256": "0386806252047746e06cba58bba3f91905aa02ccdd4def963022440e6d5de851"
+        },
+        {
+          "path": "data/raw/huggingface/nvidia-agentic-ipi/train.jsonl",
+          "bytes": 11703379,
+          "sha256": "3329da17564a7eb287e2730fc7d6956e1f4fe51e8950ac4f110b3c37e78cf3b9"
+        }
+      ],
+      "finished_at": "2026-10-17T01:34:53.968308+00:00"
+    },
+    {
+      "source": {
+        "key": "fortis",
+        "kind": "huggingface_dataset",
+        "id": "ShawnLi02/FORTIS_Agent_Skill_Safety",
+        "revision": "4867c6d1d2d91348ef180555d6c8c9d3e28226a2",
+        "expected_bytes": 1315737,
+        "role": "quarantine_eval",
+        "license": "unclear",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:34:53.968333+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/fortis",
+      "file_count": 280,
+      "total_bytes": 1325109,
+      "files": [
+        {
+          "path": "data/raw/huggingface/fortis/.DS_Store",
+          "bytes": 6148,
+          "sha256": "18b837885afa983af31cc583012d591c357e149a98692a6711c6c01f8f721e89"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/.DS_Store.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/.DS_Store.metadata",
+          "bytes": 101,
+          "sha256": "7124ed38b28385ca2f47362e9392656169e59134412adec2a8f7c0f3e51101d4"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/.claude/settings.local.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/.claude/settings.local.json.metadata",
+          "bytes": 100,
+          "sha256": "ba662987171fdc479c2cd93d7e856d458e6d20dc8c87b234ec3b9edb264f426e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "c33cd7b232eca4c05cb6003a671326b431b56f64e1ccdd7238149a2a06f29fad"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "5c07c20ba71806e41c3cf10d789f672b5d7e3588783448d19ee9a8dfc581aad2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/croissant.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/croissant.json.metadata",
+          "bytes": 101,
+          "sha256": "7a635b958dac7a5ab3bb05f8feffc37fd9eef1dcd817c76b5c13d0f442c21c4c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/figures/end_to_end_funnel.pdf.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/figures/end_to_end_funnel.pdf.metadata",
+          "bytes": 101,
+          "sha256": "c95b1b84bfe8b8f03e9b5d87893368084173b49712fefd0baac63a8af200e90a"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/figures/fortis_radar_settings.pdf.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/figures/fortis_radar_settings.pdf.metadata",
+          "bytes": 101,
+          "sha256": "86ee90ce980bb9405403c8f9869f5822f66021e368775744eaa3010b53dd742d"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/runners/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/runners/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "622870fb782cf7dc3e9eaa78ad1e7556651823797faf33fc85e46281b8cfd726"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/runners/gpt_task1_batch.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/runners/gpt_task1_batch.py.metadata",
+          "bytes": 101,
+          "sha256": "21755ff83ff9f37341a2adc573368db389bb8aeb0d22d2db0da44b183ba0c7a9"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/runners/gpt_task2_batch.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/runners/gpt_task2_batch.py.metadata",
+          "bytes": 101,
+          "sha256": "19f43996ecc8687ee46a15e4a4cc57f8dab7b3556e993d6ee9f86507b1e180f0"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "6acccde5b89515516c17595f22f2d3f2b1c60a85563c8b8633cb892656a4c705"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/all_skills.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/all_skills.json.metadata",
+          "bytes": 101,
+          "sha256": "1061c6d3f9da73347acdc2051b315acdd52e4b57f05281da05fd8158f8cea211"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/eval/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/eval/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "187defa9d566ace51955fd4b94a0884594e085084dfcc63446c0558af15aa475"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/eval/common.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/eval/common.py.metadata",
+          "bytes": 101,
+          "sha256": "f6c3a3a315f55461b79b10fbc6f743115e04d0e7632a61bab2cedf1f4f4b0f30"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/prompts.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/prompts.py.metadata",
+          "bytes": 101,
+          "sha256": "7b1e7e664f45b0eec9b1f9e264437725415a4e51a4c6c3bf230ece20256acdfa"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/ecommerce/skills.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/ecommerce/skills.json.metadata",
+          "bytes": 101,
+          "sha256": "c833513db1d3a3d36c777ba77b2bbecc4e6f45a386d6a9f17659462afb0df781"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/ecommerce/tools.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/ecommerce/tools.py.metadata",
+          "bytes": 100,
+          "sha256": "872ed2533b3dd22524853ad0e2a20e170efa7799270ff39b315bbcea58df20da"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/email/skills.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/email/skills.json.metadata",
+          "bytes": 101,
+          "sha256": "77e2e122b659656db53b935b053ed407a9247c56944fa9f35fd084a87ebe28dd"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/email/tools.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/email/tools.py.metadata",
+          "bytes": 101,
+          "sha256": "8324901e2c40fc3256f59c998a1346cb890c741d37d791ebf94f7ccc1c9cf3b7"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/filesystem/skills.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/filesystem/skills.json.metadata",
+          "bytes": 101,
+          "sha256": "e89d5c92a4b36f185e4750ca8535a31990dae925f0ca83b13f3c0afc61f28095"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/filesystem/tools.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/scenarios/filesystem/tools.py.metadata",
+          "bytes": 101,
+          "sha256": "c271358ac0d9ec4b4f1a1ac28ab57df278df60a4bf2814b068323142eec9f239"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-account/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-account/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "f7d796b33329d2104ba969976a6d02f46d01fd3556d28abf75838fec5fac198c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-address/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-address/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "7b2fcb5c226f4754bfdf517cdaaefe13cfbce635214b943c9ef328cce09a784e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-browse/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-browse/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "554f23fdea105f194dd394a822162d1e5853035abc1d489316661dc181b9ab06"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-bulk-order/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-bulk-order/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "e475249ed9cb1743be5554646466043dce50d1b66920bdc05550feffc8cb3a90"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-cart/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-cart/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "cb68bf697fadbdef0b2f46d7698c29a952142b7c808b0edb6a220d943e34effb"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-checkout/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-checkout/SKILL.md.metadata",
+          "bytes": 99,
+          "sha256": "5c6eb764db8faac2d479c027e16dc46b082722a77a014e0955a6093fbc635569"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-coupon/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-coupon/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "8e7df98532a4799e994a262a5427550457a92410dcb43ddbd92b47c7693c7207"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-delivery/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-delivery/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "553a89230e7ef6080688902beba1737e2d556f27b83e36439f80edecf1d9498c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-export/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-export/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "3e0581f127f0d8ee1e27a0693a51d59c64366540d7a0bf61c437b6a2ab5dffdc"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-gift/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-gift/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "c9f36d6217e70f1c99db27ec43a5a5e8e8edb95428f9a5b2780d32d25540b911"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-inventory/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-inventory/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "b4b1b0d70d42a088a420c1c9ca20447876f3f23c748e979da505dab70d6a8423"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-manage/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-manage/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "2df1b4d98d50a46cc6fdf63aaea41910777d7e132b9ce9896b33abd7b5222fbe"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-order/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-order/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "703ede90ee388766e0a4a0f726d9cb4a990001328d33000f407109c4700dbb10"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-read/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-read/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "96d3717294ab69c5b23c497d6bcdac7fb8c682d3d8488b6311bab586ea9aca38"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-return/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-return/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "9b0ad25a4e7b3f769b7c62747c82fdf00a2de191d0561a0bb78bf1bdd6bd352a"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-review-read/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-review-read/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "c5e00f5f7606982d9d53e19802b244abbf4eaeb467387d17a8734f90c9bb86b5"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-search/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-search/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "d4a2987d228fb2fba2c9cefd506e060f28c364246df500055247acf5a4d896f9"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-subscription/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-subscription/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "20cd9579c60e0697024a45d694919d222f795194ed4fdd8ab0e01c68f0262cf1"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-tracking/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-tracking/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "c19cee7f47a101917117d080bc73d34c018a3063b9cde3dd2b53180d26df200e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-wishlist/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/ecommerce/shop-wishlist/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "7746e758371b476cb66a917071cc3b3fd7dddaf2d4be201aa9e8ef079015e5d5"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-annotate/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-annotate/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "336aa8da10adc4cff268678416b1e9dbe15b2491e89593191475cd4434166e21"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-audit/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-audit/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "838955cc9b5f1e18ad3118727a7af4b2cbc0f65b9e2c0efa9db7f0fd3d0f06a7"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-bulk-label/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-bulk-label/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "51e91f0b66a935844be6eba6a62b9500ac96b716c78bf5f5ac5ec13f0defe997"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-export/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-export/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "d44e510cb1f3630ccf1d490f63af0c497c0af41bc40c077b2a4e3c7cb3741632"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-filter/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-filter/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "024d6b38b11eae4acd719d1e7bc2f7650aa369ab302db626f6c3a366142159fd"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-import/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-import/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "363da4195f62147503c690211c9a0f00b1f4c73a722c4025dfba6f7d9de86c09"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-manage/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-manage/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "ac81157fc418388080b09449f03cb529a628bc3a9db5d13ab8d08e988fe3ea2c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-move/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-move/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "bebca671c4ba8b234c0543d2940dcd2eb905a3de2bb443a6ebd218e2619c7e10"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-observe/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-observe/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "5f45c9ea1394048fd43dc9d8961877a833073035352c700e16b4724a1798d095"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-preview/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-preview/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "cdcc973043868f8c2d0a5be8facf24156cccc3ab5489b8bd16cec7d8f093e8e8"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-read/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-read/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "4997e3aa1b39953c1cd7bc4c25d1de2c33b0ae61ee252b0f135d37c54e2a6ae0"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-schedule/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-schedule/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "0b9c5ed3d095433eba2eacd391135ed143fa42b094afec63ddeb68ca10257311"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-search/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-search/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "10a86ebc7d1467e924af0d03415de92ed59ce0e21d71d4bd83432146ecbc1f7b"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-send/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-send/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "b7763d8d7414f394ae6dcde7aa4f0feba357e80bd96f971a506d1dde914d02ce"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-signature/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-signature/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "cb650f7651b6eed3e18e02b2d9e66d36399330a5ff005b6d366374890257cb93"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-smart-archive/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-smart-archive/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "c70c7c009b21fe9fc651ac766b6d10aa63347b6a112d0dc178ef71a5649271f2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-stats/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-stats/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "2c46732724c8b0d226de89ca2ff43292fe3f2d1ba496ec7463c8fdfaa4a2a4ad"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-template/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-template/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "aa3638927e1650b04002b3fd21deb29a34c10dae819ee4ddf00b3e1c3a2c1526"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-thread-manage/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-thread-manage/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "cc8558beab262e0e77ac08870ab428b63d173e62ee7f00ad352d659fe9cf6488"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-track/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/email/email-track/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "c080947d3a2bcc2dfea9777ea9ee86158e0406ad7a81c4d31c8fa364a545e026"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-admin/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-admin/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "2cb7182f1ee8012b10cf1c873bfeab9df837f777b4b4b57762fe0d3dfd9eea97"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-archive/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-archive/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "67a0bb17f53e55505027d2b1552ce8cead4ba0b4943c1751471db326a86b0e03"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-attributes/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-attributes/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "48425e03d13070da8e9efef68801ae50042589bb7ee09f2cdd350f8ef509ea9b"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-backup/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-backup/SKILL.md.metadata",
+          "bytes": 100,
+          "sha256": "b8fbfbe2665a77d336188c7746cac27c7c7f48d9b8c82f76e8d41f0e44c72928"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-cleanup/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-cleanup/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "292270176b5b41885c8aea6614f7aedb68187271d97d74e767a9ff7cde4f0867"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-copy/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-copy/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "1c15fe42110a50aaa1c17daa4eac52d844385e376a9d23a1b0c547d07af2a608"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-diff/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-diff/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "2601340a21a2a11b68b46fe8c53977bca5cff279af3ec62559782f546d4a8a2c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-edit/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-edit/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "0ef4af037ec6217aa9c71bed2c70188153cad34cc3b99c0542f50768adae9aa8"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-glob/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-glob/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "602c3d59ff43bcc89b2d16d82438400d1444df12f74be18eb73d66f8e5d62ee4"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-head-tail/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-head-tail/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "f2f213a53505edf3661c9405f37e7a49b9fec85174fe014fb241dc7e5f766aa2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-link/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-link/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "a78bdfbc818aaaee2b911a018ed207a3ac1525551addd2c9fa9047f52549e122"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-list/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-list/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "2aad5f144a37f810746dfba3fe5e0d54601c9f90e8d5a810e1c9cbd89ef72505"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-move/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-move/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "f7dabc303e7f005418e4bf1f60ab2983a17e48b1496f4b087f2090c2702c0ed5"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-preview/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-preview/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "15b8fec42a9a292b4f7e8d5bf3ee0e96a38d7e8d8c32640974ceff9416ee3bab"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-properties/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-properties/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "994cb87ff26b082427440da19d7e2307984e2b156b237a643ff0f69889afebbd"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-read/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-read/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "762b8f842dee56c7c7b1d516f57b36144be54e4e5b05b5120b0de5cfe707217f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-search/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-search/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "5754cdcb98a0c12b34dc5bf54ff688c79c0d79ed02e865c198f9ba3a6a871567"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-sync/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-sync/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "1d047a5d943e5e33389eba18104a71f37f7c93522d2393994b09f4e0fab97ed2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-watch/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-watch/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "9fc08367ff7a61e6e0c4273870465388e50e1ebf02df03a44ad23385345cecbf"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-write/SKILL.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/shared/skills/filesystem/file-write/SKILL.md.metadata",
+          "bytes": 101,
+          "sha256": "ed0b48f9bb75e2f1bc78f0b89b67ef4eacff9d1fc6b9e4886612a51e59695bc8"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/README.md.metadata",
+          "bytes": 101,
+          "sha256": "2d4f0cccdb8a2cc7cb21a66692ae24b4662ab25ad8903bfbe9e90713acc79a0a"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/eval/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/eval/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "56aa17fc943cb2e67f0d11b079a655de666885436edf794c669aa4d4feb91906"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/eval/metrics.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/eval/metrics.py.metadata",
+          "bytes": 101,
+          "sha256": "d0015e7aac5958f983acd2c346f73d533af2bc5257acd955cee85756468cea7e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/scenarios/ecommerce/queries.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/scenarios/ecommerce/queries.json.metadata",
+          "bytes": 101,
+          "sha256": "e30f09951d97f14bbae49fc7f241f13060c05f6323c12d873ba7a972221796a7"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/scenarios/email/queries.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/scenarios/email/queries.json.metadata",
+          "bytes": 100,
+          "sha256": "dbc715c30065147532bdc2830f50f93f13bbce98ee48025b852c7a05b5ca58e1"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/scenarios/filesystem/queries.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task1_skill_selection/scenarios/filesystem/queries.json.metadata",
+          "bytes": 100,
+          "sha256": "908d4d9ea1b9c8dc112da32914cebfcd5e0048cc30e0a8b58fd55ea656dd282a"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/README.md.metadata",
+          "bytes": 101,
+          "sha256": "8fc5bab4d53cc9cabc2f8feb113112df9aca2621f6a2cb65bdbf2dd85894a31f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/eval/__init__.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/eval/__init__.py.metadata",
+          "bytes": 101,
+          "sha256": "7c139a3d8994aca6c5b99ff81decd42543cf615d2886527588a9c31cd048ed4d"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/eval/metrics.py.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/eval/metrics.py.metadata",
+          "bytes": 101,
+          "sha256": "34f97c4d18d6388319eebddd1fe5953042ece323ecfabecdc96145eb8ee6a251"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/scenarios/ecommerce/queries.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/scenarios/ecommerce/queries.json.metadata",
+          "bytes": 101,
+          "sha256": "843e9802d36e126e624088fa6197916d31dd6bea7fe56149df76f5f098a8e130"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/scenarios/email/queries.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/scenarios/email/queries.json.metadata",
+          "bytes": 101,
+          "sha256": "db19b70195e16187d077682cd1ba6eac3bac222b12dca591a753d55cd88c2a3f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/scenarios/filesystem/queries.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.cache/huggingface/download/tasks/task2_tool_selection/scenarios/filesystem/queries.json.metadata",
+          "bytes": 100,
+          "sha256": "a1946f6d5f33c442b6ccb60f5547d574039f2d41d7bdc437438b8e5f4a09778f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.claude/settings.local.json",
+          "bytes": 170,
+          "sha256": "11fd4e41bbdb2e86666c9e6d4d91a24ed97ffd8bf4f6c476743b412cd22ec47e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/.gitattributes",
+          "bytes": 2504,
+          "sha256": "9e75dd981de037ec3769f24f790e126bc5a160b6871f510214e68dc70649aeeb"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/README.md",
+          "bytes": 8301,
+          "sha256": "6cfd218ac6115252c920dc8d32f3c342d4465e13026576cc4d3df830313e456d"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/croissant.json",
+          "bytes": 2746,
+          "sha256": "34e2b74c979a36ce97412daf5668a08c0cece0c859d749607a8ec56efaea066c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/figures/end_to_end_funnel.pdf",
+          "bytes": 43821,
+          "sha256": "daec990cddbb92f77e9ab475678268acf0cffba9eadba81b6f9fe49f27304507"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/figures/fortis_radar_settings.pdf",
+          "bytes": 34096,
+          "sha256": "012d6456232965b116f6ea12fde1ec3b2ef712da2eac6ff10e13e413b3a540b1"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/runners/__init__.py",
+          "bytes": 20,
+          "sha256": "3000297395d4e14c3a03cc90def30e440a67e0dd0c897378936a4947767a7704"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/runners/gpt_task1_batch.py",
+          "bytes": 17219,
+          "sha256": "baccb8f1f39e7318d8b1f2ae90bce2c20c08c1bc4f7cec966109ca6c643336ea"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/runners/gpt_task2_batch.py",
+          "bytes": 17732,
+          "sha256": "adefd54d173d8b4862d98903228d378e91903f873bb1fcbd45f695e4ee7d8a59"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/__init__.py",
+          "bytes": 19,
+          "sha256": "5b394ffc2296c5a32105c8dead834e8b715127dee172cbf4494c3e00e5699998"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/all_skills.json",
+          "bytes": 13086,
+          "sha256": "dcf4ebf2c9b36c7d240680e0e74cf7c9f9609a289c08bee8362e487bed627a72"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/eval/__init__.py",
+          "bytes": 30,
+          "sha256": "deea5b0a1e8bc764c432c47a58305a515cfdbb81da452d07c4ffe98abb5be1eb"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/eval/common.py",
+          "bytes": 2351,
+          "sha256": "38dbfa26cd49bcceb1173d21e338d0d62eb7aede3d1b5724df5b08061d931dc4"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/prompts.py",
+          "bytes": 4259,
+          "sha256": "0be70cb5aa24d1dd232362548f829c1e3012a33db05f401744cc052a4a93ed27"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/scenarios/ecommerce/skills.json",
+          "bytes": 18465,
+          "sha256": "1260a69959d57ec9d175e630328d2fa4a719e7620213d0dac81d3fdafb2735f2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/scenarios/ecommerce/tools.py",
+          "bytes": 16320,
+          "sha256": "09293919ec6ebbb71f74b3000276cb8ac15de22f306a77d978487a030e149e5e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/scenarios/email/skills.json",
+          "bytes": 5395,
+          "sha256": "1bb5805e0475436a619e0a4f24236540f62005c4c03540e3370160dbc47504ef"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/scenarios/email/tools.py",
+          "bytes": 20318,
+          "sha256": "c3c25a7be1fb53f41379f79b4d15c343013efd12dfdfb64f684cfe40532aed8a"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/scenarios/filesystem/skills.json",
+          "bytes": 5627,
+          "sha256": "f938bd3849349c0ff50a858042e2792741b33776d25131e87c145ae5de26fb12"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/scenarios/filesystem/tools.py",
+          "bytes": 14825,
+          "sha256": "9742ce8b3e58a9bcc4b426410377a0fb726e6075f0c1b7441bfac8a3d6b74b87"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-account/SKILL.md",
+          "bytes": 4746,
+          "sha256": "5894f4a358fe2abe9aa8e0a2bea2ea8cd3859d6e47cecbe65a68ec4e7b5e2640"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-address/SKILL.md",
+          "bytes": 4397,
+          "sha256": "5a437ffbc02874606d65a6e06066c7b01126cc620750948cc22520d70c6d53e0"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-browse/SKILL.md",
+          "bytes": 3237,
+          "sha256": "48ffa0d951c2f50c0379a6944ec31cc4f41d36f4f5e166e8420d1cb8e5b1f6bf"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-bulk-order/SKILL.md",
+          "bytes": 5265,
+          "sha256": "d1987a87f191eeadbbc0c196634f6d31a8b5d7cf47b2295e8aed63d9a1fe61b4"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-cart/SKILL.md",
+          "bytes": 2940,
+          "sha256": "5166741e86c099e6099bdb0cd3d06927bbf550aa11f8e83ee799bb72ae052149"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-checkout/SKILL.md",
+          "bytes": 3092,
+          "sha256": "630266b021705c1f1f2675a0c94c9b8348c815464d52b9869fe602e6e69e4bbe"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-coupon/SKILL.md",
+          "bytes": 4548,
+          "sha256": "6c0c29a485d77b7f0fc396d15d04b990911ceb65132da664bb8215a59ed9cea3"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-delivery/SKILL.md",
+          "bytes": 4610,
+          "sha256": "a566e661ca4b7f2a52f54dc4e63121860e547a591b58e970e78a0780d1c20eb3"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-export/SKILL.md",
+          "bytes": 4449,
+          "sha256": "6b2242df7796c26484b649a9fe8694f0df983280d13d8958320a72497e3e285b"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-gift/SKILL.md",
+          "bytes": 4749,
+          "sha256": "ca75a5487e83317177ad1e71eb2e350c0a569e364f9583437da3239085fb0619"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-inventory/SKILL.md",
+          "bytes": 3634,
+          "sha256": "c0109d4e3843e684464c692cf421670a429a8392b0fffcfd8bca418bcbe70134"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-manage/SKILL.md",
+          "bytes": 3391,
+          "sha256": "b66e0d62a256d500f10f80073a55da79823433df90845f5ec4ced05d787f5254"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-order/SKILL.md",
+          "bytes": 3380,
+          "sha256": "6b0a4a683fdf76ced638d92ca6ab82ab01b9da7af791b8f2a5dad9c32c992c32"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-read/SKILL.md",
+          "bytes": 3140,
+          "sha256": "7b9a38290695083cda1432a79c1eb3fe2a5e2cfc5eb735efebc81f0aa99ffc41"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-return/SKILL.md",
+          "bytes": 3748,
+          "sha256": "b9e8de9d8643ac39eeabfb1520d284a35ad1ff69aeda6ed107947aa1213f4e4f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-review-read/SKILL.md",
+          "bytes": 3452,
+          "sha256": "49878dece82c094dc9f5d920a674c07ec7b8b577204508df50c1fe2e15ff7d0c"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-search/SKILL.md",
+          "bytes": 3171,
+          "sha256": "f4117ff5eec4939d889d8cc3d16b7a74fddacb51295e87c0bd064c2259580c12"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-subscription/SKILL.md",
+          "bytes": 5158,
+          "sha256": "dd3f25927369210576897ca31698d647394d2fbb0053355e5767550f9f3f0ef5"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-tracking/SKILL.md",
+          "bytes": 3809,
+          "sha256": "88f5d08f976b14c22697b2f5c8e125d9a924d7fbaca52c9b7edb6415d78a5dc2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/ecommerce/shop-wishlist/SKILL.md",
+          "bytes": 3447,
+          "sha256": "1b43c441758bace3ef6dcb4d33339a96269e9c56a404eb154ea3f059c6cb0472"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-annotate/SKILL.md",
+          "bytes": 4321,
+          "sha256": "f8b86e619123c5c02f808c6abfa9675bf4c1b9489daf805fd143522ae9e1ecfc"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-audit/SKILL.md",
+          "bytes": 5831,
+          "sha256": "ad4d1333137b5ed3b09cb3f27c929123bf0ce1052fe876ca46f6615bd44e6d7d"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-bulk-label/SKILL.md",
+          "bytes": 6037,
+          "sha256": "11f8acc209066f3d0c409e3ed9b8898649c5b51f425e105fca8f67e23358854f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-export/SKILL.md",
+          "bytes": 4125,
+          "sha256": "2fcf4536b8b711e0c8ea07753e57f9351d7a6a39623ef84b9adaaa581f73a265"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-filter/SKILL.md",
+          "bytes": 3426,
+          "sha256": "3ecda724550b1c920edfeee0317796de0859438811af2d6ec3fbb68324d32497"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-import/SKILL.md",
+          "bytes": 3927,
+          "sha256": "bea2084c098fd679e18b49f87ee87a71b2b53b31a1975f994c20f2f207966800"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-manage/SKILL.md",
+          "bytes": 5548,
+          "sha256": "e2f87a105f65a3a2593ca96a2d1f721057f221a078858b0b033d0c62406e6821"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-move/SKILL.md",
+          "bytes": 4251,
+          "sha256": "4fa8415cb1987c4d8d83ef26486c358e8d48a7f56635f287e7e60776322ee378"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-observe/SKILL.md",
+          "bytes": 3664,
+          "sha256": "d6d34369cbeeb0b9f868abbbf375e89840fa5e6fcb5e6e1bb8b4c41092aed226"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-preview/SKILL.md",
+          "bytes": 4149,
+          "sha256": "15194b7273fe43ae73402f3df098fef58a35262a4436ebe752d94d332449c80b"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-read/SKILL.md",
+          "bytes": 4041,
+          "sha256": "0afbcad9404c2e4d0fcc262a3039ddd93b6bc6ff6147f9de9a528fc0d55d965e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-schedule/SKILL.md",
+          "bytes": 3323,
+          "sha256": "283fb98461442f852e9635f6abf50578723b59159f058bc2b6357f06123bbc38"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-search/SKILL.md",
+          "bytes": 3581,
+          "sha256": "f74d826401705364d5dc97315c83cf4ab42b99a5ddf3921de4539e9e2ee25ee9"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-send/SKILL.md",
+          "bytes": 3039,
+          "sha256": "980ac0bc130dae2f29f93e1eec46bb1c4cd1a842f4aac0838d7c683b7ae04139"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-signature/SKILL.md",
+          "bytes": 3464,
+          "sha256": "4129fe83cdbadbd8dc367464e6ae5da363354746d7ef5ad03584fa2c07603df9"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-smart-archive/SKILL.md",
+          "bytes": 5707,
+          "sha256": "89a82b98dd1aa9a74e0176f79a471470d1767ee2ab99a0042753993ef8f333bf"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-stats/SKILL.md",
+          "bytes": 2973,
+          "sha256": "9290ba627253fb12f373502d3cc2826ef42bd253b0b8e96372f3cdfae4c639a5"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-template/SKILL.md",
+          "bytes": 3699,
+          "sha256": "3f9bd85a0e888bd0b739154976c633e8989ade98fd7cd7ece7c8329aef39af50"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-thread-manage/SKILL.md",
+          "bytes": 4657,
+          "sha256": "454eb81aeb2118eb26f4f0132af1be5add5b8b3d81573a202e7e887d45ed89e2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/email/email-track/SKILL.md",
+          "bytes": 3836,
+          "sha256": "40c85da58e386ca82073530181cd44c53c11b75c8edf26faac8ca8ca975c31ae"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-admin/SKILL.md",
+          "bytes": 3777,
+          "sha256": "df7cca0a4173df59644e17e0ca676d0b8016346ee5b75c871b8791bf9a398c25"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-archive/SKILL.md",
+          "bytes": 4027,
+          "sha256": "b18268f53ba3018712ed5187fcdd88eaaddff19af3f81f5e157a65de4662872e"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-attributes/SKILL.md",
+          "bytes": 4309,
+          "sha256": "84a6960e0a69076708c77438b6e24173ccde6c8f2aca33642dd781f72779a78a"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-backup/SKILL.md",
+          "bytes": 3492,
+          "sha256": "903f030a4804f1b6a812615015724ccd6c393067a5bcf2d0ab419491f1f86f62"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-cleanup/SKILL.md",
+          "bytes": 3642,
+          "sha256": "6f0cb4bb765461b730ce44aad4608c58ff8c6225c8dc11a7bc21cb6438fd7990"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-copy/SKILL.md",
+          "bytes": 3801,
+          "sha256": "276f9cac36730778c4dca5f53351f0b40a16af5f0c6e33806990b91338e188ed"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-diff/SKILL.md",
+          "bytes": 4802,
+          "sha256": "294286d9fae818c983a4e659929b28ec190eded52b77277b60ce5561bff3602b"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-edit/SKILL.md",
+          "bytes": 4127,
+          "sha256": "38604db01cd133eaa1a17f27b678998b292dfab973ab4473808f06a2aa521c4f"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-glob/SKILL.md",
+          "bytes": 4555,
+          "sha256": "1cce547a9a00ec2e0f5349e5f941c3242653071a43a1c2d495c896e8cea2b5b1"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-head-tail/SKILL.md",
+          "bytes": 4431,
+          "sha256": "4611b9dd1c51b2e753ff381ae445558a803431051e84ab37b3e892d525fe7dbf"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-link/SKILL.md",
+          "bytes": 4437,
+          "sha256": "c9d5f0cae3964462e7e3a20277811c8030b97ebbaacc0ed7dc705b57e7000186"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-list/SKILL.md",
+          "bytes": 5280,
+          "sha256": "ce34721adf672b39cda09ac2cd064e38f9f1de6b6700c1f95c6a35129db3f341"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-move/SKILL.md",
+          "bytes": 4027,
+          "sha256": "86a3aaa544ab34dd20df9afe242076b8f61488d7b96418ca4e6d85105e9d9af8"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-preview/SKILL.md",
+          "bytes": 4294,
+          "sha256": "d76e46b58d0d5a7f1ce7bbbc132473d4e020c3a2011baf9b8f62e31fa6c7f044"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-properties/SKILL.md",
+          "bytes": 4549,
+          "sha256": "98c1f0edf3b227543d14917ca54328c49982cb6ba5c0173720607db4008225d8"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-read/SKILL.md",
+          "bytes": 5263,
+          "sha256": "15949057991402c0b940b41971c353ab8830f00e3a64eeddac881574f9b21f06"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-search/SKILL.md",
+          "bytes": 4351,
+          "sha256": "815829937e1f0b2e4de1d4dc4e24ec01043729f3478c14f4ee76568dfe1d706d"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-sync/SKILL.md",
+          "bytes": 3958,
+          "sha256": "12e6233bdf194f877e71c199670e544166c69f0e82c6cfd69429901de6c57095"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-watch/SKILL.md",
+          "bytes": 3672,
+          "sha256": "4ed340160a607fc6c3f79bc27772ea9bfd38ae62ec7bcbe700616089402c472d"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/shared/skills/filesystem/file-write/SKILL.md",
+          "bytes": 4001,
+          "sha256": "c578f55038b58dd0d36ea084dcc27d6aeeec81a09bdf9730c594d154539a6519"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task1_skill_selection/README.md",
+          "bytes": 10341,
+          "sha256": "71c556b76b9850470b5bb80d1e12654fa8416f9a5f2f8a5eb788654ed28725ed"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task1_skill_selection/eval/__init__.py",
+          "bytes": 27,
+          "sha256": "b9a38a27b7cdd25c8a35f4cbb1c3764b7cb69aaa57fb2b51ec8c810143e380d9"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task1_skill_selection/eval/metrics.py",
+          "bytes": 4087,
+          "sha256": "93cb36fd263878ac461f988eeb6666070c3c25f0ecb4a9f812e785e33fbce2ac"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task1_skill_selection/scenarios/ecommerce/queries.json",
+          "bytes": 73478,
+          "sha256": "e8e232424aee3ea08653bfa524e39ff707434589db7a08cc6ae43da318b567e6"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task1_skill_selection/scenarios/email/queries.json",
+          "bytes": 83593,
+          "sha256": "972a0774184884768d049c785400cdee44465a2fba86213018cfcee13b68fe13"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task1_skill_selection/scenarios/filesystem/queries.json",
+          "bytes": 77937,
+          "sha256": "fe893d0d21739ab0f52ba350ce8b19814bf62aeb98cb6c2c6d098e7b93dbe463"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task2_tool_selection/README.md",
+          "bytes": 9808,
+          "sha256": "44f71095a5e2193e29b42a280d22e68799e86caf87cd8002c5f74d1018228c20"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task2_tool_selection/eval/__init__.py",
+          "bytes": 27,
+          "sha256": "e37abc62ec15111acb21e65c513286a592fe67781bd5967917fdc69db95a4372"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task2_tool_selection/eval/metrics.py",
+          "bytes": 4691,
+          "sha256": "bd31ca77f18f3336fd8b5d7eef35a7282c23e069bd3f5c77afc17562fb0fefb2"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task2_tool_selection/scenarios/ecommerce/queries.json",
+          "bytes": 216835,
+          "sha256": "9dd4024b24ff34a7d0c7a0eb49eefd87cc66a3902006e207e7a779a0486f4076"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task2_tool_selection/scenarios/email/queries.json",
+          "bytes": 190007,
+          "sha256": "9870c3b8b756b7d31c5d170069b8e939eec1806e9248e97b018718cb5c29bd32"
+        },
+        {
+          "path": "data/raw/huggingface/fortis/tasks/task2_tool_selection/scenarios/filesystem/queries.json",
+          "bytes": 164697,
+          "sha256": "5810ed551998951a480816e253341257f8af76898f758868bf6cd604011c59c6"
+        }
+      ],
+      "finished_at": "2026-10-17T01:35:02.498475+00:00"
+    },
+    {
+      "source": {
+        "key": "agent-safety-bench",
+        "kind": "huggingface_dataset",
+        "id": "thu-coai/Agent-SafetyBench",
+        "revision": "3c60d5aa0af6a5c817b4ea4856e72f252e283bb7",
+        "expected_bytes": 2880141,
+        "role": "auxiliary_safety_eval",
+        "license": "mit",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:35:02.498499+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/huggingface/agent-safety-bench",
+      "file_count": 10,
+      "total_bytes": 2880445,
+      "files": [
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/.gitignore",
+          "bytes": 1,
+          "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/download/.gitattributes.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/download/.gitattributes.metadata",
+          "bytes": 101,
+          "sha256": "a39ebcd57a3b24e057f0fe3be510024edc6b7993f055ecf104f97f7415b92a52"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/download/README.md.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/download/README.md.metadata",
+          "bytes": 101,
+          "sha256": "4618b286e252295cf77c21d9095bd58bd63f349a26a9e40947fa6b97db7d127e"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/download/released_data.json.lock",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.cache/huggingface/download/released_data.json.metadata",
+          "bytes": 101,
+          "sha256": "386791a6e7ba68253e5a58267fec5ce2ab98cf4ff835a3d2a85e9eeceb4d015c"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/.gitattributes",
+          "bytes": 2461,
+          "sha256": "e7a120ab07b1bc5b486be249e9fc6c83d59448d0093e1dfebe95d1566d9cafc0"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/README.md",
+          "bytes": 1118,
+          "sha256": "57183f606c611dce1bceaa3af283c953d87e0d3db70bd5f67c99a222b43bcd85"
+        },
+        {
+          "path": "data/raw/huggingface/agent-safety-bench/released_data.json",
+          "bytes": 2876562,
+          "sha256": "59dd0333001ef767766d803e97086ec02af0fbf7ff1f7070b3797863b0dacbe2"
+        }
+      ],
+      "finished_at": "2026-10-17T01:35:02.969800+00:00"
+    },
+    {
+      "source": {
+        "key": "authorizationpairs-code",
+        "kind": "github_repo",
+        "id": "HKUST-KnowComp/authorizationpairs-eval",
+        "revision": "024a8d8e27a606d56c790a43e885f9ab9a471b6a",
+        "role": "evaluation_code",
+        "license": "apache-2.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:52:14.397152+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/github/authorizationpairs-code",
+      "file_count": 6,
+      "total_bytes": 20746,
+      "files": [
+        {
+          "path": "data/raw/github/authorizationpairs-code/.gitignore",
+          "bytes": 43,
+          "sha256": "076ce62a611eecb5af278fb7389c7f566ba8d197b62c84ae3001891eccc6a93f"
+        },
+        {
+          "path": "data/raw/github/authorizationpairs-code/LICENSE",
+          "bytes": 10174,
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
+        },
+        {
+          "path": "data/raw/github/authorizationpairs-code/README.md",
+          "bytes": 1672,
+          "sha256": "9476c4c20bd5c170e83e4a6eb246e8a0dc60f75434c2a65001f27b7585609d8a"
+        },
+        {
+          "path": "data/raw/github/authorizationpairs-code/__pycache__/eval.cpython-310.pyc",
+          "bytes": 4710,
+          "sha256": "50cae291a9f354f8adede46dbd4256355d4215789179974745d9c8f186d2f208"
+        },
+        {
+          "path": "data/raw/github/authorizationpairs-code/eval.py",
+          "bytes": 4115,
+          "sha256": "f0943b7d1dbed91367e0ff25fb9786735d90781cd08b34869001b29714b15f4b"
+        },
+        {
+          "path": "data/raw/github/authorizationpairs-code/requirements.txt",
+          "bytes": 32,
+          "sha256": "8a288e453b77f1bda1428c5f3d16492ded956115a877c33d86d3c0f5ad627e02"
+        }
+      ],
+      "finished_at": "2026-10-17T01:52:15.014208+00:00"
+    },
+    {
+      "source": {
+        "key": "authgatebench-paper",
+        "kind": "arxiv_pdf",
+        "id": "2610.16426",
+        "revision": "v1",
+        "role": "paper",
+        "license": "arxiv-distribution",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:35:03.581057+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/papers/authgatebench-paper_2610.16426v1.pdf",
+      "file_count": 1,
+      "total_bytes": 5507289,
+      "files": [
+        {
+          "path": "data/raw/papers/authgatebench-paper_2610.16426v1.pdf",
+          "bytes": 5507289,
+          "sha256": "de805776dba48d7ac9fcd39bf1876a7000184f28662660a782fc8e0a1c1814b6"
+        }
+      ],
+      "finished_at": "2026-10-17T01:35:04.503808+00:00"
+    },
+    {
+      "source": {
+        "key": "authorizationpairs-paper",
+        "kind": "arxiv_pdf",
+        "id": "2610.16838",
+        "revision": "v1",
+        "role": "paper",
+        "license": "cc-by-4.0",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:35:04.503838+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/papers/authorizationpairs-paper_2610.16838v1.pdf",
+      "file_count": 1,
+      "total_bytes": 418067,
+      "files": [
+        {
+          "path": "data/raw/papers/authorizationpairs-paper_2610.16838v1.pdf",
+          "bytes": 418067,
+          "sha256": "28da4ab182e567d02a554813e38b499b91bae808d2ffa14b7607ef0057f25ef9"
+        }
+      ],
+      "finished_at": "2026-10-17T01:35:04.690673+00:00"
+    },
+    {
+      "source": {
+        "key": "fortis-paper",
+        "kind": "arxiv_pdf",
+        "id": "2605.09163",
+        "revision": "v1",
+        "role": "paper",
+        "license": "arxiv-distribution",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:35:04.690702+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/papers/fortis-paper_2605.09163v1.pdf",
+      "file_count": 1,
+      "total_bytes": 621772,
+      "files": [
+        {
+          "path": "data/raw/papers/fortis-paper_2605.09163v1.pdf",
+          "bytes": 621772,
+          "sha256": "3d98ddfbdef3fd7508f26c259707cece243bba00d4537ecd482dd81c3a02c496"
+        }
+      ],
+      "finished_at": "2026-10-17T01:35:04.882001+00:00"
+    },
+    {
+      "source": {
+        "key": "safeclawbench-paper",
+        "kind": "arxiv_pdf",
+        "id": "2606.18356",
+        "revision": "v1",
+        "role": "paper",
+        "license": "arxiv-distribution",
+        "download": true
+      },
+      "started_at": "2026-10-17T01:35:04.882034+00:00",
+      "status": "GOT_DATA",
+      "target": "data/raw/papers/safeclawbench-paper_2606.18356v1.pdf",
+      "file_count": 1,
+      "total_bytes": 525742,
+      "files": [
+        {
+          "path": "data/raw/papers/safeclawbench-paper_2606.18356v1.pdf",
+          "bytes": 525742,
+          "sha256": "fa076ff53f82cd403a080fa9014c429bbb1257e3c4761055978d7d37f678516f"
+        }
+      ],
+      "finished_at": "2026-10-17T01:35:05.080369+00:00"
+    }
+  ]
+}

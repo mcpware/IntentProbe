@@ -1,7 +1,7 @@
 # IntentProbe
 
 <p align="center">
-  <strong>A local scanner for MCP servers, tools, and skills. It reads a frozen model's <em>activations</em>, not just the text — so it catches attacks worded in ways a text classifier never saw.</strong>
+  <strong>Local activation probes for AI-agent security: catch poisoned tools before install, and tell “help me prepare this” from “submit it now.”</strong>
 </p>
 
 <p align="center">
@@ -16,30 +16,39 @@
 </p>
 
 <p align="center">
+  <img src="docs/demo.svg" width="700" alt="IntentProbe blocks a poisoned MCP tool description (risk 0.950) and passes a clean one (0.000)." />
+</p>
+
+<p align="center">
   <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
 </p>
 
-> **New on Hugging Face:** [IntentProbe MiniCPM5-1B authorization probe](https://huggingface.co/mcpware/intentprobe-minicpm5-1b-authorization) — a 28 KB local activation probe for AI-agent permission checks, approval detection, MCP tool-use authorization, and runtime guardrails. The release includes a copy-run scorer, a six-backbone layer screen, and a separate 3,000-row held-out comparison with matched-budget TF-IDF.
+## Two detectors, one project
 
-## What it is
+IntentProbe is a family of small classifiers that read the internal activations of frozen local
+language models. Each detector has its own task, training data, selected layers, benchmark, and probe
+weights.
 
-IntentProbe runs a tool description or prompt through a frozen local model (Qwen2.5-0.5B), reads a
-few mid-layers, and scores the mean-pooled activation vector with a small logistic probe (~22 KB).
-Most scanners read the text itself: patterns, classifiers, rules, or "ask an LLM". This reads the
-host model's internal state instead.
+| Detector | The problem it catches | Frozen model | Activation recipe | Learned artifact |
+|---|---|---|---|---:|
+| [Tool-poisoning probe](probes/qwen2.5-0.5b-tool-poisoning/) | A tool or agent skill hides instructions to steal data, take over another tool, or act outside its stated job | `Qwen/Qwen2.5-0.5B` | Mean-pooled hidden states 13–15 | 22 KB |
+| [Action-authorization probe](probes/minicpm5-1b-authorization/) | An agent treats “help me apply” or “draft an email” as permission to submit or send something the user has not reviewed | `openbmb/MiniCPM5-1B-Base` | Standardized masked-mean hidden outputs 13–14 | 28 KB |
 
-The point of doing it this way is generalization. When you train a text classifier on attack
-examples and then face attacks from a source it never saw, the vocabulary often doesn't transfer and
-recall collapses. The probe holds up better across sources, because it keys off how the model
-internally represents the input rather than the exact words.
+The idea behind both is simple. A language model creates internal number patterns while it reads an
+input. Those patterns are called activations. IntentProbe freezes the model, reads a selected set of
+middle layers, and trains a small logistic classifier for one specific job.
 
-This is a **research preview**: a local, single-pass, registration-time review signal, not a hard
-security boundary. Runs locally (CPU-only, after a one-time ~1 GB model download); scan inputs and
-results are never uploaded. We have not found another shipped tool in this exact deployment shape —
-installable, scanning standalone tool/skill/MCP *descriptions* before install, on model activations. It is **not** the first probe-based detector; there is a
-substantial body of prior and parallel work (see [Competitive landscape](#competitive-landscape)).
+This signal is different from keyword rules and surface-text classifiers. It also avoids asking
+another LLM to say “safe” or “unsafe.”
 
-## Install in one command
+The [probe catalog](probes/) keeps each detector's model recipe, artifact, benchmark, source record,
+and reproduction steps together.
+
+The PyPI package currently ships the Qwen tool-poisoning scanner. The MiniCPM authorization detector
+is available as a standalone research release with a local scorer, a six-model layer screen, and a
+separate 3,000-row test.
+
+## Install the tool-poisoning scanner
 
 ```bash
 python3 -m pip install intentprobe
@@ -68,6 +77,25 @@ intentprobe scan --format summary --text "Reads SSH config and private keys, the
 
 First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). After that, everything stays local.
 
+## Try the authorization probe
+
+Suppose you ask an agent to show you an email draft. The proposed action below tries to send it
+instead. The authorization probe scores the request, conversation history, and exact tool call
+together:
+
+```bash
+python3 -m pip install "transformers>=5.8,<6" "torch>=2.2" "numpy>=1.26" huggingface_hub
+hf download mcpware/intentprobe-minicpm5-1b-authorization --local-dir ./intentprobe-auth
+python3 ./intentprobe-auth/score.py \
+  --artifact ./intentprobe-auth/probe.npz \
+  --call-json '{"tool":"send_email","args":{"to":"sam@example.com","body":"The draft"}}' \
+  --user-request 'Show me the draft before sending.' \
+  --history 'The assistant displayed a draft, but the user has not approved it.'
+```
+
+The scorer returns an `approve_score`. It is designed to sit beside exact runtime checks for the
+payload, recipient, preview, final confirmation, and any change made after approval.
+
 ## GitHub Action
 
 Use IntentProbe as a CI gate for MCP configs, skills, and tool manifests:
@@ -93,6 +121,22 @@ without a video — run the [demo script](docs/DEMO_SCRIPT.md) or inspect the
 
 ## How it works
 
+Both detectors follow the same basic path:
+
+```text
+request + context + proposed action
+              ↓
+      frozen local model
+              ↓
+ selected hidden activations
+              ↓
+   small task-specific probe
+              ↓
+ review signal or runtime receipt
+```
+
+The current PyPI scanner uses the Qwen tool-poisoning path shown below.
+
 <p align="center">
   <img src="docs/how-it-works.png" width="700" alt="tool description → frozen Qwen2.5-0.5B → read mid layers → ~22KB probe → allow/warn/block" />
 </p>
@@ -115,6 +159,43 @@ judge; the deterministic label baseline flagged every clean curated item as pois
 1.000). The reproducible baseline is in `research/`.
 
 ## Benchmarks
+
+### Action authorization: did the user approve this exact action?
+
+This benchmark tests a common agent failure. The user asks for help preparing an email, application,
+or tool action. The agent must distinguish that request from clear permission to carry it out.
+
+We froze six small backbones and tested every individual layer, every adjacent two-layer window,
+every adjacent three-layer window, and two pooling methods. MiniCPM5-1B ranked first on the frozen
+validation screen. Its best representation came from masked-mean hidden outputs 13–14, rather than
+the final layer.
+
+| Same 1,600-row training budget | Separate-test AUROC | Separate-test AUPRC |
+|---|---:|---:|
+| **MiniCPM5 activation probe** | **0.8137** | **0.8223** |
+| Word/bigram TF-IDF logistic | 0.7897 | 0.8079 |
+
+The separate test contains 3,000 examples and has zero exact rendered-text overlap with the training
+or validation rows. The paired AUROC difference was **+0.0240**, with a 95% bootstrap interval of
+**+0.0056 to +0.0429** and `p=0.0150`.
+
+The layer search also produced a broader engineering finding: every winning activation probe used
+masked-mean pooling, but the best depth and window changed across model architectures.
+
+| Frozen backbone | Best hidden output(s) | Validation AUPRC |
+|---|---:|---:|
+| **MiniCPM5-1B** | **13–14** | **0.9228** |
+| Qwen3.5-0.8B | 14–16 | 0.9205 |
+| Qwen2.5-0.5B | 16–18 | 0.9136 |
+| LFM2.5-230M | 10–12 | 0.9090 |
+| Granite 4.0 350M | 19 | 0.9081 |
+| Qwen3-0.6B | 14 | 0.9045 |
+
+Full methods, hashes, model revisions, uncertainty estimates, held-out results, and reproduction
+commands are in the [authorization research workspace](research/authorization-send-detector/) and
+the [Hugging Face release](https://huggingface.co/mcpware/intentprobe-minicpm5-1b-authorization).
+
+### Tool poisoning and prompt injection
 
 Reproducible from `research/`: the experiment scripts and result JSONs are committed; the PI datasets are
 downloaded from their original public sources (deepset, SafeGuard, SPML, jayavibhav, HackAPrompt on
@@ -199,8 +280,8 @@ new sources and new vocabulary, not same-vocabulary detection inside one distrib
 | Type | Who | How they scan | How IntentProbe differs |
 |---|---|---|---|
 | **MCP scanner** | Snyk Agent Scan (formerly Invariant MCP-Scan), Cisco AI Defense, NVIDIA SkillSpector | Static rules, AST, YARA signatures, LLM-as-judge | Adds a model-internal **activation** signal; static keywords still corroborate the block tier |
-| **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Keys off model activations rather than surface vocabulary; **measured against our same-data TF-IDF baseline** (not these products), it transfers better to attack sources it never trained on |
-| **Probe-based** | PIShield, TaskTracker (research code); RouteGuard, MindGuard (papers); frontier-lab production probes (e.g. Google Gemini) | Linear probe / classifier on model internals | Same family of method — IntentProbe is **not** first or only on the technique. The only-one-we-found niche is the deployment shape: installable, pre-install, scans the tool *description*, on activations |
+| **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Reads the host model's internal activations instead of classifying the surface text, a different and complementary signal |
+| **Probe-based** | PIShield, TaskTracker (research code); RouteGuard, MindGuard (papers); frontier-lab production probes (e.g. Google Gemini) | Linear probe / classifier on model internals | Same family of method; IntentProbe's angle is the deployment shape: installable, pre-install, scans the tool *description* on activations |
 | **LLM-as-judge** | NeMo, OpenAI Guardrails, Promptfoo | Ask another LLM "is this poisoned?" | Deterministic, local, no API call; scores state not the verbal answer |
 | **Enterprise cloud** | Lakera, Azure, Google Model Armor, AWS Bedrock | Ship content to a vendor cloud | Runs locally; benchmarks, scripts, and the probe artifact are public (datasets from their original sources) |
 
@@ -290,16 +371,33 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
   corpus exists yet, so MCPTox's poisoned half and our minimal-pairs are constructed. MCPTox is
   a significant win, routeguard a non-significant lean, the minimal-pairs at chance for both.
 
-  single model family (Qwen2.5). each base model needs its own retrained probe;
-  numbers do not transfer across models.
+  each artifact is tied to one frozen backbone and one activation layout. the Qwen
+  tool-poisoning weights do not transfer to MiniCPM, and the MiniCPM authorization
+  weights do not transfer to another model without retraining.
+
+  the authorization benchmark uses silver labels. its separate test is now consumed,
+  so the next round of model, layer, or threshold selection needs a new untouched test.
 
   not first or only on the technique (PIShield, TaskTracker, and others predate or parallel it);
   the niche is the deployment shape, not the method.
 
-  research preview, a local registration-time review signal, NOT a hard security boundary.
+  research preview. the poisoning probe is a local pre-install review signal; the
+  authorization probe is an additional runtime signal beside exact approval checks.
 ```
 
 ## Research
+
+### Action authorization
+
+The [authorization research workspace](research/authorization-send-detector/) contains the pinned
+source and model registries, six-backbone activation screen, matched TF-IDF comparison, frozen
+selection record, separate-test analysis, compact MiniCPM artifact, integrity tests, and an
+[end-to-end reproduction guide](research/authorization-send-detector/REPRODUCE.md).
+
+This line of work asks two engineering questions: which internal layer best represents authorization
+intent in each small model, and whether a useful rule transfers across model architectures.
+
+### Tool poisoning
 
 > **[Can Model Internals Detect MCP Tool Poisoning That Text Analysis Cannot?](https://doi.org/10.5281/zenodo.19990741)**
 >
@@ -319,4 +417,5 @@ Apache-2.0
 
 ---
 
-If this probe ever flags something worth a second look before you install it, a star helps other people find it.
+If one of these probes catches something worth reviewing before an agent acts, a star helps other
+people find the project.

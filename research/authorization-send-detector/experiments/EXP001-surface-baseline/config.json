@@ -1,0 +1,33 @@
+{
+  "experiment_id": "EXP001",
+  "as_of": "2026-10-16",
+  "hypothesis": "Surface text explains a substantial portion of public authorization labels.",
+  "train_source": "ProCreations/auto-1b-data@d265bbf7bac76cd55daaf81a1d185dfe089a412b:train.parquet",
+  "validation_source": "ProCreations/auto-1b-data@d265bbf7bac76cd55daaf81a1d185dfe089a412b:validation.parquet",
+  "test_source": "ProCreations/approve-or-deny@a38b625913dd46ca9702063f1597c979e6ace34e:test.parquet",
+  "positive_label": "approve",
+  "vectorizer": {
+    "type": "TfidfVectorizer",
+    "analyzer": "word",
+    "ngram_range": [1, 2],
+    "min_df": 3,
+    "max_df": 0.999,
+    "max_features": 200000,
+    "sublinear_tf": true,
+    "dtype": "float32"
+  },
+  "classifier": {
+    "type": "SGDClassifier",
+    "loss": "log_loss",
+    "class_weight": "balanced",
+    "average": true,
+    "max_iter": 30,
+    "tol": 0.0001,
+    "random_state": 42,
+    "alpha_grid": [0.000001, 0.00001, 0.0001]
+  },
+  "selection": "highest validation AUPRC; ties resolve to larger alpha",
+  "operating_threshold": "validation threshold with maximum TPR subject to FPR <= 0.01",
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 42
+}

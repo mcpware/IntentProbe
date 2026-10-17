@@ -37,6 +37,7 @@ thoughts/
 research/.venv-audit/
 research/.venv-bench/
 research/_results/
+research/_results_published/_emb_alllayers/*.npy
 research/audit_sources/
 research/audit_logs/
 research/arxiv/
@@ -44,6 +45,19 @@ research/datasets/MCPTox-Benchmark/
 research/datasets/external_raw/
 research/datasets/external_imports/
 research/datasets/external_normalized/
+research/authorization-send-detector/data/raw/
+research/authorization-send-detector/data/processed/
+research/authorization-send-detector/outputs/
+research/authorization-send-detector/.cache/
+research/memory-write-gate/data/raw/
+research/memory-write-gate/data/processed/
+research/memory-write-gate/outputs/
+research/memory-write-gate/.cache/
+
+# Private launch drafting and distribution notes. Public Hub release folders
+# under hf/ are staged explicitly.
+hf/humanizer/
+hf/DISTRIBUTION_PLAN.md
 
 # Shipped probe artifact. Keep only the tiny default probe in git.
 intentprobe/scanner/artifacts/*

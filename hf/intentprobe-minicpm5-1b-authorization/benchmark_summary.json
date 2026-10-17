@@ -1,0 +1,78 @@
+{
+  "schema": "intentprobe-authorization-benchmark-v1",
+  "experiment_id": "EXP002",
+  "status": "RESEARCH_ONLY_CALIBRATION_GATE_FAILED",
+  "artifact": {
+    "file": "probe.npz",
+    "bytes": 28708,
+    "sha256": "b105bfd0026716d25b393b6337e0252f7331afab60ed5b6a72ac76a13a5aa87f"
+  },
+  "method": {
+    "base_model": "openbmb/MiniCPM5-1B-Base",
+    "base_model_revision": "156170697656c48f69915b33a2fb44110242187c",
+    "backbone_frozen": true,
+    "pooling": "masked_mean",
+    "hidden_output_indices": [13, 14],
+    "layer_combine": "featurewise mean after per-layer train-only standardization",
+    "head": "class-weighted logistic regression",
+    "max_tokens": 192,
+    "training_rows": 1600,
+    "validation_rows": 800
+  },
+  "selection": {
+    "frozen_before_heldout_read": true,
+    "selection_metric": "validation_auprc",
+    "validation_auprc": 0.9227866747746696,
+    "frozen_selection_sha256": "1293df7db9a5d984faffd11d59217bd2651fbf4a3efc66527eae83dbf74c0181"
+  },
+  "heldout": {
+    "rows": 3000,
+    "approve_n": 1599,
+    "deny_n": 1401,
+    "exact_rendered_overlap_with_train": 0,
+    "exact_rendered_overlap_with_validation": 0,
+    "activation": {
+      "auprc": 0.8223098622891658,
+      "auprc_row_bootstrap_95ci": [0.8024215024252173, 0.8414256930606252],
+      "auroc": 0.8137259234559073,
+      "auroc_row_bootstrap_95ci": [0.798634799100703, 0.8290454173328651]
+    },
+    "matched_word_bigram_tfidf": {
+      "auprc": 0.8078664465343413,
+      "auprc_row_bootstrap_95ci": [0.787603980829738, 0.8281306450788726],
+      "auroc": 0.7897088606860372,
+      "auroc_row_bootstrap_95ci": [0.7728669419676745, 0.805103095513381]
+    },
+    "paired_activation_minus_tfidf": {
+      "auprc": 0.014443415754824551,
+      "auprc_row_bootstrap_95ci": [-0.005324288623696355, 0.03358794717641096],
+      "auprc_two_sided_bootstrap_p": 0.14392803598200898,
+      "auroc": 0.024017062769870146,
+      "auroc_row_bootstrap_95ci": [0.005569442530464855, 0.04286677759691618],
+      "auroc_two_sided_bootstrap_p": 0.014992503748125937,
+      "bootstrap_resamples": 2000
+    }
+  },
+  "calibration_gate": {
+    "passed": false,
+    "validation_5pct_threshold_heldout_false_approve_rate": 0.09493219129193434,
+    "validation_1pct_threshold_heldout_false_approve_rate": 0.05067808708065667
+  },
+  "cross_backbone_validation_screen": [
+    {"model": "openbmb/MiniCPM5-1B-Base", "outputs": [13, 14], "normalized_depth": 0.5625, "pooling": "masked_mean", "auprc": 0.9227866747746696},
+    {"model": "Qwen/Qwen3.5-0.8B", "outputs": [14, 15, 16], "normalized_depth": 0.625, "pooling": "masked_mean", "auprc": 0.920500643064016},
+    {"model": "Qwen/Qwen2.5-0.5B", "outputs": [16, 17, 18], "normalized_depth": 0.7083333333333334, "pooling": "masked_mean", "auprc": 0.9135694600152473},
+    {"model": "LiquidAI/LFM2.5-230M", "outputs": [10, 11, 12], "normalized_depth": 0.7857142857142857, "pooling": "masked_mean", "auprc": 0.9090441015752769},
+    {"model": "ibm-granite/granite-4.0-350m-base", "outputs": [19], "normalized_depth": 0.6785714285714286, "pooling": "masked_mean", "auprc": 0.908091916038041},
+    {"model": "Qwen/Qwen3-0.6B-Base", "outputs": [14], "normalized_depth": 0.5, "pooling": "masked_mean", "auprc": 0.9044565614326121}
+  ],
+  "provenance": {
+    "training_dataset": "ProCreations/auto-1b-data",
+    "training_dataset_revision": "d265bbf7bac76cd55daaf81a1d185dfe089a412b",
+    "heldout_dataset": "ProCreations/approve-or-deny",
+    "heldout_dataset_revision": "a38b625913dd46ca9702063f1597c979e6ace34e",
+    "heldout_result_sha256": "19354ce783ac0cac3da7cab69a9326d5dd8f0d491528058dc3332eca3ccc2b0e",
+    "screen_leaderboard_sha256": "e813ae01f24c76a9055bdde45bc4184b63bd7c0682b960f7e911882017fb7dd9"
+  }
+}
+

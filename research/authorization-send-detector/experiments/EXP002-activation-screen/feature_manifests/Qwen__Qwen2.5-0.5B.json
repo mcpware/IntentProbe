@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "weight_bytes": 988097824,
+    "phase": "screen",
+    "role": "existing anchor",
+    "license": "apache-2.0",
+    "architecture_note": "dense causal LM"
+  },
+  "model_class": "Qwen2Model",
+  "started_at": "2026-10-17T02:49:48.407403+00:00",
+  "batch_size": 8,
+  "max_tokens": 192,
+  "load_seconds": 1.2132129818201065,
+  "splits": {
+    "train": {
+      "input_path": "data/processed/exp002/train.parquet",
+      "input_sha256": "9df0307cad51321e039531dc812ade6f26503b9554abd48957e5811ce88c0630",
+      "rows": 1600,
+      "hidden_state_count": 25,
+      "hidden_size": 896,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/train_masked_mean.npy",
+          "bytes": 71680128,
+          "sha256": "a71b3de8d6e79bd0ecd162ba32e3b6afff5c070bf430eef114344db051fef5d6"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/train_last_nonpadding.npy",
+          "bytes": 71680128,
+          "sha256": "3e9add89b46ba42b85eac51ff51df2d01a46f17a843611177d7327ba759708a2"
+        }
+      },
+      "elapsed_seconds": 370.3567851590924
+    },
+    "validation": {
+      "input_path": "data/processed/exp002/validation.parquet",
+      "input_sha256": "de70dddbe5ae2ba0d71629758c1dffc2d632803457dcab9d9f40e939ce9de80b",
+      "rows": 800,
+      "hidden_state_count": 25,
+      "hidden_size": 896,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/validation_masked_mean.npy",
+          "bytes": 35840128,
+          "sha256": "91e6d8e694fa87680711cc069f53c194a52c103b47db0313b05d88b84c8ab90e"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/Qwen__Qwen2.5-0.5B/validation_last_nonpadding.npy",
+          "bytes": 35840128,
+          "sha256": "bbc17c7ea1b569a3a81598d5178b054672beb71f4cfa8d6327efd58e53efbad7"
+        }
+      },
+      "elapsed_seconds": 194.06121256295592
+    }
+  },
+  "status": "COMPLETED",
+  "finished_at": "2026-10-17T02:59:12.825443+00:00",
+  "peak_rss_kib": 4014880
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "openbmb/MiniCPM5-1B-Base",
+    "revision": "156170697656c48f69915b33a2fb44110242187c",
+    "weight_bytes": 2161290944,
+    "phase": "extended",
+    "role": "upper end of ordinary-CPU core range",
+    "license": "apache-2.0",
+    "architecture_note": "Llama-compatible causal LM"
+  },
+  "model_class": "LlamaModel",
+  "started_at": "2026-10-17T04:01:23.482965+00:00",
+  "batch_size": 8,
+  "max_tokens": 192,
+  "load_seconds": 2.6233416709583253,
+  "splits": {
+    "train": {
+      "input_path": "data/processed/exp002/train.parquet",
+      "input_sha256": "9df0307cad51321e039531dc812ade6f26503b9554abd48957e5811ce88c0630",
+      "rows": 1600,
+      "hidden_state_count": 25,
+      "hidden_size": 1536,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/openbmb__MiniCPM5-1B-Base/train_masked_mean.npy",
+          "bytes": 122880128,
+          "sha256": "5e8d70aca24e5122420eee1bd7d16fd8be3e3fcabe62277a0d45aa05d821c75e"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/openbmb__MiniCPM5-1B-Base/train_last_nonpadding.npy",
+          "bytes": 122880128,
+          "sha256": "3ee92742e2f512dc52365ad2521f1aa125687081016b762341692810e3f2d2d4"
+        }
+      },
+      "elapsed_seconds": 646.8419030008372
+    },
+    "validation": {
+      "input_path": "data/processed/exp002/validation.parquet",
+      "input_sha256": "de70dddbe5ae2ba0d71629758c1dffc2d632803457dcab9d9f40e939ce9de80b",
+      "rows": 800,
+      "hidden_state_count": 25,
+      "hidden_size": 1536,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/openbmb__MiniCPM5-1B-Base/validation_masked_mean.npy",
+          "bytes": 61440128,
+          "sha256": "dcd879d8bcb058bcf75d8117d29a134455b2a8162204708a768a398fff96b083"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/openbmb__MiniCPM5-1B-Base/validation_last_nonpadding.npy",
+          "bytes": 61440128,
+          "sha256": "5181eafa45311d16b6f4e45a551dd441aa168ddccc33b2e27732c39bbca9681c"
+        }
+      },
+      "elapsed_seconds": 321.68348063202575
+    }
+  },
+  "status": "COMPLETED",
+  "finished_at": "2026-10-17T04:17:32.008391+00:00",
+  "peak_rss_kib": 5825852
+}

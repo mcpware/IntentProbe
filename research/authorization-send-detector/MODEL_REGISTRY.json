@@ -1,0 +1,88 @@
+{
+  "as_of": "2026-10-16",
+  "hardware_target": "CPU-only ordinary computer; current host has about 30 GiB RAM",
+  "weight_download_policy": "Pinned here; download only when a model enters an experiment phase.",
+  "models": [
+    {
+      "id": "Qwen/Qwen2.5-0.5B",
+      "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+      "weight_bytes": 988097824,
+      "phase": "screen",
+      "role": "existing anchor",
+      "license": "apache-2.0",
+      "architecture_note": "dense causal LM"
+    },
+    {
+      "id": "LiquidAI/LFM2.5-230M",
+      "revision": "40cb2ad3b3044d5a41eee083a6103c8b523afa45",
+      "weight_bytes": 459401112,
+      "phase": "screen",
+      "role": "smallest current hybrid candidate",
+      "license": "custom-lfm",
+      "architecture_note": "hybrid; release use requires license review"
+    },
+    {
+      "id": "ibm-granite/granite-4.0-350m-base",
+      "revision": "a50b46cef21c8a86b15f0496cb794487a78a910b",
+      "weight_bytes": 704786224,
+      "phase": "screen",
+      "role": "Apache edge/offline candidate",
+      "license": "apache-2.0",
+      "architecture_note": "Granite MoE hybrid causal LM"
+    },
+    {
+      "id": "Qwen/Qwen3-0.6B-Base",
+      "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+      "weight_bytes": 1192135096,
+      "phase": "screen",
+      "role": "current Qwen successor",
+      "license": "apache-2.0",
+      "architecture_note": "dense causal LM"
+    },
+    {
+      "id": "tiiuae/Falcon-H1-0.5B-Base",
+      "revision": "59fb76e8c5d3fc7441b062be638e1ba0afd5c687",
+      "weight_bytes": 1042886408,
+      "phase": "extended",
+      "role": "Transformer/Mamba architecture test",
+      "license": "custom-falcon",
+      "architecture_note": "hybrid; release use requires license review"
+    },
+    {
+      "id": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "weight_bytes": 1746942600,
+      "phase": "extended",
+      "role": "DeltaNet/MoE architecture test",
+      "license": "apache-2.0",
+      "architecture_note": "multimodal conditional-generation wrapper; benchmark text backbone only"
+    },
+    {
+      "id": "openbmb/MiniCPM5-1B-Base",
+      "revision": "156170697656c48f69915b33a2fb44110242187c",
+      "weight_bytes": 2161290944,
+      "phase": "extended",
+      "role": "upper end of ordinary-CPU core range",
+      "license": "apache-2.0",
+      "architecture_note": "Llama-compatible causal LM"
+    },
+    {
+      "id": "ProCreations/auto-0.4b",
+      "revision": "2f6ec6ca79d733fa8c1677676a77cc85b739f0d2",
+      "weight_bytes": 791684972,
+      "phase": "baseline",
+      "role": "dedicated authorization encoder baseline",
+      "license": "apache-2.0",
+      "architecture_note": "ModernBERT classifier"
+    },
+    {
+      "id": "ProCreations/auto-1b",
+      "revision": "69f939a9c026e4811f8526897ad2498f65bdf8fa",
+      "weight_bytes": 4125087736,
+      "phase": "baseline",
+      "role": "strong dedicated authorization encoder baseline",
+      "license": "apache-2.0",
+      "architecture_note": "Ettin/ModernBERT encoder classifier"
+    }
+  ]
+}

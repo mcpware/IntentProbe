@@ -1,0 +1,40 @@
+{
+  "experiment_id": "EXP002",
+  "baseline": "word_1_2_tfidf_logistic",
+  "completed_at": "2026-10-17T02:53:34.866945+00:00",
+  "train_rows": 1600,
+  "validation_rows": 800,
+  "vocabulary_size": 35587,
+  "metrics": {
+    "n": 800,
+    "approve_n": 399,
+    "deny_n": 401,
+    "auroc": 0.8873555459721623,
+    "auprc": 0.8865965486222571,
+    "balanced_accuracy_at_0_5": 0.7974737342108388,
+    "f1_at_0_5": 0.7949367088607595,
+    "brier": 0.1750498061444086,
+    "recall_at_5pct_false_approve": {
+      "max_fpr": 0.05,
+      "recall": 0.506265664160401,
+      "achieved_fpr": 0.04738154613466334,
+      "threshold": 0.5961660552883777
+    },
+    "recall_at_1pct_false_approve": {
+      "max_fpr": 0.01,
+      "recall": 0.2982456140350877,
+      "achieved_fpr": 0.00997506234413965,
+      "threshold": 0.6588680316633306
+    },
+    "auroc_row_bootstrap_95ci": [
+      0.8650529770276606,
+      0.907891486737415
+    ],
+    "auprc_row_bootstrap_95ci": [
+      0.8571957832089654,
+      0.913421429902039
+    ]
+  },
+  "elapsed_seconds": 8.465466036926955,
+  "peak_rss_kib": 1897212
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "ibm-granite/granite-4.0-350m-base",
+    "revision": "a50b46cef21c8a86b15f0496cb794487a78a910b",
+    "weight_bytes": 704786224,
+    "phase": "screen",
+    "role": "Apache edge/offline candidate",
+    "license": "apache-2.0",
+    "architecture_note": "Granite MoE hybrid causal LM"
+  },
+  "model_class": "GraniteMoeHybridModel",
+  "started_at": "2026-10-17T03:07:22.678638+00:00",
+  "batch_size": 16,
+  "max_tokens": 192,
+  "load_seconds": 0.9799715608824044,
+  "splits": {
+    "train": {
+      "input_path": "data/processed/exp002/train.parquet",
+      "input_sha256": "9df0307cad51321e039531dc812ade6f26503b9554abd48957e5811ce88c0630",
+      "rows": 1600,
+      "hidden_state_count": 29,
+      "hidden_size": 1024,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/ibm-granite__granite-4.0-350m-base/train_masked_mean.npy",
+          "bytes": 95027328,
+          "sha256": "90b6f6590974432838cbb602fbb2c77cbbb6618c7dacc1eb6b56bc8bf415599b"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/ibm-granite__granite-4.0-350m-base/train_last_nonpadding.npy",
+          "bytes": 95027328,
+          "sha256": "40f1dd4b5e08c7b19b1be2242d110da0f3e474b449235db441c85e60da13bc02"
+        }
+      },
+      "elapsed_seconds": 309.5179185750894
+    },
+    "validation": {
+      "input_path": "data/processed/exp002/validation.parquet",
+      "input_sha256": "de70dddbe5ae2ba0d71629758c1dffc2d632803457dcab9d9f40e939ce9de80b",
+      "rows": 800,
+      "hidden_state_count": 29,
+      "hidden_size": 1024,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/ibm-granite__granite-4.0-350m-base/validation_masked_mean.npy",
+          "bytes": 47513728,
+          "sha256": "fefdf2702dde40e5a9c71002ad9324e62ddd0bf97fa80ad399afc36f38e73185"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/ibm-granite__granite-4.0-350m-base/validation_last_nonpadding.npy",
+          "bytes": 47513728,
+          "sha256": "e8cf83710c51b5227b4d0bd6e3281b7fe94491e16f7ebe3105d19363022b1dba"
+        }
+      },
+      "elapsed_seconds": 140.94190874090418
+    }
+  },
+  "status": "COMPLETED",
+  "finished_at": "2026-10-17T03:14:53.138511+00:00",
+  "peak_rss_kib": 3587180
+}

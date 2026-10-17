@@ -42,3 +42,7 @@ include = ["intentprobe*"]
 
 [tool.setuptools.package-data]
 intentprobe = ["scanner/artifacts/**/*.json", "scanner/artifacts/**/*.npz"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

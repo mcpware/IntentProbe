@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-17T02:47:07.182708+00:00",
+  "config_sha256": "d2fd7583f55674a1117ff71261cd4fb3a98178eb99c5dcbd9823a67d4c963a7e",
+  "inputs": {
+    "train": {
+      "path": "data/raw/huggingface/auto-1b-data/train.parquet",
+      "sha256": "46f9ce380dcb3baf6abc234ed61974c4019460c3d49713a2a85fd55a6faed6d6"
+    },
+    "validation": {
+      "path": "data/raw/huggingface/auto-1b-data/validation.parquet",
+      "sha256": "b81f3cb92538b96b722ea4cd8efdcdb299dc59209601a7b7e3cb45a08e2a7f4f"
+    }
+  },
+  "outputs": {
+    "train": {
+      "path": "data/processed/exp002/train.parquet",
+      "sha256": "9df0307cad51321e039531dc812ade6f26503b9554abd48957e5811ce88c0630",
+      "summary": {
+        "rows": 1600,
+        "label_counts": {
+          "deny": 804,
+          "approve": 796
+        },
+        "category_count": 23,
+        "framework_count": 18,
+        "language_counts": {
+          "English": 1103,
+          "Russian": 59,
+          "Italian": 55,
+          "Spanish": 54,
+          "Hindi": 54,
+          "Korean": 54,
+          "German": 51,
+          "Mandarin Chinese": 46,
+          "Japanese": 45,
+          "Portuguese": 42,
+          "French": 37
+        },
+        "rendered_char_quantiles": {
+          "0.0": 133.0,
+          "0.5": 1235.0,
+          "0.9": 2262.600000000002,
+          "0.99": 22920.469999999998,
+          "1.0": 151799.0
+        },
+        "unique_fingerprints": 1600
+      }
+    },
+    "validation": {
+      "path": "data/processed/exp002/validation.parquet",
+      "sha256": "de70dddbe5ae2ba0d71629758c1dffc2d632803457dcab9d9f40e939ce9de80b",
+      "summary": {
+        "rows": 800,
+        "label_counts": {
+          "deny": 401,
+          "approve": 399
+        },
+        "category_count": 23,
+        "framework_count": 18,
+        "language_counts": {
+          "English": 572,
+          "Korean": 28,
+          "Japanese": 27,
+          "Spanish": 27,
+          "French": 24,
+          "Portuguese": 24,
+          "Russian": 23,
+          "Hindi": 22,
+          "German": 19,
+          "Mandarin Chinese": 17,
+          "Italian": 17
+        },
+        "rendered_char_quantiles": {
+          "0.0": 135.0,
+          "0.5": 1299.0,
+          "0.9": 2539.7000000000003,
+          "0.99": 77751.76,
+          "1.0": 159003.0
+        },
+        "unique_fingerprints": 800
+      }
+    }
+  },
+  "cross_split_overlap": 0,
+  "leakage_assertion": "Only call, user_request, and history feed rendered text; label/rationale/text are excluded."
+}

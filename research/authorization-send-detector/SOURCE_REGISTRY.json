@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-16",
+  "sources": [
+    {
+      "key": "auto-1b-data",
+      "kind": "huggingface_dataset",
+      "id": "ProCreations/auto-1b-data",
+      "revision": "d265bbf7bac76cd55daaf81a1d185dfe089a412b",
+      "expected_bytes": 1109811493,
+      "role": "silver_train",
+      "license": "apache-2.0",
+      "download": true
+    },
+    {
+      "key": "approve-or-deny",
+      "kind": "huggingface_dataset",
+      "id": "ProCreations/approve-or-deny",
+      "revision": "a38b625913dd46ca9702063f1597c979e6ace34e",
+      "expected_bytes": 26121133,
+      "role": "silver_heldout",
+      "license": "apache-2.0",
+      "download": true
+    },
+    {
+      "key": "authorizationpairs",
+      "kind": "huggingface_dataset",
+      "id": "Egbertjing/authorizationpairs",
+      "revision": "3af4e426ed1fe4f4327a1852422cb46172cba10f",
+      "expected_bytes": 13644312,
+      "role": "external_eval",
+      "license": "apache-2.0",
+      "download": true
+    },
+    {
+      "key": "safeclawbench",
+      "kind": "huggingface_dataset",
+      "id": "sairights/safeclawbench",
+      "revision": "e6c29204c24a5910600aae854baae57a51586655",
+      "expected_bytes": 3744775,
+      "role": "external_eval_only",
+      "license": "mit",
+      "download": true
+    },
+    {
+      "key": "compass",
+      "kind": "huggingface_dataset",
+      "id": "AIM-Intelligence/COMPASS-Policy-Alignment-Testbed-Dataset",
+      "revision": "b96038806b975a69cfefaac001f3ebfad25ba834",
+      "expected_bytes": 2560387,
+      "role": "auxiliary_policy_eval",
+      "license": "cc-by-4.0",
+      "download": true
+    },
+    {
+      "key": "agentcibench",
+      "kind": "huggingface_dataset",
+      "id": "UKPLab/agentcibench",
+      "revision": "f5523cb986828ee77bc505120a933f114bbcf4f3",
+      "expected_bytes": 440638,
+      "role": "auxiliary_privacy_eval",
+      "license": "cc-by-4.0",
+      "download": true
+    },
+    {
+      "key": "nvidia-agentic-ipi",
+      "kind": "huggingface_dataset",
+      "id": "nvidia/Nemotron-RL-Agentic-Indirect-Prompt-Injection-v1",
+      "revision": "d738d4f361cc38bb4d7a42b9066776dade5332f5",
+      "expected_bytes": 11719170,
+      "role": "positive_attack_pool",
+      "license": "cc-by-4.0",
+      "download": true
+    },
+    {
+      "key": "fortis",
+      "kind": "huggingface_dataset",
+      "id": "ShawnLi02/FORTIS_Agent_Skill_Safety",
+      "revision": "4867c6d1d2d91348ef180555d6c8c9d3e28226a2",
+      "expected_bytes": 1315737,
+      "role": "quarantine_eval",
+      "license": "unclear",
+      "download": true
+    },
+    {
+      "key": "agent-safety-bench",
+      "kind": "huggingface_dataset",
+      "id": "thu-coai/Agent-SafetyBench",
+      "revision": "3c60d5aa0af6a5c817b4ea4856e72f252e283bb7",
+      "expected_bytes": 2880141,
+      "role": "auxiliary_safety_eval",
+      "license": "mit",
+      "download": true
+    },
+    {
+      "key": "authorizationpairs-code",
+      "kind": "github_repo",
+      "id": "HKUST-KnowComp/authorizationpairs-eval",
+      "revision": "024a8d8e27a606d56c790a43e885f9ab9a471b6a",
+      "role": "evaluation_code",
+      "license": "apache-2.0",
+      "download": true
+    },
+    {
+      "key": "authgatebench-paper",
+      "kind": "arxiv_pdf",
+      "id": "2610.16426",
+      "revision": "v1",
+      "role": "paper",
+      "license": "arxiv-distribution",
+      "download": true
+    },
+    {
+      "key": "authorizationpairs-paper",
+      "kind": "arxiv_pdf",
+      "id": "2610.16838",
+      "revision": "v1",
+      "role": "paper",
+      "license": "cc-by-4.0",
+      "download": true
+    },
+    {
+      "key": "fortis-paper",
+      "kind": "arxiv_pdf",
+      "id": "2605.09163",
+      "revision": "v1",
+      "role": "paper",
+      "license": "arxiv-distribution",
+      "download": true
+    },
+    {
+      "key": "safeclawbench-paper",
+      "kind": "arxiv_pdf",
+      "id": "2606.18356",
+      "revision": "v1",
+      "role": "paper",
+      "license": "arxiv-distribution",
+      "download": true
+    }
+  ]
+}

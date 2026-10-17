@@ -1,0 +1,34 @@
+{
+  "model": {
+    "id": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "weight_bytes": 1746942600,
+    "phase": "extended",
+    "role": "DeltaNet/MoE architecture test",
+    "license": "apache-2.0",
+    "architecture_note": "multimodal conditional-generation wrapper; benchmark text backbone only"
+  },
+  "started_at": "2026-10-17T02:48:38.298458+00:00",
+  "status": "PASS",
+  "model_class": "Qwen3_5Model",
+  "model_type": "qwen3_5",
+  "hidden_state_count": 25,
+  "first_last_shapes": [
+    [
+      4,
+      32,
+      1024
+    ],
+    [
+      4,
+      32,
+      1024
+    ]
+  ],
+  "hidden_dtype": "torch.bfloat16",
+  "load_seconds": 2.7863278391305357,
+  "forward_seconds": 0.4424289860762656,
+  "finished_at": "2026-10-17T02:48:42.115566+00:00",
+  "elapsed_seconds": 3.817115877987817,
+  "peak_rss_kib": 2270284
+}

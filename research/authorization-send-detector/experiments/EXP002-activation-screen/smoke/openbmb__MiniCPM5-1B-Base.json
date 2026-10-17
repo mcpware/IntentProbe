@@ -1,0 +1,34 @@
+{
+  "model": {
+    "id": "openbmb/MiniCPM5-1B-Base",
+    "revision": "156170697656c48f69915b33a2fb44110242187c",
+    "weight_bytes": 2161290944,
+    "phase": "extended",
+    "role": "upper end of ordinary-CPU core range",
+    "license": "apache-2.0",
+    "architecture_note": "Llama-compatible causal LM"
+  },
+  "started_at": "2026-10-17T02:48:45.771801+00:00",
+  "status": "PASS",
+  "model_class": "LlamaModel",
+  "model_type": "llama",
+  "hidden_state_count": 25,
+  "first_last_shapes": [
+    [
+      4,
+      32,
+      1536
+    ],
+    [
+      4,
+      32,
+      1536
+    ]
+  ],
+  "hidden_dtype": "torch.bfloat16",
+  "load_seconds": 2.724959086161107,
+  "forward_seconds": 0.2586817480623722,
+  "finished_at": "2026-10-17T02:48:49.665909+00:00",
+  "elapsed_seconds": 3.8941172999329865,
+  "peak_rss_kib": 2315128
+}

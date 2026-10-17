@@ -1,0 +1,34 @@
+{
+  "model": {
+    "id": "ProCreations/auto-0.4b",
+    "revision": "2f6ec6ca79d733fa8c1677676a77cc85b739f0d2",
+    "weight_bytes": 791684972,
+    "phase": "baseline",
+    "role": "dedicated authorization encoder baseline",
+    "license": "apache-2.0",
+    "architecture_note": "ModernBERT classifier"
+  },
+  "started_at": "2026-10-17T02:48:53.345819+00:00",
+  "status": "PASS",
+  "model_class": "ModernBertModel",
+  "model_type": "modernbert",
+  "hidden_state_count": 29,
+  "first_last_shapes": [
+    [
+      4,
+      32,
+      1024
+    ],
+    [
+      4,
+      32,
+      1024
+    ]
+  ],
+  "hidden_dtype": "torch.bfloat16",
+  "load_seconds": 0.4071269209962338,
+  "forward_seconds": 0.37512995512224734,
+  "finished_at": "2026-10-17T02:48:54.342029+00:00",
+  "elapsed_seconds": 0.9962304451037198,
+  "peak_rss_kib": 1543180
+}

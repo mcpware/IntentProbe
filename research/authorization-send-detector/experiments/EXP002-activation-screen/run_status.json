@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "activation_models": {
+    "tiiuae/Falcon-H1-0.5B-Base": {
+      "status": "CPU_INFEASIBLE",
+      "environment": "Ryzen 5 PRO 7540U, 6 physical cores, no NVIDIA GPU",
+      "reason": "Transformers reported that selective_state_update, causal_conv1d_fn, and causal_conv1d_update were unavailable and used the naive implementation.",
+      "attempt": {
+        "batch_size": 16,
+        "max_tokens": 192,
+        "elapsed_seconds_before_interrupt": 151,
+        "completed_rows": 0,
+        "observed_cpu_percent": 443,
+        "observed_rss_kib": 11283552
+      },
+      "ranking_policy": "Excluded from accuracy ranking because no full, comparable feature matrix was produced; retained as a deployment-feasibility failure."
+    }
+  }
+}

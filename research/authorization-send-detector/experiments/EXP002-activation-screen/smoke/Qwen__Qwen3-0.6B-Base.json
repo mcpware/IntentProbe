@@ -1,0 +1,34 @@
+{
+  "model": {
+    "id": "Qwen/Qwen3-0.6B-Base",
+    "revision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+    "weight_bytes": 1192135096,
+    "phase": "screen",
+    "role": "current Qwen successor",
+    "license": "apache-2.0",
+    "architecture_note": "dense causal LM"
+  },
+  "started_at": "2026-10-17T02:48:10.733722+00:00",
+  "status": "PASS",
+  "model_class": "Qwen3Model",
+  "model_type": "qwen3",
+  "hidden_state_count": 29,
+  "first_last_shapes": [
+    [
+      4,
+      32,
+      1024
+    ],
+    [
+      4,
+      32,
+      1024
+    ]
+  ],
+  "hidden_dtype": "torch.bfloat16",
+  "load_seconds": 2.179888793034479,
+  "forward_seconds": 0.25075149978511035,
+  "finished_at": "2026-10-17T02:48:13.509940+00:00",
+  "elapsed_seconds": 2.7762429928407073,
+  "peak_rss_kib": 1812024
+}

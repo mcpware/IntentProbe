@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "weight_bytes": 1746942600,
+    "phase": "extended",
+    "role": "DeltaNet/MoE architecture test",
+    "license": "apache-2.0",
+    "architecture_note": "multimodal conditional-generation wrapper; benchmark text backbone only"
+  },
+  "model_class": "Qwen3_5Model",
+  "started_at": "2026-10-17T03:38:47.055428+00:00",
+  "batch_size": 8,
+  "max_tokens": 192,
+  "load_seconds": 2.109234963078052,
+  "splits": {
+    "train": {
+      "input_path": "data/processed/exp002/train.parquet",
+      "input_sha256": "9df0307cad51321e039531dc812ade6f26503b9554abd48957e5811ce88c0630",
+      "rows": 1600,
+      "hidden_state_count": 25,
+      "hidden_size": 1024,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/Qwen__Qwen3.5-0.8B/train_masked_mean.npy",
+          "bytes": 81920128,
+          "sha256": "ec7c8d065b0d50a5410e3c0f6e75d1e704380b7ed1439a5c821cc6a9054bf872"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/Qwen__Qwen3.5-0.8B/train_last_nonpadding.npy",
+          "bytes": 81920128,
+          "sha256": "19a2e518e03b82671fea5863d211f229c35c1d9696122382b32e97bc1ad9ffb3"
+        }
+      },
+      "elapsed_seconds": 832.4765259460546
+    },
+    "validation": {
+      "input_path": "data/processed/exp002/validation.parquet",
+      "input_sha256": "de70dddbe5ae2ba0d71629758c1dffc2d632803457dcab9d9f40e939ce9de80b",
+      "rows": 800,
+      "hidden_state_count": 25,
+      "hidden_size": 1024,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/Qwen__Qwen3.5-0.8B/validation_masked_mean.npy",
+          "bytes": 40960128,
+          "sha256": "b47547f80b54e4eee3e5aafadf26271dc53e657e561328d557d0d436065b5114"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/Qwen__Qwen3.5-0.8B/validation_last_nonpadding.npy",
+          "bytes": 40960128,
+          "sha256": "302e9ea6dec552dc50c90d834e457be818bdd96fd9ddda2921ef0caba929c463"
+        }
+      },
+      "elapsed_seconds": 390.32146594300866
+    }
+  },
+  "status": "COMPLETED",
+  "finished_at": "2026-10-17T03:59:09.853459+00:00",
+  "peak_rss_kib": 6264596
+}

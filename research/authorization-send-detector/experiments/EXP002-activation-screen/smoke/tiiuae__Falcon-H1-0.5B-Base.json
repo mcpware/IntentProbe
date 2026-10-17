@@ -1,0 +1,34 @@
+{
+  "model": {
+    "id": "tiiuae/Falcon-H1-0.5B-Base",
+    "revision": "59fb76e8c5d3fc7441b062be638e1ba0afd5c687",
+    "weight_bytes": 1042886408,
+    "phase": "extended",
+    "role": "Transformer/Mamba architecture test",
+    "license": "custom-falcon",
+    "architecture_note": "hybrid; release use requires license review"
+  },
+  "started_at": "2026-10-17T02:48:17.174990+00:00",
+  "status": "PASS",
+  "model_class": "FalconH1Model",
+  "model_type": "falcon_h1",
+  "hidden_state_count": 37,
+  "first_last_shapes": [
+    [
+      4,
+      32,
+      1024
+    ],
+    [
+      4,
+      32,
+      1024
+    ]
+  ],
+  "hidden_dtype": "torch.bfloat16",
+  "load_seconds": 2.318809072021395,
+  "forward_seconds": 15.045534004922956,
+  "finished_at": "2026-10-17T02:48:34.701846+00:00",
+  "elapsed_seconds": 17.526867205044255,
+  "peak_rss_kib": 3100456
+}

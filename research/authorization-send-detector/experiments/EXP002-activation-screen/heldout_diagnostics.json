@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "descriptive_only_no_test_tuning": true,
+  "activation": {
+    "validation": {
+      "prevalence": 0.49875,
+      "mean_prediction": 0.4909093357284331,
+      "calibration_in_the_large": -0.007840664271566933,
+      "brier": 0.12638754237974203,
+      "deny_score_quantiles": {
+        "p05": 5.7103792878377825e-08,
+        "p50": 0.0031718231051391897,
+        "p95": 0.9680430296843242
+      },
+      "approve_score_quantiles": {
+        "p05": 0.016470241935244514,
+        "p50": 0.9947758336739247,
+        "p95": 0.9999989551815289
+      }
+    },
+    "heldout": {
+      "prevalence": 0.533,
+      "mean_prediction": 0.4661701698165882,
+      "calibration_in_the_large": -0.06682983018341182,
+      "brier": 0.2223196302926284,
+      "deny_score_quantiles": {
+        "p05": 1.9044392749850073e-07,
+        "p50": 0.00880871445248975,
+        "p95": 0.9964334538429086
+      },
+      "approve_score_quantiles": {
+        "p05": 0.0011022386329710896,
+        "p50": 0.9352108477346911,
+        "p95": 0.9999976879246633
+      }
+    }
+  },
+  "surface": {
+    "validation": {
+      "prevalence": 0.49875,
+      "mean_prediction": 0.4996381489705703,
+      "calibration_in_the_large": 0.0008881489705702683,
+      "brier": 0.1750498061444086,
+      "deny_score_quantiles": {
+        "p05": 0.2418649447362875,
+        "p50": 0.3970321940951772,
+        "p95": 0.594647217141984
+      },
+      "approve_score_quantiles": {
+        "p05": 0.4098918221188122,
+        "p50": 0.5964481311413083,
+        "p95": 0.783236733011605
+      }
+    },
+    "heldout": {
+      "prevalence": 0.533,
+      "mean_prediction": 0.474125244200855,
+      "calibration_in_the_large": -0.05887475579914503,
+      "brier": 0.21072243052088174,
+      "deny_score_quantiles": {
+        "p05": 0.27905684500450456,
+        "p50": 0.4179504187845709,
+        "p95": 0.5644132303548028
+      },
+      "approve_score_quantiles": {
+        "p05": 0.3708136256471308,
+        "p50": 0.5139629744489658,
+        "p95": 0.6981150459731381
+      }
+    }
+  },
+  "heldout_score_spearman": 0.4946724456302717,
+  "heldout_subgroups": {
+    "difficulty": [
+      {
+        "value": "easy",
+        "n": 870,
+        "approve_n": 533,
+        "activation_auprc": 0.859696845468234,
+        "surface_auprc": 0.8561902230444298,
+        "auprc_delta": 0.003506622423804173,
+        "activation_auroc": 0.8132679363771497,
+        "surface_auroc": 0.7951742836305332,
+        "auroc_delta": 0.01809365274661645
+      },
+      {
+        "value": "hard",
+        "n": 1065,
+        "approve_n": 533,
+        "activation_auprc": 0.7933479764313554,
+        "surface_auprc": 0.7731910059882163,
+        "auprc_delta": 0.020156970443139022,
+        "activation_auroc": 0.8023635542890999,
+        "surface_auroc": 0.7801175076528093,
+        "auroc_delta": 0.022246046636290595
+      },
+      {
+        "value": "medium",
+        "n": 1065,
+        "approve_n": 533,
+        "activation_auprc": 0.8198232077017871,
+        "surface_auprc": 0.8020306154708164,
+        "auprc_delta": 0.017792592230970627,
+        "activation_auroc": 0.8252549760893793,
+        "surface_auroc": 0.7970489074468535,
+        "auroc_delta": 0.028206068642525728
+      }
+    ],
+    "lang": [
+      {
+        "value": "English",
+        "n": 2104,
+        "approve_n": 1128,
+        "activation_auprc": 0.8232077570627439,
+        "surface_auprc": 0.8212928898383459,
+        "auprc_delta": 0.0019148672243979314,
+        "activation_auroc": 0.8155456124287874,
+        "surface_auroc": 0.8069683031042902,
+        "auroc_delta": 0.008577309324497184
+      },
+      {
+        "value": "French",
+        "n": 91,
+        "approve_n": 46,
+        "activation_auprc": 0.8015229775970528,
+        "surface_auprc": 0.7611594340376439,
+        "auprc_delta": 0.040363543559408965,
+        "activation_auroc": 0.7922705314009661,
+        "surface_auroc": 0.7270531400966184,
+        "auroc_delta": 0.06521739130434778
+      },
+      {
+        "value": "German",
+        "n": 82,
+        "approve_n": 47,
+        "activation_auprc": 0.8383366831173478,
+        "surface_auprc": 0.8225230775176741,
+        "auprc_delta": 0.015813605599673708,
+        "activation_auroc": 0.7720364741641338,
+        "surface_auroc": 0.7714285714285714,
+        "auroc_delta": 0.0006079027355624378
+      },
+      {
+        "value": "Hindi",
+        "n": 78,
+        "approve_n": 39,
+        "activation_auprc": 0.9051081498670517,
+        "surface_auprc": 0.7727078348458815,
+        "auprc_delta": 0.13240031502117022,
+        "activation_auroc": 0.8994082840236686,
+        "surface_auroc": 0.7495069033530573,
+        "auroc_delta": 0.14990138067061132
+      },
+      {
+        "value": "Italian",
+        "n": 97,
+        "approve_n": 50,
+        "activation_auprc": 0.8707880456471891,
+        "surface_auprc": 0.8765326375045225,
+        "auprc_delta": -0.0057445918573333365,
+        "activation_auroc": 0.8438297872340426,
+        "surface_auroc": 0.8736170212765957,
+        "auroc_delta": -0.029787234042553123
+      },
+      {
+        "value": "Japanese",
+        "n": 112,
+        "approve_n": 62,
+        "activation_auprc": 0.7965848557494108,
+        "surface_auprc": 0.7499969117522547,
+        "auprc_delta": 0.046587943997156156,
+        "activation_auroc": 0.7993548387096774,
+        "surface_auroc": 0.7035483870967741,
+        "auroc_delta": 0.09580645161290324
+      },
+      {
+        "value": "Korean",
+        "n": 97,
+        "approve_n": 47,
+        "activation_auprc": 0.8415810606079291,
+        "surface_auprc": 0.713991471193148,
+        "auprc_delta": 0.12758958941478116,
+        "activation_auroc": 0.8446808510638297,
+        "surface_auroc": 0.7327659574468085,
+        "auroc_delta": 0.11191489361702123
+      },
+      {
+        "value": "Mandarin Chinese",
+        "n": 83,
+        "approve_n": 47,
+        "activation_auprc": 0.8400149437039843,
+        "surface_auprc": 0.7585659551376126,
+        "auprc_delta": 0.08144898856637173,
+        "activation_auroc": 0.8026004728132388,
+        "surface_auroc": 0.6855791962174941,
+        "auroc_delta": 0.11702127659574468
+      },
+      {
+        "value": "Portuguese",
+        "n": 77,
+        "approve_n": 40,
+        "activation_auprc": 0.8499256957572597,
+        "surface_auprc": 0.798383761306119,
+        "auprc_delta": 0.05154193445114075,
+        "activation_auroc": 0.8195945945945945,
+        "surface_auroc": 0.7621621621621621,
+        "auroc_delta": 0.057432432432432345
+      },
+      {
+        "value": "Russian",
+        "n": 90,
+        "approve_n": 43,
+        "activation_auprc": 0.7007481540569913,
+        "surface_auprc": 0.7264966411738742,
+        "auprc_delta": -0.025748487116882934,
+        "activation_auroc": 0.7402276100940128,
+        "surface_auroc": 0.7323107372587828,
+        "auroc_delta": 0.007916872835230016
+      },
+      {
+        "value": "Spanish",
+        "n": 89,
+        "approve_n": 50,
+        "activation_auprc": 0.831739627192591,
+        "surface_auprc": 0.7711026391314496,
+        "auprc_delta": 0.06063698806114137,
+        "activation_auroc": 0.7882051282051281,
+        "surface_auroc": 0.6979487179487178,
+        "auroc_delta": 0.09025641025641029
+      }
+    ]
+  },
+  "interpretation": [
+    "A threshold-free ranking gain and a transferable probability threshold are different claims.",
+    "These diagnostics consume the already-opened test only descriptively and must not select a revised artifact."
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema": "intentprobe-hf-benchmark-summary-v1",
+  "artifact_id": "qwen-pooled-curated-core-l13-15-v2",
+  "weights_sha256": "ffd777469dc0376d651f59ea1e2d7ec44d988e68c6d506d45e7957b643b0e409",
+  "dataset": {
+    "id": "yoonholee/agent-skill-malware",
+    "revision": "5cff435ddab2cc34261875885de9ac50d40393ec",
+    "file": "skills.jsonl",
+    "file_sha256": "c7ae101d3d37f53af7dc7b2afc5ea15fe7c51794ef879bdbf2a7f5a342d4e3db",
+    "rows_in_pinned_file": 347,
+    "exact_normalized_training_overlaps_excluded": 2,
+    "evaluation_rows": 345,
+    "clean": 221,
+    "malicious": 124
+  },
+  "method": {
+    "frozen_weight": true,
+    "weight_layer_or_threshold_changed_by_run": false,
+    "bootstrap_repeats": 2000,
+    "bootstrap_seed": 42,
+    "preferred_interval": "split_group cluster bootstrap",
+    "input_max_tokens": 256
+  },
+  "scores": {
+    "activation": {
+      "auroc": 0.9345351043643264,
+      "auroc_ci95_cluster": [0.9068033709035105, 0.9605714229539228],
+      "average_precision": 0.9042294462029729
+    },
+    "tfidf": {
+      "auroc": 0.6256021018829367,
+      "auroc_ci95_cluster": [0.5634071030541228, 0.6845284139264991],
+      "average_precision": 0.4469911847228384
+    },
+    "activation_minus_tfidf": {
+      "auroc_difference": 0.30893300248138966,
+      "auroc_difference_ci95_cluster": [0.24920305800706627, 0.3742954119521165]
+    },
+    "static": {
+      "auroc": 0.6107320099255582,
+      "auroc_ci95_cluster": [0.5632149735533195, 0.6574534959297618],
+      "average_precision": 0.46934258626311676
+    },
+    "risk_max_activation_static": {
+      "auroc": 0.9015654648956357,
+      "auroc_ci95_cluster": [0.8685771271668232, 0.9321056716709072],
+      "average_precision": 0.7958556141282939
+    },
+    "dataset_authored_signature": {
+      "auroc": 1.0,
+      "auroc_ci95_cluster": [1.0, 1.0],
+      "average_precision": 1.0,
+      "interpretation": "Dataset-specific known-campaign baseline; not out-of-distribution."
+    }
+  },
+  "policy": {
+    "decision_policy": "corroborated-block-v4",
+    "warn_threshold": 0.3,
+    "block_threshold": 0.85,
+    "warn_or_block": {
+      "recall": 0.9354838709677419,
+      "recall_ci95_clopper_pearson": [0.8768333526283576, 0.9717373944135328],
+      "false_positive_rate": 0.334841628959276,
+      "false_positive_rate_ci95_clopper_pearson": [0.27295562195566553, 0.4012280056174076],
+      "f1": 0.7388535031847133,
+      "tp": 116,
+      "fp": 74,
+      "fn": 8,
+      "tn": 147
+    },
+    "block_only": {
+      "recall": 0.08870967741935484,
+      "recall_ci95_clopper_pearson": [0.04511844911596334, 0.15318297914141119],
+      "false_positive_rate": 0.0,
+      "false_positive_rate_ci95_clopper_pearson": [0.0, 0.016553226644565586],
+      "f1": 0.16296296296296298,
+      "tp": 11,
+      "fp": 0,
+      "fn": 113,
+      "tn": 221
+    }
+  },
+  "full_receipt": "https://github.com/mcpware/IntentProbe/blob/main/research/_results_published/hf_blind_agent_skill_malware.json"
+}

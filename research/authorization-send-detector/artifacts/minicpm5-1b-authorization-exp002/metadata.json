@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "RESEARCH_ONLY_CALIBRATION_GATE_FAILED",
+  "artifact": "probe.npz",
+  "artifact_bytes": 28708,
+  "artifact_sha256": "b105bfd0026716d25b393b6337e0252f7331afab60ed5b6a72ac76a13a5aa87f",
+  "base_model": {
+    "id": "openbmb/MiniCPM5-1B-Base",
+    "revision": "156170697656c48f69915b33a2fb44110242187c",
+    "license": "apache-2.0"
+  },
+  "representation": {
+    "pooling": "masked_mean",
+    "hidden_output_indices": [13, 14],
+    "layer_combine": "featurewise mean after per-layer train-only standardization",
+    "max_tokens": 192,
+    "truncation_side": "right"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "classes": {"0": "deny", "1": "approve"}
+  },
+  "training": {
+    "source": "ProCreations/auto-1b-data",
+    "revision": "d265bbf7bac76cd55daaf81a1d185dfe089a412b",
+    "license": "apache-2.0",
+    "rows": 1600,
+    "label_quality": "silver"
+  },
+  "selection": {
+    "validation_rows": 800,
+    "validation_auprc": 0.9227866747746696,
+    "frozen_at": "2026-10-17T04:44:25.426600+00:00"
+  },
+  "heldout": {
+    "source": "ProCreations/approve-or-deny",
+    "revision": "a38b625913dd46ca9702063f1597c979e6ace34e",
+    "rows": 3000,
+    "activation_auprc": 0.8223098622891658,
+    "activation_auroc": 0.8137259234559073,
+    "matched_tfidf_auprc": 0.8078664465343413,
+    "matched_tfidf_auroc": 0.7897088606860372,
+    "paired_auprc_difference_95ci": [-0.005324288623696355, 0.03358794717641096],
+    "paired_auroc_difference_95ci": [0.005569442530464855, 0.04286677759691618]
+  },
+  "deployment_gate": {
+    "passed": false,
+    "reason": "Validation-frozen false-approve thresholds did not transfer to held-out data.",
+    "validation_5pct_threshold_heldout_false_approve_rate": 0.09493219129193434,
+    "validation_1pct_threshold_heldout_false_approve_rate": 0.05067808708065667
+  }
+}

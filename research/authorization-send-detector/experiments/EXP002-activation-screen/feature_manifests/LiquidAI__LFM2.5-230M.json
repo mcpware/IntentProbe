@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "model": {
+    "id": "LiquidAI/LFM2.5-230M",
+    "revision": "40cb2ad3b3044d5a41eee083a6103c8b523afa45",
+    "weight_bytes": 459401112,
+    "phase": "screen",
+    "role": "smallest current hybrid candidate",
+    "license": "custom-lfm",
+    "architecture_note": "hybrid; release use requires license review"
+  },
+  "model_class": "Lfm2Model",
+  "started_at": "2026-10-17T03:01:16.907001+00:00",
+  "batch_size": 16,
+  "max_tokens": 192,
+  "load_seconds": 0.8521252479404211,
+  "splits": {
+    "train": {
+      "input_path": "data/processed/exp002/train.parquet",
+      "input_sha256": "9df0307cad51321e039531dc812ade6f26503b9554abd48957e5811ce88c0630",
+      "rows": 1600,
+      "hidden_state_count": 15,
+      "hidden_size": 1024,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/LiquidAI__LFM2.5-230M/train_masked_mean.npy",
+          "bytes": 49152128,
+          "sha256": "acd90f6a9afbe987bb4341eb8928446aa9f342bcc0e12ffc5d8f1796900ecb22"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/LiquidAI__LFM2.5-230M/train_last_nonpadding.npy",
+          "bytes": 49152128,
+          "sha256": "29d9c3fc35a257d90280a28bfdf51910e2f9d795d74f275a2575aa64421949c3"
+        }
+      },
+      "elapsed_seconds": 185.65553347603418
+    },
+    "validation": {
+      "input_path": "data/processed/exp002/validation.parquet",
+      "input_sha256": "de70dddbe5ae2ba0d71629758c1dffc2d632803457dcab9d9f40e939ce9de80b",
+      "rows": 800,
+      "hidden_state_count": 15,
+      "hidden_size": 1024,
+      "feature_dtype": "float16",
+      "features": {
+        "masked_mean": {
+          "path": ".cache/exp002/LiquidAI__LFM2.5-230M/validation_masked_mean.npy",
+          "bytes": 24576128,
+          "sha256": "7277abb433d9e0ac1e14613bd104fcd414f0b60503e12ac9eb1dd694484e299a"
+        },
+        "last_nonpadding": {
+          "path": ".cache/exp002/LiquidAI__LFM2.5-230M/validation_last_nonpadding.npy",
+          "bytes": 24576128,
+          "sha256": "12ebadec090771e1051832f4dcce67960a1c5b251dc305386a09c291dbede9b9"
+        }
+      },
+      "elapsed_seconds": 90.85411217692308
+    }
+  },
+  "status": "COMPLETED",
+  "finished_at": "2026-10-17T03:05:53.416686+00:00",
+  "peak_rss_kib": 2514568
+}

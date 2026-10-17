@@ -1,0 +1,34 @@
+{
+  "model": {
+    "id": "ibm-granite/granite-4.0-350m-base",
+    "revision": "a50b46cef21c8a86b15f0496cb794487a78a910b",
+    "weight_bytes": 704786224,
+    "phase": "screen",
+    "role": "Apache edge/offline candidate",
+    "license": "apache-2.0",
+    "architecture_note": "Granite MoE hybrid causal LM"
+  },
+  "started_at": "2026-10-17T02:48:04.990630+00:00",
+  "status": "PASS",
+  "model_class": "GraniteMoeHybridModel",
+  "model_type": "granitemoehybrid",
+  "hidden_state_count": 29,
+  "first_last_shapes": [
+    [
+      4,
+      32,
+      1024
+    ],
+    [
+      4,
+      32,
+      1024
+    ]
+  ],
+  "hidden_dtype": "torch.bfloat16",
+  "load_seconds": 1.4502901709638536,
+  "forward_seconds": 0.15221140999346972,
+  "finished_at": "2026-10-17T02:48:07.020474+00:00",
+  "elapsed_seconds": 2.029846991878003,
+  "peak_rss_kib": 1393628
+}
