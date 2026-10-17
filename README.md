@@ -19,6 +19,8 @@
   <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
 </p>
 
+> **New on Hugging Face:** [IntentProbe MiniCPM5-1B authorization probe](https://huggingface.co/mcpware/intentprobe-minicpm5-1b-authorization) — a 28 KB local activation probe for AI-agent permission checks, approval detection, MCP tool-use authorization, and runtime guardrails. The release includes a copy-run scorer, a six-backbone layer screen, and a separate 3,000-row held-out comparison with matched-budget TF-IDF.
+
 ## What it is
 
 IntentProbe runs a tool description or prompt through a frozen local model (Qwen2.5-0.5B), reads a
