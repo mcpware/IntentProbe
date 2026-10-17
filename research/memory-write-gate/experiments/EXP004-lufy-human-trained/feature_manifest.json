@@ -1,0 +1,21 @@
+{
+  "batch_size": 16,
+  "completed_at": "2026-10-17T20:08:30.381518+00:00",
+  "dtype": "float32",
+  "elapsed_seconds": 362.1526605980471,
+  "experiment_id": "MEM-EXP004",
+  "features_sha256": "4070832bc195f515863f437f7529785eedb4a60c3496cdbba1be3847489771b8",
+  "input_sha256": "c0d41bd6945572d1382bd37b740aa5756fa409c505fc14bcbdcb00865ca63409",
+  "maximum_rendered_tokens": 160,
+  "peak_rss_kib": 2959792,
+  "positive_rows": 332,
+  "rows": 6470,
+  "rows_over_cap": 0,
+  "shape": [
+    6470,
+    896
+  ],
+  "started_at": "2026-10-17T20:02:28.233235+00:00",
+  "status": "FEATURES_COMPLETE",
+  "users": 17
+}

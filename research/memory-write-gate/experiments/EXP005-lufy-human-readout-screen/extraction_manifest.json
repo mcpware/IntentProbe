@@ -1,0 +1,38 @@
+{
+  "batch_size": 8,
+  "completed_at": "2026-10-17T20:17:17.597093+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 351.4471823819913,
+  "experiment_id": "MEM-EXP005",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 289856128,
+      "path": "experiments/EXP005-lufy-human-readout-screen/cache/last_nonpadding.npy",
+      "sha256": "2f9003d9af9ea441243e527f30b236c3802f50896821bd828290eda4321c6a52"
+    },
+    "masked_max": {
+      "bytes": 289856128,
+      "path": "experiments/EXP005-lufy-human-readout-screen/cache/masked_max.npy",
+      "sha256": "9a968c8b7e1d0a7874f079381fe280fba2cc49c63b279397816a1669992f162e"
+    },
+    "masked_mean": {
+      "bytes": 289856128,
+      "path": "experiments/EXP005-lufy-human-readout-screen/cache/masked_mean.npy",
+      "sha256": "6b97c6d5fd908842865fbf2f0d76d1620e24a00ed91ed6196dc3f4a52f9d5e19"
+    }
+  },
+  "input_sha256": "c0d41bd6945572d1382bd37b740aa5756fa409c505fc14bcbdcb00865ca63409",
+  "maximum_rendered_tokens": 160,
+  "peak_rss_kib": 3747800,
+  "positive_rows": 332,
+  "rows": 6470,
+  "rows_over_cap": 0,
+  "shape_per_pooling": [
+    6470,
+    25,
+    896
+  ],
+  "started_at": "2026-10-17T20:11:27.324435+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "users": 17
+}

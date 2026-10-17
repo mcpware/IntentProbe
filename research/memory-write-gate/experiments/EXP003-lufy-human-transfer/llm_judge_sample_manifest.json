@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MEM-EXP003",
+  "negative_rows": 332,
+  "output_sha256": "9da5c1ef6bfca18aa7bed91895158e0389ded4a8665fcf2fffc875b45a1c8ddb",
+  "positive_rows": 332,
+  "publication_boundary": "The JSONL contains quarantined historical LUFY text and is not committed or redistributed.",
+  "rows": 664,
+  "seed": 20261017,
+  "selection": "all 332 majority-positive rows plus one same-user/system matched negative per positive",
+  "source_sha256": "c0d41bd6945572d1382bd37b740aa5756fa409c505fc14bcbdcb00865ca63409",
+  "status": "PREPARED",
+  "unanimous_sample": {
+    "negative_rows": 52,
+    "output_sha256": "61631981154096aa724a59bb11058f05e366143191bd02f6b6376847a9facb43",
+    "positive_rows": 52,
+    "rows": 104,
+    "users": 14
+  },
+  "users": 17
+}

@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "features_sha256": "4070832bc195f515863f437f7529785eedb4a60c3496cdbba1be3847489771b8",
+    "human_trained_probe_sha256": "996cb017a6fdb34b4dc26dbcb5506cd3b256854213d93015ff869ac306b0fe18",
+    "oof_scores_sha256": "24d46e5cb6bc1c7d14b31ed5db41a8ab8324d1d6b999befa27ce4981eb08591e"
+  },
+  "design": "leave-one-user-out out-of-fold prediction",
+  "experiment_id": "MEM-EXP004",
+  "models": {
+    "activation": {
+      "auprc": 0.1180124255009323,
+      "auprc_user_bootstrap_95ci": [
+        0.09126513328480215,
+        0.1574965896922714
+      ],
+      "auroc": 0.7031773231734366,
+      "auroc_user_bootstrap_95ci": [
+        0.678995408519591,
+        0.7273969318490657
+      ],
+      "balanced_accuracy_at_0_5": 0.6159702348003941
+    },
+    "tfidf_word_char": {
+      "auprc": 0.15440951705272118,
+      "auprc_user_bootstrap_95ci": [
+        0.12135269290438944,
+        0.20157520554841665
+      ],
+      "auroc": 0.7808357084250983,
+      "auroc_user_bootstrap_95ci": [
+        0.753074807055179,
+        0.8050915955962646
+      ],
+      "balanced_accuracy_at_0_5": 0.6272533928480295
+    }
+  },
+  "paired_activation_minus_tfidf": {
+    "auprc_difference": -0.036397091551788885,
+    "auprc_difference_user_bootstrap_95ci": [
+      -0.06801036476947789,
+      -0.007622600716903997
+    ],
+    "auroc_difference": -0.07765838525166169,
+    "auroc_difference_user_bootstrap_95ci": [
+      -0.09933693438764472,
+      -0.057790428506153096
+    ],
+    "resamples": 2000,
+    "seed": 20261017,
+    "unit": "user_name"
+  },
+  "positive_prevalence": 0.05131375579598145,
+  "positive_rows": 332,
+  "release_boundary": "Historical LUFY annotation files remain in licence quarantine. Aggregate research results may be recorded, but the human-trained artifact is not published until release rights are confirmed.",
+  "representation": {
+    "hidden_state_output": 11,
+    "id": "Qwen/Qwen2.5-0.5B",
+    "max_tokens": 256,
+    "pooling": "masked_mean",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987"
+  },
+  "rows": 6470,
+  "selection_boundary": "Output 11 and masked-mean pooling were frozen from MEM-EXP002 before loading LUFY. LUFY trains the head but does not select the representation in this experiment.",
+  "status": "COMPLETE_HUMAN_TRAINED_GROUPED_EVALUATION",
+  "users": 17
+}

@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://github.com/mcpware/IntentProbe/stargazers"><img src="https://img.shields.io/github/stars/mcpware/IntentProbe?style=social" alt="Stars" /></a>
   <a href="https://github.com/mcpware/IntentProbe/network/members"><img src="https://img.shields.io/github/forks/mcpware/IntentProbe?style=social" alt="Forks" /></a>
+  <a href="https://huggingface.co/mcpware/intentprobe-minicpm5-1b-authorization"><img src="https://img.shields.io/huggingface/dm/mcpware/intentprobe-minicpm5-1b-authorization?label=HF%20downloads" alt="Hugging Face monthly downloads" /></a>
   <a href="https://huggingface.co/mcpware/intentprobe-qwen2.5-0.5b-memory-write"><img src="https://img.shields.io/huggingface/dm/mcpware/intentprobe-qwen2.5-0.5b-memory-write?label=Memory%20probe%20downloads" alt="Memory probe Hugging Face monthly downloads" /></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python 3.10+" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License" /></a>
@@ -49,6 +50,13 @@ and reproduction steps together.
 The PyPI package currently ships the Qwen tool-poisoning scanner. The MiniCPM authorization detector
 and Qwen memory-write detector are standalone research releases with local scorers and complete
 selection receipts.
+
+The main research track is now the
+[multi-task activation benchmark](research/multitask-activation-benchmark/README.md): one common
+protocol for testing how backbone, normalized depth, token pooling, and layer combination interact
+across authorization, prompt injection, tool/skill poisoning, memory write, and toxicity. Individual
+detectors remain useful products, while the paper studies the engineering choices that transfer—or
+fail to transfer—between tasks.
 
 ## Install the tool-poisoning scanner
 
@@ -192,6 +200,15 @@ masked-mean pooling, but the best depth and window changed across model architec
 | LFM2.5-230M | 10–12 | 0.9090 |
 | Granite 4.0 350M | 19 | 0.9081 |
 | Qwen3-0.6B | 14 | 0.9045 |
+
+We also ran the frozen probe on two independently released authorization benchmarks. On
+AuthorizationPairs, both activation and a stronger word-and-character TF-IDF baseline fell near
+chance. On the 156-row human-labelled DelegationCheck benchmark, an audit caught that the published
+192-token interface erased 40 of 48 controlled pair contrasts. A post-hoc full-context rerun kept all
+48 contrasts visible; the activation probe reached 0.4850 AUPRC / 0.5632 AUROC versus 0.4533 / 0.5276
+for full-text TF-IDF, but the paired family-bootstrap intervals included zero and both systems
+followed the authored contrast direction in 29/48 pairs. The full audit trail is preserved rather
+than replacing the original result.
 
 Full methods, hashes, model revisions, uncertainty estimates, held-out results, and reproduction
 commands are in the [authorization research workspace](research/authorization-send-detector/) and
@@ -378,7 +395,8 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
   weights do not transfer to another model without retraining.
 
   the authorization benchmark uses silver labels. its separate test is now consumed,
-  so the next round of model, layer, or threshold selection needs a new untouched test.
+  so the next round of model, layer, or threshold selection needs a new untouched test. external
+  transfer is not established; the DelegationCheck full-context rerun is explicitly post-hoc.
 
   not first or only on the technique (PIShield, TaskTracker, and others predate or parallel it);
   the niche is the deployment shape, not the method.
@@ -393,7 +411,8 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
 
 The [authorization research workspace](research/authorization-send-detector/) contains the pinned
 source and model registries, six-backbone activation screen, matched TF-IDF comparison, frozen
-selection record, separate-test analysis, compact MiniCPM artifact, integrity tests, and an
+selection record, separate-test analysis, two external-transfer audits, compact MiniCPM artifact,
+integrity tests, and an
 [end-to-end reproduction guide](research/authorization-send-detector/REPRODUCE.md).
 
 This line of work asks two engineering questions: which internal layer best represents authorization

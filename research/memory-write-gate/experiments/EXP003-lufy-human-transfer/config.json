@@ -1,0 +1,45 @@
+{
+  "experiment_id": "MEM-EXP003",
+  "name": "lufy-human-written-external-transfer",
+  "status": "FROZEN_BEFORE_SCORING",
+  "source": {
+    "repository": "ryuichi-sumida/LUFY",
+    "revision": "e0695216d52a38ef39ec2f91708d324877e328bd",
+    "subtree": "Dataset",
+    "label_rule": "majority vote across the three binary important? annotations"
+  },
+  "evaluation_unit": "human user utterance",
+  "cluster_unit": "user_name",
+  "primary_metric": "AUPRC",
+  "secondary_metrics": [
+    "AUROC",
+    "balanced accuracy at 0.5",
+    "false-save rate at the frozen synthetic-development threshold",
+    "SAVE recall at the frozen synthetic-development threshold"
+  ],
+  "views": [
+    "all majority-vote rows",
+    "unanimous-only rows",
+    "per source chatbot system"
+  ],
+  "activation_probe": {
+    "backbone": "Qwen/Qwen2.5-0.5B",
+    "backbone_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "artifact": "../EXP002-qwen-activation-screen/selected_probe.npz",
+    "pooling": "masked_mean",
+    "hidden_state_output": 11,
+    "renderer": "USER_UTTERANCE\\n{text}\\n\\nMEMORY_WRITE_DECISION",
+    "max_tokens": 256
+  },
+  "surface_baseline": {
+    "training_source": "chris0809/memory-write-gate-20k",
+    "training_revision": "004add9de074a96e1d2eeddf8c3f695f9e121b2a",
+    "model": "word_1_2_plus_character_2_5_tfidf_class_weighted_logistic"
+  },
+  "bootstrap": {
+    "resamples": 2000,
+    "seed": 20261017,
+    "unit": "user_name"
+  },
+  "claim_boundary": "This is a zero-shot external transfer evaluation. No LUFY row may select the representation, fit either classifier, or choose a threshold."
+}

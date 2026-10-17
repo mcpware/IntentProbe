@@ -101,9 +101,39 @@ Paired seed-family bootstrap differences:
 - AUPRC: +0.0531, 95% CI −0.0199 to +0.1469.
 - AUROC: +0.0419, 95% CI −0.0194 to +0.0998.
 
-These are development estimates after representation selection. An independent human-written LUFY
-evaluation is being run and will be added as a versioned benchmark receipt rather than retrofitted
-into the selection process.
+These are development estimates after representation selection.
+
+## Frozen human-written transfer
+
+The selected probe was then scored once, without refitting or reselection, on 6,470 human-written
+LUFY user turns from 17 users. Each turn had three future-usefulness annotations; majority vote is
+the main label.
+
+| 6,470 turns / 332 majority SAVE labels | AUPRC | AUROC |
+| --- | ---: | ---: |
+| Qwen activation probe | **0.0737** | **0.5811** |
+| Word + character TF-IDF | 0.0666 | 0.5599 |
+| Positive prevalence | 0.0513 | — |
+
+Activation-minus-TF-IDF paired user-bootstrap differences were +0.0071 AUPRC (95% CI −0.0058 to
++0.0198) and +0.0212 AUROC (95% CI −0.0226 to +0.0644). The activation point estimates are higher,
+but the paired intervals include zero. This is a measured synthetic-to-human transfer result, not a
+claim that the current probe is a complete automatic memory policy. Aggregate details are preserved
+in `human_transfer_summary.json`.
+
+## Human-trained readout study
+
+A separate research experiment trains directly on the human labels and keeps five users completely
+outside representation selection. Among 216 Qwen readouts, masked-mean outputs **7--8** win on the 12
+development users. On 1,748 turns from five held-out users, that human-trained probe reaches 0.1575
+AUPRC and 0.7842 AUROC, compared with 0.1726 and 0.7892 for human-trained word + character TF-IDF.
+The paired user-bootstrap intervals include zero, so their ranking performance is unresolved on this
+test. Activation has higher balanced accuracy at threshold 0.5: 0.6603 versus 0.6250.
+
+The public artifact on this page remains the synthetic-trained output-11 research preview. The
+human-trained outputs-7--8 weights are not bundled while the release scope of LUFY's historical
+annotation files is being clarified. Aggregate results are recorded in
+`human_readout_research_summary.json` and feed the broader multi-task activation benchmark.
 
 ## Intended use
 

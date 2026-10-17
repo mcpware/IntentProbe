@@ -1,0 +1,54 @@
+{
+  "experiment_id": "MEM-EXP005",
+  "status": "COMPLETE_DEVELOPMENT_SCREEN_AND_ONE_SHOT_HUMAN_TEST",
+  "design": {
+    "development_rows": 4722,
+    "development_users": 12,
+    "heldout_test_rows": 1748,
+    "heldout_test_users": 5,
+    "heldout_test_positive_rows": 91,
+    "candidate_count": 216,
+    "development_cv": "four-fold GroupKFold by anonymized user",
+    "selection_metric": "AUPRC"
+  },
+  "winner": {
+    "pooling": "masked_mean",
+    "start_layer": 7,
+    "end_layer": 8,
+    "mean_development_auprc": 0.1823959459505332
+  },
+  "heldout_test": {
+    "activation": {
+      "auprc": 0.15746749366563353,
+      "auprc_user_bootstrap_95ci": [0.11219507833540265, 0.2386225154409796],
+      "auroc": 0.7841790074741192,
+      "auroc_user_bootstrap_95ci": [0.7451691698446279, 0.8167224702380952],
+      "balanced_accuracy_at_0_5": 0.6602724372790758
+    },
+    "tfidf_word_char": {
+      "auprc": 0.17257961328352858,
+      "auprc_user_bootstrap_95ci": [0.11342295112730773, 0.29926667517061006],
+      "auroc": 0.7891529110599721,
+      "auroc_user_bootstrap_95ci": [0.7580370624571037, 0.8156556281267003],
+      "balanced_accuracy_at_0_5": 0.6250041449196548
+    },
+    "paired_activation_minus_tfidf": {
+      "auprc_difference": -0.015112119617895048,
+      "auprc_difference_user_bootstrap_95ci": [-0.08023262929757083, 0.0016350223954609694],
+      "auroc_difference": -0.0049739035858529235,
+      "auroc_difference_user_bootstrap_95ci": [-0.04158665067331613, 0.030897207367795554],
+      "resamples": 2000,
+      "unit": "held-out user",
+      "seed": 20261017
+    }
+  },
+  "post_test_output11_diagnostic": {
+    "selected_minus_output11_auprc": 0.060692757881906756,
+    "selected_minus_output11_auprc_user_bootstrap_95ci": [0.030188400045867397, 0.1200176167676071],
+    "selected_minus_output11_auroc": 0.10884890607280473,
+    "selected_minus_output11_auroc_user_bootstrap_95ci": [0.06752638853983406, 0.1482615887488029],
+    "status": "post-test diagnostic, not confirmatory"
+  },
+  "artifact_release": "Human-trained weights withheld pending confirmation that the historical LUFY annotation revision may be redistributed in derived form.",
+  "claim_boundary": "LUFY labels future usefulness, not storage consent, privacy policy, deletion intent, or retrieval authorization."
+}

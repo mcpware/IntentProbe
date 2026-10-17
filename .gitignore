@@ -51,6 +51,14 @@ research/authorization-send-detector/outputs/
 research/authorization-send-detector/.cache/
 research/memory-write-gate/data/raw/
 research/memory-write-gate/data/processed/
+research/memory-write-gate/experiments/EXP003-lufy-human-transfer/activation_scores.npz
+research/memory-write-gate/experiments/EXP003-lufy-human-transfer/comparison_scores.npz
+research/memory-write-gate/experiments/EXP004-lufy-human-trained/masked_mean_output11.npy
+research/memory-write-gate/experiments/EXP004-lufy-human-trained/oof_scores.npz
+research/memory-write-gate/experiments/EXP004-lufy-human-trained/human_trained_probe.npz
+research/memory-write-gate/experiments/EXP005-lufy-human-readout-screen/cache/
+research/memory-write-gate/experiments/EXP005-lufy-human-readout-screen/test_scores.npz
+research/memory-write-gate/experiments/EXP005-lufy-human-readout-screen/human_trained_probe.npz
 research/memory-write-gate/outputs/
 research/memory-write-gate/.cache/
 

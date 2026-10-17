@@ -1,0 +1,50 @@
+{
+  "experiment_id": "MEM-EXP005",
+  "name": "lufy-human-readout-screen",
+  "status": "FROZEN_BEFORE_EXTRACTION",
+  "source": {
+    "repository": "ryuichi-sumida/LUFY",
+    "revision": "e0695216d52a38ef39ec2f91708d324877e328bd",
+    "label_rule": "majority vote across three binary important? annotations"
+  },
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "hidden_state_outputs": 25,
+    "hidden_size": 896,
+    "max_tokens": 256
+  },
+  "candidate_family": {
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "layer_windows": [1, 2, 3],
+    "window_operation": "fit standardization separately for each output on development-train folds, then mean adjacent standardized outputs",
+    "candidate_count": 216
+  },
+  "split": {
+    "user_id_rule": "first 12 hex characters of SHA256('intentprobe-lufy-v1:' + user_name)",
+    "heldout_test_user_ids": [
+      "0603c4d22344",
+      "21b787519bce",
+      "3776cda38ae5",
+      "38238147d6de",
+      "434f9f13fd2b"
+    ],
+    "selection": "four-fold GroupKFold on the remaining 12 users",
+    "selection_metric": "AUPRC",
+    "test_use": "one final evaluation after candidate selection"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "random_state": 20261017
+  },
+  "baseline": "word 1-2 plus character 2-5 TF-IDF logistic trained on the same 12 development users",
+  "uncertainty": {
+    "resamples": 2000,
+    "unit": "held-out user",
+    "seed": 20261017
+  },
+  "release_boundary": "Historical LUFY annotation files remain in licence quarantine. Do not publish the human-trained numeric artifact until release rights are confirmed."
+}

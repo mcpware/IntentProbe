@@ -53,6 +53,33 @@ semantics must eventually keep write, delete, and retrieval authorization separa
   preferences, third-party information, explicit save/no-save, corrections, and forget requests.
   LUFY supplies future-utility labels, but it does not settle storage consent or privacy policy.
 
+## Label-source hierarchy and distillation
+
+The project keeps the source of every label explicit. These label classes are not interchangeable:
+
+1. **Human gold:** direct human votes or adjudicated labels. This is the preferred external test
+   evidence. LUFY's three per-turn votes remain unchanged; a model must not overwrite them.
+2. **Deterministic policy gold:** labels generated from an auditable state machine, such as an exact
+   `no-store` instruction or a verified deletion request. These test rule compliance, not subjective
+   future usefulness.
+3. **Teacher pseudo-labels:** Codex, Claude, or another teacher reads a frozen context and emits
+   `SAVE`, `SKIP`, or `ABSTAIN` under a versioned rubric. These can cheaply expand training coverage
+   and are a form of distillation, but remain model-generated labels.
+4. **Synthetic templates:** controlled contrast cases used for representation development and edge
+   cases. Template or seed families must never cross splits.
+
+Teacher pseudo-labels may enter training only when the prompt, model identifier, source revision,
+sampling settings, confidence, and disagreement record are preserved. Low-confidence cases and
+teacher disagreements become `ABSTAIN` or a human-review queue. They never enter the human-gold test,
+never replace an existing human label, and are never reported as independent proof that the student
+understands people.
+
+The practical distillation pipeline is therefore:
+
+`unlabelled conversation -> frozen teacher rubric -> SAVE/SKIP/ABSTAIN -> confidence/disagreement filter -> activation-probe training pool`
+
+This allows fast product iteration without contaminating the multi-task paper's external evaluation.
+
 ## Phases
 
 ### Phase 0 — source and design freeze (partially complete)
@@ -101,15 +128,23 @@ semantics must eventually keep write, delete, and retrieval authorization separa
 - [ ] Compare model-specific optimum with normalized universal depth.
 - [ ] Fit a task-by-model mixed-effects analysis only after the benchmark matrix is complete and the
   independence assumptions are defensible.
+- [x] Establish the human-data Qwen readout result (MEM-EXP005): among 216 development candidates,
+  masked-mean outputs 7--8 win. On five held-out users, the selected activation probe reaches 0.1575
+  AUPRC / 0.7842 AUROC versus 0.1726 / 0.7892 for TF-IDF; paired user-bootstrap intervals include
+  zero, so the two approaches are unresolved on this test.
 
 ### Phase 3 — human gold and personalization
 
 - [ ] Write annotation manual and consent/privacy handling process.
-- [ ] Build a user-held-out LUFY benchmark with majority, unanimous-core, and disagreement views.
+- [x] Build a frozen zero-shot LUFY benchmark with majority, unanimous-core, disagreement metadata,
+  and user-clustered inference. MEM-EXP003 scores 6,470 turns from 17 users without fitting or
+  selecting on LUFY.
 - [ ] Add human-authored consent/privacy gap cases with explicit author intent; do not relabel LUFY
   future utility as consent to persist.
 - [ ] Separate universal safety rules from personal memory preferences.
 - [ ] Test cold-start, per-user calibration, and preference changes over time.
+- [ ] Run a versioned teacher-distillation experiment on unlabelled conversations, with a held-out
+  human-labelled test that no teacher output can enter.
 
 ### Phase 4 — productization
 
@@ -148,3 +183,9 @@ to protect.
 | 2026-10-17 | Treat the activation-over-TF-IDF result as promising, not confirmatory | The paired development gains are positive at the point estimate but both 95% seed-bootstrap intervals include zero after validation selection. |
 | 2026-10-17 | Adopt LUFY as the first human-written benchmark candidate | The historical public release contains three direct importance votes per user turn under a future-use criterion, much closer to SAVE/SKIP than retrieval-only or synthetic sources. |
 | 2026-10-17 | Keep historical LUFY annotations quarantined pending license confirmation | The current Hugging Face card is CC BY 4.0, but the deleted historical XLSX files have no explicit license file tying that grant to the old release. |
+| 2026-10-17 | Use model-labelled data only as distillation training data | A teacher can scale policy labels, but cannot provide independent evidence for its own or a student's human generalization. |
+| 2026-10-17 | Make the multi-task activation benchmark the primary paper | Memory write remains a shipped application and one benchmark column; the paper contribution is the cross-task, cross-backbone readout study. |
+| 2026-10-17 | Keep the Qwen memory probe after the first human transfer test | On 6,470 LUFY turns, the frozen probe retains above-prevalence ranking signal and a higher point estimate than TF-IDF, but the paired user-bootstrap intervals include zero; this is a product preview and benchmark column, not a solved write policy. |
+| 2026-10-17 | Train a new head directly on human LUFY labels | Leave-one-user-out output-11 training raises AUROC from the zero-shot 0.5811 to 0.7032, confirming that synthetic-to-human transfer was not the final product experiment. |
+| 2026-10-17 | Select the human readout on 12 users and test once on five held-out users | Masked-mean outputs 7--8 nearly match TF-IDF on the primary test. A clearly labelled post-test diagnostic measures +0.0607 AUPRC and +0.1088 AUROC over output 11. |
+| 2026-10-17 | Keep human-trained weights local pending licence confirmation | Aggregate research results may be published, but the deleted historical LUFY annotation files do not yet carry an explicit release grant tied to that revision. |

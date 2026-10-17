@@ -1,0 +1,15 @@
+{
+  "batch_size": 16,
+  "elapsed_seconds": 369.7200093609281,
+  "experiment_id": "MEM-EXP003",
+  "input_sha256": "c0d41bd6945572d1382bd37b740aa5756fa409c505fc14bcbdcb00865ca63409",
+  "maximum_rendered_tokens": 160,
+  "peak_rss_kib": 3015540,
+  "probe_sha256": "2a988fbfa76e36d4fe0b1aa4fcca1b8b19a9a5c90d702452f8d36e1defb6ca92",
+  "rows": 6470,
+  "rows_over_256_tokens": 0,
+  "scores_sha256": "e17a31d7ba9d3d8c289135eaebdcdb8cb3975dbdbe98c4ab9886c3f253bbcdee",
+  "completed_at": "2026-10-17T19:58:31.255782+00:00",
+  "started_at": "2026-10-17T19:52:21.535773+00:00",
+  "status": "SCORED"
+}

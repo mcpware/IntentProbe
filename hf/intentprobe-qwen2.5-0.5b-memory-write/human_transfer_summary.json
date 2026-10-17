@@ -1,0 +1,36 @@
+{
+  "experiment_id": "MEM-EXP003",
+  "status": "COMPLETE_EXTERNAL_HUMAN_TRANSFER",
+  "selection_use": "none; zero-shot scoring with frozen representation, heads, renderers, and thresholds",
+  "source": {
+    "repository": "ryuichi-sumida/LUFY",
+    "revision": "e0695216d52a38ef39ec2f91708d324877e328bd",
+    "label": "majority vote across three binary future-usefulness annotations"
+  },
+  "rows": 6470,
+  "users": 17,
+  "positive_rows": 332,
+  "positive_prevalence": 0.05131375579598145,
+  "activation": {
+    "auprc": 0.07367321750389372,
+    "auprc_user_bootstrap_95ci": [0.058364648814701534, 0.09485128571698943],
+    "auroc": 0.5811263136612923,
+    "auroc_user_bootstrap_95ci": [0.5353909788940722, 0.6228535957596366]
+  },
+  "tfidf_word_char": {
+    "auprc": 0.06661467330491909,
+    "auprc_user_bootstrap_95ci": [0.0507552462101334, 0.09303081575833096],
+    "auroc": 0.5599433413026496,
+    "auroc_user_bootstrap_95ci": [0.5221210109767658, 0.6023286436826286]
+  },
+  "paired_activation_minus_tfidf": {
+    "auprc_difference": 0.007058544198974628,
+    "auprc_difference_user_bootstrap_95ci": [-0.005756278666425235, 0.019835053615769017],
+    "auroc_difference": 0.02118297235864275,
+    "auroc_difference_user_bootstrap_95ci": [-0.02258703757345875, 0.06439415370294378],
+    "resamples": 2000,
+    "unit": "user_name",
+    "seed": 20261017
+  },
+  "claim_boundary": "LUFY measures whether information would be useful in future conversation. It does not measure storage consent, privacy policy, deletion intent, or retrieval authorization."
+}

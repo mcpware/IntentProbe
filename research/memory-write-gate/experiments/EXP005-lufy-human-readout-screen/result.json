@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "230e8a0b7e9f8f6a08893a9e5274a7e76891f0b931a2885b379c1c666e7361cf",
+    "human_trained_probe_sha256": "0cf4f52fd6e8b9e1b01256596fa80761bc59dbf6b49f110f1e15f28dceecf648",
+    "test_scores_sha256": "6ee2ce4539fb12310f95e65291a68290d614914d863d7cedd4b47ad10763e47d"
+  },
+  "candidate_count": 216,
+  "development": {
+    "cv": "four-fold GroupKFold by anonymized user",
+    "positive_rows": 241,
+    "rows": 4722,
+    "selection_metric": "AUPRC",
+    "users": 12,
+    "winner": {
+      "end_layer": 8,
+      "mean_development_auprc": 0.1823959459505332,
+      "pooling": "masked_mean",
+      "start_layer": 7
+    }
+  },
+  "elapsed_seconds": 565.6887064948678,
+  "experiment_id": "MEM-EXP005",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.15746749366563353,
+        "auprc_user_bootstrap_95ci": [
+          0.11219507833540265,
+          0.2386225154409796
+        ],
+        "auroc": 0.7841790074741192,
+        "auroc_user_bootstrap_95ci": [
+          0.7451691698446279,
+          0.8167224702380952
+        ],
+        "balanced_accuracy_at_0_5": 0.6602724372790758
+      },
+      "tfidf_word_char": {
+        "auprc": 0.17257961328352858,
+        "auprc_user_bootstrap_95ci": [
+          0.11342295112730773,
+          0.29926667517061006
+        ],
+        "auroc": 0.7891529110599721,
+        "auroc_user_bootstrap_95ci": [
+          0.7580370624571037,
+          0.8156556281267003
+        ],
+        "balanced_accuracy_at_0_5": 0.6250041449196548
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "auprc_difference": -0.015112119617895048,
+      "auprc_difference_user_bootstrap_95ci": [
+        -0.08023262929757083,
+        0.0016350223954609694
+      ],
+      "auroc_difference": -0.0049739035858529235,
+      "auroc_difference_user_bootstrap_95ci": [
+        -0.04158665067331613,
+        0.030897207367795554
+      ],
+      "resamples": 2000,
+      "seed": 20261017,
+      "unit": "held-out user"
+    },
+    "positive_prevalence": 0.05205949656750572,
+    "positive_rows": 91,
+    "rows": 1748,
+    "users": 5
+  },
+  "release_boundary": "Historical LUFY annotation files remain in licence quarantine. Do not publish the human-trained numeric artifact until release rights are confirmed.",
+  "status": "COMPLETE_DEVELOPMENT_SCREEN_AND_ONE_SHOT_HUMAN_TEST"
+}

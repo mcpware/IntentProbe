@@ -22,5 +22,40 @@
     "auroc_difference": 0.04188398437499996,
     "auroc_difference_seed_bootstrap_95ci": [-0.019356224025973947, 0.09977162611060049]
   },
-  "claim_boundary": "Development-only selection on synthetic silver data; independent human LUFY evaluation is in progress."
+  "external_human_transfer": {
+    "experiment_id": "MEM-EXP003",
+    "rows": 6470,
+    "users": 17,
+    "positive_rows": 332,
+    "activation_auprc": 0.07367321750389372,
+    "activation_auroc": 0.5811263136612923,
+    "tfidf_auprc": 0.06661467330491909,
+    "tfidf_auroc": 0.5599433413026496,
+    "paired_auprc_difference": 0.007058544198974628,
+    "paired_auprc_difference_user_bootstrap_95ci": [-0.005756278666425235, 0.019835053615769017],
+    "paired_auroc_difference": 0.02118297235864275,
+    "paired_auroc_difference_user_bootstrap_95ci": [-0.02258703757345875, 0.06439415370294378]
+  },
+  "human_trained_readout_screen": {
+    "experiment_id": "MEM-EXP005",
+    "development_users": 12,
+    "candidate_count": 216,
+    "winner": {
+      "pooling": "masked_mean",
+      "start_layer": 7,
+      "end_layer": 8,
+      "mean_grouped_development_auprc": 0.1823959459505332
+    },
+    "heldout_test_rows": 1748,
+    "heldout_test_users": 5,
+    "heldout_test_positive_rows": 91,
+    "activation_auprc": 0.15746749366563353,
+    "activation_auroc": 0.7841790074741192,
+    "tfidf_auprc": 0.17257961328352858,
+    "tfidf_auroc": 0.7891529110599721,
+    "paired_auprc_difference_user_bootstrap_95ci": [-0.08023262929757083, 0.0016350223954609694],
+    "paired_auroc_difference_user_bootstrap_95ci": [-0.04158665067331613, 0.030897207367795554],
+    "artifact_release": "withheld pending historical annotation licence confirmation"
+  },
+  "claim_boundary": "The public artifact was selected and trained on synthetic silver data. MEM-EXP005 separately selected and evaluated a human-trained readout, but its weights are not bundled. LUFY measures human-labelled future usefulness, not storage consent, privacy policy, deletion intent, or retrieval authorization."
 }

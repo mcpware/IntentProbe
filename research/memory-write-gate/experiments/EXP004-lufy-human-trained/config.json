@@ -1,0 +1,35 @@
+{
+  "experiment_id": "MEM-EXP004",
+  "name": "lufy-human-trained-output11",
+  "status": "FROZEN_BEFORE_FEATURE_EXTRACTION",
+  "source": {
+    "repository": "ryuichi-sumida/LUFY",
+    "revision": "e0695216d52a38ef39ec2f91708d324877e328bd",
+    "label_rule": "majority vote across three binary important? annotations"
+  },
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "pooling": "masked_mean",
+    "hidden_state_output": 11,
+    "max_tokens": 256
+  },
+  "evaluation": {
+    "design": "leave-one-user-out out-of-fold prediction",
+    "group": "user_name",
+    "primary_metric": "AUPRC",
+    "secondary_metrics": ["AUROC", "balanced_accuracy_at_0_5"],
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 20261017
+  },
+  "head": {
+    "type": "standardized class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "random_state": 20261017
+  },
+  "baseline": "leave-one-user-out word 1-2 plus character 2-5 TF-IDF with the same logistic head",
+  "selection_boundary": "Output 11 and masked-mean pooling were frozen from MEM-EXP002 before loading LUFY. LUFY trains the head but does not select the representation in this experiment.",
+  "release_boundary": "Historical LUFY annotation files remain in licence quarantine. Aggregate research results may be recorded, but the human-trained artifact is not published until release rights are confirmed."
+}

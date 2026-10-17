@@ -49,6 +49,29 @@ def test_release_metadata_matches_selection_receipt() -> None:
     assert summary["activation_probe"]["auroc"] == observed["auroc"]
 
 
+def test_release_human_transfer_summary_matches_experiment_receipt() -> None:
+    experiment = json.loads(
+        (
+            ROOT
+            / "research"
+            / "memory-write-gate"
+            / "experiments"
+            / "EXP003-lufy-human-transfer"
+            / "result.json"
+        ).read_text(encoding="utf-8")
+    )
+    release = json.loads((PACKAGE / "human_transfer_summary.json").read_text(encoding="utf-8"))
+    experiment_view = experiment["views"]["all_majority_vote"]
+    assert release["rows"] == experiment_view["rows"]
+    assert release["users"] == experiment_view["users"]
+    assert release["positive_rows"] == experiment_view["positive_rows"]
+    assert release["activation"]["auprc"] == experiment_view["models"]["activation"]["auprc"]
+    assert release["activation"]["auroc"] == experiment_view["models"]["activation"]["auroc"]
+    assert release["paired_activation_minus_tfidf"] == experiment_view[
+        "paired_activation_minus_tfidf"
+    ]
+
+
 def test_numpy_scorer_and_renderer_contract() -> None:
     module = load_score_module()
     probe = module.load_probe(PACKAGE / "probe.npz")

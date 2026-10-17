@@ -1,0 +1,40 @@
+{
+  "claim_boundary": "Output 11 was evaluated after the held-out test had been opened for the development-selected winner. This comparison diagnoses readout engineering and is not a second confirmatory test.",
+  "experiment_id": "MEM-EXP005-POSTHOC-OUTPUT11",
+  "frozen_masked_mean_output_11": {
+    "auprc": 0.09677473578372678,
+    "auprc_user_bootstrap_95ci": [
+      0.0723676319423722,
+      0.13198022157668168
+    ],
+    "auroc": 0.6753301014013144,
+    "auroc_user_bootstrap_95ci": [
+      0.6651778329197684,
+      0.6852497259619439
+    ],
+    "balanced_accuracy_at_0_5": 0.5677080915463535
+  },
+  "selected_masked_mean_outputs_7_8": {
+    "auprc": 0.15746749366563353,
+    "auroc": 0.7841790074741192,
+    "balanced_accuracy_at_0_5": 0.6602724372790758
+  },
+  "selected_minus_output11": {
+    "auprc_difference": 0.060692757881906756,
+    "auprc_difference_user_bootstrap_95ci": [
+      0.030188400045867397,
+      0.1200176167676071
+    ],
+    "auroc_difference": 0.10884890607280473,
+    "auroc_difference_user_bootstrap_95ci": [
+      0.06752638853983406,
+      0.1482615887488029
+    ],
+    "resamples": 2000,
+    "seed": 20261017,
+    "unit": "held-out user"
+  },
+  "status": "POST_TEST_DIAGNOSTIC_NOT_CONFIRMATORY",
+  "test_rows": 1748,
+  "test_users": 5
+}
