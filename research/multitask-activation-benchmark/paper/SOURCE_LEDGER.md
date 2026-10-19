@@ -1,6 +1,6 @@
 # Multi-task paper source and evidence ledger
 
-Last reconciled: 2026-10-18 (America/Vancouver).
+Last reconciled: 2026-10-19 (America/Vancouver).
 
 This ledger distinguishes external prior art, external datasets, and IntentProbe's own computed
 results. Full retrieval queries and adverse findings remain in the parent benchmark ledgers.
@@ -11,13 +11,41 @@ results. Full retrieval queries and adverse findings remain in the parent benchm
 | --- | --- | --- | --- | --- |
 | VERIFIED PRIMARY | Tillman & Mossing, *Investigating Task-Specific Prompts and Sparse Autoencoders for Activation Monitoring* | <https://arxiv.org/abs/2504.20271> | Probe versus generated-output precedent | Conditional results; does not establish universal probe superiority |
 | VERIFIED PRIMARY | Meyoyan & Del Corro, *A BERTology View of LLM Orchestrations* | <https://aclanthology.org/2026.acl-long.1955/> | Closest token/layer selection and single-pass systems precedent | Uses a larger serving model and different hardware/tasks |
-| VERIFIED PRIMARY | Li et al., *Representation-as-a-Judge* | <https://openreview.net/forum?id=VAISvCsrvG> | Small-model representation-versus-judge evidence | Reasoning-quality evaluation, not heterogeneous workflow heads |
+| VERIFIED PRIMARY | Li et al., *Representation-as-a-Judge* | <https://arxiv.org/abs/2601.22588> | Small-model representation-versus-judge evidence | Reasoning-quality evaluation, not heterogeneous workflow heads; accessible arXiv source replaces the unverified OpenReview mapping |
 | VERIFIED PRIMARY | Ratnakar et al., *LatentGate* | <https://aclanthology.org/2026.acl-industry.153/> | Non-generative small-model routing precedent | Routing only; one readout pipeline rather than 16 attachable tasks |
 | VERIFIED PRIMARY | Karamolegkou et al., *Trick or Neat* | <https://aclanthology.org/2025.findings-acl.954/> | Prompt/probe extraction gap on ambiguity | Linguistic classification, not systems safety |
 | VERIFIED PRIMARY | Schumacher et al., *Prompting Underestimates LLM Capability for Time Series Classification* | <https://arxiv.org/abs/2601.03464> | Cross-domain extraction-gap evidence | Time-series inputs, not the text runtime studied here |
-| VERIFIED INDEXED FULL TEXT; PDF ACCESS FAILED | Rammouz et al., *Embarrassingly Simple Access Control for Large Language Models* | <https://openreview.net/pdf?id=Re0fXzBeXH> | Close authorization/access-control prior art | Direct PDF returned HTTP 403 during review; reopen final proceedings source before submission |
+| VERIFIED AUTHOR METADATA; FULL PDF ACCESS FAILED | Rammouz et al., *Embarrassingly Simple Access Control for Large Language Models* | <https://www.anthonyrios.net/publications/> | Adjacent organizational-permission problem | Author page confirms title, four authors and forthcoming AACL-IJCNLP venue. The coauthor's UTSA page independently confirms title/venue but omits Klisura. Direct OpenReview PDF returns 403 and its API returns 429. Earlier indexed-text leads remain in the literature map; this candidate removes detailed final-layer/token/method claims rather than calling them independently reverified |
 | VERIFIED PRIMARY | Xi et al., *Calibration, Not Answer Selection* | <https://arxiv.org/abs/2609.33290> | Narrow-signal and calibration boundary | A useful latent signal may fail on an adjacent decision |
 | VERIFIED PRIMARY | Yang et al., *You Only Judge Once* | <https://arxiv.org/abs/2604.10966> | Adjacent one-pass scaling evidence | Multi-response reward scoring, not heterogeneous task heads |
+| VERIFIED PRIMARY | Goodfire × Rakuten | <https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection> | Production sidecar precedent | Describes adding probes cheaply; not a matched measurement of this runtime |
+| VERIFIED PRIMARY | Sing Team, *SingProbe Technical Report* | <https://arxiv.org/abs/2608.30703> | Intrinsic generation-time guardrails | Reuses the serving model's hidden states; not this separate CPU sidecar |
+| VERIFIED PRIMARY | Patronus Studio, *Lion Warden AI Security Classifier* | <https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier> | Seven-head shared encoder and CPU deployment precedent | Model card describes masked joint multi-task training; no common benchmark leaderboard is implied |
+| VERIFIED PRIMARY | Nordby, Pais & Parrack, *Linear Probe Accuracy Scales with Model Size and Benefits from Multi-Layer Ensembling* | <https://arxiv.org/html/2604.13386v1> | Variable useful layers and learned ensembles | Sections 4.3–4.4 concern deception tasks, not our four-task CPU suite; no imported numerical gain or universal recipe claim |
+| VERIFIED PRIMARY | Gao, *From Probe Scores to Alarm Policies* | <https://arxiv.org/html/2610.04575v1> | Calibration and operational-unit boundary | Sections 3 and 5 distinguish ranking metrics from a validated threshold policy; no claim that probes universally fail |
+| VERIFIED PRIMARY | Blandfort & Graham, *Red-teaming Activation Probes using Prompted LLMs* | <https://arxiv.org/html/2511.00554v1> | Concrete robustness checks | Case-study failure patterns motivate evaluation, not a measured failure rate for IntentProbe |
+
+## 19 October verification coverage and reconciliation
+
+The active Claude session supplied review leads, not independent proof of the current files.
+The current manuscript had already corrected the Representation-as-a-Judge URL, the You Only Judge
+Once description, and the unsupported Tillman task list. Reopening Tillman & Mossing's full HTML
+also confirms moderation, SimpleQA hallucination and sentiment tasks in Section 3.1; no restoration
+of that list is needed for the present short comparison.
+
+| Status | Retrieval | Result / exact scope |
+| --- | --- | --- |
+| GOT DATA | arXiv primary abstract/HTML records linked above | Titles, author metadata and the specific propositions cited in Sections 2.1–2.4 were checked. Numerical results from those papers are not imported into IntentProbe's benchmark |
+| GOT DATA | ACL Anthology records `2025.findings-acl.954`, `2026.acl-long.1955`, `2026.acl-industry.153` | Matching titles, authors and abstracts; no claim to have rechecked every camera-ready table |
+| GOT DATA | Goodfire research article and Lion Warden model card | Sidecar marginal-cost statement, seven-head CPU interface and masked joint training |
+| GOT DATA | Exact-title access-control web discovery plus two author publication pages | Paper existence corroborated at <https://www.anthonyrios.net/publications/> and <https://ceid.utsa.edu/rkrishnan/publications/>; author lists differ as recorded above |
+| FAILED | `https://openreview.net/pdf?id=Re0fXzBeXH` | HTTP 403 / browser verification; not evidence that the paper is absent |
+| FAILED | `https://api2.openreview.net/notes?id=Re0fXzBeXH` | HTTP 429; no repeated hammering or inferred empty result |
+| SKIPPED | New social, patent and broad competitor sweeps | This pass reconciles cited sources for two existing preprints; it makes no new priority or patentability claim |
+
+Biggest source gap: the access-control full PDF was not freshly accessible. This candidate cites
+the author's publication record for the bibliographic and topic-level statement only. The existing
+indexed-text method lead is not represented as a successful PDF retrieval.
 
 ## External dataset sources
 

@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use the IntentProbe architecture or software, please cite this repository and the relevant research manuscript."
+message: "Cite the architecture preprint for the design and the separate empirical preprint for readout-selection and benchmark results."
 title: "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
 type: software
 authors:
@@ -35,6 +35,9 @@ keywords:
   - llm-as-a-judge
   - sidecar
 identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23471117
+    description: "Empirical preprint: IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass"
   - type: doi
     value: 10.5281/zenodo.23467859
     description: "Architecture preprint: IntentProbe: One Local Model Pass, Many Task-Specific Probes"

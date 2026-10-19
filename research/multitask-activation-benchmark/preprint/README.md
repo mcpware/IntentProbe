@@ -6,7 +6,10 @@ Author: **Wan Sheng Leung** · Publisher: **MCPware** · Version: **0.1.3**
 
 The preprint explains the complete architecture using the existing plain-English
 [article](../../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md). Its abstract is
-[`ABSTRACT.md`](ABSTRACT.md). It is separate from the longer empirical manuscript in `../paper/`.
+[`ABSTRACT.md`](ABSTRACT.md). It is separate from the longer
+[empirical manuscript](../paper/README.md), DOI `10.5281/zenodo.23471117`.
+Architecture DOI: `10.5281/zenodo.23467859`. Both are reserved and remain unsubmitted
+publication candidates until the author reviews and authorizes the exact publication batch.
 
 The PDF is built from that canonical article, without a second substantive rewrite:
 

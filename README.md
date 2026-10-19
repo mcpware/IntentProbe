@@ -52,6 +52,8 @@ for that backbone.
 
 [Read the architecture article](docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md) ·
 [Cite the architecture preprint](https://doi.org/10.5281/zenodo.23467859) ·
+[Read the empirical paper](research/multitask-activation-benchmark/paper/DRAFT.md) ·
+[Cite the empirical results](https://doi.org/10.5281/zenodo.23471117) ·
 [Browse the probe models](probes/) ·
 [Reproduce the benchmark](research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/)
 

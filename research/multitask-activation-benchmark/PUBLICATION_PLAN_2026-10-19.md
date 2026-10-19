@@ -11,6 +11,8 @@ the May 2026 Zenodo record so citation indexes resolve both to one author.
 ## Current publication candidate
 
 - Architecture article: `docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md`.
+- Empirical manuscript: `paper/DRAFT.md`, reporting readout selection, task quality and CPU scaling;
+  separate DOI `10.5281/zenodo.23471117` and PDF/BibTeX in `paper/`.
 - Website entry point: `docs/index.md`; GitHub Pages already targets `main:/docs`.
 - Citation metadata: `CITATION.cff` and `.zenodo.json`.
 - Discoverability: natural search terms in opening text, site metadata, root/site LLM context,
@@ -20,12 +22,14 @@ the May 2026 Zenodo record so citation indexes resolve both to one author.
 
 ## Publication sequence
 
-1. Keep the architecture candidate public on the review branch while preparing the separate
-   architecture preprint. Its reserved DOI is `10.5281/zenodo.23467859`; its author is
-   `Leung, Wan Sheng`, displayed as Wan Sheng Leung. Align the saved Zenodo draft with the approved
-   six-page PDF, Markdown source and BibTeX, then show the complete final metadata and file preview.
-2. After the exact preview and Nicole's standalone uppercase `SEND`, publish that new preprint
-   first and verify the public DOI, author, files and checksums. The two older tool-poisoning records
+1. Follow the author's two-paper decision: the empirical paper presents the model/layer/pooling
+   evidence; the architecture note explains the design and cites it. Keep both candidates on the
+   review branch. Reserve separate DOIs, cross-reference them, and align both unsubmitted Zenodo
+   drafts with their PDFs, Markdown sources and BibTeX. Architecture DOI:
+   `10.5281/zenodo.23467859`; empirical DOI: `10.5281/zenodo.23471117`. Both use author
+   `Leung, Wan Sheng`, displayed as Wan Sheng Leung. Show every final metadata field and file.
+2. After the exact two-record preview and the author's standalone uppercase `SEND`, publish that
+   exact approved batch and verify both public DOIs, authors, files and checksums. The two older tool-poisoning records
    already publish the legal name; restore their stale handle-only edit drafts without republishing
    their unchanged articles. The May paper's DOI remains a reference to that earlier work.
 3. Deploy the reviewed GitHub/Pages and model-card revisions. Check the website returns 200, the
@@ -35,7 +39,7 @@ the May 2026 Zenodo record so citation indexes resolve both to one author.
    draft concrete: the deployment problem, code/model link, and one measured result. Review the
    actual wording before posting. Track referrals, model downloads and concrete usage reports;
    downloads are not unique users.
-5. Continue the benchmark without holding the initial explanatory article for every future test.
+5. Continue the benchmark without holding these initial preprints for every future test.
    Publish each subsequent result with its own source, protocol and version.
 
 ## Highest-value next experiments
@@ -51,6 +55,12 @@ the May 2026 Zenodo record so citation indexes resolve both to one author.
 
 Freeze the analysis plan before running a new comparison. Keep the measured systems panel, task
 quality results, implementation status and future designs identifiable in every release.
+
+The implementation checklist and preserved editorial locks are in
+[`TWO_PAPER_RELEASE_PLAN_2026-10-19.md`](TWO_PAPER_RELEASE_PLAN_2026-10-19.md).
+Reserving both DOIs before rendering is an editorial convenience, not a platform rule that papers
+must publish simultaneously. Zenodo permits metadata edits and linked new versions; a DOI is not
+a claim that arbitrary PDF replacement remains possible forever.
 
 ## Editorial checks
 

@@ -82,6 +82,8 @@ Apache-2.0. Research preview.
 
 ## Primary links
 
+- Architecture preprint DOI: https://doi.org/10.5281/zenodo.23467859
+- Empirical readout/benchmark paper DOI: https://doi.org/10.5281/zenodo.23471117
 - Repository: https://github.com/mcpware/IntentProbe
 - Public architecture note: https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md
 - Research manuscript: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md

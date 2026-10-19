@@ -1,6 +1,8 @@
 # IntentProbe full context for LLMs
 
 Canonical repository: https://github.com/mcpware/IntentProbe
+Architecture preprint: https://doi.org/10.5281/zenodo.23467859
+Empirical readout/benchmark preprint: https://doi.org/10.5281/zenodo.23471117
 Research paper (preliminary, GPT-2): https://doi.org/10.5281/zenodo.19990741
 Author: Wan Sheng Leung (https://github.com/ithiria894)
 

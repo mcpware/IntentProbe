@@ -2,6 +2,7 @@
   "claim_boundaries": {
     "missing_system_arms": [
       "one prompted multi-label judge call",
+      "separate judge calls with a shared cacheable prefix",
       "measured fleet of compact task-specific classifiers"
     ],
     "ood": "Unlabelled cross-domain score-shift diagnostic only. Native heldout labels determine accuracy and calibration; non-native source scores are not called errors.",

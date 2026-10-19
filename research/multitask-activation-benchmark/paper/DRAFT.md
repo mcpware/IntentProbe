@@ -2,13 +2,14 @@
 
 **Status:** public research manuscript v0.1.3; not peer reviewed<br>
 **Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
-**Publisher:** MCPware, a product and research brand of GEASS LABS INC.
+**Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
+**Updated:** 19 October 2026<br>
+**DOI:** [10.5281/zenodo.23471117](https://doi.org/10.5281/zenodo.23471117)
 
 This manuscript is the empirical systems evaluation of the public [*IntentProbe: One Local Model
 Pass, Many Task-Specific Probes*
-architecture note](../../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md).
-
-![Panel a, runtime: a request and its context enter a frozen local model that runs one forward pass over layers 1 to N; the shared hidden states fan out in parallel to toxicity, sentiment and jailbreak readouts, each with its own layer selection and pooling, feeding independent heads that each return a score to a host policy of allow, review or block. Panel b, offline: labelled data feeds a readout selection and head fit that produces a versioned head, loaded later as a compatible head without retraining the others.](../../../docs/intentprobe-architecture-overview.png)
+architecture note](https://doi.org/10.5281/zenodo.23467859). The note explains the design;
+this paper reports the readout search, task comparisons and shared-runtime measurements.
 
 ## Abstract
 
@@ -113,8 +114,8 @@ monitoring. [Lion Warden](https://huggingface.co/patronus-studio/lion-warden-ai-
 jointly trains a compact encoder and seven security heads and provides CPU inference.
 
 [A BERTology View of LLM Orchestrations](https://aclanthology.org/2026.acl-long.1955/)
-searches token- and layer-selective probes on a frozen serving model, compares
-against prompted and standalone classifiers, and measures the latency and memory saved by reusing a
+searches token- and layer-selective probes on a frozen serving model. It compares against
+prompted and standalone classifiers and measures the latency and memory saved by reusing a
 serving pass. [LatentGate](https://aclanthology.org/2026.acl-industry.153/) uses a frozen small model,
 mean pooling, PCA whitening, and a linear probe for semantic routing. [You Only Judge
 Once](https://arxiv.org/abs/2604.10966) uses a discriminative multimodal reward model to score
@@ -125,14 +126,26 @@ independently attachable, and allowed to read different layer windows and poolin
 
 ### 2.3 Authorization and narrow signal contracts
 
-[Embarrassingly Simple Access Control for Large Language Models](https://openreview.net/pdf?id=Re0fXzBeXH)
-probes final-token, final-layer representations for access-control decisions and compares them with
-direct and two-step prompting. It is close prior art for permission classification, although its task
-is organizational access control rather than whether a user's language authorizes executing a
-specific action. [Calibration, Not Answer Selection](https://arxiv.org/abs/2609.33290) supplies an
+[Rammouz and colleagues' forthcoming access-control paper](https://www.anthonyrios.net/publications/)
+addresses permissions in large language models. Its organizational access-control setting is
+adjacent to our question of whether a user's language authorizes executing a specific action.
+[Calibration, Not Answer Selection](https://arxiv.org/abs/2609.33290) supplies an
 important boundary: a latent signal can be useful for one declared target while failing on a nearby
 decision. We apply that boundary throughout. Decodability is not causal understanding, and a
 probabilistic authorization score is not an execution permission.
+
+### 2.4 Readout selection and operational checks
+
+[Nordby, Pais and Parrack](https://arxiv.org/abs/2604.13386) report that useful probing layers vary
+across deception tasks and model architectures, and study learned multi-layer ensembles. That
+motivates testing the readout recipe rather than treating the final layer as a default guarantee.
+Our screen uses simpler adjacent windows and holds the backbone fixed during head training.
+
+[Gao](https://arxiv.org/abs/2610.04575) separates predictive probe scores from calibrated alarm
+policies. [Blandfort and Graham](https://arxiv.org/abs/2511.00554) find concrete false-positive and
+false-negative patterns by red-teaming probes with prompted models. These studies motivate the
+separate calibration, shift and head-admission checks in our architecture; the timing experiment
+measures the cost of serving heads that have already been trained.
 
 ## 3. Data and tasks
 
@@ -181,6 +194,11 @@ using human labels for fitting.
 
 ## 4. Methods
 
+<figure>
+<img src="../../../docs/intentprobe-architecture-overview.png" alt="One frozen model pass feeds independent task heads, each with its own layer and pooling selection. A separate offline path fits and versions compatible heads." />
+<figcaption><strong>Figure 1. The activation backplane: one model pass that every probe plugs into.</strong> At runtime, independent task readouts share the frozen model's hidden states. Offline, labelled data selects each readout and fits its head. Shared inference and head application are measured here; general compatible-head loading and host policy are specified integration points.</figcaption>
+</figure>
+
 ### 4.1 Activation readout search
 
 Backbone weights remain frozen. For Qwen2.5-0.5B, each input produces 25 hidden-state outputs of
@@ -188,7 +206,7 @@ width 896. The simple candidate family combines:
 
 - masked mean, last non-padding token, or featurewise masked maximum over input tokens;
 - every individual hidden output and every adjacent width-two or width-three window; and
-- fold-local featurewise standardization followed by a class-weighted logistic head.
+- training-split featurewise standardization followed by a class-weighted logistic head.
 
 This gives 216 candidates per binary Qwen task. Window representations average the standardized
 layer features. Selection uses the task's frozen validation metric: AUROC for SST-2 and AUPRC for
@@ -345,12 +363,12 @@ first panel is the mean over all 80 shared-path rows and is not the denominator 
 
 Head application itself takes 1.85 ms on average at K=16. The recorded K=16 peak RSS is 3617.4 MiB,
 only 0.73 MiB above K=1. Saved probe files total 386,121 bytes. Since the shared path requests all
-hidden outputs even at K=1, these measurements describe the intended attachable-head bus rather than
+hidden outputs even at K=1, these measurements describe the intended attachable-head backplane rather than
 an optimized single-head special case.
 
 ### 5.5 Cross-domain scores move enough to require monitoring
 
-The 320-row diagnostic finds meaningful distribution movement. The largest absolute mean shift is
+The 320-row diagnostic records source-dependent score movement. The largest absolute mean shift is
 +0.301 for the curiosity head on ToxicChat relative to its full native GoEmotions score distribution;
 the KS distance is 0.406. This is not an error estimate because ToxicChat has no curiosity label. It
 does show that a fixed threshold can fire at a very different rate when the source changes.
@@ -405,9 +423,10 @@ right to execute remain explicit state and policy facts outside the classifier.
 
 ### 6.4 What remains for a full systems frontier
 
-This experiment completes the shared-path curve and a conservative repeated-forward lower bound. It
-does not yet measure two planned arms: one prompted multi-label judge call and a measured fleet of
-compact task-specific classifiers on the same hardware. Those arms are required before claiming the complete
+This experiment completes the shared-path curve and a conservative repeated-forward lower bound.
+Three comparison arms remain: one prompted multi-label judge call, separate judge calls with a
+shared cacheable prefix, and a measured fleet of compact task-specific classifiers on the same
+hardware. Their actual prompting and cache configurations need to be measured before claiming the complete
 quality--latency--RAM frontier. The current result is narrower and still useful: given 16 existing
 heads, their marginal serving cost is small relative to one 0.5B forward.
 
@@ -423,7 +442,8 @@ heads, their marginal serving cost is small relative to one 0.5B forward.
    LLM-judge benchmark.
 6. The direct-judge sentinel uses LFM2.5 and Qwen3.5, while the systems suite uses Qwen2.5. The two
    experiments answer complementary rather than perfectly matched questions.
-7. The one-call multi-label judge and measured compact-classifier fleet remain incomplete.
+7. The one-call multi-label judge, prefix-cached separate judges and measured compact-classifier
+   fleet remain incomplete.
 8. Native heldout tasks differ in prevalence, size, source, and label definition. Their metrics must
    not be averaged into a universal quality number.
 9. UCC lacks author and article grouping. Several other datasets also lack the independent unit
@@ -489,6 +509,53 @@ binary heads.
 ## Author and assistance disclosure
 
 Wan Sheng Leung defined the research question, architecture, experiment priorities, interpretation,
-and release boundary, and approved this manuscript. Coding assistants were used to implement and
+and release boundary. Coding assistants were used to implement and
 check experiments, generate figures, and edit the manuscript. Quantitative claims are regenerated
 from the versioned artifacts linked above and are covered by repository tests.
+
+## References
+
+1. Tillman, H., and Mossing, D. 2025. *Investigating task-specific prompts and sparse autoencoders
+   for activation monitoring.* [arXiv:2504.20271](https://arxiv.org/abs/2504.20271).
+2. Li, Z., et al. 2026. *Rethinking LLM-as-a-Judge: Representation-as-a-Judge with Small Language
+   Models via Semantic Capacity Asymmetry.* ICLR 2026.
+   [arXiv:2601.22588](https://arxiv.org/abs/2601.22588).
+3. Karamolegkou, A., Eberle, O., Rust, P., Kauf, C., and Søgaard, A. 2025. *Trick or Neat:
+   Adversarial Ambiguity and Language Model Evaluation.* Findings of ACL.
+   [10.18653/v1/2025.findings-acl.954](https://aclanthology.org/2025.findings-acl.954/).
+4. Schumacher, D., Nourbakhsh, E., Slavin, R., and Rios, A. 2026. *Prompting Underestimates LLM
+   Capability for Time Series Classification.*
+   [arXiv:2601.03464](https://arxiv.org/abs/2601.03464).
+5. Goodfire. 2025. *Deploying Interpretability to Production with Rakuten: SAE Probes for PII
+   Detection.* [Official research article](https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection).
+6. Sing Team. 2026. *SingProbe Technical Report.*
+   [arXiv:2608.30703](https://arxiv.org/abs/2608.30703).
+7. Patronus Studio. 2026. *Lion Warden AI Security Classifier.*
+   [Model card](https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier).
+8. Meyoyan, G. A., and Del Corro, L. 2026. *A BERTology View of LLM Orchestrations: Token- and
+   Layer-Selective Probes for Efficient Single-Pass Classification.* ACL.
+   [10.18653/v1/2026.acl-long.1955](https://aclanthology.org/2026.acl-long.1955/).
+9. Ratnakar, S., Talasila, A., and Doifode, V. K. 2026. *LatentGate: Low-Latency Semantic Routing
+   via Frozen-Backbone Probing of Small Language Models.* ACL Industry Track.
+   [10.18653/v1/2026.acl-industry.153](https://aclanthology.org/2026.acl-industry.153/).
+10. Yang, Y., Ma, Z., Ganti, M., Zhang, J., and Krishna, R. 2026. *You Only Judge Once:
+    Multi-response Reward Modeling in a Single Forward Pass.*
+    [arXiv:2604.10966](https://arxiv.org/abs/2604.10966).
+11. Rammouz, V., Klisura, Đ., Krishnan, R., and Rios, A. 2026. *Embarrassingly Simple Access
+    Control for Large Language Models.* AACL-IJCNLP, to appear.
+    [Author publication record](https://www.anthonyrios.net/publications/).
+12. Xi, Y., Zhang, R., Lv, T., Luo, Z., and Zhao, R. 2026. *Calibration, Not Answer Selection:
+    Distilling Internal Confidence in Reasoning Models.*
+    [arXiv:2609.33290](https://arxiv.org/abs/2609.33290).
+13. Nordby, E., Pais, T., and Parrack, A. 2026. *Linear Probe Accuracy Scales with Model Size and
+    Benefits from Multi-Layer Ensembling.* [arXiv:2604.13386](https://arxiv.org/abs/2604.13386).
+14. Gao, X. 2026. *From Probe Scores to Alarm Policies: Operational Validity of Activation
+    Monitors for Language-Model Agents.* [arXiv:2610.04575](https://arxiv.org/abs/2610.04575).
+15. Blandfort, P., and Graham, R. 2025. *Red-teaming Activation Probes using Prompted LLMs.*
+    [arXiv:2511.00554](https://arxiv.org/abs/2511.00554).
+16. Leung, W. S. 2026. *IntentProbe: One Local Model Pass, Many Task-Specific Probes.*
+    Architecture preprint v0.1.3. [10.5281/zenodo.23467859](https://doi.org/10.5281/zenodo.23467859).
+
+Dataset release links and exact local provenance are listed in the
+[task source ledger](../SOURCE_LEDGER_2026-10-17.md) and the
+[paper source ledger](SOURCE_LEDGER.md).

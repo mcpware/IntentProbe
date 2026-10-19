@@ -10,6 +10,8 @@ authorization and memory-write probes have standalone scorers. General hot-loadi
 Author: Wan Sheng Leung. Publisher: MCPware, a product and research brand of GEASS LABS INC.
 
 - Architecture: https://mcpware.github.io/IntentProbe/architecture/
+- Architecture preprint: https://doi.org/10.5281/zenodo.23467859
+- Empirical preprint: https://doi.org/10.5281/zenodo.23471117
 - Repository: https://github.com/mcpware/IntentProbe
 - Models: https://huggingface.co/mcpware
 - Probe catalog: https://github.com/mcpware/IntentProbe/tree/main/probes

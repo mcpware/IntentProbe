@@ -135,6 +135,16 @@ model. Masked-mean pooling dominated sentiment and toxicity. Spam split evenly b
 and masked max. Toxicity and jailbreak detection selected different readouts even when they saw the
 same input rows from the same model.
 
+That choice has a measurable price. On the ToxicChat validation cells, a universal readout --
+masked mean, width two, normalized depth 0.5 -- reaches mean AUPRC 0.7872, against 0.8220 for
+cell-specific selection: a mean regret of 0.0348. Allowing one rule per backbone cuts that regret
+to 0.0142. These are selection-set comparisons on validation cells, not held-out generalization.
+
+The served heads show the same spread. Of the 16, 11 selected masked mean and five masked max;
+seven read a single hidden output and nine a two- or three-layer window. The selected layers span
+outputs 2 to 20 of 25, and none of them is the final output. The full model-by-task matrix is in
+the [empirical research paper](https://doi.org/10.5281/zenodo.23471117).
+
 Each head therefore carries its own manifest:
 
 - task and label contract;
@@ -220,7 +230,7 @@ and 16 heads. Its public probe catalog also gives readers weights and scorers to
 
 ## Evidence and implementation record
 
-- [Research manuscript: *IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass*](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md)
+- [Empirical paper: *IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass*](https://doi.org/10.5281/zenodo.23471117)
 - [Complete implementable architecture disclosure](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md)
 - [One-forward scaling result](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
 - [Probe-versus-judge sentinel](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
@@ -235,4 +245,4 @@ MCPware, a product and research brand of GEASS LABS INC.
 IntentProbe (2026) runs a small frozen local model on CPU as a sidecar and shares one forward pass
 across independently trained activation probes, each with its own readout manifest.
 
-[Download BibTeX with the author handle preserved](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/intentprobe-architecture.bib).
+[Download BibTeX](https://zenodo.org/records/23467859/files/intentprobe-architecture-v0.1.3.bib?download=1).

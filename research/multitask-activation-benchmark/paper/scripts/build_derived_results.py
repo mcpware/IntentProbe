@@ -147,6 +147,7 @@ def main() -> None:
             "ood": scaling["interpretation"]["ood"],
             "missing_system_arms": [
                 "one prompted multi-label judge call",
+                "separate judge calls with a shared cacheable prefix",
                 "measured fleet of compact task-specific classifiers",
             ],
         },
