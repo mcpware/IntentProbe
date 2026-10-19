@@ -15,9 +15,14 @@ The public manuscript source is [`DRAFT.md`](DRAFT.md); the PDF candidate is
 [`intentprobe-empirical.bib`](intentprobe-empirical.bib). Build it from the repository root with
 `python3 scripts/build_multitask_preprint.py --output research/multitask-activation-benchmark/paper/intentprobe-empirical-v0.1.3.pdf --evidence-ref FULL_SOURCE_COMMIT`.
 The final source commit and exact build command are recorded in `BUILD.md` when the PDF is frozen.
-The renderer uses installed Markdown/WeasyPrint, the approved local figure and public GitHub
+The renderer uses installed Markdown/WeasyPrint, the approved architecture figure, the existing
+matched-panel latency figure, the reproducible selected-readout figure, and public GitHub
 evidence links pinned to that immutable commit; it does not install packages or expose local
 filesystem links in the PDF.
+
+Regenerate the selected-readout SVG and 300-DPI PNG with
+`python3 scripts/render_multitask_readouts.py`. The figure's source, encoding and interpretation
+boundaries are documented in [`outputs/figures/README.md`](outputs/figures/README.md).
 
 Paper-level numbers are rebuilt from frozen
 experiment artifacts by:

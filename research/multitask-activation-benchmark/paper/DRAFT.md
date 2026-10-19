@@ -13,34 +13,24 @@ this paper reports the readout search, task comparisons and shared-runtime measu
 
 ## Abstract
 
-Agent workflows need many guardrail and classification checks on the same input. We present
-IntentProbe, a CPU sidecar architecture that runs a small frozen local language model in a single
-forward pass, then applies independently trained activation probes to selected hidden states.
-It supplies task scores without generating a separate LLM-as-a-judge answer for every check. A
-hosted agent's hidden states are not required: the sidecar reads its own local sensor model.
-Prompt injection, authorization, toxicity, and memory write motivate the broader project; the
-shared 16-head timing suite below covers the specific tasks listed in its manifest.
-Our empirical programme has three parts. First, a 24-cell screen crosses six 230M--1B backbones with
-sentiment, spam, toxicity, and jailbreak detection. Selected pooling and depth vary by model and
-task; even toxicity and jailbreak labels on identical ToxicChat prompts select different readouts.
-Second, a six-cell sentinel compares activation heads, matched TF-IDF, and direct output judgments
-from two local backbones on authorization-to-execute, toxicity, and sentiment. It finds substantial
-task-by-model interaction rather than a universal ordering of methods. This motivates an
-architecture in which heads, labelled datasets, readout recipes, and even the backbone remain
-replaceable components instead of being treated as one fixed detector.
+IntentProbe serves 16 independently trained task heads from one frozen Qwen2.5-0.5B forward pass on
+a six-core CPU. Across 80 held-out texts per K, increasing the head count from one to 16 raises mean
+latency from 68.63 to 73.34 ms (+6.9%; paired mean ratio 1.069, 95% CI 1.056--1.078). On a separate
+matched ten-input panel, one forward plus 16 heads takes 62.70 ms versus 956.71 ms for 16 repeated
+backbone forwards: a 15.26-fold ratio (95% CI 15.04--15.49). This comparator omits task prompting,
+output scoring and generation; it is a repeated-forward lower bound, not a full LLM-judge benchmark.
 
-Third, we freeze 16 binary heads on one exact Qwen2.5-0.5B revision across five real-text sources:
-toxicity, jailbreak, spam, sentiment, five emotion labels, and seven conversational-pragmatics
-labels. Native heldout AUPRC ranges from 0.0836 to 0.9804 because the tasks and prevalences differ.
-On one six-core CPU, mean latency rises from 68.63 ms for one forward plus one head to
-73.34 ms for the same forward plus 16 heads, a ratio of 1.069 (paired-bootstrap 95% CI
-1.056--1.078). In the separate matched ten-prompt comparator, one forward plus 16 heads averages
-62.70 ms and 16 repeated base-model forwards average 956.71 ms, a repeated/shared ratio of 15.26
-(95% CI 15.04--15.49). Peak process memory changes by +0.73 MiB; the 16 saved probe artifacts occupy
-386,121 bytes. The repeated-forward arm omits prompting, LM-head scoring, and generation, so it is a
-lower bound rather than a complete judge implementation.
-These results support a modular one-forward/many-readout runtime. The shared runtime is the stable
-system layer; head quality, calibration, data, and domain specificity can improve independently.
+The local model supplies shared hidden states to task-specific probes without accessing a hosted
+agent's activations. Each probe declares its own layers, token pooling, normalization and classifier.
+A 24-cell screen across six 230M--1B backbones and four tasks finds that selected readouts vary by
+model and task, including different selections for toxicity and jailbreak labels on identical
+inputs. A six-cell same-backbone comparison with TF-IDF and direct judges likewise finds
+task-dependent quality differences.
+
+The shared runtime covers toxicity, jailbreak, spam, sentiment, emotion and conversational pragmatics.
+Native heldout AUPRC ranges from 0.0836 to 0.9804 across tasks with different prevalences. The 16 probe
+artifacts occupy 386,121 bytes; recorded peak process memory changes by +0.73 MiB. These measurements
+support a shared runtime whose heads and readout recipes can improve independently.
 
 ## 1. Introduction
 
@@ -71,12 +61,12 @@ We therefore separate four questions:
 
 Our contributions are:
 
+- a paired CPU scaling experiment at K=`1,2,4,8,16`, including peak process memory, saved-artifact
+  size, and a deliberately favourable repeated-forward lower bound;
+- a 16-head Qwen2.5-0.5B suite whose heads use different pooling methods and hidden-state windows;
 - a 24-cell, six-backbone readout screen over four real-labelled binary tasks;
 - a six-cell same-backbone probe-versus-judge sentinel with paired uncertainty and a 12-test AUPRC
   false-discovery family;
-- a 16-head Qwen2.5-0.5B suite whose heads use different pooling methods and hidden-state windows;
-- a paired CPU scaling experiment at K=`1,2,4,8,16`, including peak process memory, saved-artifact
-  size, and a deliberately favourable repeated-forward lower bound;
 - native heldout discrimination and calibration for every served head, plus an explicitly unlabelled
   five-source score-shift diagnostic; and
 - complete manifests, hashes, row-level timing artifacts without source text, and tests that enforce
@@ -166,6 +156,9 @@ cross-split overlaps, and label-conflict groups are handled before activation ex
 each source manifest.
 
 ### 3.2 Shared 16-head suite
+
+Prompt injection, authorization, toxicity, and memory write motivate the broader project. The shared
+16-head timing suite covers the tasks listed below; it does not include authorization or memory write.
 
 The shared Qwen2.5-0.5B suite adds five GoEmotions labels and seven Conversation AI Unhealthy
 Comments attributes to sentiment, spam, toxicity, and jailbreak detection:
@@ -310,6 +303,11 @@ The shared Qwen suite contains 11 masked-mean and five masked-max winners. Selec
 spans 0.125--0.792. Native AUPRC spans 0.0836--0.9804 and AUROC 0.7330--0.9959; positive prevalence
 spans 0.0206--0.4992.
 
+<figure>
+<img src="outputs/figures/selected-readout-windows.svg" alt="Sixteen head rows mark selected windows across hidden-state outputs 0 to 24. Eleven use masked mean and five use masked maximum. Selected outputs span 2 to 20; none includes final output 24. Pooling is also labelled in text." />
+<figcaption><strong>Figure 2. Selected readouts differ across the 16 served heads.</strong> Each filled cell belongs to a head's selected hidden-state window; colour and the right-hand label identify token pooling. Output 0 is the embedding output and output 24 is the final hidden output. This is a census of the frozen selected recipes, not an accuracy heatmap or evidence that no shared recipe could work. Selection and validation-regret comparisons are reported in Section 5.1; head quality is reported below.</figcaption>
+</figure>
+
 | Head | Pooling / outputs | Prevalence | AUPRC | AUROC | Balanced accuracy | Brier | ECE |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Toxicity | mean 18--20 | 0.127 | 0.709 | 0.909 | 0.828 | 0.091 | 0.087 |
@@ -354,6 +352,11 @@ The second panel compares both paths on the same ten prompts.
 | 4 | 60.49 | 238.73 | 3.95 |
 | 8 | 61.71 | 475.64 | 7.71 |
 | 16 | 62.70 | 956.71 | 15.26 |
+
+<figure>
+<img src="../../../docs/one-local-model-pass-many-task-specific-probes-latency.svg" alt="On the matched ten-input panel, latency for one forward plus K heads remains around 60 to 63 milliseconds as K grows from 1 to 16, while K repeated backbone forwards rise from 57.88 to 956.71 milliseconds. Error bars show row-bootstrap 95 percent confidence intervals." />
+<figcaption><strong>Figure 3. Shared inference avoids repeated backbone work.</strong> Both curves use the same ten inputs from the second table, with 2,000-resample row-bootstrap 95% confidence intervals. At K=16, shared inference takes 62.70 ms versus 956.71 ms for repeated forwards, a ratio of 15.26. The repeated-forward arm omits task prompts, output scoring and generation; it is not a full LLM-judge implementation. The separate 80-input scaling panel in the first table gives 68.63 to 73.34 ms; those values are not the plotted ten-input means. Intervals capture prompt variation, not repeated-run or run-order uncertainty.</figcaption>
+</figure>
 
 At K=16, the paired mean-latency ratio to K=1 on the 80-row shared-path panel is 1.069, 95% CI
 [1.056, 1.078]. The repeated-forward ratio to its own K=1 baseline is 16.53, 95% CI [16.39, 16.69].
@@ -483,6 +486,8 @@ implementation step rather than a measured product feature.
 - Six-cell sentinel: [`../experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/result.json`](../experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/result.json)
 - Sentinel human-readable summary: [`../experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md`](../experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
 - One-forward K-scaling result: [`../experiments/ONE-FORWARD-MULTIHEAD-EXP001/result.json`](../experiments/ONE-FORWARD-MULTIHEAD-EXP001/result.json)
+- Frozen per-head readout registry: [`../experiments/ONE-FORWARD-MULTIHEAD-EXP001/HEAD_REGISTRY.json`](../experiments/ONE-FORWARD-MULTIHEAD-EXP001/HEAD_REGISTRY.json)
+- Readout figure source and scope: [`outputs/figures/README.md`](outputs/figures/README.md)
 - Systems summary and interpretation boundaries: [`../experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md`](../experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
 - UCC primary result: [`../experiments/PRAGMATICS-UCC-QWEN-EXP001/result.json`](../experiments/PRAGMATICS-UCC-QWEN-EXP001/result.json)
 - UCC expansion result: [`../experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/result.json`](../experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/result.json)

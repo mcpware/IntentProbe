@@ -1,0 +1,31 @@
+# Selected readout windows
+
+Figure 2 answers one question: which hidden-state windows and token-pooling rules were selected
+for the 16 frozen heads served by the shared Qwen2.5-0.5B runtime?
+
+Source: [`HEAD_REGISTRY.json`](../../../experiments/ONE-FORWARD-MULTIHEAD-EXP001/HEAD_REGISTRY.json).
+The script reads only the head metadata; no source text, activations, fitting or inference is needed.
+From the repository root:
+
+`python3 scripts/render_multitask_readouts.py`
+
+The renderer validates the 16 unique heads and their frozen order, valid output indices, window
+widths and the selected pooling census before drawing the figure. It writes
+`selected-readout-windows.svg` and a 300-DPI `selected-readout-windows.png` here. The current-release
+checksum ledger identifies the exact figure bytes. Fixed SVG date and hash salt make the SVG
+reproducible within the recorded rendering environment.
+
+Each row is a head, and each filled cell is an output in its selected window. Blue means masked
+mean, orange means masked maximum; right-hand text repeats the pooling label for greyscale access.
+The hatched column is final output 24. Output 0 is the embedding output. Selected windows span
+outputs 2–20; 11 heads use masked mean and five use masked maximum. These are exact manifest
+counts, not uncertain performance estimates, so error bars do not apply.
+
+This is a selection census, not an accuracy heatmap, a causal result or proof that no common recipe
+could work. The paper separately reports validation-selection regret and native heldout quality.
+It reuses the repository's existing Matplotlib style rather than a generic bar-chart helper,
+because this figure encodes selected discrete intervals instead of a magnitude per category.
+
+Figure 3 reuses the existing latency SVG unchanged from `docs/`. It plots the matched ten-input
+comparison and its row-bootstrap intervals, not the separate 80-input scaling means. Its caption
+preserves the repeated-forward lower-bound and run-order uncertainty boundaries.

@@ -99,4 +99,4 @@ def test_missing_system_arms_remain_visible() -> None:
     derived = load(DERIVED)
     for arm in derived["claim_boundaries"]["missing_system_arms"]:
         assert arm in paper
-    assert "lower bound rather than a complete judge implementation" in paper
+    assert "repeated-forward lower bound, not a full LLM-judge benchmark" in paper

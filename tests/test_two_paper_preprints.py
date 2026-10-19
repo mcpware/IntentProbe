@@ -82,6 +82,21 @@ def test_empirical_pdf_uses_the_approved_local_figure(
     assert "Wan Sheng Leung" in text
     assert EMPIRICAL_DOI in text and ARCHITECTURE_DOI in text
     assert (ROOT / "docs/intentprobe-architecture-overview.png").as_uri() in text
+    assert (ROOT / "docs/one-local-model-pass-many-task-specific-probes-latency.svg").as_uri() in text
+    assert (BENCH / "paper/outputs/figures/selected-readout-windows.svg").as_uri() in text
+    assert text.count("<figure>") == 3
     assert 'href="file:' not in text
     assert 'src="https:' not in text
     assert captured["output"] == output
+
+
+def test_empirical_abstract_leads_with_scaling_without_merging_panels() -> None:
+    source = (BENCH / "paper/DRAFT.md").read_text()
+    abstract = source.split("## Abstract", 1)[1].split("## 1. Introduction", 1)[0]
+    assert 180 <= len(abstract.split()) <= 250
+    assert abstract.index("68.63") < abstract.index("24-cell")
+    assert "80 held-out texts" in abstract and "ten-input panel" in abstract
+    assert "repeated-forward lower bound" in abstract
+    assert "Native heldout AUPRC" in abstract
+    assert "motivate the broader project" not in abstract
+    assert "motivate the broader project" in source.split("### 3.2", 1)[1]

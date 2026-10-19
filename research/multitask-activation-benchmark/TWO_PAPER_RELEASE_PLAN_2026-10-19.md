@@ -41,6 +41,21 @@ after the complete final preview. No main, Pages, HF, or outreach deployment is 
 
 ## Checks and boundaries
 
+### Presentation follow-up
+
+The owner approved a targeted empirical-paper presentation revision after the first two-paper
+preview: keep the architecture illustration; add the existing matched-panel latency curve and a
+new manifest-derived readout-window figure; shorten the abstract and lead with measured serving
+cost. Do not change experiments or introduce a first-ever or universal-readout claim.
+
+- [x] Revise the abstract and contribution order; move the broader task scope into Section 3.2.
+- [x] Add the unchanged latency SVG with an explicit ten-input versus 80-input distinction.
+- [x] Render and check the 16-head selected-window census with text pooling labels.
+- [ ] Complete code review, full tests, Humanizer review, PDF inspection and release checksums.
+- [ ] Synchronize the review branch and unsubmitted draft; replace the exact publication preview.
+
+### Initial two-paper candidate
+
 The baseline independent check passed 97 tests, with 5 skipped and 3 dependency warnings.
 All 39 current release hashes passed before this work started. Those are baseline
 results, not a substitute for final-candidate QA. New tests or files can change the counts.
