@@ -51,8 +51,14 @@ cost. Do not change experiments or introduce a first-ever or universal-readout c
 - [x] Revise the abstract and contribution order; move the broader task scope into Section 3.2.
 - [x] Add the unchanged latency SVG with an explicit ten-input versus 80-input distinction.
 - [x] Render and check the 16-head selected-window census with text pooling labels.
-- [ ] Complete code review, full tests, Humanizer review, PDF inspection and release checksums.
-- [ ] Synchronize the review branch and unsubmitted draft; replace the exact publication preview.
+- [x] Complete code review, full tests, Humanizer review, PDF inspection and release checksums.
+- [x] Synchronize the review branch and unsubmitted draft; replace the exact publication preview.
+
+The revised empirical candidate has 15 pages and three figures; its abstract has 220
+whitespace-delimited words. The suite passes 104 tests, with five skipped and three dependency
+warnings. A fresh CodeRabbit review reported zero findings. Revised empirical source/PDF files
+and description have been saved to the same unsubmitted draft and downloaded for byte checks;
+the architecture candidate remains unchanged. The refreshed release ledger has 56 entries.
 
 ### Initial two-paper candidate
 
