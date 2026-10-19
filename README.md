@@ -1,16 +1,17 @@
 # IntentProbe
 
 <p align="center">
-  <strong>One model pass. Many task-specific readouts.</strong>
+  <strong>One local model pass. Many task-specific probes.</strong>
 </p>
 
 <p align="center">
-  IntentProbe turns one local language-model forward into a shared hidden-state bus for many
-  independently trained task heads.
+  IntentProbe runs one frozen local language model forward, then reads its hidden states with many
+  small, independently trained and independently versioned task probes.
 </p>
 
 <p align="center">
-  <strong>Measured proof:</strong> serving 16 heads added 6.9% mean CPU latency over serving one.
+  <strong>Measured:</strong> one forward plus one probe averaged 68.63 ms; one forward plus 16 probes
+  averaged 73.34 ms, a 6.9% increase (n=80, paired 95% CI [1.056, 1.078]).
 </p>
 
 <p align="center">
@@ -27,17 +28,17 @@
 </p>
 
 <p align="center">
-  <img src="docs/one-forward-many-decisions.svg" width="1000" alt="One input passes through one frozen local model. A shared hidden-state bus fans out to task-specific heads attached at different layers. Calibrated scores cross a separate host-control boundary before policy or irreversible action." />
+  <img src="docs/one-local-model-pass-many-task-specific-probes.svg" width="1000" alt="One input passes through one frozen local model. A shared hidden-state bus fans out to task-specific probes attached at different layers. Calibrated scores cross a separate host-control boundary before policy or irreversible action." />
 </p>
 
 ## Why make the model read the same input again for every task?
 
 You do not have to.
 
-One agent turn may need toxicity, jailbreak, spam, sentiment, routing, authorization and other
-checks on the same input. Asking a model each question separately repeats the expensive part. An
+One agent turn may need toxicity, jailbreak, spam, sentiment, emotion and conversation-state checks
+on the same input. Asking a model each question separately repeats the expensive part. An
 IntentProbe runtime reads the input once, exposes selected hidden states through an activation bus,
-and lets many small heads reuse that same pass. Different heads can read different layers and use
+and lets many small probes reuse that same pass. Different probes can read different layers and use
 different pooling, normalization, classifiers and thresholds.
 
 The first measured Qwen2.5-0.5B CPU runtime produced a clear systems result:
@@ -45,16 +46,19 @@ The first measured Qwen2.5-0.5B CPU runtime produced a clear systems result:
 - across **80 real held-out texts per K**, one forward plus one head averaged **68.63 ms**; one
   forward plus 16 heads averaged **73.34 ms**. That is a **6.9%** increase, with a paired mean ratio
   of `1.069` (95% CI `[1.056, 1.078]`);
+- measured head application itself rose from **0.38 ms** to **1.85 ms**. Of the **4.70 ms** total
+  increase, **1.47 ms** is recorded head work and the remaining **3.23 ms** is unattributed;
 - on the separate **matched ten-prompt comparator**, one forward plus 16 heads averaged **62.70
   ms**. Sixteen repeated base-model forwards averaged **956.71 ms** — **15.26×** the shared path
   (95% CI `[15.04, 15.49]`).
 
 The repeated-forward arm is deliberately favourable to repetition: it omits task prompts,
 language-model output scoring and generation. It is a lower bound, not a complete implementation of
-16 LLM judges.
+16 LLM judges. The shared path requests all hidden outputs even at K=1, so the K=1 measurement is the
+activation-bus baseline rather than an optimized single-probe path.
 
 <p align="center">
-  <img src="docs/one-forward-many-decisions-latency.svg" width="900" alt="On the same ten prompts, one model forward plus up to 16 heads remains near 60 milliseconds while repeated model forwards rise from 58 to 957 milliseconds. At K equals 16 the repeated path is 15.26 times the shared path." />
+  <img src="docs/one-local-model-pass-many-task-specific-probes-latency.svg" width="900" alt="On the same ten prompts, one model forward plus up to 16 probes remains near 60 milliseconds while repeated model forwards rise from 58 to 957 milliseconds. At K equals 16 the repeated path is 15.26 times the shared path." />
 </p>
 
 The benchmark is evidence for the architecture, not a final ranking of the first 16 heads. Each
@@ -73,9 +77,9 @@ auditable layers.
 | **Measured research runtime** | Reproducible one-forward fan-out across 16 frozen heads, with row-level timing artifacts and tests |
 | **Specified next runtime** | General manifest registry, hot-loading and multi-head receipt emission; these are designed and schema-tested, not yet the PyPI product surface |
 
-Read the plain-English public note, [**IntentProbe: One Model Pass, Many Task-Specific
-Readouts**](docs/ONE_FORWARD_MANY_DECISIONS.md), the research manuscript [*IntentProbe: Many
-Task-Specific Hidden-State Readouts from One Small Language Model Forward
+Read the plain-English public note, [**IntentProbe: One Local Model Pass, Many Task-Specific
+Probes**](docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md), the research manuscript
+[*IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward
 Pass*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete technical
 disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md). The
 [v0.1.2 release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_2.md) links the
@@ -93,10 +97,10 @@ GEASS LABS INC.
 ## One architecture, three public probe products
 
 IntentProbe is a family of small classifiers that read the internal activations of frozen local
-language models. Each detector has its own task, training data, selected layers, benchmark, and probe
+language models. Each probe has its own task, training data, selected layers, benchmark, and probe
 weights.
 
-| Detector | The problem it catches | Frozen model | Activation recipe | Learned artifact |
+| Probe | The problem it catches | Frozen model | Activation recipe | Learned artifact |
 |---|---|---|---|---:|
 | [Tool-poisoning probe](probes/qwen2.5-0.5b-tool-poisoning/) | A tool or agent skill hides instructions to steal data, take over another tool, or act outside its stated job | `Qwen/Qwen2.5-0.5B` | Mean-pooled hidden states 13–15 | 22 KB |
 | [Action-authorization probe](probes/minicpm5-1b-authorization/) | An agent treats “help me apply” or “draft an email” as permission to submit or send something the user has not reviewed | `openbmb/MiniCPM5-1B-Base` | Standardized masked-mean hidden outputs 13–14 | 28 KB |
@@ -109,18 +113,18 @@ middle layers, and trains a small logistic classifier for one specific job.
 This signal is different from keyword rules and surface-text classifiers. It also avoids asking
 another LLM to say “safe” or “unsafe.”
 
-The [probe catalog](probes/) keeps each detector's model recipe, artifact, benchmark, source record,
+The [probe catalog](probes/) keeps each probe's model recipe, artifact, benchmark, source record,
 and reproduction steps together.
 
-The PyPI package currently ships the Qwen tool-poisoning scanner. The MiniCPM authorization detector
-and Qwen memory-write detector are standalone research releases with local scorers and complete
+The PyPI package currently ships the Qwen tool-poisoning scanner. The MiniCPM authorization probe
+and Qwen memory-write probe are standalone research releases with local scorers and complete
 selection receipts.
 
 The main research track is now the
 [multi-task activation benchmark](research/multitask-activation-benchmark/README.md): one common
 protocol for testing how backbone, normalized depth, token pooling, and layer combination interact
 across authorization, prompt injection, tool/skill poisoning, memory write, and toxicity. Individual
-detectors remain useful products, while the paper studies the engineering choices that transfer—or
+probes remain useful products, while the paper studies the engineering choices that transfer—or
 fail to transfer—between tasks.
 
 ## Install the tool-poisoning scanner
@@ -153,7 +157,7 @@ intentprobe scan --format summary --text "Reads SSH config and private keys, the
 First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). After that, everything stays local.
 
 <p align="center">
-  <img src="docs/demo.svg" width="700" alt="The shipped scanner blocks a poisoned MCP tool description with risk 0.950 and passes a clean description with risk 0.000." />
+  <img src="docs/demo.gif" width="700" alt="The shipped scanner blocks a poisoned MCP tool description with risk 0.950 and passes a clean description with risk 0.000." />
 </p>
 
 ## Try the authorization probe
@@ -246,9 +250,9 @@ The architecture benchmark separates two questions that use different panels:
 | Question | Inputs | Measured result |
 |---|---:|---:|
 | What changes when the same forward serves 1 versus 16 heads? | 80 held-out texts per K | `68.63 → 73.34 ms`; paired ratio `1.069`, 95% CI `[1.056, 1.078]` |
-| What changes when 16 decisions share one pass instead of repeating the base model? | Same 10 prompts in both arms | `62.70 vs 956.71 ms`; repeated/shared ratio `15.26`, 95% CI `[15.04, 15.49]` |
+| What changes when 16 probes share one pass instead of repeating the base model? | Same 10 prompts in both arms | `62.70 vs 956.71 ms`; repeated/shared ratio `15.26`, 95% CI `[15.04, 15.49]` |
 
-The 16-head suite is a heterogeneous research workload, not a claim that 16 production detectors are
+The 16-head suite is a heterogeneous research workload, not a claim that 16 production probes are
 ready. Each head keeps its own held-out discrimination, calibration and task contract. The systems
 finding is that compatible heads can share the expensive pass; admission remains a separate decision
 for every head.

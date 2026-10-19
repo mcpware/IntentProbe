@@ -159,7 +159,7 @@ def render_architecture() -> None:
     ax.text(
         0.5,
         0.957,
-        "One model pass. Many task-specific readouts.",
+        "One local model pass. Many task-specific probes.",
         ha="center",
         va="center",
         fontsize=28,
@@ -350,7 +350,7 @@ def render_architecture() -> None:
     ax.text(0.455, 0.071, "+6.9% total latency", ha="left", va="center", fontsize=10.5, fontweight="bold", color=NAVY)
     ax.text(0.635, 0.071, "n=80 · paired ratio 1.069 · 95% CI [1.056, 1.078]", ha="left", va="center", fontsize=8.5, color=MID_GREY)
 
-    save_public_figure(fig, "one-forward-many-decisions")
+    save_public_figure(fig, "one-local-model-pass-many-task-specific-probes")
     plt.close(fig)
 
 
@@ -427,7 +427,7 @@ def render_latency() -> None:
         label="K repeated base-model forwards (lower bound)",
     )
     ax.set_title("One pass stays flat. Repeating the model does not.", loc="left")
-    ax.set_xlabel("Number of decisions (K)")
+    ax.set_xlabel("Number of probes (K)")
     ax.set_ylabel("Mean latency per input (ms)")
     ax.set_xticks(x, labels=[str(value) for value in k_values])
     ax.set_ylim(bottom=0)
@@ -476,7 +476,7 @@ def render_latency() -> None:
         fontsize=8.5,
         color=MID_GREY,
     )
-    save_public_figure(fig, "one-forward-many-decisions-latency")
+    save_public_figure(fig, "one-local-model-pass-many-task-specific-probes-latency")
     plt.close(fig)
 
 

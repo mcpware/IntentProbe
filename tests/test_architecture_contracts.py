@@ -208,7 +208,7 @@ def test_public_architecture_release_matches_frozen_systems_result() -> None:
 
 def test_public_release_identity_numbers_and_figures_are_present() -> None:
     paths = (
-        ROOT / "docs" / "ONE_FORWARD_MANY_DECISIONS.md",
+        ROOT / "docs" / "ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md",
         BENCHMARK_DIR / "ARCHITECTURE_DISCLOSURE_V0_1.md",
         BENCHMARK_DIR / "paper" / "DRAFT.md",
     )
@@ -222,11 +222,45 @@ def test_public_release_identity_numbers_and_figures_are_present() -> None:
         assert "15.26" in text
 
     for name in (
-        "one-forward-many-decisions.svg",
-        "one-forward-many-decisions.png",
-        "one-forward-many-decisions-latency.svg",
-        "one-forward-many-decisions-latency.png",
+        "one-local-model-pass-many-task-specific-probes.svg",
+        "one-local-model-pass-many-task-specific-probes.png",
+        "one-local-model-pass-many-task-specific-probes-latency.svg",
+        "one-local-model-pass-many-task-specific-probes-latency.png",
     ):
         path = ROOT / "docs" / name
         assert path.is_file()
         assert path.stat().st_size > 1_000
+
+
+def test_legacy_architecture_note_points_to_current_canonical_note() -> None:
+    legacy = (ROOT / "docs" / "ONE_FORWARD_MANY_DECISIONS.md").read_text(encoding="utf-8")
+    assert "ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md" in legacy
+    assert "compatibility page" in legacy
+
+
+def test_current_public_titles_are_consistent() -> None:
+    architecture_title = "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
+    paper_title = (
+        "IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass"
+    )
+    architecture_sources = (
+        ROOT / "README.md",
+        ROOT / "CITATION.cff",
+        ROOT / "docs" / "ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md",
+        BENCHMARK_DIR / "ARCHITECTURE_DISCLOSURE_V0_1.md",
+        BENCHMARK_DIR / "README.md",
+    )
+    paper_sources = (
+        ROOT / "README.md",
+        ROOT / "CITATION.cff",
+        BENCHMARK_DIR / "paper" / "DRAFT.md",
+        BENCHMARK_DIR / "paper" / "README.md",
+    )
+    assert all(
+        architecture_title in " ".join(path.read_text(encoding="utf-8").split())
+        for path in architecture_sources
+    )
+    assert all(
+        paper_title in " ".join(path.read_text(encoding="utf-8").split())
+        for path in paper_sources
+    )

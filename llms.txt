@@ -1,12 +1,13 @@
 # IntentProbe
 
-> One local model forward. Many task-specific readouts.
+> One local model pass. Many task-specific probes.
 
 IntentProbe is a research and product architecture for reading task-specific signals from the
 hidden states of a small local language model. One forward pass creates a shared activation bus.
-Multiple independently trained heads reuse that pass for toxicity, jailbreak, spam, sentiment,
-conversation state, routing, authorization and other declared tasks. Detection, calibration, host
-policy and irreversible action remain separate layers.
+The current shared-runtime benchmark serves 16 independently trained probes spanning toxicity,
+jailbreak, spam, sentiment, emotion and conversational pragmatics. Authorization and memory-write
+probes are separate research releases. Routing is specified future work, not a current measured
+head. Detection, calibration, host policy and irreversible action remain separate layers.
 
 ## Why the architecture exists
 
@@ -27,6 +28,10 @@ is designed so compatible heads can improve independently without retraining unr
   lower bound, not a complete implementation of 16 LLM judges.
 - Applying all 16 heads took 1.85 ms per input on the 80-row scaling panel. Peak RSS at K=16 was
   0.73 MiB above K=1. The 16 probe artifacts totalled 386,121 bytes.
+- Recorded head application rose from 0.38 ms at K=1 to 1.85 ms at K=16. That accounts for 1.47 ms
+  of the 4.70 ms total increase; the remaining 3.23 ms is unattributed.
+- The shared path requests all hidden outputs even at K=1, so K=1 is the activation-bus baseline,
+  not an optimized single-probe path.
 
 The 16 heads form a heterogeneous research workload, not one product-quality claim. Each head keeps
 its own held-out discrimination, calibration, prevalence and admission decision. The architecture
@@ -71,7 +76,7 @@ Apache-2.0. Research preview.
 ## Primary links
 
 - Repository: https://github.com/mcpware/IntentProbe
-- Public architecture note: https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_FORWARD_MANY_DECISIONS.md
+- Public architecture note: https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md
 - Research manuscript: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md
 - Technical disclosure: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md
 - v0.1.2 release record: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_2.md

@@ -1,5 +1,9 @@
 # IntentProbe title-positioning review — 2026-10-18
 
+**Status:** superseded by the final public wording adopted later on 18 October 2026:
+*IntentProbe: One Local Model Pass, Many Task-Specific Probes*. The alternatives below are retained
+as the decision record rather than current recommendations.
+
 ## Source coverage
 
 | Status | Source | Actual coverage | Use |

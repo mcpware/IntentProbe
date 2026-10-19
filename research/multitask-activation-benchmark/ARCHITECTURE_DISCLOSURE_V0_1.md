@@ -1,4 +1,4 @@
-# IntentProbe: One Model Pass, Many Task-Specific Readouts — architecture disclosure v0.1.2
+# IntentProbe: One Local Model Pass, Many Task-Specific Probes — architecture disclosure v0.1.2
 
 Document date: **2026-10-18 (America/Vancouver)**<br>
 Status: **public technical disclosure v0.1.2**<br>
@@ -12,9 +12,10 @@ runtime, and probe catalog.
 
 The architecture starts from one economic fact: the local-model forward pass dominates the cost.
 IntentProbe performs that pass once, exposes a versioned hidden-state bus, and lets independently
-trained task readouts reuse it. Calibration, host policy and irreversible action remain outside the
-sensor. The measured research runtime serves 16 heads with 6.9% more mean latency than one head in
-the recorded CPU setting.
+trained task probes reuse it. Calibration, host policy and irreversible action remain outside the
+sensor. In the recorded CPU setting, total mean latency was 6.9% higher at K=16 than at K=1.
+Recorded head work rose by 1.47 ms; the remaining 3.23 ms of the 4.70 ms total increase is
+unattributed.
 
 | Release boundary | v0.1.2 state |
 |---|---|
@@ -23,10 +24,10 @@ the recorded CPU setting.
 | Specified next implementation | General registry, hot-loading and multi-head receipt emission |
 
 For a shorter explanation, start with [the public architecture
-note](../../docs/ONE_FORWARD_MANY_DECISIONS.md).
+note](../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md).
 
-![One input goes through one frozen local model. The same hidden states feed many small task heads,
-which produce calibrated scores and a runtime receipt.](../../docs/one-forward-many-decisions.svg)
+![One input goes through one frozen local model. The same hidden states feed many small task probes,
+which produce calibrated scores and a runtime receipt.](../../docs/one-local-model-pass-many-task-specific-probes.svg)
 
 ## 1. Publisher and project hierarchy
 
@@ -83,7 +84,7 @@ general independently loadable registry remains a specified implementation step.
 
 This distinction lets the system improve without being rebuilt. New data can update one head. A new
 readout search can move that task to different layers. A stronger local model can replace the
-backbone after compatible heads are trained. None of those changes requires unrelated detectors to
+backbone after compatible heads are trained. None of those changes requires unrelated probes to
 be retrained or the host workflow to adopt a different control interface.
 
 ## 3. System boundary
@@ -101,7 +102,7 @@ request + conversation + proposed action + runtime event
                            |
         +------------------+------------------+
         |                  |                  |
- authorization readout  memory readout   poisoning readout   ...
+  authorization probe    memory probe     poisoning probe     ...
         |                  |                  |
  calibrated head       calibrated head    calibrated head
         +------------------+------------------+
@@ -349,7 +350,8 @@ experiments test whether those states are accessible under different readout cho
 A routing head can choose a workflow, specialist agent, tool class, or compute tier. A task-complexity
 head can route a simple request to a cheaper path and an uncertain request to a stronger model or
 human review. BANKING77 is a current negative result for one highly lexical 77-way task and therefore
-helps define where activation readouts may not be the best component.
+helps define where activation readouts may not be the best component. Routing remains a specified
+future task: no routing head is included in the current 16-probe shared-runtime benchmark.
 
 ## 9. Multi-backbone portfolio
 

@@ -1,12 +1,12 @@
 # Multi-task activation benchmark
 
-**Public architecture release:** [IntentProbe: One Forward, Many
-Decisions](../../docs/ONE_FORWARD_MANY_DECISIONS.md)<br>
+**Public architecture release:** [IntentProbe: One Local Model Pass, Many Task-Specific
+Probes](../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md)<br>
 **Author:** Nicole BeWater<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
 ![One input goes through one frozen local model. A shared activation bus feeds many small task
-heads.](../../docs/one-forward-many-decisions.svg)
+probes.](../../docs/one-local-model-pass-many-task-specific-probes.svg)
 
 The simple idea is that a model may already react differently to toxicity, sentiment, spam,
 authorization and other concepts even when prompting it for `YES` or `NO` does not recover those
@@ -28,7 +28,7 @@ umbrella under which the research and products stay connected.
 
 The public implementable specification for the shared system is
 [`ARCHITECTURE_DISCLOSURE_V0_1.md`](ARCHITECTURE_DISCLOSURE_V0_1.md). It distinguishes current code
-and results from planned extensions. The first measured one-forward, many-decision CPU experiment is
+and results from planned extensions. The first measured one-forward, many-probe CPU experiment is
 now complete with 16 independent Qwen2.5-0.5B heads. The first machine-readable contracts are the
 [`readout manifest`](../schemas/intentprobe_readout_manifest.schema.json) and
 [`multi-head receipt`](../schemas/intentprobe_multihead_receipt.schema.json) JSON Schemas; they are
@@ -41,7 +41,7 @@ Individual probes are useful products, but the paper asks a broader engineering 
 > uncertainty are controlled?
 
 The paper's object of study is the complete **activation-readout pipeline**, not logistic regression
-and not any one detector. The engineering matrix is:
+and not any one probe. The engineering matrix is:
 
 `input/renderer -> token region -> token pooling -> hidden-state depth -> layer combination ->`
 `fold-local normalization -> classifier head -> calibration/threshold -> runtime deployment`
@@ -50,7 +50,7 @@ IntentProbe therefore studies how to cut and read a frozen model's hidden states
 retain, which hidden-state outputs to use, whether to mean/max/otherwise pool them, whether adjacent
 outputs should be averaged or concatenated, whether depth should be expressed absolutely or
 relative to architecture depth, how scaling/whitening changes the signal, and only then which head
-best converts that representation into a decision. A released detector is one frozen point in this
+best converts that representation into a decision. A released probe is one frozen point in this
 larger design space.
 
 ## Prior art and claim boundary
@@ -65,7 +65,7 @@ records which general findings are cited from prior work and reduces our own gen
 a six-cell sentinel panel plus the novel many-head scaling experiment.
 
 The paper does not claim to invent activation probes or one-pass multi-head classification. Its
-target contribution is the crossed small-model benchmark and measured one-prefill/many-decision
+target contribution is the crossed small-model benchmark and measured one-prefill/many-probe
 runtime: task-specific internal readouts, direct same-backbone judge baselines, OOD specificity, and
 the accuracy--latency--RAM frontier against separate classifiers.
 

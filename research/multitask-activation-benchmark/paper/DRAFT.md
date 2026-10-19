@@ -1,14 +1,15 @@
-# IntentProbe: Many Task-Specific Hidden-State Readouts from One Small Language Model Forward Pass
+# IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass
 
 **Status:** public research manuscript v0.1.2; not peer reviewed<br>
 **Author:** Nicole BeWater<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
-This manuscript is the empirical systems evaluation of the public [*IntentProbe: One Model Pass, Many Task-Specific Readouts*
-architecture note](../../../docs/ONE_FORWARD_MANY_DECISIONS.md).
+This manuscript is the empirical systems evaluation of the public [*IntentProbe: One Local Model
+Pass, Many Task-Specific Probes*
+architecture note](../../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md).
 
 ![IntentProbe runs one frozen local model forward pass and reuses the hidden states across many
-small task heads.](../../../docs/one-forward-many-decisions.svg)
+small task probes.](../../../docs/one-local-model-pass-many-task-specific-probes.svg)
 
 ## Abstract
 
@@ -361,10 +362,12 @@ window, normalization, classifier, calibration, and threshold.
 
 ### 6.2 One pass changes the economics of workflow classification
 
-The backbone dominates cost. Adding 15 more linear heads increases mean latency by about 6.9%, while
-repeating only the base forward 16 times increases latency approximately sixteenfold. This supports
-the IntentProbe one-forward, many-decisions architecture: one small local sidecar can inspect an
-input once and fan the same activations into many narrow functions.
+The backbone dominates cost. Total mean latency was 6.9% higher at K=16 than at K=1. Recorded head
+application rose from 0.38 ms to 1.85 ms, accounting for 1.47 ms of the 4.70 ms total increase; the
+remaining 3.23 ms is unattributed. Repeating only the base forward 16 times increased latency
+approximately sixteenfold on the separate matched panel. This supports the IntentProbe shared-pass,
+many-probe architecture: one small local sidecar can inspect an input once and fan the same
+activations into many narrow functions.
 
 This does not require access to Claude, Codex, or another hosted model's hidden states. In that
 deployment, IntentProbe is a local sidecar. If the primary model is itself local and exposes hidden

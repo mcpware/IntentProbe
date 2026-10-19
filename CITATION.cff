@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use the IntentProbe architecture or software, please cite this repository and the relevant research manuscript."
-title: "IntentProbe: One Model Pass, Many Task-Specific Readouts"
+title: "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
 type: software
 authors:
   - given-names: "Nicole"
@@ -10,7 +10,7 @@ date-released: 2026-10-18
 license: Apache-2.0
 repository-code: "https://github.com/mcpware/IntentProbe"
 url: "https://github.com/mcpware/IntentProbe"
-abstract: "IntentProbe is a local activation-readout architecture that runs one frozen language model forward pass and reuses its hidden states across independently trained task heads for agent security, routing, sentiment, authorization, memory, and related decisions."
+abstract: "IntentProbe is a local activation-probing architecture that runs one frozen language-model forward pass and reuses its hidden states across independently trained task heads. The current shared-runtime benchmark serves 16 probes spanning toxicity, jailbreak, spam, sentiment, emotion, and conversational pragmatics; authorization and memory-write probes are separate research releases."
 keywords:
   - mcp-security
   - model-context-protocol
@@ -19,8 +19,14 @@ keywords:
   - agent-security
   - tool-poisoning
   - activation-probing
+  - single-forward-pass
   - multi-head-classification
+  - multi-task-classification
+  - frozen-backbone
+  - linear-probe
   - hidden-state-readout
+  - shared-backbone
+  - llm-guardrails
   - local-language-model
   - prompt-injection
   - local-scanner
@@ -30,7 +36,7 @@ identifiers:
     description: "Research paper: Can Model Internals Detect MCP Tool Poisoning That Text Analysis Cannot?"
 preferred-citation:
   type: article
-  title: "IntentProbe: Many Task-Specific Hidden-State Readouts from One Small Language Model Forward Pass"
+  title: "IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass"
   authors:
     - given-names: "Nicole"
       family-names: "BeWater"
