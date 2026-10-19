@@ -1,0 +1,19 @@
+Use case: scientific-educational / infographic-diagram.
+Asset: the principal systems-architecture figure in an ML preprint, IntentProbe.
+Create a polished, restrained, genuinely publication-quality diagram on a pure white background. Landscape 3:2 composition. Crisp flat vector-like linework, generous whitespace, excellent typographic hierarchy, dark navy text, muted blue for the frozen backbone, teal for independent readouts, and a single restrained amber accent for the offline training inset. No gradients, shadows, 3D, cartoons, brains, robots, decorative circuitry, logos or watermarks added by you.
+
+Communicate ONE central idea at a glance: the expensive local language model reads an input once, then several tiny independent task heads reuse that SAME pass, each reading different layers with its own pooling recipe. This is not a sequence of models and not a sequence of heads.
+
+Main panel occupies the top three quarters. Small panel label "a  Runtime" at top left. Read from left to right:
+1. Small input block: "Request + context".
+2. A substantial "Frozen local model" block containing a tidy stack of horizontal hidden-layer slabs. Subheading "One forward pass". Indicate that layers are illustrative, not a specific layer count. A restrained right-side activation fan-out labelled "Shared hidden states".
+3. Three well-separated parallel horizontal lanes. Each lane consists of a readout recipe block, then a small trained-head block, then "Score". Recipe and head must remain distinct. Lanes:
+   "Toxicity" / "Layer selection + pooling" / "Head 1" / "Score";
+   "Sentiment" / "Layer selection + pooling" / "Head 2" / "Score";
+   "Jailbreak" / "Layer selection + pooling" / "Head 3" / "Score".
+   Use a small "..." beneath these lanes and the note "More independent heads". No fixed head-count headline and no invented numerical layer values.
+4. A visibly separate dashed vertical boundary AFTER the score outputs. On its other side, a quiet block "Host policy", subline "Allow / review / block". The HOST, not the probes, decides whether an action runs. Only score arrows cross this boundary. No feedback arrow to the language model.
+
+Lower, secondary panel separated by ample space: "b  Train each head independently". A single horizontal schematic: "Labelled data" -> "Select readout + fit head" -> "Versioned head". Under it, a short note: "Own layers, pooling, normalization and threshold". A subtle dashed installation arrow from the versioned head into the runtime head area, labelled "Load compatible heads". This is an architecture design, not a claim that every integration is already shipped.
+
+Keep all labels short, exact and legible when printed at 174 mm width. Use consistent sans-serif typography. No text smaller than approximately 9 pt at that final width. No big promotional title inside the figure; its caption will be supplied in the paper. Do not include performance numbers, benchmark charts or references. Do not duplicate blocks, cross wires, or connect heads to each other. Preserve meaningful arrows and two clear panel labels.
