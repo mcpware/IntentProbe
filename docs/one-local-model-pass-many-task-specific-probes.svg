@@ -473,7 +473,7 @@ L 669.168 190.0908
     <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Arial', sans-serif; text-anchor: middle; fill: #66717e" x="251.784" y="419.601037" transform="rotate(-0 251.784 419.601037)">hidden states</text>
    </g>
    <g id="text_16">
-    <text style="font-weight: 700; font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', sans-serif; text-anchor: middle; fill: #4c78a8" x="386.1504" y="187.636934" transform="rotate(-0 386.1504 187.636934)">HIDDEN-STATE BUS</text>
+    <text style="font-weight: 700; font-size: 9.4px; font-family: 'DejaVu Sans', 'Arial', sans-serif; text-anchor: middle; fill: #4c78a8" x="386.1504" y="187.636934" transform="rotate(-0 386.1504 187.636934)">ACTIVATION BACKPLANE</text>
    </g>
    <g id="text_17">
     <text style="font-size: 7.7px; font-family: 'DejaVu Sans', 'Arial', sans-serif; text-anchor: end; fill: #66717e" x="361.152" y="228.639599" transform="rotate(-0 361.152 228.639599)">L18–20</text>

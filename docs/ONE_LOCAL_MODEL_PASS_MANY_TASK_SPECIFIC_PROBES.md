@@ -1,20 +1,25 @@
 ---
 title: "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
 description: "CPU activation probes for AI-agent guardrails and classification. One frozen local model pass, many independent heads, with code and reproducible benchmarks."
-author: ithiria894
+author: Wan Sheng Leung
 permalink: /architecture/
-image: /one-local-model-pass-many-task-specific-probes.png
+image: /intentprobe-architecture-overview.png
 ---
 
 # IntentProbe: One Local Model Pass, Many Task-Specific Probes
 
 **Public architecture note v0.1.3**<br>
-**Author:** [ithiria894](https://github.com/ithiria894)<br>
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
 **Published:** 18 October 2026 · **Updated:** 19 October 2026
 
 Activation probes for AI-agent guardrails and classification on CPU. A small local model serves
 many independent heads from a single forward pass, without generating a verdict for every check.
+
+<figure>
+<img src="https://raw.githubusercontent.com/mcpware/IntentProbe/ade288c568161beba2906c2dada3def2422757bf/docs/intentprobe-architecture-overview.png" alt="Panel a, runtime: a request and its context enter a frozen local model that runs one forward pass over layers 1 to N; the shared hidden states fan out in parallel to toxicity, sentiment and jailbreak readouts, each with its own layer selection and pooling, feeding independent heads that each return a score to a host policy of allow, review or block. Panel b, offline: labelled data feeds a readout selection and head fit that produces a versioned head, loaded later as a compatible head without retraining the others." />
+<figcaption><strong>Figure 1. The activation backplane: one model pass that every probe plugs into.</strong> (a) At runtime the frozen model reads the request and context once. Its hidden states feed independently trained heads. Each head selects its own layers and pooling and returns a score. (b) Offline, labelled data is used to fit each head and produce a versioned artifact. The shared pass and head application are measured; host policy and compatible-head loading are specified integration points.</figcaption>
+</figure>
 
 [Probe models and local scorers](https://github.com/mcpware/IntentProbe/tree/main/probes) ·
 [Hugging Face publisher](https://huggingface.co/mcpware) ·
@@ -35,8 +40,6 @@ Beside Claude, Codex, or another hosted agent, that costs one extra local read. 
 share that sidecar pass. If the agent's own model is local and exposes hidden states, heads trained
 for it can attach to that pass instead.
 
-![One input goes through one frozen local model. The same hidden states feed many small task probes,
-which produce calibrated scores and a runtime receipt.](https://raw.githubusercontent.com/mcpware/IntentProbe/main/docs/one-local-model-pass-many-task-specific-probes.svg)
 
 ## The short version
 
@@ -52,7 +55,8 @@ That gives the runtime a simple shape:
 
 1. render the request and context once;
 2. run one frozen local model forward pass;
-3. expose the required hidden states through a shared hidden-state interface;
+3. expose the required hidden states through the **activation backplane** -- one model pass that
+   every probe plugs into;
 4. apply many small, independently versioned heads;
 5. calibrate the scores and pass them to host policy;
 6. record what ran in a receipt.
@@ -60,12 +64,21 @@ That gives the runtime a simple shape:
 The expensive part is the model forward pass. In the measured CPU runtime, total mean latency was
 6.9% higher at K=16 than at K=1. Recorded probe work accounted for 1.47 ms of the 4.70 ms total
 increase; the remaining 3.23 ms is unattributed. The shared path requests all hidden outputs even at
-K=1, so this is a shared-hidden-state baseline rather than an optimized single-probe path.
+K=1, so this is a backplane baseline rather than an optimized single-probe path.
 
-The terminology is deliberate. **Probe** is the public name for a trained task component. **Head**
-is the technical runtime object attached to that interface. **Readout** is the recipe that says
-which token region, layers, pooling and normalization the head uses. **Detector** is reserved for a
-security product whose job is detection.
+The terminology is deliberate. The **activation backplane** is the one model pass that every probe
+plugs into. **Probe** is the public name for a trained task component. **Head** is the technical
+runtime object attached to the backplane. **Readout** is the recipe that says which token region,
+layers, pooling and normalization the head uses. **Detector** is reserved for a security product
+whose job is detection.
+
+The backplane name is deliberate, and it addresses a different problem from the Universal Activation
+Bus of [Kim, Mun and Han](https://arxiv.org/abs/2608.09521). That work builds a shared activation
+space *across different models*, joined by one linear encoder--decoder adapter pair per model, so a
+single probe or SAE feature can travel between them. The IntentProbe activation backplane works
+*within* one model: one pass of one frozen local model into which many independently trained probes
+plug. The two are compatible rather than competing -- cross-model portability and within-model
+fan-out could be combined.
 
 ## The model may know more than it can say
 
@@ -224,7 +237,7 @@ and 16 heads. Its public probe catalog also gives readers weights and scorers to
 
 ## Citation
 
-ithiria894. 2026. *IntentProbe: One Local Model Pass, Many Task-Specific Probes. Public architecture note v0.1.3.*
+Leung, Wan Sheng. 2026. *IntentProbe: One Local Model Pass, Many Task-Specific Probes. Public architecture note v0.1.3.*
 MCPware, a product and research brand of GEASS LABS INC.
 
 IntentProbe (2026) runs a small frozen local model on CPU as a sidecar and shares one forward pass

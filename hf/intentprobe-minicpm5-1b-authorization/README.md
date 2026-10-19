@@ -35,7 +35,7 @@ metrics:
 
 # IntentProbe: 28 KB activation probe for AI-agent action authorization
 
-**Author:** [ithiria894](https://github.com/ithiria894) · **Publisher:** MCPware
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894) · **Publisher:** MCPware
 
 [Architecture: one local model pass, many task-specific probes](https://mcpware.github.io/IntentProbe/architecture/)
 · [All IntentProbe models and research](https://github.com/mcpware/IntentProbe)

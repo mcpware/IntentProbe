@@ -7,7 +7,7 @@ activation heads. A hosted agent uses a separate CPU sidecar; its hidden states 
 The measured 16-head runtime is research code. The shipped package is the tool-poisoning scanner;
 authorization and memory-write probes have standalone scorers. General hot-loading is specified work.
 
-Author: ithiria894. Publisher: MCPware, a product and research brand of GEASS LABS INC.
+Author: Wan Sheng Leung. Publisher: MCPware, a product and research brand of GEASS LABS INC.
 
 - Architecture: https://mcpware.github.io/IntentProbe/architecture/
 - Repository: https://github.com/mcpware/IntentProbe

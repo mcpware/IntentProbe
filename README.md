@@ -3,7 +3,7 @@
 Activation probes for local AI-agent guardrails and classification. CPU sidecar · frozen small
 language model · many independent heads from a single forward pass.
 
-Public author: [ithiria894](https://github.com/ithiria894) · Publisher: MCPware.
+Author: [Wan Sheng Leung](https://github.com/ithiria894) · Publisher: MCPware.
 
 <p align="center">
   <strong>One local model pass. Many task-specific probes.</strong>
@@ -33,15 +33,16 @@ Public author: [ithiria894](https://github.com/ithiria894) · Publisher: MCPware
 </p>
 
 <p align="center">
-  <img src="docs/one-local-model-pass-many-task-specific-probes.svg" width="1000" alt="One input passes through one frozen local model. A shared hidden-state bus fans out to task-specific probes attached at different layers. Calibrated scores cross a separate host-control boundary before policy or irreversible action." />
+  <img src="docs/intentprobe-architecture-overview.png" width="1000" alt="Panel a, runtime: a request and its context enter a frozen local model that runs one forward pass over layers 1 to N; the shared hidden states fan out in parallel to toxicity, sentiment and jailbreak readouts, each with its own layer selection and pooling, feeding independent heads that each return a score to a host policy of allow, review or block. Panel b, offline: labelled data feeds a readout selection and head fit that produces a versioned head, loaded later as a compatible head without retraining the others." />
 </p>
 
 ## One model read for many guardrail and classification checks
 
 One agent turn may need toxicity, jailbreak, spam, sentiment, emotion and conversation-state checks
 on the same input. Asking a model each question separately repeats the expensive part. An
-IntentProbe runtime reads the input once, exposes selected hidden states through a shared hidden-state interface,
-and lets many small probes reuse that same pass. Different probes can read different layers and use
+IntentProbe runtime reads the input once, exposes selected hidden states through the **activation
+backplane** — one model pass that every probe plugs into — and lets many small probes reuse that same
+pass. Different probes can read different layers and use
 different pooling, normalization, classifiers and thresholds.
 
 For a hosted agent such as Claude or Codex, the sidecar makes one extra local model pass and shares
@@ -68,7 +69,7 @@ The first measured Qwen2.5-0.5B CPU runtime produced a clear systems result:
 The repeated-forward arm is deliberately favourable to repetition: it omits task prompts,
 language-model output scoring and generation. It is a lower bound, not a complete implementation of
 16 LLM judges. The shared path requests all hidden outputs even at K=1, so the K=1 measurement is the
-shared-hidden-state baseline rather than an optimized single-probe path.
+backplane baseline rather than an optimized single-probe path.
 
 <p align="center">
   <img src="docs/one-local-model-pass-many-task-specific-probes-latency.svg" width="900" alt="On the same ten prompts, one model forward plus up to 16 probes remains near 60 milliseconds while repeated model forwards rise from 58 to 957 milliseconds. At K equals 16 the repeated path is 15.26 times the shared path." />

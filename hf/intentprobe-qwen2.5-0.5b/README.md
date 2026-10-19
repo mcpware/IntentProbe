@@ -20,7 +20,7 @@ tags:
 
 # IntentProbe Qwen2.5-0.5B activation probe
 
-**Author:** [ithiria894](https://github.com/ithiria894) · **Publisher:** MCPware
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894) · **Publisher:** MCPware
 
 [Architecture: one local model pass, many task-specific probes](https://mcpware.github.io/IntentProbe/architecture/)
 · [All IntentProbe models and research](https://github.com/mcpware/IntentProbe)

@@ -1,15 +1,14 @@
 # IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass
 
 **Status:** public research manuscript v0.1.3; not peer reviewed<br>
-**Author:** [ithiria894](https://github.com/ithiria894)<br>
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
 This manuscript is the empirical systems evaluation of the public [*IntentProbe: One Local Model
 Pass, Many Task-Specific Probes*
 architecture note](../../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md).
 
-![IntentProbe runs one frozen local model forward pass and reuses the hidden states across many
-small task probes.](../../../docs/one-local-model-pass-many-task-specific-probes.svg)
+![Panel a, runtime: a request and its context enter a frozen local model that runs one forward pass over layers 1 to N; the shared hidden states fan out in parallel to toxicity, sentiment and jailbreak readouts, each with its own layer selection and pooling, feeding independent heads that each return a score to a host policy of allow, review or block. Panel b, offline: labelled data feeds a readout selection and head fit that produces a versioned head, loaded later as a compatible head without retraining the others.](../../../docs/intentprobe-architecture-overview.png)
 
 ## Abstract
 
@@ -369,7 +368,8 @@ identity with an offline cache.
 The results reject two easy defaults. The final hidden output is not consistently best, and one
 pooling/depth recipe does not serve every label. Even when inputs and backbone are identical,
 toxicity and jailbreak can select different locations. A shared runtime should therefore expose a
-stable hidden-state interface while allowing each head to declare its own renderer, token pooling, layer
+stable activation backplane -- one model pass that every probe plugs into -- while allowing each head
+to declare its own renderer, token pooling, layer
 window, normalization, classifier, calibration, and threshold.
 
 ### 6.2 One pass changes the economics of workflow classification
@@ -390,7 +390,7 @@ states, the same readout design can attach to that host and avoid the extra side
 The architecture and the current head artifacts are different objects. A task head reflects one
 dataset, backbone, readout search, classifier, and calibration procedure at one point in time. Better
 labels, a stronger backbone, a wider readout search, or another bounded classifier can improve that
-task while leaving the hidden-state interface and every unrelated head unchanged. The sentinel in Section
+task while leaving the backplane and every unrelated head unchanged. The sentinel in Section
 5.2 is therefore a component-admission test, not a verdict on the architecture.
 
 This separation matters operationally. The shared runtime provides the expensive model pass,
@@ -447,7 +447,7 @@ architectural result is a reusable semantic sensor whose task-specific readouts 
 independently. The 24-cell matrix shows why that modularity is necessary: model, task, depth,
 pooling, and readout interact rather than collapsing into one universal recipe.
 
-The architecture is therefore modular. Run the backbone once; expose a versioned hidden-state bus;
+The architecture is therefore modular. Run the backbone once; expose a versioned activation backplane;
 give each task a tested readout manifest; and keep calibration, policy, and irreversible action
 outside the sensor. In the measured CPU setting, this turns 16 repeated model forwards into one
 forward plus 1.85 ms of head work. Later datasets, models, pooling methods, and head families can
@@ -488,7 +488,7 @@ binary heads.
 
 ## Author and assistance disclosure
 
-ithiria894 defined the research question, architecture, experiment priorities, interpretation,
+Wan Sheng Leung defined the research question, architecture, experiment priorities, interpretation,
 and release boundary, and approved this manuscript. Coding assistants were used to implement and
 check experiments, generate figures, and edit the manuscript. Quantitative claims are regenerated
 from the versioned artifacts linked above and are covered by repository tests.

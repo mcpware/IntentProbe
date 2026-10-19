@@ -1,21 +1,24 @@
 ---
 title: "IntentProbe — CPU Activation Probes for AI-Agent Guardrails"
 description: "Run a small frozen local model once and share its hidden states across independent task heads. Explore the architecture, probe models and reproducible benchmarks."
-author: ithiria894
-image: /one-local-model-pass-many-task-specific-probes.png
+author: Wan Sheng Leung
+image: /intentprobe-architecture-overview.png
 ---
 
 # One local model pass. Many task-specific probes.
 
 IntentProbe uses **activation probes** to turn a small local language model's hidden states into
-task scores. One forward pass can feed many independently trained heads for guardrail and
-classification checks, without generating a separate answer for each check.
+task scores. One forward pass creates the **activation backplane** -- one model pass that every probe
+plugs into -- so many independently trained heads can run guardrail and classification checks without
+generating a separate answer for each check.
 
 [Read the architecture article]({{ '/architecture/' | relative_url }}) ·
 [Get the models on Hugging Face](https://huggingface.co/mcpware) ·
 [GitHub and reproduction code](https://github.com/mcpware/IntentProbe)
 
-![One frozen local model shares its hidden states across task-specific probes.](one-local-model-pass-many-task-specific-probes.svg)
+![Panel a, runtime: a request and its context enter a frozen local model that runs one forward pass over layers 1 to N; the shared hidden states fan out in parallel to toxicity, sentiment and jailbreak readouts, each with its own layer selection and pooling, feeding independent heads that each return a score to a host policy of allow, review or block. Panel b, offline: labelled data feeds a readout selection and head fit that produces a versioned head, loaded later as a compatible head without retraining the others.](intentprobe-architecture-overview.png)
+
+*Figure 1. The activation backplane: one model pass that every probe plugs into. The shared pass and the independent heads are implemented and measured; host-policy integration and compatible-head loading are architectural interfaces, specified and schema-tested, not shipped runtime capabilities.*
 
 ## A CPU sidecar for agent workflows
 
@@ -60,4 +63,4 @@ and hot-loading interface are specified next steps.
 - [Machine-readable project context]({{ '/llms.txt' | relative_url }}).
 
 Published by **MCPware**, a product and research brand of GEASS LABS INC.
-Public author: [ithiria894](https://github.com/ithiria894). Architecture first published 18 October 2026.
+Author: [Wan Sheng Leung](https://github.com/ithiria894). Architecture first published 18 October 2026.

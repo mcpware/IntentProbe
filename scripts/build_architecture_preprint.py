@@ -14,7 +14,15 @@ from weasyprint import HTML
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs" / "ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md"
 TITLE = "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
-AUTHOR = "ithiria894"
+AUTHOR = "Wan Sheng Leung"
+# Figures are referenced by public raw URLs so the article renders on GitHub and Pages.
+# The architecture illustration is pinned to its immutable asset commit; the latency figure
+# tracks main. Both resolve to local bytes when the PDF is rendered.
+ARCHITECTURE_ASSET_COMMIT = "ade288c568161beba2906c2dada3def2422757bf"
+REMOTE_DOC_PREFIXES = (
+    f"https://raw.githubusercontent.com/mcpware/IntentProbe/{ARCHITECTURE_ASSET_COMMIT}/docs/",
+    "https://raw.githubusercontent.com/mcpware/IntentProbe/main/docs/",
+)
 
 CSS = """
 @page {
@@ -29,6 +37,9 @@ h2 { font-size: 14pt; color: #17324d; margin: 17pt 0 7pt; break-after: avoid; }
 p { margin: 0 0 9pt; orphans: 3; widows: 3; }
 a { color: #285e9b; text-decoration: none; overflow-wrap: anywhere; }
 img { display: block; max-width: 100%; height: auto; margin: 10pt auto; }
+figure { margin: 11pt 0 13pt; break-inside: avoid; page-break-inside: avoid; }
+figure img { margin: 0 auto 6pt; max-height: 112mm; }
+figcaption { font-size: 8.4pt; line-height: 1.45; color: #3f4c5a; text-align: left; }
 table { border-collapse: collapse; width: 100%; font-size: 8.5pt; margin: 9pt 0 12pt; }
 thead { display: table-header-group; }
 th, td { border: 0.5pt solid #d7e0e8; padding: 6pt; vertical-align: top; overflow-wrap: anywhere; }
@@ -46,8 +57,9 @@ def build(output: Path, doi: str | None) -> None:
     source = SOURCE.read_text(encoding="utf-8")
     assert source.startswith("---\n")
     text = source.split("---", 2)[2].lstrip()
-    prefix = "https://raw.githubusercontent.com/mcpware/IntentProbe/main/docs/"
-    text = text.replace(prefix, (ROOT / "docs").as_uri() + "/")
+    local_docs = (ROOT / "docs").as_uri() + "/"
+    for prefix in REMOTE_DOC_PREFIXES:
+        text = text.replace(prefix, local_docs)
     body = markdown.markdown(text, extensions=["tables", "fenced_code"])
     citation = (
         f'<p class="edition">DOI: <a href="https://doi.org/{html.escape(doi)}">'

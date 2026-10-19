@@ -150,7 +150,7 @@ def add_arrow(
 
 
 def render_architecture() -> None:
-    """Render a literal one-pass activation bus with task-specific fan-out."""
+    """Render a literal one-pass activation backplane with task-specific fan-out."""
     fig, ax = plt.subplots(figsize=(16, 9))
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
@@ -271,7 +271,7 @@ def render_architecture() -> None:
         edgecolor=BLUE,
     )
     ax.add_patch(bus)
-    ax.text(0.418, 0.646, "HIDDEN-STATE BUS", ha="center", va="bottom", fontsize=9.4, fontweight="bold", color=BLUE)
+    ax.text(0.418, 0.646, "ACTIVATION BACKPLANE", ha="center", va="bottom", fontsize=9.4, fontweight="bold", color=BLUE)
 
     head_specs = [
         (0.536, "Toxicity", "mean · outputs 18–20", "L18–20"),

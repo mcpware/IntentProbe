@@ -13,9 +13,7 @@ repository, retaining its embedded provenance metadata.
 | SHA-256 | `2e248922bdd4fb484cd9fbaf089c7cef96b69fa5618bd857387dde9494973d08` |
 | Prompt | [`ARCHITECTURE_FIGURE_PROMPT.txt`](ARCHITECTURE_FIGURE_PROMPT.txt) |
 
-The tool did not expose a pinned model snapshot. Gemini 3 Pro Image was attempted first, but its
-API returned HTTP 403, project access denied; it did not produce this image. No browser-based
-generation or software installation was used.
+The tool did not expose a pinned model snapshot.
 
 ## Technical review
 

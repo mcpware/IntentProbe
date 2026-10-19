@@ -1,7 +1,7 @@
 # IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass
 
 **Public research manuscript v0.1.3**<br>
-**Author:** [ithiria894](https://github.com/ithiria894)<br>
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
 The public manuscript is [`DRAFT.md`](DRAFT.md). Paper-level numbers are rebuilt from frozen

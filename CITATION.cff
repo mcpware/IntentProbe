@@ -3,7 +3,8 @@ message: "If you use the IntentProbe architecture or software, please cite this 
 title: "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
 type: software
 authors:
-  - family-names: "ithiria894"
+  - family-names: "Leung"
+    given-names: "Wan Sheng"
     website: "https://github.com/ithiria894"
 version: 0.1.3-architecture
 date-released: 2026-10-19
@@ -44,7 +45,8 @@ preferred-citation:
   type: article
   title: "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
   authors:
-    - family-names: "ithiria894"
+    - family-names: "Leung"
+      given-names: "Wan Sheng"
       website: "https://github.com/ithiria894"
   doi: "10.5281/zenodo.23467859"
   url: "https://doi.org/10.5281/zenodo.23467859"

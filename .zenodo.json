@@ -2,7 +2,7 @@
   "title": "IntentProbe: One Local Model Pass, Many Task-Specific Probes",
   "description": "IntentProbe is a CPU sidecar architecture for AI-agent guardrails and classification. A small frozen local language model runs a single forward pass, and independently trained activation probes read its hidden states. Each head can select its own layer window, token pooling, normalization and threshold. The reproducible research runtime measures 16 independent heads spanning toxicity, jailbreak, spam, sentiment, emotion and conversational pragmatics. The repository also publishes tool-poisoning, action-authorization and memory-write probe products. General registry, hot-loading and multi-head receipt emission are specified next steps. The release includes the architecture article, technical specification, manuscript, probe catalog, code and frozen benchmark evidence.",
   "creators": [
-    {"name": "ithiria894", "affiliation": "MCPware"}
+    {"name": "Leung, Wan Sheng", "affiliation": "MCPware"}
   ],
   "license": "Apache-2.0",
   "keywords": [

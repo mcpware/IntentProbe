@@ -5,7 +5,8 @@
 Publish a useful, reproducible account of the IntentProbe architecture. Make it easy for a reader
 researching activation probes, local guardrails, or alternatives to LLM-as-a-judge to find the
 project, try a probe, reproduce the evidence, and cite a fixed version. IntentProbe is the research
-and product umbrella under MCPware. The public author handle is `ithiria894`.
+and product umbrella under MCPware. Public author fields use the name `Leung, Wan Sheng`, matching
+the May 2026 Zenodo record so citation indexes resolve both to one author.
 
 ## Current publication candidate
 

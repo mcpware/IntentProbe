@@ -1,7 +1,7 @@
 # IntentProbe architecture v0.1.1
 
 **Release name:** One Forward, Many Decisions<br>
-**Author:** [ithiria894](https://github.com/ithiria894)<br>
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
 **Release date:** 18 October 2026
 

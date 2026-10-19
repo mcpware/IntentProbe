@@ -27,7 +27,7 @@ def normalized_paper() -> str:
 def test_paper_identity_and_scope_are_explicit() -> None:
     """Keep the public author handle and contribution boundary visible."""
     paper = PAPER.read_text(encoding="utf-8")
-    assert "**Author:** [ithiria894](https://github.com/ithiria894)" in paper
+    assert "**Author:** [Wan Sheng Leung](https://github.com/ithiria894)" in paper
     assert "MCPware, a product and research brand of GEASS LABS INC." in paper
     assert "We do not claim to invent activation probing" in paper
     assert "first ever" not in paper.lower()

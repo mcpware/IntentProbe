@@ -2,11 +2,10 @@
 
 **Public architecture release:** [IntentProbe: One Local Model Pass, Many Task-Specific
 Probes](../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md)<br>
-**Author:** [ithiria894](https://github.com/ithiria894)<br>
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
-![One input goes through one frozen local model. Shared hidden states feed many small task
-probes.](../../docs/one-local-model-pass-many-task-specific-probes.svg)
+![Panel a, runtime: a request and its context enter a frozen local model that runs one forward pass over layers 1 to N; the shared hidden states fan out in parallel to toxicity, sentiment and jailbreak readouts, each with its own layer selection and pooling, feeding independent heads that each return a score to a host policy of allow, review or block. Panel b, offline: labelled data feeds a readout selection and head fit that produces a versioned head, loaded later as a compatible head without retraining the others.](../../docs/intentprobe-architecture-overview.png)
 
 The simple idea is that a model may already react differently to toxicity, sentiment, spam,
 authorization and other concepts even when prompting it for `YES` or `NO` does not recover those

@@ -1,6 +1,6 @@
 # IntentProbe architecture v0.1.3 — publication and discoverability
 
-**Author:** [ithiria894](https://github.com/ithiria894)<br>
+**Author:** [Wan Sheng Leung](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
 **Revision date:** 19 October 2026<br>
 **Architecture first published:** 18 October 2026
@@ -11,9 +11,14 @@ architecture title and presents the system through its implementation and measur
 
 ## Changes
 
-- Public author fields and citation metadata use the GitHub handle `ithiria894`.
+- Public author fields and citation metadata use `Leung, Wan Sheng`, matching the May 2026 Zenodo
+  record (`10.5281/zenodo.19990741`) so both deposits resolve to one author.
 - The article and README explain the extra local pass beside a hosted agent and the reuse across
   the sidecar's own heads.
+- The shared interface is named the Activation Backplane, with a first-use explanation and a
+  cited distinction from cross-model Universal Activation Bus research.
+- The approved architecture illustration appears in the article, README and six-page PDF.
+  Its unchanged pixels, prompt and provenance are recorded with the preprint sources.
 - Related work adds Goodfire × Rakuten, SingProbe, Lion Warden, and Constitutional Classifiers++.
   Citation corrections distinguish attention-based MindGuard from hidden-state linear probes.
 - The website adds a homepage, title and description metadata, canonical page configuration,
@@ -35,15 +40,16 @@ they are not regenerated to match the changing main branch.
 
 ## Candidate checks
 
-The four existing architecture, paper, multi-head and memory-release test modules pass (22 tests).
+The full test suite passes (97 tests; 5 skipped), including three new figure-preservation and
+preprint-rendering checks.
 The CFF validates against the official 1.2.0 schema. YAML front matter and site configuration parse,
 and the new GitHub blob links resolve to local source files. Benchmark artifacts and derived
 result JSON have no diff.
 
 The public article's Humanizer observable-style audit reports no stock phrases or Unicode
-anomalies. Its long-sentence leads are metadata, link groups and enumerated lists; they were
+anomalies. Its long-sentence leads include metadata, HTML image markup, link groups and enumerated lists; they were
 inspected in context. Frozen article SHA-256:
-`c78fb9bc953661ae34e8e17559c0a36122a06113d3158956cadfce7459b44cc7`.
+`af94bb00405ed792088c39a0204a4ea0d87e5f7430c42ed236b83f8b79213f2c`.
 This is a style check, not an AI-authorship detector result.
 
 Jekyll is not installed locally. No packages were installed for this revision. A real Pages build,
