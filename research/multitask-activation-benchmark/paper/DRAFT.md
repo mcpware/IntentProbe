@@ -16,11 +16,10 @@ Our empirical programme has three parts. First, a 24-cell screen crosses six 230
 sentiment, spam, toxicity, and jailbreak detection. Selected pooling and depth vary by model and
 task; even toxicity and jailbreak labels on identical ToxicChat prompts select different readouts.
 Second, a six-cell sentinel compares activation heads, matched TF-IDF, and direct output judgments
-from two local backbones on authorization-to-execute, toxicity, and sentiment. Activation heads beat
-both choice-likelihood judge prompts on toxicity after Benjamini--Hochberg correction, tie the
-strongest Qwen3.5 sentiment judge, and lose to Qwen3.5 zero-shot choice likelihood on human-labelled
-authorization by 0.2137 AUPRC (group-bootstrap 95% CI 0.0335--0.3973 in the judge's favour). The
-result is task-by-model interaction, not universal probe superiority.
+from two local backbones on authorization-to-execute, toxicity, and sentiment. It finds substantial
+task-by-model interaction rather than a universal ordering of methods. This motivates an
+architecture in which heads, labelled datasets, readout recipes, and even the backbone remain
+replaceable components instead of being treated as one fixed detector.
 
 Third, we freeze 16 binary heads on one exact Qwen2.5-0.5B revision across five real-text sources:
 toxicity, jailbreak, spam, sentiment, five emotion labels, and seven conversational-pragmatics
@@ -31,8 +30,8 @@ prevalences. On one six-core CPU, mean latency rises from 68.63 ms for one forwa
 the shared path on matched prompts (95% CI 15.04--15.49). Peak process memory changes by +0.73 MiB;
 the 16 saved probe artifacts occupy 386,121 bytes. The repeated-forward arm omits prompting,
 LM-head scoring, and generation, so it is a lower bound rather than a complete judge implementation.
-These results support a modular one-forward/many-readout runtime, while also showing that head
-quality, calibration, and domain specificity remain separate engineering problems.
+These results support a modular one-forward/many-readout runtime. The shared runtime is the stable
+system layer; head quality, calibration, data, and domain specificity can improve independently.
 
 ## 1. Introduction
 
@@ -55,7 +54,8 @@ readout interchangeable.
 We therefore separate four questions:
 
 1. How much does the selected readout vary across models and tasks?
-2. When does a hidden-state head beat, match, or lose to directly asking the same local model?
+2. How does a trained hidden-state head compare with directly asking the same local model, and how
+   should that evidence govern whether the head is installed?
 3. How does CPU latency and memory scale when one forward serves 1, 2, 4, 8, or 16 independent
    heads?
 4. Do the same heads remain numerically stable and well behaved when texts come from other domains?
@@ -352,13 +352,18 @@ This does not require access to Claude, Codex, or another hosted model's hidden 
 deployment, IntentProbe is a local sidecar. If the primary model is itself local and exposes hidden
 states, the same readout design can attach to that host and avoid the extra sidecar forward.
 
-### 6.3 Cheap is not the same as correct
+### 6.3 Head quality can improve without changing the architecture
 
-The sentinel prevents a misleading product story. Activation heads are dramatically better than
-direct judges on the studied toxicity cells, essentially tied with strong Qwen3.5 choice-likelihood
-judging on sentiment, and worse on human-labelled authorization after silver-data training. The
-engineering advantage is therefore conditional: shared heads are attractive when labelled data and
-readout selection produce an adequate task head. A poor head stays poor even when it is almost free.
+The architecture and the current head artifacts are different objects. A task head reflects one
+dataset, backbone, readout search, classifier, and calibration procedure at one point in time. Better
+labels, a stronger backbone, a wider readout search, or another bounded classifier can improve that
+task while leaving the activation bus and every unrelated head unchanged. The sentinel in Section
+5.2 is therefore a component-admission test, not a verdict on the architecture.
+
+This separation matters operationally. The shared runtime provides the expensive model pass,
+versioned hidden-state access, head loading, timing, and receipts. Each detector team can improve its
+own task boundary and publish a new manifest. The host can promote, roll back, or disable that head
+without retraining the backbone or disturbing the rest of the detector bank.
 
 Authorization especially needs a separate deterministic boundary. A probe may estimate whether the
 context looks like authority to act. Exact payload review, recipient binding, scope, expiry, and the
@@ -404,16 +409,15 @@ heads, their marginal serving cost is small relative to one 0.5B forward.
 
 A frozen 0.5B local language model can serve 16 independently trained activation heads from one
 forward pass with modest marginal CPU latency and almost no measured process-memory growth. The
-result is not that one hidden layer solves every classifier. The 24-cell matrix, the 16-head suite,
-and the direct-judge sentinel all show task-by-model-by-readout interaction. Sentiment, spam,
-toxicity, jailbreak, emotion, pragmatics, and authorization do not share one accuracy story.
+architectural result is a reusable semantic sensor whose task-specific readouts can evolve
+independently. The 24-cell matrix shows why that modularity is necessary: model, task, depth,
+pooling, and readout interact rather than collapsing into one universal recipe.
 
-The defensible architecture is therefore modular. Run the backbone once; expose a versioned hidden-
-state bus; let each task install its own tested readout manifest; keep calibration and policy outside
-the backbone; and refuse to promote a cheap head whose native or shifted-data evidence is weak. In
-the measured CPU setting, that architecture turns 16 repeated model forwards into one forward plus
-1.85 ms of head work. Completing the multi-label-judge and compact-classifier arms will determine
-where the full quality--latency--RAM frontier lies.
+The architecture is therefore modular. Run the backbone once; expose a versioned hidden-state bus;
+let each task install and update its own tested readout manifest; and keep calibration, policy, and
+irreversible action outside the sensor. In the measured CPU setting, this turns 16 repeated model
+forwards into one forward plus 1.85 ms of head work. Later datasets, models, pooling methods, and
+head families can move the quality frontier without replacing that shared runtime.
 
 ## Reproducibility and evidence map
 

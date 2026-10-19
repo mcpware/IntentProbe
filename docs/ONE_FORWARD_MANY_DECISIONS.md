@@ -45,19 +45,24 @@ An activation head takes a shorter path. It reads the model's internal response 
 and learns the task boundary from labelled examples. A prompt can describe a rule in words. A
 trained head can compress thousands of examples of that rule into a small set of weights.
 
-This does not mean an activation head must always be more accurate. It means that a useful signal can
-already exist inside the model even when prompted output is a poor way to recover it.
+The important point is not that one first-generation head must always be more accurate than every
+other method. It is that useful task information can already exist inside the model, and labelled
+examples can teach a small readout how to recover it without asking the model to generate a verdict.
 
-Our direct comparison shows all three possible outcomes:
+The architecture does not freeze the quality of its first heads. A head can be retrained with better
+labels, a different layer or pooling recipe, a nonlinear classifier, or a newer local model. That
+head can then be replaced without changing the activation bus, the other detectors, or the host
+workflow. Benchmarking decides whether a particular head is ready for a particular job; it does not
+decide whether the shared architecture can keep improving.
 
-| Same-backbone comparison | What happened |
-|---|---|
-| Toxicity | The trained activation heads beat both tested direct-judge prompts on both local backbones. All four corrected comparisons had `q=0.0024`. |
-| Sentiment on Qwen3.5-0.8B | Activation reached `0.9424` AUPRC. The best tested direct judge reached `0.9487`. The difference was not statistically distinguishable (`q=0.7971`). |
-| Authorization on Qwen3.5-0.8B | The current activation head reached `0.3567`; the zero-shot choice judge reached `0.5704`. The judge was better in this cell. |
+This gives IntentProbe two different kinds of progress:
 
-This is why the architecture has a quality gate. A cheap head is useful only when its held-out
-quality, calibration and shift checks are good enough for its intended job.
+- system progress: one forward pass, shared activations, cheap fan-out, versioned receipts, and
+  policy separation; and
+- detector progress: better data, models, readout recipes, calibration, and task-specific heads.
+
+The first systems benchmark measures the shared structure. Individual task benchmarks measure the
+replaceable components installed on top of it.
 
 ## What the first systems benchmark found
 
@@ -111,8 +116,7 @@ same layer.
 
 ## Why this can be more practical than LLM-as-a-judge
 
-For one isolated decision, a direct judge may be good enough or even more accurate. The architecture
-becomes more useful when one workflow needs many decisions on the same input.
+The architecture becomes most useful when one workflow needs many decisions on the same input.
 
 Instead of writing, tuning and running a separate prompt for every check, one local backbone pass can
 serve a bank of narrow heads. Each head returns a continuous score, keeps its own threshold, and can
@@ -122,10 +126,10 @@ With the model revision, renderer, readout, weights and threshold frozen, the sc
 reproduce and audit than a generated answer. A temperature-zero judge can be deterministic too, but
 it still depends on prompt wording, chat templates, label tokens and output handling.
 
-This is a cost and control argument, not a claim that every probe beats every judge. When quality is
-close, the shared head can be the better production choice because its marginal cost is tiny. When a
-judge is materially better, as in the current authorization transfer result, the head needs better
-data or should not be promoted.
+This is an architecture and control argument, not a claim that one frozen set of heads is the final
+answer. Each installed head still has to pass its own held-out quality, calibration, and shift
+checks. If it does not, the component can be retrained or replaced while the shared runtime remains
+the same.
 
 ## Where it can run
 
@@ -142,8 +146,8 @@ between backbones.
 
 The current evidence establishes that one frozen 0.5B model can serve 16 real, independently trained
 heads with nearly flat marginal latency and memory in this CPU environment. It also establishes that
-quality is task-specific: toxicity favoured the trained readout, sentiment was competitive either
-way, and the tested authorization transfer favoured the judge.
+readout choice is task-specific. Different tasks can select different layers, pooling rules, and
+heads while sharing the same model pass.
 
 Two important comparisons remain open:
 
@@ -152,7 +156,7 @@ Two important comparisons remain open:
 
 Those tests will locate the full accuracy, latency and memory frontier. They do not change the result
 already measured: once compatible activation heads exist, many of them can share one model forward
-at very low marginal cost.
+at very low marginal cost, and each head can improve independently afterward.
 
 ## Evidence and implementation record
 

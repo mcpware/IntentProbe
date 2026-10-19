@@ -60,6 +60,19 @@ read selected hidden activations, and reuse those activations through small inde
 task heads. Each head is trained for a defined label contract and may read different tokens, layers,
 layer combinations, normalizations, and feature transformations from the shared pass.
 
+### 2.1 Stable architecture, replaceable components
+
+IntentProbe is the complete serving architecture, not one backbone or one set of probe weights. Its
+stable structure is the versioned input renderer, shared local-model pass, hidden-state activation
+bus, independently loadable readouts, calibration, policy boundary, and receipt. The model, labelled
+dataset, layer selection, pooling method, normalization, classifier, and threshold are replaceable
+implementations inside that structure.
+
+This distinction lets the system improve without being rebuilt. New data can update one head. A new
+readout search can move that task to different layers. A stronger local model can replace the
+backbone after compatible heads are trained. None of those changes requires unrelated detectors to
+be retrained or the host workflow to adopt a different control interface.
+
 ## 3. System boundary
 
 The specified full system is:

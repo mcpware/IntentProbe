@@ -44,10 +44,15 @@ forward plus 16 heads took **73.34 ms**. Repeating the base-model forward 16 tim
 and was **15.26 times slower** than the shared path on matched prompts. The repeated-forward arm is a
 conservative lower bound because it excludes task prompting, output scoring and generation.
 
-Accuracy remains task-specific. The trained activation heads beat both tested same-backbone judge
-prompts on toxicity, matched the strongest Qwen3.5 sentiment judge, and lost to the Qwen3.5 judge on
-the current human-labelled authorization transfer. A cheap head is promoted only when its own
-held-out quality and calibration are good enough.
+The benchmark is evidence for the architecture, not a final ranking of the first 16 heads. Each
+head is a replaceable component: new labelled data, a better readout recipe, a different classifier,
+or a stronger local backbone can improve one task without redesigning the shared runtime. The
+system keeps the expensive model pass common while allowing every detector to evolve on its own.
+
+That separation is the point. One local model acts as a reusable semantic sensor; small task heads
+turn its hidden states into many independently tested signals. The host application then decides
+what those signals are allowed to do. Detection, policy, and irreversible action remain separate,
+auditable layers.
 
 Read the plain-English public note, [**IntentProbe: One Forward, Many
 Decisions**](docs/ONE_FORWARD_MANY_DECISIONS.md), the research manuscript [*One Forward, Sixteen
