@@ -1,10 +1,10 @@
-# One Forward, Sixteen Decisions: Task-Specific Hidden-State Readouts from a Small Local Language Model
+# IntentProbe: Many Task-Specific Hidden-State Readouts from One Small Language Model Forward Pass
 
-**Status:** public research manuscript v0.1.1; not peer reviewed<br>
+**Status:** public research manuscript v0.1.2; not peer reviewed<br>
 **Author:** Nicole BeWater<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
-This manuscript is the empirical systems evaluation of the public [*One Forward, Many Decisions*
+This manuscript is the empirical systems evaluation of the public [*IntentProbe: One Model Pass, Many Task-Specific Readouts*
 architecture note](../../../docs/ONE_FORWARD_MANY_DECISIONS.md).
 
 ![IntentProbe runs one frozen local model forward pass and reuses the hidden states across many

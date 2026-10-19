@@ -1,12 +1,16 @@
 # IntentProbe
 
 <p align="center">
-  <strong>One model pass. Sixteen learned decisions. 6.9% more latency.</strong>
+  <strong>One model pass. Many task-specific readouts.</strong>
 </p>
 
 <p align="center">
   IntentProbe turns one local language-model forward into a shared hidden-state bus for many
   independently trained task heads.
+</p>
+
+<p align="center">
+  <strong>Measured proof:</strong> serving 16 heads added 6.9% mean CPU latency over serving one.
 </p>
 
 <p align="center">
@@ -26,7 +30,7 @@
   <img src="docs/one-forward-many-decisions.svg" width="1000" alt="One input passes through one frozen local model. A shared hidden-state bus fans out to task-specific heads attached at different layers. Calibrated scores cross a separate host-control boundary before policy or irreversible action." />
 </p>
 
-## Why run the model sixteen times?
+## Why make the model read the same input again for every task?
 
 You do not have to.
 
@@ -69,11 +73,12 @@ auditable layers.
 | **Measured research runtime** | Reproducible one-forward fan-out across 16 frozen heads, with row-level timing artifacts and tests |
 | **Specified next runtime** | General manifest registry, hot-loading and multi-head receipt emission; these are designed and schema-tested, not yet the PyPI product surface |
 
-Read the plain-English public note, [**IntentProbe: One Forward, Many
-Decisions**](docs/ONE_FORWARD_MANY_DECISIONS.md), the research manuscript [*One Forward, Sixteen
-Decisions*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete technical
+Read the plain-English public note, [**IntentProbe: One Model Pass, Many Task-Specific
+Readouts**](docs/ONE_FORWARD_MANY_DECISIONS.md), the research manuscript [*IntentProbe: Many
+Task-Specific Hidden-State Readouts from One Small Language Model Forward
+Pass*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete technical
 disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md). The
-[v0.1.1 release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_1.md) links the
+[v0.1.2 release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_2.md) links the
 frozen evidence ledger.
 
 ```text

@@ -59,7 +59,7 @@ plt.rcParams.update(
         "savefig.bbox": "tight",
         "savefig.pad_inches": 0.18,
         "svg.fonttype": "none",
-        "svg.hashsalt": "intentprobe-architecture-presentation-v0.1.1",
+        "svg.hashsalt": "intentprobe-architecture-presentation-v0.1.2",
     }
 )
 
@@ -159,7 +159,7 @@ def render_architecture() -> None:
     ax.text(
         0.5,
         0.957,
-        "One model pass. Many learned decisions.",
+        "One model pass. Many task-specific readouts.",
         ha="center",
         va="center",
         fontsize=28,

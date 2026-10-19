@@ -1,6 +1,6 @@
 # IntentProbe
 
-> One local model forward. Many independently trained decisions.
+> One local model forward. Many task-specific readouts.
 
 IntentProbe is a research and product architecture for reading task-specific signals from the
 hidden states of a small local language model. One forward pass creates a shared activation bus.
@@ -74,8 +74,8 @@ Apache-2.0. Research preview.
 - Public architecture note: https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_FORWARD_MANY_DECISIONS.md
 - Research manuscript: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md
 - Technical disclosure: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md
-- v0.1.1 release record: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_1.md
-- v0.1.1 SHA-256 ledger: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/SHA256SUMS_V0_1_1.txt
+- v0.1.2 release record: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_2.md
+- v0.1.2 SHA-256 ledger: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/SHA256SUMS_V0_1_2.txt
 - Reproducible 16-head experiment: https://github.com/mcpware/IntentProbe/tree/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001
 - Original preliminary paper and DOI: https://doi.org/10.5281/zenodo.19990741
 - License: Apache-2.0

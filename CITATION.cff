@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you use the IntentProbe architecture or software, please cite this repository and the relevant research manuscript."
-title: "IntentProbe: One Forward, Many Decisions"
+title: "IntentProbe: One Model Pass, Many Task-Specific Readouts"
 type: software
 authors:
   - given-names: "Nicole"
     family-names: "BeWater"
-version: 0.1.1-architecture
+version: 0.1.2-architecture
 date-released: 2026-10-18
 license: Apache-2.0
 repository-code: "https://github.com/mcpware/IntentProbe"
@@ -30,7 +30,7 @@ identifiers:
     description: "Research paper: Can Model Internals Detect MCP Tool Poisoning That Text Analysis Cannot?"
 preferred-citation:
   type: article
-  title: "One Forward, Sixteen Decisions: Task-Specific Hidden-State Readouts from a Small Local Language Model"
+  title: "IntentProbe: Many Task-Specific Hidden-State Readouts from One Small Language Model Forward Pass"
   authors:
     - given-names: "Nicole"
       family-names: "BeWater"

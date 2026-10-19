@@ -1,11 +1,11 @@
-# IntentProbe: One Forward, Many Decisions
+# IntentProbe: One Model Pass, Many Task-Specific Readouts
 
-**Public architecture note v0.1.1**<br>
+**Public architecture note v0.1.2**<br>
 **Author:** Nicole BeWater<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
 **Published:** 18 October 2026
 
-**One 0.5B model pass served 16 learned decisions for 6.9% more mean CPU latency.**
+**Measured proof: one 0.5B model pass served 16 task heads for 6.9% more mean CPU latency than one head.**
 
 A language model can carry a useful pattern in its hidden states without turning that pattern into a
 reliable `YES` or `NO` answer. IntentProbe reads the pattern directly.
@@ -169,7 +169,7 @@ at very low marginal cost, and each head can improve independently afterward.
 
 ## Evidence and implementation record
 
-- [Research manuscript: *One Forward, Sixteen Decisions*](../research/multitask-activation-benchmark/paper/DRAFT.md)
+- [Research manuscript: *IntentProbe: Many Task-Specific Hidden-State Readouts from One Small Language Model Forward Pass*](../research/multitask-activation-benchmark/paper/DRAFT.md)
 - [Complete implementable architecture disclosure](../research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md)
 - [One-forward scaling result](../research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
 - [Probe-versus-judge sentinel](../research/multitask-activation-benchmark/experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
@@ -178,7 +178,7 @@ at very low marginal cost, and each head can improve independently afterward.
 
 ## Citation
 
-Nicole BeWater. 2026. *IntentProbe: One Forward, Many Decisions. Public architecture note v0.1.1.*
+Nicole BeWater. 2026. *IntentProbe: One Model Pass, Many Task-Specific Readouts. Public architecture note v0.1.2.*
 MCPware, a product and research brand of GEASS LABS INC.
 
 This release does not claim to invent activation probing, linear probing or shared-backbone

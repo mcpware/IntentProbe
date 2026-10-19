@@ -1,7 +1,7 @@
-# IntentProbe: One Forward, Many Decisions — architecture disclosure v0.1.1
+# IntentProbe: One Model Pass, Many Task-Specific Readouts — architecture disclosure v0.1.2
 
 Document date: **2026-10-18 (America/Vancouver)**<br>
-Status: **public technical disclosure v0.1.1**<br>
+Status: **public technical disclosure v0.1.2**<br>
 Author: **Nicole BeWater**<br>
 Publisher: **MCPware, a product and research brand of GEASS LABS INC.**
 
@@ -16,7 +16,7 @@ trained task readouts reuse it. Calibration, host policy and irreversible action
 sensor. The measured research runtime serves 16 heads with 6.9% more mean latency than one head in
 the recorded CPU setting.
 
-| Release boundary | v0.1.1 state |
+| Release boundary | v0.1.2 state |
 |---|---|
 | Public product | Single-head PyPI tool-poisoning path; standalone Hugging Face authorization and memory-write scorers |
 | Measured research implementation | One-forward fan-out across 16 frozen heads with timing artifacts and tests |
