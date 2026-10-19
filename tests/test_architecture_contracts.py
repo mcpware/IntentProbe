@@ -252,7 +252,6 @@ def test_current_public_titles_are_consistent() -> None:
     )
     paper_sources = (
         ROOT / "README.md",
-        ROOT / "CITATION.cff",
         BENCHMARK_DIR / "paper" / "DRAFT.md",
         BENCHMARK_DIR / "paper" / "README.md",
     )
@@ -264,3 +263,5 @@ def test_current_public_titles_are_consistent() -> None:
         paper_title in " ".join(path.read_text(encoding="utf-8").split())
         for path in paper_sources
     )
+    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    assert 'doi: "10.5281/zenodo.23467859"' in citation

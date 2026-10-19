@@ -52,6 +52,7 @@ and hot-loading interface are specified next steps.
 
 ## Read, reproduce, cite
 
+- [Architecture preprint and DOI](https://doi.org/10.5281/zenodo.23467859).
 - [Plain-English architecture article]({{ '/architecture/' | relative_url }}): the design and examples.
 - [Research manuscript](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md): methods and results.
 - [Technical specification](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md): components and interfaces.

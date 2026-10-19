@@ -50,6 +50,7 @@ accessible local model, probes can instead attach to that model's pass after tra
 for that backbone.
 
 [Read the architecture article](docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md) ·
+[Cite the architecture preprint](https://doi.org/10.5281/zenodo.23467859) ·
 [Browse the probe models](probes/) ·
 [Reproduce the benchmark](research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/)
 
@@ -96,6 +97,9 @@ Pass*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete
 disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md). The
 [v0.1.3 editorial release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_3.md) links the
 frozen evidence ledger.
+
+The architecture preprint has its own DOI, [10.5281/zenodo.23467859](https://doi.org/10.5281/zenodo.23467859).
+It is separate from the original tool-poisoning paper linked in the badges.
 
 ```text
 GEASS LABS INC.

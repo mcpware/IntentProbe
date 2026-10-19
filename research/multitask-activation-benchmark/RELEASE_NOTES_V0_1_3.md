@@ -21,6 +21,9 @@ architecture title and presents the system through its implementation and measur
 - Hugging Face card sources link back to the architecture and add relevant CPU/hidden-state tags.
 - `.zenodo.json` supplies explicit author metadata for a future software archive. It does not
   assign a DOI or repurpose the earlier tool-poisoning paper's DOI.
+- The separate six-page architecture preprint uses DOI `10.5281/zenodo.23467859`. Publication is
+  prepared on Zenodo before the corresponding GitHub citation update is deployed. Its source,
+  abstract and PDF renderer are included; its added experiments are follow-up work.
 
 No benchmark dataset, weights, predictions, result JSON, confidence interval, or measured value is
 changed. The current 16-head runtime remains research code. General registry, hot-loading, and

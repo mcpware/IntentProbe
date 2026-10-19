@@ -42,7 +42,11 @@ Status: reconciled after the six-cell sentinel and `ONE-FORWARD-MULTIHEAD-EXP001
 - Live full-precision hidden states and the original float16 activation cache are not bit-identical;
   the 64-row replay quantifies the difference.
 
-## Remaining publication gates
+## Follow-up studies for the empirical submission
+
+The initial architecture preprint uses the completed evidence and states its implementation and
+comparison boundaries. The studies below strengthen a later empirical submission; they do not
+hold the explanatory architecture preprint for results that have not yet been measured.
 
 - Add a measured one-call multi-label judge arm.
 - Add a measured fleet of compact task-specific classifiers on the same hardware and prompt panel.
