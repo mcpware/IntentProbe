@@ -1,0 +1,22 @@
+title: IntentProbe
+description: "CPU activation probes for AI-agent guardrails and classification. One small frozen local model pass, many independently trained task heads."
+url: https://mcpware.github.io
+baseurl: /IntentProbe
+repository: mcpware/IntentProbe
+theme: jekyll-theme-primer
+author:
+  name: ithiria894
+  url: https://github.com/ithiria894
+social:
+  name: IntentProbe
+  links:
+    - https://github.com/mcpware/IntentProbe
+    - https://huggingface.co/mcpware
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

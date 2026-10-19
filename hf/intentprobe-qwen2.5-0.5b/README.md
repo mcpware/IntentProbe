@@ -12,10 +12,18 @@ tags:
   - prompt-injection
   - activation-probe
   - linear-probe
+  - hidden-states
+  - cpu-inference
+  - local-llm
   - qwen2.5
 ---
 
 # IntentProbe Qwen2.5-0.5B activation probe
+
+**Author:** [ithiria894](https://github.com/ithiria894) · **Publisher:** MCPware
+
+[Architecture: one local model pass, many task-specific probes](https://mcpware.github.io/IntentProbe/architecture/)
+· [All IntentProbe models and research](https://github.com/mcpware/IntentProbe)
 
 This repository contains the 22 KB linear probe used by
 [IntentProbe](https://github.com/mcpware/IntentProbe), a local research-preview scanner for MCP tool

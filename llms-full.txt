@@ -2,8 +2,26 @@
 
 Canonical repository: https://github.com/mcpware/IntentProbe
 Research paper (preliminary, GPT-2): https://doi.org/10.5281/zenodo.19990741
+Public author: ithiria894 (https://github.com/ithiria894)
 
-## One-sentence summary
+## Activation probes for CPU guardrails and classification
+
+IntentProbe runs a small frozen local language model once and shares its hidden states across
+independently trained activation probes. This is a CPU sidecar architecture for AI-agent guardrails
+and classification, including research on LLM-as-a-judge alternatives. The measured shared runtime
+serves 16 heads; the published probe catalog covers tool poisoning, action authorization, and memory
+write. The latter two are standalone releases, rather than heads in that 16-head timing panel.
+
+With a hosted agent, the sensor makes one extra local pass, shared across its own heads. The
+hosted model's hidden states are not accessed. The general registry, hot-loading, and multi-head
+receipt emitter are specified next steps; the 16-head fan-out already exists as research code.
+
+Public architecture article:
+https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md
+Probe catalog: https://github.com/mcpware/IntentProbe/tree/main/probes
+Hugging Face: https://huggingface.co/mcpware
+
+## Shipped tool-poisoning scanner
 
 IntentProbe is a local scanner for MCP servers, AI agent tools, Claude Code
 skills, packages, and runtime tool events. It runs a tool description or prompt

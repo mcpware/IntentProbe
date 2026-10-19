@@ -1,8 +1,8 @@
-# IntentProbe: One Local Model Pass, Many Task-Specific Probes — architecture disclosure v0.1.2
+# IntentProbe: One Local Model Pass, Many Task-Specific Probes — architecture disclosure v0.1.3
 
-Document date: **2026-10-18 (America/Vancouver)**<br>
-Status: **public technical disclosure v0.1.2**<br>
-Author: **Nicole BeWater**<br>
+First published: **2026-10-18**; revised **2026-10-19 (America/Vancouver)**<br>
+Status: **public technical disclosure v0.1.3**<br>
+Author: **ithiria894**<br>
 Publisher: **MCPware, a product and research brand of GEASS LABS INC.**
 
 This document specifies the IntentProbe research and product architecture in implementable detail.
@@ -11,13 +11,13 @@ and measurement. This version is the citable public technical bridge between the
 runtime, and probe catalog.
 
 The architecture starts from one economic fact: the local-model forward pass dominates the cost.
-IntentProbe performs that pass once, exposes a versioned hidden-state bus, and lets independently
+IntentProbe performs that pass once, exposes a versioned hidden-state interface, and lets independently
 trained task probes reuse it. Calibration, host policy and irreversible action remain outside the
 sensor. In the recorded CPU setting, total mean latency was 6.9% higher at K=16 than at K=1.
 Recorded head work rose by 1.47 ms; the remaining 3.23 ms of the 4.70 ms total increase is
 unattributed.
 
-| Release boundary | v0.1.2 state |
+| Release boundary | v0.1.3 state |
 |---|---|
 | Public product | Single-head PyPI tool-poisoning path; standalone Hugging Face authorization and memory-write scorers |
 | Measured research implementation | One-forward fan-out across 16 frozen heads with timing artifacts and tests |
@@ -48,7 +48,7 @@ MCPware is the publisher. IntentProbe is the project. A tool-poisoning model, au
 or memory-write model is one IntentProbe probe product, not a separate top-level brand or research
 programme. The papers explain and test the common method behind the products.
 
-The scholarly author is Nicole BeWater. MCPware publishes the work as a product and research brand
+The public author is [ithiria894](https://github.com/ithiria894). MCPware publishes the work as a product and research brand
 of GEASS LABS INC. This identity should remain consistent in the paper PDF, DOI metadata, GitHub
 release, Hugging Face Collection, model cards, citation file, and project site.
 
@@ -76,8 +76,8 @@ layer combinations, normalizations, and feature transformations from the shared 
 ### 2.1 Stable architecture, replaceable components
 
 IntentProbe is the complete serving architecture, not one backbone or one set of probe weights. Its
-stable structure is the versioned input renderer, shared local-model pass, hidden-state activation
-bus, readout-manifest contract, calibration, policy boundary, and receipt. The model, labelled
+stable structure is the versioned input renderer, shared local-model pass, hidden-state
+interface, readout-manifest contract, calibration, policy boundary, and receipt. The model, labelled
 dataset, layer selection, pooling method, normalization, classifier, and threshold are replaceable
 implementations inside that structure. The current research runtime demonstrates fan-out; the
 general independently loadable registry remains a specified implementation step.
@@ -427,7 +427,7 @@ judge or specialized classifier on every task.
 | Multi-head decision receipt | [`research/schemas/intentprobe_multihead_receipt.schema.json`](../schemas/intentprobe_multihead_receipt.schema.json) | Draft v1 schema and validation examples implemented; runtime emission pending |
 | Product catalog | [`probes/`](../../probes/) | Three documented probe products |
 | Multi-task readout evidence | [`research/multitask-activation-benchmark/`](./) | Multiple completed and in-progress task matrices |
-| Shared activation bus and head fan-out | [`experiments/ONE-FORWARD-MULTIHEAD-EXP001/`](experiments/ONE-FORWARD-MULTIHEAD-EXP001/) | Implemented and measured as a research runtime; production registry and hot-loading remain pending |
+| Shared hidden-state interface and head fan-out | [`experiments/ONE-FORWARD-MULTIHEAD-EXP001/`](experiments/ONE-FORWARD-MULTIHEAD-EXP001/) | Implemented and measured as a research runtime; production registry and hot-loading remain pending |
 | `K`-head systems comparison | [`experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md`](experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md) | Shared `K` curve and repeated-forward lower bound complete; multi-label judge and standalone fleet pending |
 
 The shipped scanner still concatenates selected layer features for one artifact. The research
@@ -526,5 +526,5 @@ changing this record.
 | Version | Date | State | Change |
 | --- | --- | --- | --- |
 | 0.1-draft | 2026-10-18 | Local only | First integrated architecture, hierarchy, component contracts, embodiments, evaluation protocol, and public-priority plan |
-| 0.1.0 | 2026-10-18 | Public release | Names Nicole BeWater as author; freezes the IntentProbe one-forward, many-decisions architecture; adds the completed 16-head shared-path result, direct-judge sentinel, schemas, figures, paper draft, and machine-readable evidence |
+| 0.1.0 | 2026-10-18 | Public release | Establishes the public authorship and IntentProbe one-forward, many-decisions architecture; adds the completed 16-head shared-path result, direct-judge sentinel, schemas, figures, paper draft, and machine-readable evidence |
 | 0.1.1 | 2026-10-18 | Public presentation patch | Leads with the measured architecture, draws the actual multi-head fan-out and policy boundary, separates the 80-row and matched ten-prompt timing panels, and states the shipped/research/specified boundary explicitly |

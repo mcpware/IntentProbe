@@ -1,9 +1,24 @@
+---
+title: "IntentProbe: One Local Model Pass, Many Task-Specific Probes"
+description: "CPU activation probes for AI-agent guardrails and classification. One frozen local model pass, many independent heads, with code and reproducible benchmarks."
+author: ithiria894
+permalink: /architecture/
+image: /one-local-model-pass-many-task-specific-probes.png
+---
+
 # IntentProbe: One Local Model Pass, Many Task-Specific Probes
 
-**Public architecture note v0.1.2**<br>
-**Author:** Nicole BeWater<br>
+**Public architecture note v0.1.3**<br>
+**Author:** [ithiria894](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
-**Published:** 18 October 2026
+**Published:** 18 October 2026 · **Updated:** 19 October 2026
+
+Activation probes for AI-agent guardrails and classification on CPU. A small local model serves
+many independent heads from a single forward pass, without generating a verdict for every check.
+
+[Probe models and local scorers](https://github.com/mcpware/IntentProbe/tree/main/probes) ·
+[Hugging Face publisher](https://huggingface.co/mcpware) ·
+[Reproduce the 16-head benchmark](https://github.com/mcpware/IntentProbe/tree/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/)
 
 **Measured on one six-core CPU:** one Qwen2.5-0.5B forward plus one probe averaged 68.63 ms; the
 same shared path plus 16 probes averaged 73.34 ms, a 6.9% increase (n=80, paired 95% CI
@@ -12,11 +27,16 @@ same shared path plus 16 probes averaged 73.34 ms, a 6.9% increase (n=80, paired
 A language model can carry a useful pattern in its hidden states without turning that pattern into a
 reliable `YES` or `NO` answer. IntentProbe reads the pattern directly.
 
-Most agent workflows pay for the model to read the same input again and again. IntentProbe pays for
-that read once, then reuses what the model already computed.
+Suppose one agent turn needs ten checks: toxicity, sentiment, spam, authorization, and so on.
+You could ask an LLM each question separately. IntentProbe takes another route: one small local
+model reads the input, and trained heads turn its hidden states into the different scores.
+
+Beside Claude, Codex, or another hosted agent, that costs one extra local read. All compatible heads
+share that sidecar pass. If the agent's own model is local and exposes hidden states, heads trained
+for it can attach to that pass instead.
 
 ![One input goes through one frozen local model. The same hidden states feed many small task probes,
-which produce calibrated scores and a runtime receipt.](one-local-model-pass-many-task-specific-probes.svg)
+which produce calibrated scores and a runtime receipt.](https://raw.githubusercontent.com/mcpware/IntentProbe/main/docs/one-local-model-pass-many-task-specific-probes.svg)
 
 ## The short version
 
@@ -32,7 +52,7 @@ That gives the runtime a simple shape:
 
 1. render the request and context once;
 2. run one frozen local model forward pass;
-3. expose the required hidden states through an activation bus;
+3. expose the required hidden states through a shared hidden-state interface;
 4. apply many small, independently versioned heads;
 5. calibrate the scores and pass them to host policy;
 6. record what ran in a receipt.
@@ -40,10 +60,10 @@ That gives the runtime a simple shape:
 The expensive part is the model forward pass. In the measured CPU runtime, total mean latency was
 6.9% higher at K=16 than at K=1. Recorded probe work accounted for 1.47 ms of the 4.70 ms total
 increase; the remaining 3.23 ms is unattributed. The shared path requests all hidden outputs even at
-K=1, so this is an activation-bus baseline rather than an optimized single-probe path.
+K=1, so this is a shared-hidden-state baseline rather than an optimized single-probe path.
 
 The terminology is deliberate. **Probe** is the public name for a trained task component. **Head**
-is the technical runtime object attached to the activation bus. **Readout** is the recipe that says
+is the technical runtime object attached to that interface. **Readout** is the recipe that says
 which token region, layers, pooling and normalization the head uses. **Detector** is reserved for a
 security product whose job is detection.
 
@@ -67,7 +87,7 @@ examples can teach a small readout how to recover it without asking the model to
 The architecture does not freeze the quality of its first heads. A head can be retrained with better
 labels, a different layer or pooling recipe, a nonlinear classifier, or a newer local model. The
 manifest contract is designed so that one compatible head can change without changing the activation
-bus or retraining unrelated probes. Benchmarking decides whether a particular head is ready for a
+interface or retraining unrelated probes. Benchmarking decides whether a particular head is ready for a
 particular job; it does not decide whether the shared architecture can keep improving.
 
 This gives IntentProbe two different kinds of progress:
@@ -99,7 +119,7 @@ Across the 80-row scaling panel, applying all 16 heads took 1.85 ms per input. P
 16 heads was 0.73 MiB above the one-head run, and the saved probe artifacts occupied 386,121 bytes.
 
 ![Measured latency stays nearly flat as probes are added, while repeated model forwards rise almost
-linearly.](one-local-model-pass-many-task-specific-probes-latency.svg)
+linearly.](https://raw.githubusercontent.com/mcpware/IntentProbe/main/docs/one-local-model-pass-many-task-specific-probes-latency.svg)
 
 ## One common model does not mean one universal layer
 
@@ -168,29 +188,46 @@ The implementation boundary is equally specific:
 - the general manifest registry, hot-loading and multi-head receipt emitter are specified and
   schema-tested, but are not yet the public PyPI product surface.
 
-Two important comparisons remain open:
+The next benchmark adds three comparisons:
 
 - one prompted call that asks the same model for all labels at once;
+- separate judge calls with a reusable prompt prefix and caching enabled;
 - a measured fleet of compact task-specific classifiers on the same machine and inputs.
 
 Those tests will locate the full accuracy, latency and memory frontier. They do not change the result
 already measured: once compatible activation heads exist, many of them can share one model forward
 at very low marginal cost, and each head can improve independently afterward.
 
+## Where this fits
+
+There is already useful work on activation-probe guardrails. [Goodfire and
+Rakuten](https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection) deployed a sidecar
+for PII detection and described adding more probes at low marginal cost.
+[SingProbe](https://arxiv.org/abs/2608.30703) integrates intent, safety, and hallucination monitoring
+with the model that generates the response. [BERTology](https://arxiv.org/abs/2601.13288) studies
+token and layer selection for classification. [Lion
+Warden](https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier) offers a compact
+encoder with seven jointly trained security heads and CPU inference.
+
+IntentProbe brings the local deployment, independent task heads, per-head readout recipes, and CPU
+measurements together in a reproducible architecture. The current runtime measures K=1, 2, 4, 8,
+and 16 heads. Its public probe catalog also gives readers weights and scorers to try.
+
 ## Evidence and implementation record
 
-- [Research manuscript: *IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass*](../research/multitask-activation-benchmark/paper/DRAFT.md)
-- [Complete implementable architecture disclosure](../research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md)
-- [One-forward scaling result](../research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
-- [Probe-versus-judge sentinel](../research/multitask-activation-benchmark/experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
-- [Readout manifest schema](../research/schemas/intentprobe_readout_manifest.schema.json)
-- [Multi-head receipt schema](../research/schemas/intentprobe_multihead_receipt.schema.json)
+- [Research manuscript: *IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass*](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md)
+- [Complete implementable architecture disclosure](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md)
+- [One-forward scaling result](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
+- [Probe-versus-judge sentinel](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
+- [Readout manifest schema](https://github.com/mcpware/IntentProbe/blob/main/research/schemas/intentprobe_readout_manifest.schema.json)
+- [Multi-head receipt schema](https://github.com/mcpware/IntentProbe/blob/main/research/schemas/intentprobe_multihead_receipt.schema.json)
 
 ## Citation
 
-Nicole BeWater. 2026. *IntentProbe: One Local Model Pass, Many Task-Specific Probes. Public architecture note v0.1.2.*
+ithiria894. 2026. *IntentProbe: One Local Model Pass, Many Task-Specific Probes. Public architecture note v0.1.3.*
 MCPware, a product and research brand of GEASS LABS INC.
 
-This release does not claim to invent activation probing, linear probing or shared-backbone
-multi-head classification. It documents the IntentProbe architecture, its task-specific readout
-contracts and the first measured 16-head local runtime built around them.
+IntentProbe (2026) runs a small frozen local model on CPU as a sidecar and shares one forward pass
+across independently trained activation probes, each with its own readout manifest.
+
+[Download BibTeX with the author handle preserved](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/intentprobe-architecture.bib).

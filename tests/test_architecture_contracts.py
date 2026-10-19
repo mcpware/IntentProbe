@@ -214,7 +214,7 @@ def test_public_release_identity_numbers_and_figures_are_present() -> None:
     )
     for path in paths:
         text = path.read_text(encoding="utf-8")
-        assert "Nicole BeWater" in text
+        assert "ithiria894" in text
         assert "68.63" in text
         assert "73.34" in text
         assert "62.70" in text

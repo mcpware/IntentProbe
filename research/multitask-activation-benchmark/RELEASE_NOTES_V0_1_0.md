@@ -1,7 +1,7 @@
 # IntentProbe architecture v0.1.0
 
 **Release name:** One Forward, Many Decisions<br>
-**Author:** Nicole BeWater<br>
+**Author:** [ithiria894](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.<br>
 **Release date:** 18 October 2026
 
@@ -52,7 +52,7 @@ fleet on the same hardware and inputs.
 
 ## Publication QA
 
-- The public explanation preserves Nicole BeWater's meaning and plain-language framing: a model can
+- The public explanation preserves the author's meaning and plain-language framing: a model can
   carry a useful hidden-state pattern without reliably turning it into the requested `YES` or `NO`.
 - Every headline latency value is checked against the frozen machine-readable systems result by the
   repository test suite.

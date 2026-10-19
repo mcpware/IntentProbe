@@ -2,10 +2,10 @@
 
 **Public architecture release:** [IntentProbe: One Local Model Pass, Many Task-Specific
 Probes](../../docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md)<br>
-**Author:** Nicole BeWater<br>
+**Author:** [ithiria894](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
-![One input goes through one frozen local model. A shared activation bus feeds many small task
+![One input goes through one frozen local model. Shared hidden states feed many small task
 probes.](../../docs/one-local-model-pass-many-task-specific-probes.svg)
 
 The simple idea is that a model may already react differently to toxicity, sentiment, spam,

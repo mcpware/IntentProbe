@@ -1,6 +1,26 @@
 # Competitive Landscape
 
-Last checked: 2026-06-18.
+Shared-model comparison and citation corrections checked: 2026-10-18.
+Legacy scanner/vendor survey below last checked: 2026-06-18.
+
+## Shared-model guardrails and probe serving
+
+IntentProbe now covers a CPU sidecar architecture as well as its shipped tool-poisoning scanner.
+One small frozen model supplies hidden states to independently trained task heads. The measured
+research runtime serves 16 heads with per-head readout recipes; general registry and hot-loading
+support remain specified work.
+
+| Work | Public approach | Relation to IntentProbe |
+|---|---|---|
+| [Goodfire × Rakuten](https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection) | Activation and SAE probes on a separate sidecar for PII detection; discusses adding more probes at low marginal cost | Earlier deployment and motivation for sidecar probing. IntentProbe measures heterogeneous independent heads together on a 0.5B CPU path |
+| [SingProbe](https://arxiv.org/abs/2608.30703) | Intrinsic guardrails reuse the serving model's hidden states for intent, safety, and hallucination monitoring; SGLang/vLLM integrations | An open guardrail stack. IntentProbe's current experiment instead measures a separate CPU sensor with independent task readouts |
+| [Lion Warden](https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier) | Compact encoder with seven jointly trained security heads and CPU inference | A useful shared-encoder baseline. CPU inference is common to both; IntentProbe keeps its backbone frozen while training each head separately |
+| [BERTology](https://arxiv.org/abs/2601.13288) | Token- and layer-selective probes on a serving model | Relevant readout-selection and serving precedent |
+| [Constitutional Classifiers++](https://arxiv.org/abs/2601.04603) | Linear probes combined with external classifiers and a cascade | Relevant production guardrail design, rather than a matched benchmark of this CPU sidecar |
+
+These are method and deployment comparisons. The published results use different tasks, hardware,
+and metrics; their scores are not a common leaderboard. A same-CPU classifier-fleet and cached-judge
+comparison is planned separately.
 
 This is the full, source-backed version of the comparison table in the
 [README](../README.md#competitive-landscape). Everything here mirrors the
@@ -274,9 +294,10 @@ or classifier on model internals; some predates IntentProbe, some is parallel.
 - **TaskTracker** (Microsoft, 2024) — task-drift detection on model internals.
 - **RouteGuard** (arXiv:2604.22888) — hidden-state plus attention features for
   skill poisoning, on a Skill-Inject benchmark; same niche, runtime monitor.
-- **MindGuard** — hidden-state probing (paper / research code).
+- **MindGuard** (arXiv:2508.20412) — attention-based decision inspection and a Decision Dependence
+  Graph for metadata poisoning; it is not a linear hidden-state probe.
 - **Frontier-lab production probes** — Google has reported running activation
-  probes on Gemini in production (arXiv:2509.03888, 2601.11516). So "first to use
+  probes on Gemini in production (arXiv:2601.11516). So "first to use
   activation probing for safety" is false.
 
 What is different about IntentProbe is only the deployment shape: it is

@@ -1,0 +1,17 @@
+# IntentProbe
+
+> CPU activation probes for AI-agent guardrails and classification.
+
+IntentProbe shares one frozen local language model forward pass across independently trained
+activation heads. A hosted agent uses a separate CPU sidecar; its hidden states are not accessed.
+The measured 16-head runtime is research code. The shipped package is the tool-poisoning scanner;
+authorization and memory-write probes have standalone scorers. General hot-loading is specified work.
+
+Author: ithiria894. Publisher: MCPware, a product and research brand of GEASS LABS INC.
+
+- Architecture: https://mcpware.github.io/IntentProbe/architecture/
+- Repository: https://github.com/mcpware/IntentProbe
+- Models: https://huggingface.co/mcpware
+- Probe catalog: https://github.com/mcpware/IntentProbe/tree/main/probes
+- Manuscript: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md
+- Full project context: https://github.com/mcpware/IntentProbe/blob/main/llms-full.txt

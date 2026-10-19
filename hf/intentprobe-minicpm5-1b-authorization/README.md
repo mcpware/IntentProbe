@@ -9,6 +9,9 @@ datasets:
   - ProCreations/approve-or-deny
 tags:
   - activation-probe
+  - hidden-states
+  - cpu-inference
+  - local-llm
   - linear-probe
   - ai-agents
   - agent-security
@@ -31,6 +34,11 @@ metrics:
 ---
 
 # IntentProbe: 28 KB activation probe for AI-agent action authorization
+
+**Author:** [ithiria894](https://github.com/ithiria894) · **Publisher:** MCPware
+
+[Architecture: one local model pass, many task-specific probes](https://mcpware.github.io/IntentProbe/architecture/)
+· [All IntentProbe models and research](https://github.com/mcpware/IntentProbe)
 
 [![GitHub](https://img.shields.io/badge/GitHub-mcpware%2Fintentprobe-181717?logo=github)](https://github.com/mcpware/intentprobe)
 [![PyPI](https://img.shields.io/pypi/v/intentprobe?label=PyPI)](https://pypi.org/project/intentprobe/)

@@ -2,12 +2,18 @@
 
 > One local model pass. Many task-specific probes.
 
+Activation probes · AI-agent guardrails · LLM-as-a-judge alternatives · CPU sidecar · single forward
+pass · frozen small local language models. Public author: ithiria894 (https://github.com/ithiria894).
+
 IntentProbe is a research and product architecture for reading task-specific signals from the
-hidden states of a small local language model. One forward pass creates a shared activation bus.
+hidden states of a small local language model. One forward pass creates shared hidden states.
 The current shared-runtime benchmark serves 16 independently trained probes spanning toxicity,
 jailbreak, spam, sentiment, emotion and conversational pragmatics. Authorization and memory-write
 probes are separate research releases. Routing is specified future work, not a current measured
 head. Detection, calibration, host policy and irreversible action remain separate layers.
+
+For hosted agents, the sidecar performs one extra local pass and shares it across its own heads.
+It reads the local sensor's representations; a hosted model's hidden states are not required.
 
 ## Why the architecture exists
 
@@ -30,7 +36,7 @@ is designed so compatible heads can improve independently without retraining unr
   0.73 MiB above K=1. The 16 probe artifacts totalled 386,121 bytes.
 - Recorded head application rose from 0.38 ms at K=1 to 1.85 ms at K=16. That accounts for 1.47 ms
   of the 4.70 ms total increase; the remaining 3.23 ms is unattributed.
-- The shared path requests all hidden outputs even at K=1, so K=1 is the activation-bus baseline,
+- The shared path requests all hidden outputs even at K=1, so K=1 is the shared-hidden-state baseline,
   not an optimized single-probe path.
 
 The 16 heads form a heterogeneous research workload, not one product-quality claim. Each head keeps
@@ -60,7 +66,7 @@ benchmark measures shared computation; task benchmarks decide whether a specific
 - IntentProbe does not claim to invent activation probing, layer search or shared multi-head
   inference. PIShield, TaskTracker, RouteGuard, MindGuard and related work predate or parallel parts
   of the method. The contribution is the integrated, measured architecture: task-specific readout
-  manifests, a shared local activation bus, separate policy, receipts and a deployment-constrained
+  manifests, shared local hidden states, separate policy, receipts and a deployment-constrained
   readout search.
 
 ## Install the shipped scanner
@@ -79,8 +85,8 @@ Apache-2.0. Research preview.
 - Public architecture note: https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md
 - Research manuscript: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md
 - Technical disclosure: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md
-- v0.1.2 release record: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_2.md
-- v0.1.2 SHA-256 ledger: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/SHA256SUMS_V0_1_2.txt
+- v0.1.3 editorial release record: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_3.md
+- v0.1.3 SHA-256 ledger: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/SHA256SUMS_V0_1_3.txt
 - Reproducible 16-head experiment: https://github.com/mcpware/IntentProbe/tree/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001
 - Original preliminary paper and DOI: https://doi.org/10.5281/zenodo.19990741
 - License: Apache-2.0

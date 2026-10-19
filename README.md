@@ -1,12 +1,17 @@
 # IntentProbe
 
+Activation probes for local AI-agent guardrails and classification. CPU sidecar · frozen small
+language model · many independent heads from a single forward pass.
+
+Public author: [ithiria894](https://github.com/ithiria894) · Publisher: MCPware.
+
 <p align="center">
   <strong>One local model pass. Many task-specific probes.</strong>
 </p>
 
 <p align="center">
-  IntentProbe runs one frozen local language model forward, then reads its hidden states with many
-  small, independently trained and independently versioned task probes.
+  Run a small local model once. Read its hidden states with many independently trained activation
+  probes for guardrail and classification tasks.
 </p>
 
 <p align="center">
@@ -21,7 +26,7 @@
   <a href="https://huggingface.co/mcpware/intentprobe-qwen2.5-0.5b-memory-write"><img src="https://img.shields.io/huggingface/dm/mcpware/intentprobe-qwen2.5-0.5b-memory-write?label=Memory%20probe%20downloads" alt="Memory probe Hugging Face monthly downloads" /></a>
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white" alt="Python 3.10+" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue" alt="License" /></a>
-  <a href="https://doi.org/10.5281/zenodo.19990741"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.19990741-blue" alt="DOI" /></a>
+  <a href="https://doi.org/10.5281/zenodo.19990741"><img src="https://img.shields.io/badge/Original%20paper%20DOI-10.5281%2Fzenodo.19990741-blue" alt="Original tool-poisoning paper DOI" /></a>
   <img src="https://img.shields.io/badge/runs-local-brightgreen" alt="Runs locally" />
   <img src="https://img.shields.io/badge/telemetry-zero-blue" alt="Zero telemetry" />
   <img src="https://img.shields.io/badge/status-research%20preview-orange" alt="Research preview" />
@@ -31,15 +36,22 @@
   <img src="docs/one-local-model-pass-many-task-specific-probes.svg" width="1000" alt="One input passes through one frozen local model. A shared hidden-state bus fans out to task-specific probes attached at different layers. Calibrated scores cross a separate host-control boundary before policy or irreversible action." />
 </p>
 
-## Why make the model read the same input again for every task?
-
-You do not have to.
+## One model read for many guardrail and classification checks
 
 One agent turn may need toxicity, jailbreak, spam, sentiment, emotion and conversation-state checks
 on the same input. Asking a model each question separately repeats the expensive part. An
-IntentProbe runtime reads the input once, exposes selected hidden states through an activation bus,
+IntentProbe runtime reads the input once, exposes selected hidden states through a shared hidden-state interface,
 and lets many small probes reuse that same pass. Different probes can read different layers and use
 different pooling, normalization, classifiers and thresholds.
+
+For a hosted agent such as Claude or Codex, the sidecar makes one extra local model pass and shares
+that work across its probes. It reads its own model's hidden states. When the agent itself runs an
+accessible local model, probes can instead attach to that model's pass after training and validation
+for that backbone.
+
+[Read the architecture article](docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md) ·
+[Browse the probe models](probes/) ·
+[Reproduce the benchmark](research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/)
 
 The first measured Qwen2.5-0.5B CPU runtime produced a clear systems result:
 
@@ -55,7 +67,7 @@ The first measured Qwen2.5-0.5B CPU runtime produced a clear systems result:
 The repeated-forward arm is deliberately favourable to repetition: it omits task prompts,
 language-model output scoring and generation. It is a lower bound, not a complete implementation of
 16 LLM judges. The shared path requests all hidden outputs even at K=1, so the K=1 measurement is the
-activation-bus baseline rather than an optimized single-probe path.
+shared-hidden-state baseline rather than an optimized single-probe path.
 
 <p align="center">
   <img src="docs/one-local-model-pass-many-task-specific-probes-latency.svg" width="900" alt="On the same ten prompts, one model forward plus up to 16 probes remains near 60 milliseconds while repeated model forwards rise from 58 to 957 milliseconds. At K equals 16 the repeated path is 15.26 times the shared path." />
@@ -82,7 +94,7 @@ Probes**](docs/ONE_LOCAL_MODEL_PASS_MANY_TASK_SPECIFIC_PROBES.md), the research 
 [*IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward
 Pass*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete technical
 disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md). The
-[v0.1.2 release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_2.md) links the
+[v0.1.3 editorial release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_3.md) links the
 frozen evidence ledger.
 
 ```text
@@ -390,7 +402,8 @@ new sources and new vocabulary, not same-vocabulary detection inside one distrib
 |---|---|---|---|
 | **MCP scanner** | Snyk Agent Scan (formerly Invariant MCP-Scan), Cisco AI Defense, NVIDIA SkillSpector | Static rules, AST, YARA signatures, LLM-as-judge | Adds a model-internal **activation** signal; static keywords still corroborate the block tier |
 | **Text classifier** | ProtectAI DeBERTa (used by Invariant/Snyk/Lakera/promptfoo), Meta Prompt Guard | Classify text as injection / jailbreak | Reads the host model's internal activations instead of classifying the surface text, a different and complementary signal |
-| **Probe-based** | PIShield, TaskTracker (research code); RouteGuard, MindGuard (papers); frontier-lab production probes (e.g. Google Gemini) | Linear probe / classifier on model internals | Same family of method; IntentProbe's angle is the deployment shape: installable, pre-install, scans the tool *description* on activations |
+| **Model-internal monitors** | PIShield, TaskTracker, RouteGuard; MindGuard (arXiv:2508.20412, attention-based decision inspection); frontier-lab production probes | Hidden-state readouts, activation differences, or attention-based inspection | The shipped IntentProbe scanner reads a standalone tool description locally before install; its research runtime shares hidden states across independent task heads |
+| **Shared-model guardrails** | [SingProbe](https://arxiv.org/abs/2608.30703), [Goodfire × Rakuten](https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection), [Lion Warden](https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier), BERTology | Reuse a serving model's hidden states, probe a separate sidecar, or jointly train several classifier outputs | IntentProbe measures independent readout recipes sharing one frozen 0.5B CPU pass; see the [systems comparison](docs/COMPETITIVE_LANDSCAPE.md#shared-model-guardrails-and-probe-serving) |
 | **LLM-as-judge** | NeMo, OpenAI Guardrails, Promptfoo | Ask another LLM "is this poisoned?" | Deterministic, local, no API call; scores state not the verbal answer |
 | **Enterprise cloud** | Lakera, Azure, Google Model Armor, AWS Bedrock | Ship content to a vendor cloud | Runs locally; benchmarks, scripts, and the probe artifact are public (datasets from their original sources) |
 

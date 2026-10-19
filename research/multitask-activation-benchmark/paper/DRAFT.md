@@ -1,7 +1,7 @@
 # IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass
 
-**Status:** public research manuscript v0.1.2; not peer reviewed<br>
-**Author:** Nicole BeWater<br>
+**Status:** public research manuscript v0.1.3; not peer reviewed<br>
+**Author:** [ithiria894](https://github.com/ithiria894)<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 
 This manuscript is the empirical systems evaluation of the public [*IntentProbe: One Local Model
@@ -13,9 +13,13 @@ small task probes.](../../../docs/one-local-model-pass-many-task-specific-probes
 
 ## Abstract
 
-Agent workflows increasingly call language models repeatedly to classify the same input for safety,
-routing, sentiment, and policy decisions. We test a different architecture: run one frozen local
-language model once, then apply independently trained task-specific heads to selected hidden states.
+Agent workflows need many guardrail and classification checks on the same input. We present
+IntentProbe, a CPU sidecar architecture that runs a small frozen local language model in a single
+forward pass, then applies independently trained activation probes to selected hidden states.
+It supplies task scores without generating a separate LLM-as-a-judge answer for every check. A
+hosted agent's hidden states are not required: the sidecar reads its own local sensor model.
+Prompt injection, authorization, toxicity, and memory write motivate the broader project; the
+shared 16-head timing suite below covers the specific tasks listed in its manifest.
 Our empirical programme has three parts. First, a 24-cell screen crosses six 230M--1B backbones with
 sentiment, spam, toxicity, and jailbreak detection. Selected pooling and depth vary by model and
 task; even toxicity and jailbreak labels on identical ToxicChat prompts select different readouts.
@@ -87,9 +91,9 @@ tasks, served from one sub-1B local backbone pass.
 ### 2.1 Hidden representations versus generated judgments
 
 [Tillman and Mossing](https://arxiv.org/abs/2504.20271) compare prompted outputs with raw, prompted,
-and sparse-autoencoder activation probes for moderation, hallucination, and sentiment. Their results
+and sparse-autoencoder activation probes. Their results
 show that generated labels are a serious baseline but do not exhaust information linearly available
-inside the same model. [Representation-as-a-Judge](https://openreview.net/forum?id=VAISvCsrvG)
+inside the same model. [Representation-as-a-Judge](https://arxiv.org/abs/2601.22588)
 reports a similar extraction gap for reasoning-quality evaluation with frozen small models.
 [Trick or Neat](https://aclanthology.org/2025.findings-acl.954/) finds direct prompting fragile for
 several ambiguity classes while layer-wise probes can be strong. [Prompting Underestimates LLM
@@ -102,13 +106,21 @@ backbone, readout, and distribution shift remain material.
 
 ### 2.2 Single-pass classification and routing
 
-[A BERTology View of LLM Orchestrations](https://aclanthology.org/2026.acl-long.1955/) is the closest
-systems precedent. It searches token- and layer-selective probes on a frozen serving model, compares
+[Goodfire and Rakuten](https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection)
+deploy probes on a separate sidecar for PII detection and discuss adding further probes at low
+marginal inference cost. [SingProbe](https://arxiv.org/abs/2608.30703) supplies an open intrinsic
+guardrail framework that reuses a serving model's hidden states for intent, safety, and hallucination
+monitoring. [Lion Warden](https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier)
+jointly trains a compact encoder and seven security heads and provides CPU inference.
+
+[A BERTology View of LLM Orchestrations](https://aclanthology.org/2026.acl-long.1955/)
+searches token- and layer-selective probes on a frozen serving model, compares
 against prompted and standalone classifiers, and measures the latency and memory saved by reusing a
 serving pass. [LatentGate](https://aclanthology.org/2026.acl-industry.153/) uses a frozen small model,
 mean pooling, PCA whitening, and a linear probe for semantic routing. [You Only Judge
-Once](https://arxiv.org/abs/2604.10966) shows near-constant latency when a discriminative reward model
-scores multiple responses in one pass. Those systems establish the value of shared computation.
+Once](https://arxiv.org/abs/2604.10966) uses a discriminative multimodal reward model to score
+multiple responses in one pass and reports up to N-fold wall-clock speedup and FLOP reduction.
+Those systems establish the value of shared computation.
 Our experiment narrows the question to a 0.5B CPU sidecar whose heads are independently trained,
 independently attachable, and allowed to read different layer windows and pooling rules.
 
@@ -357,7 +369,7 @@ identity with an offline cache.
 The results reject two easy defaults. The final hidden output is not consistently best, and one
 pooling/depth recipe does not serve every label. Even when inputs and backbone are identical,
 toxicity and jailbreak can select different locations. A shared runtime should therefore expose a
-stable activation bus while allowing each head to declare its own renderer, token pooling, layer
+stable hidden-state interface while allowing each head to declare its own renderer, token pooling, layer
 window, normalization, classifier, calibration, and threshold.
 
 ### 6.2 One pass changes the economics of workflow classification
@@ -378,7 +390,7 @@ states, the same readout design can attach to that host and avoid the extra side
 The architecture and the current head artifacts are different objects. A task head reflects one
 dataset, backbone, readout search, classifier, and calibration procedure at one point in time. Better
 labels, a stronger backbone, a wider readout search, or another bounded classifier can improve that
-task while leaving the activation bus and every unrelated head unchanged. The sentinel in Section
+task while leaving the hidden-state interface and every unrelated head unchanged. The sentinel in Section
 5.2 is therefore a component-admission test, not a verdict on the architecture.
 
 This separation matters operationally. The shared runtime provides the expensive model pass,
@@ -476,7 +488,7 @@ binary heads.
 
 ## Author and assistance disclosure
 
-Nicole BeWater defined the research question, architecture, experiment priorities, interpretation,
+ithiria894 defined the research question, architecture, experiment priorities, interpretation,
 and release boundary, and approved this manuscript. Coding assistants were used to implement and
 check experiments, generate figures, and edit the manuscript. Quantitative claims are regenerated
 from the versioned artifacts linked above and are covered by repository tests.

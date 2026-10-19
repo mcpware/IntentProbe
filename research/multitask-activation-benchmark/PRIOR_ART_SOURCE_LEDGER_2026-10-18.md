@@ -1,5 +1,25 @@
 # Prior-art source ledger — 2026-10-18
 
+## Publication follow-up — 2026-10-19
+
+This follow-up verifies sources needed for the architecture article. It is not a new exhaustive
+novelty search. Earlier retrieval records below retain their original dates and access limits.
+
+| Source | Retrieval and use |
+|---|---|
+| [Goodfire × Rakuten](https://www.goodfire.com/research/rakuten-sae-probes-for-pii-detection) | Official article, methods and discussion: separate sidecar, PII probes, and the stated motivation for adding more probes. Added as prior work rather than an unmatched numerical benchmark |
+| [SingProbe v2](https://arxiv.org/abs/2608.30703v2) | Primary title, abstract, and version history: intrinsic serving-model monitoring with intent, safety, and hallucination signals. No collapsed latency-overhead number is used in this update |
+| [Lion Warden](https://huggingface.co/patronus-studio/lion-warden-ai-security-classifier) | Official model card: shared encoder, seven security heads, joint training, and CPU inference. Added as a future matched-CPU baseline |
+| [Constitutional Classifiers++](https://arxiv.org/abs/2601.04603) | Primary abstract: cascade and linear probes combined with external classifiers. The earlier repo survey already listed the title; this update adds substantive discussion |
+| [MindGuard](https://arxiv.org/abs/2508.20412) | Primary abstract identifies attention-based Decision Dependence Graph inspection. Corrected its classification as a linear hidden-state probe |
+| [You Only Judge Once](https://arxiv.org/abs/2604.10966) | Primary abstract identifies a multimodal reward model and up-to-N-fold speedup, rather than a general near-constant-latency guarantee |
+| [TaskTracker current record](https://arxiv.org/abs/2406.00799) | Current v6 title is *Get my drift? Catching LLM Task Drift with Activation Deltas*. Retained the existing title; the different v3–v5 wording does not make it a current-title error |
+| [False Sense of Security](https://arxiv.org/abs/2509.03888) | Confirmed the ID is adverse probing-generalization work, not evidence for Gemini production deployment. Removed that ID from the Gemini bullet |
+| [Representation-as-a-Judge](https://arxiv.org/abs/2601.22588) | The manuscript now links to the stable arXiv record rather than relying solely on an OpenReview forum URL |
+
+The OpenReview-only access-control reference still needs a fetchable primary mirror before a
+submission citation is frozen. This editorial update does not mark that reference verified.
+
 This ledger records the actual retrieval coverage for the companion
 [`PRIOR_ART_REVIEW_2026-10-18.md`](PRIOR_ART_REVIEW_2026-10-18.md). A successful search is not
 treated as proof that a database is exhaustive. Counts from broad scholarly APIs are discovery

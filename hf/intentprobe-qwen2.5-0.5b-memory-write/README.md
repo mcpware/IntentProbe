@@ -9,6 +9,9 @@ datasets:
   - chris0809/memory-write-gate-20k
 tags:
   - activation-probe
+  - hidden-states
+  - cpu-inference
+  - local-llm
   - linear-probe
   - memory
   - long-term-memory
@@ -22,6 +25,11 @@ metrics:
 ---
 
 # IntentProbe: 15 KB activation probe for memory-write decisions
+
+**Author:** [ithiria894](https://github.com/ithiria894) · **Publisher:** MCPware
+
+[Architecture: one local model pass, many task-specific probes](https://mcpware.github.io/IntentProbe/architecture/)
+· [All IntentProbe models and research](https://github.com/mcpware/IntentProbe)
 
 [![GitHub](https://img.shields.io/badge/GitHub-mcpware%2Fintentprobe-181717?logo=github)](https://github.com/mcpware/intentprobe)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](./LICENSE)
