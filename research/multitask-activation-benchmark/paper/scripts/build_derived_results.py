@@ -22,6 +22,15 @@ def load(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_jsonl(path: Path) -> list[dict[str, Any]]:
+    """Load a JSON Lines artifact."""
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line
+    ]
+
+
 def main() -> None:
     """Derive paper-level counts and ranges without copying values by hand."""
     sentiment = load(EXPERIMENTS / "SENTIMENT-SST2-MODEL-MATRIX.json")
@@ -40,6 +49,21 @@ def main() -> None:
     normalized_depth = np.asarray([row["normalized_depth"] for row in quality])
     k1 = next(row for row in scaling["scaling"] if row["k"] == 1)
     k16 = next(row for row in scaling["scaling"] if row["k"] == 16)
+    scaling_outputs = EXPERIMENTS / "ONE-FORWARD-MULTIHEAD-EXP001" / "outputs"
+    shared_k16 = load_jsonl(scaling_outputs / "latency_k16.jsonl")
+    repeated_k16 = load_jsonl(
+        scaling_outputs / "repeated_forward_lower_bound_k16.jsonl"
+    )
+    shared_by_key = {row["row_key"]: row for row in shared_k16}
+    matched_shared_ms = np.asarray(
+        [shared_by_key[row["row_key"]]["total_ms"] for row in repeated_k16]
+    )
+    matched_repeated_ms = np.asarray([row["total_ms"] for row in repeated_k16])
+    matched_k16_shared_mean_ms = float(matched_shared_ms.mean())
+    matched_k16_repeated_mean_ms = float(matched_repeated_ms.mean())
+    matched_k16_ratio = matched_k16_repeated_mean_ms / matched_k16_shared_mean_ms
+    if not np.isclose(matched_k16_ratio, k16["repeated_over_one_forward_ratio"]):
+        raise RuntimeError("K=16 matched comparator does not reproduce result.json")
 
     result = {
         "schema_version": 1,
@@ -99,6 +123,18 @@ def main() -> None:
             "ood_rows": scaling["ood_rows"],
             "k1": k1,
             "k16": k16,
+            "matched_k16_comparator": {
+                "rows": len(repeated_k16),
+                "shared_mean_ms": matched_k16_shared_mean_ms,
+                "repeated_mean_ms": matched_k16_repeated_mean_ms,
+                "repeated_over_shared_ratio": matched_k16_ratio,
+                "repeated_over_shared_ci_low": k16[
+                    "repeated_over_one_forward_ci_low"
+                ],
+                "repeated_over_shared_ci_high": k16[
+                    "repeated_over_one_forward_ci_high"
+                ],
+            },
             "runtime_replay_worst_mean_absolute_difference": max(
                 row["mean_absolute_difference"] for row in scaling["runtime_replay"]
             ),

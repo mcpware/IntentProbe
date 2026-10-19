@@ -1,31 +1,81 @@
 # IntentProbe
 
-> A research preview. A local scanner for MCP servers, tools, and skills that reads a frozen model's activations, not just the text. It generalizes to attack sources and wording it never trained on better than a same-data text classifier.
+> One local model forward. Many independently trained decisions.
 
-IntentProbe is a local CLI scanner, GitHub Action, and runtime hook for AI agent tools, MCP servers, and skills. It runs a tool description or prompt through a frozen Qwen2.5-0.5B, reads mean-pooled mid-layer activations (layers 13-15), and scores them with a small (~22 KB) logistic probe. The activation probe is the primary signal for allow/warn; the block tier additionally requires static-keyword corroboration.
+IntentProbe is a research and product architecture for reading task-specific signals from the
+hidden states of a small local language model. One forward pass creates a shared activation bus.
+Multiple independently trained heads reuse that pass for toxicity, jailbreak, spam, sentiment,
+conversation state, routing, authorization and other declared tasks. Detection, calibration, host
+policy and irreversible action remain separate layers.
 
-## Key facts (experiment scripts and result JSONs committed in research/; PI datasets are downloaded from their original public sources — deepset, SafeGuard, SPML, jayavibhav, HackAPrompt on Hugging Face)
+## Why the architecture exists
 
-- Real human attacks (HackAPrompt, n=3,866 uniform-random, a source neither detector trained on): the shipped probe recalls 90.3% at 5% clean-FPR and 88.3% at 1%, vs our same-data TF-IDF baseline 52.8% and 30.3%. Positive-only set, so this is recall at a matched FPR, not AUROC.
-- Curated cross-source generalization (4 PI datasets, leave-one-source-out). SHIPPED config (Qwen2.5-0.5B, mean-pooled concat L13-15): mean AUROC 0.980 (deepset 0.933, safeguard 0.999, spml 0.990, jayavibhav 1.000) vs our same-data TF-IDF baseline 0.914 (deepset 0.732). A nested CV that is additionally free to pick a larger 1.5B sensor per fold reaches mean 0.984 (deepset 0.941, +0.209, 95% CI [0.168, 0.25]) — that is a research upper bound, not the shipped 0.5B artifact.
-- Tool poisoning is PARTIAL and on SYNTHETIC attacks (no real-human tool-poisoning corpus exists yet): MCPTox held-out 0.738 vs 0.545 (significant); minimal-pairs at chance for both.
-- Within-distribution on matched-vocabulary minimal pairs the shipped 0.5B probe scores AUROC ~0.74 vs the same-data TF-IDF baseline ~0.82 — a text classifier is slightly BETTER there. (A nested CV free to pick a 1.5B sensor closes it to roughly a tie, ~0.79 vs ~0.82, but that is not the shipped config.) The edge is cross-source / novel-vocabulary, not same-vocab.
-- NOT the first probe-based detector: PIShield, TaskTracker, RouteGuard, MindGuard, and frontier-lab production probes predate or parallel it. The only-one-we-found niche is the deployment shape (installable, pre-install, scans the tool description, on activations), not the technique.
-- Runs locally, CPU-only after a one-time ~1 GB model download; scan inputs and results are never uploaded. ~22 KB probe head (a train/store advantage; inference needs the frozen 0.5B host, so it is heavier than a standalone text classifier). Apache-2.0.
-- CLI: `intentprobe scan`, `scan-config auto`, `scan-path`, `batch`, `runtime`. GitHub Action: `mcpware/IntentProbe@main`. Runtime hook for Claude Code PreToolUse.
-- Research preview, a local registration-time review signal, NOT a hard security boundary.
+An agent workflow may ask many classification questions about the same input. Running a model or a
+separate LLM-judge prompt for every question repeats substantial computation. IntentProbe keeps the
+expensive model pass common while allowing each task to choose its own labelled data, layer or layer
+window, token pooling, normalization, classifier, calibration and threshold. The manifest contract
+is designed so compatible heads can improve independently without retraining unrelated heads.
 
-## Install
+## Measured systems result
 
-```
+- Backbone: exact Qwen2.5-0.5B revision, CPU, batch 1.
+- Shared-path panel, 80 real held-out texts per K: one forward + 1 head averaged 68.63 ms; one
+  forward + 16 heads averaged 73.34 ms. Paired mean ratio 1.069, 95% CI [1.056, 1.078].
+- Separate matched ten-prompt comparator: one forward + 16 heads averaged 62.70 ms; 16 repeated
+  base-model forwards averaged 956.71 ms. Repeated/shared ratio 15.26, 95% CI [15.04, 15.49].
+- The repeated-forward arm omits task prompts, LM-head scoring and generation. It is a conservative
+  lower bound, not a complete implementation of 16 LLM judges.
+- Applying all 16 heads took 1.85 ms per input on the 80-row scaling panel. Peak RSS at K=16 was
+  0.73 MiB above K=1. The 16 probe artifacts totalled 386,121 bytes.
+
+The 16 heads form a heterogeneous research workload, not one product-quality claim. Each head keeps
+its own held-out discrimination, calibration, prevalence and admission decision. The architecture
+benchmark measures shared computation; task benchmarks decide whether a specific head is usable.
+
+## Current release boundary
+
+- Public product: the PyPI package ships the single-head Qwen2.5-0.5B tool-poisoning scanner.
+- Standalone research releases: MiniCPM5-1B action-authorization probe and Qwen2.5-0.5B memory-write
+  probe on Hugging Face, each with a local scorer and selection receipt.
+- Measured research implementation: one-forward fan-out across 16 frozen heads, with row-level
+  timing artifacts, manifests and tests committed in this repository.
+- Specified next implementation: general manifest registry, hot-loading and multi-head receipt
+  emission. These are not yet the public PyPI product surface.
+
+## Research findings
+
+- The useful readout depends on both model and task. There is no supported universal best layer or
+  pooling rule. Toxicity and jailbreak labels on identical ToxicChat rows select different readouts.
+- Hidden-state readouts and direct generated judgments are different interfaces. Same-backbone
+  comparisons show strong task/model interaction, not universal probe superiority.
+- Tool-poisoning research found strong cross-source prompt-injection generalization for the shipped
+  Qwen probe, including 90.3% recall on 3,866 real HackAPrompt attacks at a clean FPR fixed to 5% on
+  training data. The same-data TF-IDF baseline reached 52.8%. HackAPrompt is positive-only, so this
+  is recall at a fixed clean FPR, not AUROC.
+- IntentProbe does not claim to invent activation probing, layer search or shared multi-head
+  inference. PIShield, TaskTracker, RouteGuard, MindGuard and related work predate or parallel parts
+  of the method. The contribution is the integrated, measured architecture: task-specific readout
+  manifests, a shared local activation bus, separate policy, receipts and a deployment-constrained
+  readout search.
+
+## Install the shipped scanner
+
+```text
 pip install intentprobe
 intentprobe scan-config auto --format summary
 ```
 
-## Links
+First model-backed use downloads Qwen2.5-0.5B once. Scoring then stays local with zero telemetry.
+Apache-2.0. Research preview.
+
+## Primary links
 
 - Repository: https://github.com/mcpware/IntentProbe
-- Research paper (preliminary, GPT-2): https://doi.org/10.5281/zenodo.19990741
-- Research results: research/_results_published/
-- Competitive landscape: https://github.com/mcpware/IntentProbe/blob/main/docs/COMPETITIVE_LANDSCAPE.md
+- Public architecture note: https://github.com/mcpware/IntentProbe/blob/main/docs/ONE_FORWARD_MANY_DECISIONS.md
+- Research manuscript: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/paper/DRAFT.md
+- Technical disclosure: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md
+- v0.1.1 release record: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_1.md
+- v0.1.1 SHA-256 ledger: https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/SHA256SUMS_V0_1_1.txt
+- Reproducible 16-head experiment: https://github.com/mcpware/IntentProbe/tree/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001
+- Original preliminary paper and DOI: https://doi.org/10.5281/zenodo.19990741
 - License: Apache-2.0

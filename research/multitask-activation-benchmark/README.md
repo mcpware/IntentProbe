@@ -15,7 +15,8 @@ small supervised head read the layers and token summary that work for its own la
 
 The first systems benchmark now measures that architecture with 16 heads. Adding the other 15 heads
 raised mean CPU latency from 68.63 ms to 73.34 ms. Sixteen repeated base-model forwards took 956.71
-ms on the matched lower-bound comparison. Quality did not move in one direction across tasks:
+ms versus 62.70 ms for the shared path on the matched ten-prompt comparison. Quality did not move in
+one direction across tasks:
 toxicity favoured the trained activation heads, Qwen3.5 sentiment was tied, and the current
 authorization transfer favoured the direct judge.
 
@@ -172,8 +173,8 @@ semantics are not pooled into a misleading universal safety number.
   superiority. See the [sentinel summary](experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md).
 - One-forward scaling: the complete Qwen2.5-0.5B suite contains 16 independently trained heads. Mean
   CPU latency rises from 68.63 ms at K=1 to 73.34 ms at K=16, a paired-bootstrap ratio of 1.069
-  (95% CI 1.056--1.078). Sixteen repeated base forwards take 956.71 ms and are 15.26 times slower
-  than the one-forward/16-head path on matched prompts (95% CI 15.04--15.49). This repeated-forward
+  (95% CI 1.056--1.078). On the matched ten prompts, the one-forward/16-head path takes 62.70 ms and
+  16 repeated base forwards take 956.71 ms, a ratio of 15.26 (95% CI 15.04--15.49). This repeated-forward
   comparator is a lower bound for separate prompted judges. Peak RSS changes by +0.73 MiB and the 16
   saved probes occupy 386,121 bytes. See the
   [systems summary](experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md).

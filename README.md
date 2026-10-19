@@ -1,7 +1,12 @@
 # IntentProbe
 
 <p align="center">
-  <strong>Local activation probes for AI-agent security: catch poisoned tools before install, and tell “help me prepare this” from “submit it now.”</strong>
+  <strong>One model pass. Sixteen learned decisions. 6.9% more latency.</strong>
+</p>
+
+<p align="center">
+  IntentProbe turns one local language-model forward into a shared hidden-state bus for many
+  independently trained task heads.
 </p>
 
 <p align="center">
@@ -18,46 +23,58 @@
 </p>
 
 <p align="center">
-  <img src="docs/demo.svg" width="700" alt="IntentProbe blocks a poisoned MCP tool description (risk 0.950) and passes a clean one (0.000)." />
+  <img src="docs/one-forward-many-decisions.svg" width="1000" alt="One input passes through one frozen local model. A shared hidden-state bus fans out to task-specific heads attached at different layers. Calibrated scores cross a separate host-control boundary before policy or irreversible action." />
 </p>
+
+## Why run the model sixteen times?
+
+You do not have to.
+
+One agent turn may need toxicity, jailbreak, spam, sentiment, routing, authorization and other
+checks on the same input. Asking a model each question separately repeats the expensive part. An
+IntentProbe runtime reads the input once, exposes selected hidden states through an activation bus,
+and lets many small heads reuse that same pass. Different heads can read different layers and use
+different pooling, normalization, classifiers and thresholds.
+
+The first measured Qwen2.5-0.5B CPU runtime produced a clear systems result:
+
+- across **80 real held-out texts per K**, one forward plus one head averaged **68.63 ms**; one
+  forward plus 16 heads averaged **73.34 ms**. That is a **6.9%** increase, with a paired mean ratio
+  of `1.069` (95% CI `[1.056, 1.078]`);
+- on the separate **matched ten-prompt comparator**, one forward plus 16 heads averaged **62.70
+  ms**. Sixteen repeated base-model forwards averaged **956.71 ms** — **15.26×** the shared path
+  (95% CI `[15.04, 15.49]`).
+
+The repeated-forward arm is deliberately favourable to repetition: it omits task prompts,
+language-model output scoring and generation. It is a lower bound, not a complete implementation of
+16 LLM judges.
 
 <p align="center">
-  <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
+  <img src="docs/one-forward-many-decisions-latency.svg" width="900" alt="On the same ten prompts, one model forward plus up to 16 heads remains near 60 milliseconds while repeated model forwards rise from 58 to 957 milliseconds. At K equals 16 the repeated path is 15.26 times the shared path." />
 </p>
-
-## One forward, many decisions
-
-A language model can carry a useful pattern in its hidden states without turning that pattern into a
-reliable `YES` or `NO` answer. IntentProbe reads the pattern directly.
-
-Think of the local model as a brain and each activation head as a small meter attached to it. The
-model reads an input once. While it reads, its hidden layers react to toxicity, sentiment, spam,
-jailbreak attempts, hostility and other concepts. Separately trained heads read different parts of
-that reaction and turn them into calibrated scores.
-
-<p align="center">
-  <img src="docs/one-forward-many-decisions.svg" width="900" alt="One input passes through one frozen local model. A shared activation bus feeds many small task heads, followed by calibrated decisions and a receipt." />
-</p>
-
-In the first measured Qwen2.5-0.5B CPU system, one forward plus one head took **68.63 ms**. One
-forward plus 16 heads took **73.34 ms**. Repeating the base-model forward 16 times took **956.71 ms**
-and was **15.26 times slower** than the shared path on matched prompts. The repeated-forward arm is a
-conservative lower bound because it excludes task prompting, output scoring and generation.
 
 The benchmark is evidence for the architecture, not a final ranking of the first 16 heads. Each
-head is a replaceable component: new labelled data, a better readout recipe, a different classifier,
-or a stronger local backbone can improve one task without redesigning the shared runtime. The
-system keeps the expensive model pass common while allowing every detector to evolve on its own.
+head has its own task contract and admission evidence. New labelled data, a better readout recipe,
+a different classifier or a stronger local backbone can improve a task without changing the shared
+interface or retraining unrelated heads.
 
-That separation is the point. One local model acts as a reusable semantic sensor; small task heads
-turn its hidden states into many independently tested signals. The host application then decides
-what those signals are allowed to do. Detection, policy, and irreversible action remain separate,
+That separation is the architecture. One local model acts as a reusable semantic sensor. Small task
+heads turn its hidden states into independently tested signals. The host application decides what
+those signals are allowed to do. Detection, policy and irreversible action remain separate,
 auditable layers.
+
+| Current layer | What exists now |
+|---|---|
+| **Public products** | PyPI tool-poisoning scanner; standalone Hugging Face authorization and memory-write probes |
+| **Measured research runtime** | Reproducible one-forward fan-out across 16 frozen heads, with row-level timing artifacts and tests |
+| **Specified next runtime** | General manifest registry, hot-loading and multi-head receipt emission; these are designed and schema-tested, not yet the PyPI product surface |
 
 Read the plain-English public note, [**IntentProbe: One Forward, Many
 Decisions**](docs/ONE_FORWARD_MANY_DECISIONS.md), the research manuscript [*One Forward, Sixteen
 Decisions*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete technical
-disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md).
+disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md). The
+[v0.1.1 release record](research/multitask-activation-benchmark/RELEASE_NOTES_V0_1_1.md) links the
+frozen evidence ledger.
 
 ```text
 GEASS LABS INC.
@@ -68,7 +85,7 @@ GEASS LABS INC.
           └── Probe products / heads  poisoning, authorization, memory, and future tasks
 ```
 
-## Three detectors, one project
+## One architecture, three public probe products
 
 IntentProbe is a family of small classifiers that read the internal activations of frozen local
 language models. Each detector has its own task, training data, selected layers, benchmark, and probe
@@ -130,6 +147,10 @@ intentprobe scan --format summary --text "Reads SSH config and private keys, the
 
 First model-backed scan downloads Qwen2.5-0.5B (~1 GB, once). After that, everything stays local.
 
+<p align="center">
+  <img src="docs/demo.svg" width="700" alt="The shipped scanner blocks a poisoned MCP tool description with risk 0.950 and passes a clean description with risk 0.000." />
+</p>
+
 ## Try the authorization probe
 
 Suppose you ask an agent to show you an email draft. The proposed action below tries to send it
@@ -172,9 +193,9 @@ Inputs, target paths, and exit behavior: [docs/GITHUB_ACTION.md](docs/GITHUB_ACT
 without a video — run the [demo script](docs/DEMO_SCRIPT.md) or inspect the
 [live demo repo](https://github.com/mcpware/intentprobe-demo): safe PR passes, poisoned PR blocks.
 
-## How it works
+## What the current probe products run
 
-Both detectors follow the same basic path:
+Each current probe product follows the same basic path:
 
 ```text
 request + context + proposed action
@@ -212,6 +233,23 @@ judge; the deterministic label baseline flagged every clean curated item as pois
 1.000). The reproducible baseline is in `research/`.
 
 ## Benchmarks
+
+### Shared runtime: one forward, sixteen heads
+
+The architecture benchmark separates two questions that use different panels:
+
+| Question | Inputs | Measured result |
+|---|---:|---:|
+| What changes when the same forward serves 1 versus 16 heads? | 80 held-out texts per K | `68.63 → 73.34 ms`; paired ratio `1.069`, 95% CI `[1.056, 1.078]` |
+| What changes when 16 decisions share one pass instead of repeating the base model? | Same 10 prompts in both arms | `62.70 vs 956.71 ms`; repeated/shared ratio `15.26`, 95% CI `[15.04, 15.49]` |
+
+The 16-head suite is a heterogeneous research workload, not a claim that 16 production detectors are
+ready. Each head keeps its own held-out discrimination, calibration and task contract. The systems
+finding is that compatible heads can share the expensive pass; admission remains a separate decision
+for every head.
+
+Full row-level timing artifacts, the frozen head registry and reproduction code are in
+[`ONE-FORWARD-MULTIHEAD-EXP001`](research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/).
 
 ### Action authorization: did the user approve this exact action?
 
@@ -417,6 +455,16 @@ and replay why a tool call was allowed, warned, or blocked. Full event schema:
 ## Honest limitations
 
 ```
+  the PyPI package currently ships the single-head tool-poisoning path. the measured
+  16-head fan-out is reproducible research code; the general registry, hot-loading and
+  multi-head receipt emitter are not yet the public product surface.
+
+  the 16 served heads are heterogeneous research load. each head has its own evidence,
+  prevalence, calibration and admission decision; their metrics are not one product score.
+
+  the repeated-forward comparator is a lower bound, not 16 complete LLM judges. a one-call
+  multi-label judge and a measured compact-classifier fleet remain open comparison arms.
+
   a text classifier does well when an attack reuses wording it has seen — that is
   pattern-matching, not intent, and it ties or beats the probe there (on the shipped
   config, same-vocabulary minimal pairs run ~0.74 probe vs ~0.82 TF-IDF — text wins; or a

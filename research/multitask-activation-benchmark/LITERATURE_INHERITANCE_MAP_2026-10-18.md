@@ -7,8 +7,9 @@ specific small-model, local-runtime, and many-head claims.
 **Execution update:** the frozen six-cell sentinel and the first K=`1,2,4,8,16` shared-head CPU
 experiment are complete. The outcome preserves the literature boundary: activation heads dominate
 the studied toxicity judge cells, tie the strongest Qwen3.5 sentiment judge, and lose one corrected
-human-authorization comparison. One Qwen2.5 forward plus 16 heads is 1.069× the K=1 latency, while
-16 repeated base forwards are 15.26× slower than the shared path on matched prompts. The
+human-authorization comparison. One Qwen2.5 forward plus 16 heads is 1.069× the K=1 latency. On
+matched prompts, the shared path takes 62.70 ms and 16 repeated base forwards take 956.71 ms, a
+ratio of 15.26. The
 repeated-forward arm is a lower bound, so the full multi-label-judge and compact-classifier arms
 remain open.
 

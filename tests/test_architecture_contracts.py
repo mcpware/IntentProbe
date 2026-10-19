@@ -217,6 +217,7 @@ def test_public_release_identity_numbers_and_figures_are_present() -> None:
         assert "Nicole BeWater" in text
         assert "68.63" in text
         assert "73.34" in text
+        assert "62.70" in text
         assert "956.71" in text
         assert "15.26" in text
 

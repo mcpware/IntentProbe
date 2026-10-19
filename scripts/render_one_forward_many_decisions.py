@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Render the public IntentProbe architecture and latency figures."""
 
 from __future__ import annotations
@@ -5,6 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from matplotlib.axes import Axes
 from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
@@ -19,13 +21,13 @@ RESULT_DIR = (
     / "experiments"
     / "ONE-FORWARD-MULTIHEAD-EXP001"
 )
+OUTPUTS = RESULT_DIR / "outputs"
 OUTPUT_DIR = ROOT / "docs"
 
 NAVY = "#17324D"
 BLUE = "#4C78A8"
 ORANGE = "#F58518"
 GREEN = "#54A24B"
-TEAL = "#72B7B2"
 LIGHT_BLUE = "#EAF2F8"
 LIGHT_ORANGE = "#FFF1E6"
 LIGHT_GREEN = "#EAF5EC"
@@ -47,7 +49,7 @@ plt.rcParams.update(
         "axes.linewidth": 0.8,
         "axes.edgecolor": "#333333",
         "axes.grid": True,
-        "grid.alpha": 0.25,
+        "grid.alpha": 0.20,
         "grid.linewidth": 0.6,
         "axes.axisbelow": True,
         "figure.facecolor": WHITE,
@@ -56,13 +58,14 @@ plt.rcParams.update(
         "savefig.dpi": 300,
         "savefig.bbox": "tight",
         "savefig.pad_inches": 0.18,
-        "svg.hashsalt": "intentprobe-architecture-v0.1.0",
+        "svg.fonttype": "none",
+        "svg.hashsalt": "intentprobe-architecture-presentation-v0.1.1",
     }
 )
 
 
 def save_public_figure(fig: plt.Figure, stem: str) -> None:
-    """Save deterministic public PNG/SVG artifacts without trailing SVG whitespace."""
+    """Save deterministic public PNG/SVG artifacts."""
     svg_path = OUTPUT_DIR / f"{stem}.svg"
     png_path = OUTPUT_DIR / f"{stem}.png"
     fig.savefig(svg_path, metadata={"Date": "2026-10-18"})
@@ -85,14 +88,15 @@ def add_box(
     body: str,
     facecolor: str,
     edgecolor: str,
-    title_color: str = NAVY,
+    title_size: float = 11.5,
+    body_size: float = 8.8,
 ) -> None:
     """Add one rounded architecture box."""
     patch = FancyBboxPatch(
         (x, y),
         width,
         height,
-        boxstyle="round,pad=0.012,rounding_size=0.018",
+        boxstyle="round,pad=0.010,rounding_size=0.015",
         linewidth=1.6,
         facecolor=facecolor,
         edgecolor=edgecolor,
@@ -104,19 +108,19 @@ def add_box(
         title,
         ha="center",
         va="center",
-        fontsize=12.5,
+        fontsize=title_size,
         fontweight="bold",
-        color=title_color,
+        color=NAVY,
     )
     ax.text(
         x + width / 2,
-        y + height * 0.30,
+        y + height * 0.27,
         body,
         ha="center",
         va="center",
-        fontsize=9.5,
+        fontsize=body_size,
         color="#313B45",
-        linespacing=1.25,
+        linespacing=1.18,
     )
 
 
@@ -129,23 +133,24 @@ def add_arrow(
     style: str = "-",
     width: float = 1.8,
 ) -> None:
-    """Add one labelled-flow arrow."""
-    arrow = FancyArrowPatch(
-        start,
-        end,
-        arrowstyle="-|>",
-        mutation_scale=14,
-        linewidth=width,
-        linestyle=style,
-        color=color,
-        shrinkA=3,
-        shrinkB=3,
+    """Add one flow arrow."""
+    ax.add_patch(
+        FancyArrowPatch(
+            start,
+            end,
+            arrowstyle="-|>",
+            mutation_scale=14,
+            linewidth=width,
+            linestyle=style,
+            color=color,
+            shrinkA=2,
+            shrinkB=2,
+        )
     )
-    ax.add_patch(arrow)
 
 
 def render_architecture() -> None:
-    """Render the offline-training and shared-runtime architecture."""
+    """Render a literal one-pass activation bus with task-specific fan-out."""
     fig, ax = plt.subplots(figsize=(16, 9))
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
@@ -153,223 +158,322 @@ def render_architecture() -> None:
 
     ax.text(
         0.5,
-        0.955,
+        0.957,
         "One model pass. Many learned decisions.",
         ha="center",
         va="center",
-        fontsize=27,
+        fontsize=28,
         fontweight="bold",
         color=NAVY,
     )
     ax.text(
         0.5,
-        0.912,
-        "IntentProbe — One Forward, Many Decisions",
+        0.913,
+        "A reusable local semantic sensor — every task head can improve independently",
         ha="center",
         va="center",
-        fontsize=14,
+        fontsize=13.5,
         color=MID_GREY,
     )
 
-    ax.text(0.035, 0.785, "OFFLINE: TEACH EACH SMALL HEAD", fontsize=10.5, fontweight="bold", color=ORANGE)
+    ax.text(
+        0.035,
+        0.825,
+        "OFFLINE  ·  TRAIN AND ADMIT EACH HEAD ON ITS OWN EVIDENCE",
+        fontsize=10.5,
+        fontweight="bold",
+        color=ORANGE,
+    )
     add_box(
         ax,
         x=0.035,
-        y=0.635,
-        width=0.20,
-        height=0.115,
+        y=0.700,
+        width=0.205,
+        height=0.095,
         title="Labelled examples",
-        body="Human-defined task boundary\nand held-out evaluation",
+        body="One declared task boundary",
         facecolor=LIGHT_ORANGE,
         edgecolor=ORANGE,
     )
     add_box(
         ax,
         x=0.300,
-        y=0.635,
-        width=0.24,
-        height=0.115,
+        y=0.700,
+        width=0.240,
+        height=0.095,
         title="Readout search",
-        body="Choose token pooling, layers,\nnormalization and head",
+        body="Pooling · layers · model · head",
         facecolor=LIGHT_ORANGE,
         edgecolor=ORANGE,
     )
     add_box(
         ax,
-        x=0.605,
-        y=0.635,
-        width=0.325,
-        height=0.115,
-        title="Versioned head registry",
-        body="Small learned weights + task contract\n+ calibration + threshold + hashes",
+        x=0.600,
+        y=0.700,
+        width=0.330,
+        height=0.095,
+        title="Versioned head manifest",
+        body="Weights · calibration · threshold · hashes",
         facecolor=LIGHT_ORANGE,
         edgecolor=ORANGE,
     )
-    add_arrow(ax, (0.235, 0.692), (0.300, 0.692), color=ORANGE)
-    add_arrow(ax, (0.540, 0.692), (0.605, 0.692), color=ORANGE)
+    add_arrow(ax, (0.240, 0.747), (0.300, 0.747), color=ORANGE)
+    add_arrow(ax, (0.540, 0.747), (0.600, 0.747), color=ORANGE)
 
-    ax.text(0.035, 0.535, "RUNTIME: READ THE MODEL ONCE", fontsize=10.5, fontweight="bold", color=BLUE)
-    runtime_y = 0.335
-    box_h = 0.135
-    add_box(
-        ax,
-        x=0.035,
-        y=runtime_y,
-        width=0.155,
-        height=box_h,
-        title="Input",
-        body="Request, context\nand proposed action",
-        facecolor=LIGHT_BLUE,
-        edgecolor=BLUE,
-    )
-    add_box(
-        ax,
-        x=0.230,
-        y=runtime_y,
-        width=0.185,
-        height=box_h,
-        title="Frozen local model",
-        body="One forward pass\nHidden states exposed",
-        facecolor=LIGHT_BLUE,
-        edgecolor=BLUE,
-    )
-    add_box(
-        ax,
-        x=0.455,
-        y=runtime_y,
-        width=0.165,
-        height=box_h,
-        title="Activation bus",
-        body="Reuse selected layers\nand valid-token masks",
-        facecolor=LIGHT_BLUE,
-        edgecolor=BLUE,
-    )
-    add_box(
-        ax,
-        x=0.660,
-        y=runtime_y,
-        width=0.155,
-        height=box_h,
-        title="Many heads",
-        body="Toxicity · spam · mood\nauthorization · routing · …",
-        facecolor=LIGHT_GREEN,
-        edgecolor=GREEN,
-    )
-    add_box(
-        ax,
-        x=0.855,
-        y=runtime_y,
-        width=0.110,
-        height=box_h,
-        title="Decisions",
-        body="Scores, policy\nand receipt",
-        facecolor=LIGHT_GREEN,
-        edgecolor=GREEN,
-    )
-    add_arrow(ax, (0.190, 0.402), (0.230, 0.402), color=BLUE)
-    add_arrow(ax, (0.415, 0.402), (0.455, 0.402), color=BLUE)
-    add_arrow(ax, (0.620, 0.402), (0.660, 0.402), color=GREEN)
-    add_arrow(ax, (0.815, 0.402), (0.855, 0.402), color=GREEN)
-    add_arrow(ax, (0.765, 0.635), (0.738, 0.470), color=ORANGE, style="--", width=1.5)
     ax.text(
-        0.790,
-        0.545,
-        "load tested heads",
-        ha="left",
+        0.035,
+        0.635,
+        "RUNTIME  ·  PAY FOR THE MODEL ONCE",
+        fontsize=10.5,
+        fontweight="bold",
+        color=BLUE,
+    )
+    add_box(
+        ax,
+        x=0.030,
+        y=0.325,
+        width=0.105,
+        height=0.145,
+        title="Input",
+        body="Request\n+ context",
+        facecolor=LIGHT_BLUE,
+        edgecolor=BLUE,
+        title_size=12,
+    )
+    add_arrow(ax, (0.135, 0.397), (0.175, 0.397), color=BLUE)
+
+    model = FancyBboxPatch(
+        (0.175, 0.165),
+        0.185,
+        0.455,
+        boxstyle="round,pad=0.012,rounding_size=0.018",
+        linewidth=2.0,
+        facecolor=LIGHT_BLUE,
+        edgecolor=BLUE,
+    )
+    ax.add_patch(model)
+    ax.text(0.2675, 0.575, "Frozen local model", ha="center", va="center", fontsize=13, fontweight="bold", color=NAVY)
+    ax.text(0.2675, 0.542, "ONE forward pass", ha="center", va="center", fontsize=10.5, fontweight="bold", color=BLUE)
+    layer_y = np.linspace(0.215, 0.505, 13)
+    for index, y_value in enumerate(layer_y):
+        shade = 0.50 + 0.35 * index / (len(layer_y) - 1)
+        ax.plot([0.205, 0.330], [y_value, y_value], color=BLUE, alpha=shade, linewidth=2.0)
+    ax.text(0.2675, 0.190, "hidden states", ha="center", va="center", fontsize=9, color=MID_GREY)
+
+    add_arrow(ax, (0.360, 0.397), (0.397, 0.397), color=BLUE)
+    bus = FancyBboxPatch(
+        (0.397, 0.155),
+        0.042,
+        0.475,
+        boxstyle="round,pad=0.006,rounding_size=0.012",
+        linewidth=2.0,
+        facecolor="#DDEBF5",
+        edgecolor=BLUE,
+    )
+    ax.add_patch(bus)
+    ax.text(0.418, 0.646, "HIDDEN-STATE BUS", ha="center", va="bottom", fontsize=9.4, fontweight="bold", color=BLUE)
+
+    head_specs = [
+        (0.536, "Toxicity", "mean · outputs 18–20", "L18–20"),
+        (0.458, "Spam", "max · outputs 15–17", "L15–17"),
+        (0.380, "Sentiment", "mean · output 12", "L12"),
+        (0.302, "Jailbreak", "max · outputs 5–7", "L5–7"),
+        (0.224, "Anger", "mean · output 5", "L5"),
+        (0.146, "+ 11 more heads", "independent manifests", "other"),
+    ]
+    for y_value, title, body, layer_label in head_specs:
+        tick_y = y_value + 0.036
+        ax.plot([0.405, 0.431], [tick_y, tick_y], color=BLUE, linewidth=2.3)
+        ax.text(0.390, tick_y, layer_label, ha="right", va="center", fontsize=7.7, color=MID_GREY)
+        ax.plot([0.439, 0.477], [tick_y, tick_y], color=GREEN, linewidth=1.5)
+        add_box(
+            ax,
+            x=0.477,
+            y=y_value,
+            width=0.188,
+            height=0.072,
+            title=title,
+            body=body,
+            facecolor=LIGHT_GREEN,
+            edgecolor=GREEN,
+            title_size=9.4,
+            body_size=7.2,
+        )
+        ax.plot([0.665, 0.710], [tick_y, tick_y], color=GREEN, linewidth=1.25)
+
+    ax.plot([0.710, 0.710], [0.182, 0.572], color=GREEN, linewidth=2.0)
+    add_arrow(ax, (0.710, 0.397), (0.750, 0.397), color=GREEN, width=2.0)
+    ax.axvline(0.735, ymin=0.145, ymax=0.645, color="#9AA4AF", linewidth=1.2, linestyle="--")
+    ax.text(0.748, 0.616, "HOST CONTROL BOUNDARY", ha="left", va="center", fontsize=8.8, fontweight="bold", color=MID_GREY)
+
+    policy = FancyBboxPatch(
+        (0.750, 0.220),
+        0.210,
+        0.330,
+        boxstyle="round,pad=0.014,rounding_size=0.020",
+        linewidth=1.8,
+        facecolor=LIGHT_GREY,
+        edgecolor=NAVY,
+    )
+    ax.add_patch(policy)
+    ax.text(0.855, 0.500, "Calibrated scores", ha="center", va="center", fontsize=11.5, fontweight="bold", color=NAVY)
+    ax.text(0.855, 0.455, "↓", ha="center", va="center", fontsize=15, color=MID_GREY)
+    ax.text(0.855, 0.415, "Host policy", ha="center", va="center", fontsize=12, fontweight="bold", color=NAVY)
+    ax.text(0.855, 0.365, "allow · warn · review · block", ha="center", va="center", fontsize=9.2, color="#313B45")
+    ax.text(0.855, 0.315, "receipt + irreversible action", ha="center", va="center", fontsize=9.2, color="#313B45")
+    ax.text(0.855, 0.270, "outside the sensor", ha="center", va="center", fontsize=9.2, fontweight="bold", color=ORANGE)
+
+    ax.annotate(
+        "load one tested head\nwithout retraining the others",
+        xy=(0.570, 0.608),
+        xytext=(0.655, 0.675),
+        arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.3, "linestyle": "--"},
+        ha="center",
         va="center",
-        fontsize=9.5,
+        fontsize=8.7,
         color=ORANGE,
     )
 
-    callout = FancyBboxPatch(
-        (0.035, 0.105),
-        0.930,
-        0.135,
-        boxstyle="round,pad=0.014,rounding_size=0.018",
+    result_box = FancyBboxPatch(
+        (0.035, 0.035),
+        0.925,
+        0.072,
+        boxstyle="round,pad=0.010,rounding_size=0.014",
         linewidth=1.2,
         facecolor=LIGHT_GREY,
         edgecolor="#C8D0D8",
     )
-    ax.add_patch(callout)
-    ax.text(0.065, 0.190, "Measured on one six-core CPU", fontsize=11.5, fontweight="bold", color=NAVY)
-    ax.text(0.065, 0.145, "1 head", fontsize=10, color=MID_GREY)
-    ax.text(0.135, 0.145, "68.63 ms", fontsize=15, fontweight="bold", color=BLUE)
-    ax.text(0.295, 0.145, "16 heads", fontsize=10, color=MID_GREY)
-    ax.text(0.390, 0.145, "73.34 ms", fontsize=15, fontweight="bold", color=GREEN)
-    ax.text(0.555, 0.145, "16 repeated forwards", fontsize=10, color=MID_GREY)
-    ax.text(0.750, 0.145, "956.71 ms", fontsize=15, fontweight="bold", color=ORANGE)
-    ax.text(
-        0.965,
-        0.047,
-        "Qwen2.5-0.5B · batch 1 · repeated-forward result is a conservative lower bound for separate judges",
-        ha="right",
-        va="center",
-        fontsize=8.8,
-        color=MID_GREY,
-    )
+    ax.add_patch(result_box)
+    ax.text(0.060, 0.071, "MEASURED", ha="left", va="center", fontsize=9.5, fontweight="bold", color=MID_GREY)
+    ax.text(0.145, 0.071, "1 → 16 heads", ha="left", va="center", fontsize=10.5, fontweight="bold", color=NAVY)
+    ax.text(0.270, 0.071, "68.63 → 73.34 ms", ha="left", va="center", fontsize=14.2, fontweight="bold", color=GREEN)
+    ax.text(0.455, 0.071, "+6.9% total latency", ha="left", va="center", fontsize=10.5, fontweight="bold", color=NAVY)
+    ax.text(0.635, 0.071, "n=80 · paired ratio 1.069 · 95% CI [1.056, 1.078]", ha="left", va="center", fontsize=8.5, color=MID_GREY)
 
     save_public_figure(fig, "one-forward-many-decisions")
     plt.close(fig)
 
 
-def render_latency() -> None:
-    """Render the measured shared-path and repeated-forward latency curves."""
-    frame = pd.read_csv(RESULT_DIR / "SCALING-SUMMARY.csv")
-    expected_k = [1, 2, 4, 8, 16]
-    assert frame["k"].tolist() == expected_k
-    assert frame["rows"].eq(80).all()
-    assert frame.loc[frame["k"].eq(16), "repeated_over_one_forward_ratio"].iat[0] > 15
+def bootstrap_mean_ci(values: np.ndarray, *, seed: int) -> tuple[float, float]:
+    """Return a fixed-seed 2,000-resample percentile interval for the mean."""
+    assert values.ndim == 1 and len(values) == 10
+    indices = np.random.default_rng(seed).integers(0, len(values), size=(2000, len(values)))
+    sampled_means = values[indices].mean(axis=1)
+    low, high = np.quantile(sampled_means, (0.025, 0.975))
+    return float(low), float(high)
 
-    fig, ax = plt.subplots(figsize=(11.5, 7.2))
-    ax.plot(
-        frame["k"],
-        frame["mean_total_ms"],
+
+def render_latency() -> None:
+    """Render matched-prompt shared-path and repeated-forward latency curves."""
+    k_values = np.asarray([1, 2, 4, 8, 16], dtype=np.int64)
+    shared_frames = [
+        pd.read_json(OUTPUTS / f"latency_k{k}.jsonl", lines=True) for k in k_values
+    ]
+    repeated_frames = [
+        pd.read_json(
+            OUTPUTS / f"repeated_forward_lower_bound_k{k}.jsonl", lines=True
+        )
+        for k in k_values
+    ]
+    assert all(len(frame) == 80 for frame in shared_frames)
+    assert all(len(frame) == 10 for frame in repeated_frames)
+    assert all(
+        shared.iloc[:10]["row_key"].reset_index(drop=True).equals(repeated["row_key"])
+        for shared, repeated in zip(shared_frames, repeated_frames, strict=True)
+    )
+
+    shared_values = [
+        frame.iloc[:10]["total_ms"].to_numpy(dtype=np.float64)
+        for frame in shared_frames
+    ]
+    repeated_values = [
+        frame["total_ms"].to_numpy(dtype=np.float64) for frame in repeated_frames
+    ]
+    shared_mean = np.asarray([values.mean() for values in shared_values])
+    repeated_mean = np.asarray([values.mean() for values in repeated_values])
+    shared_ci = np.asarray(
+        [bootstrap_mean_ci(values, seed=20261018 + int(k)) for k, values in zip(k_values, shared_values, strict=True)]
+    )
+    repeated_ci = np.asarray(
+        [bootstrap_mean_ci(values, seed=20261118 + int(k)) for k, values in zip(k_values, repeated_values, strict=True)]
+    )
+    shared_error = np.vstack((shared_mean - shared_ci[:, 0], shared_ci[:, 1] - shared_mean))
+    repeated_error = np.vstack((repeated_mean - repeated_ci[:, 0], repeated_ci[:, 1] - repeated_mean))
+    ratio_k16 = repeated_mean[-1] / shared_mean[-1]
+    assert np.isclose(ratio_k16, 15.258962751202098)
+
+    x = np.arange(len(k_values))
+    fig, ax = plt.subplots(figsize=(12.0, 7.3))
+    ax.errorbar(
+        x,
+        shared_mean,
+        yerr=shared_error,
         marker="o",
+        markersize=6.5,
+        capsize=3,
         linewidth=2.6,
         color=BLUE,
         label="One model forward + K heads",
     )
-    ax.plot(
-        frame["k"],
-        frame["repeated_forward_mean_ms"],
+    ax.errorbar(
+        x,
+        repeated_mean,
+        yerr=repeated_error,
         marker="o",
+        markersize=6.5,
+        capsize=3,
         linewidth=2.6,
         color=ORANGE,
         label="K repeated base-model forwards (lower bound)",
     )
-    ax.set_title("Adding heads is cheap; repeating the model is not", loc="left")
+    ax.set_title("One pass stays flat. Repeating the model does not.", loc="left")
     ax.set_xlabel("Number of decisions (K)")
     ax.set_ylabel("Mean latency per input (ms)")
-    ax.set_xticks(expected_k)
+    ax.set_xticks(x, labels=[str(value) for value in k_values])
     ax.set_ylim(bottom=0)
     ax.legend(loc="upper left", frameon=False)
-
-    k16 = frame.loc[frame["k"].eq(16)].iloc[0]
     ax.annotate(
-        f"{k16['repeated_over_one_forward_ratio']:.2f}×\nrepeated / shared",
-        xy=(16, k16["repeated_forward_mean_ms"]),
-        xytext=(11.3, 760),
+        f"{repeated_mean[-1]:.2f} ms\n{ratio_k16:.2f}× the shared path",
+        xy=(x[-1], repeated_mean[-1]),
+        xytext=(2.70, 760),
         arrowprops={"arrowstyle": "->", "color": ORANGE, "lw": 1.5},
-        fontsize=11,
+        fontsize=11.2,
         fontweight="bold",
         color=ORANGE,
     )
+    ax.annotate(
+        "Break-even by K=2\nin this fixed run",
+        xy=(x[1], repeated_mean[1]),
+        xytext=(0.48, 225),
+        arrowprops={"arrowstyle": "->", "color": NAVY, "lw": 1.2},
+        fontsize=9.2,
+        fontweight="bold",
+        color=NAVY,
+    )
 
-    inset = inset_axes(ax, width="43%", height="38%", loc="center left", borderpad=1.7)
-    inset.plot(frame["k"], frame["mean_total_ms"], marker="o", linewidth=2.1, color=BLUE)
-    inset.set_title("Shared path, zoomed", fontsize=10.5, loc="left")
-    inset.set_xticks(expected_k)
-    inset.set_ylim(65, 76)
-    inset.set_ylabel("ms", fontsize=9)
-    inset.tick_params(labelsize=8.5)
-    inset.grid(True, alpha=0.22)
+    inset = inset_axes(ax, width="43%", height="36%", loc="center left", borderpad=1.75)
+    inset.errorbar(
+        x,
+        shared_mean,
+        yerr=shared_error,
+        marker="o",
+        capsize=2.5,
+        linewidth=2.0,
+        color=BLUE,
+    )
+    inset.set_title("Shared path, same 10 prompts", fontsize=10.2, loc="left")
+    inset.set_xticks(x, labels=[str(value) for value in k_values])
+    inset.set_ylim(50, 75)
+    inset.set_ylabel("ms", fontsize=8.5)
+    inset.tick_params(labelsize=8.3)
+    inset.grid(True, alpha=0.18)
 
     fig.text(
         0.01,
-        0.012,
-        "Qwen2.5-0.5B, batch 1, 80 real held-out texts per K. Two warm-ups excluded. "
+        0.010,
+        "Qwen2.5-0.5B · batch 1 · matched 10-prompt panel · error bars are 2,000-resample row-bootstrap 95% CIs. "
         "The repeated-forward arm omits task prompts, LM-head scoring and generation.",
-        fontsize=8.7,
+        fontsize=8.5,
         color=MID_GREY,
     )
     save_public_figure(fig, "one-forward-many-decisions-latency")

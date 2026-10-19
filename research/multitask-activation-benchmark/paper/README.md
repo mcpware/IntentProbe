@@ -1,6 +1,6 @@
 # One Forward, Sixteen Decisions
 
-**Public research manuscript v0.1.0**<br>
+**Public research manuscript v0.1.1**<br>
 **Author:** Nicole BeWater<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
 

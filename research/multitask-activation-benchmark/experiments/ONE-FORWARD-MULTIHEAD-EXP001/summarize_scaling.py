@@ -281,7 +281,15 @@ def write_report(
     result: dict[str, Any],
 ) -> None:
     """Write a concise evidence-backed result narrative."""
+    display_scaling = scaling.copy()
+    display_scaling["matched_shared_mean_ms"] = (
+        display_scaling["repeated_forward_mean_ms"]
+        / display_scaling["repeated_over_one_forward_ratio"]
+    )
     k16 = scaling.loc[scaling["k"].eq(16)].iloc[0]
+    matched_shared_k16_ms = (
+        k16["repeated_forward_mean_ms"] / k16["repeated_over_one_forward_ratio"]
+    )
     best_quality = quality.sort_values("auprc", ascending=False).iloc[0]
     worst_quality = quality.sort_values("auprc", ascending=True).iloc[0]
     largest_shift = shifts.iloc[shifts["mean_shift_vs_native_full"].abs().argmax()]
@@ -291,11 +299,19 @@ Status: **COMPLETE**. All five frozen K cells, the 16-head score-shift panel, an
 
 ## Main result
 
-On this CPU run, one Qwen2.5-0.5B forward plus 16 independently trained activation heads took {k16['mean_total_ms']:.2f} ms per example on average. That was {k16['one_forward_mean_ratio_vs_k1']:.3f}× the one-head time (paired-bootstrap 95% CI {k16['one_forward_mean_ratio_ci_low']:.3f}–{k16['one_forward_mean_ratio_ci_high']:.3f}). Sixteen repeated base-model forwards took {k16['repeated_forward_mean_ms']:.2f} ms and were {k16['repeated_over_one_forward_ratio']:.2f}× slower than the one-forward/16-head path on the matched ten prompts (95% CI {k16['repeated_over_one_forward_ci_low']:.2f}–{k16['repeated_over_one_forward_ci_high']:.2f}). This repeated-forward comparator omits task prompts, LM-head scoring, and generation, so it is a lower bound for 16 separate LLM-judge calls.
+Across the 80-row shared-path panel, one Qwen2.5-0.5B forward plus 16 independently trained activation heads took {k16['mean_total_ms']:.2f} ms per example on average. That was {k16['one_forward_mean_ratio_vs_k1']:.3f}× the one-head time (paired-bootstrap 95% CI {k16['one_forward_mean_ratio_ci_low']:.3f}–{k16['one_forward_mean_ratio_ci_high']:.3f}). In the separate matched ten-prompt comparator, the one-forward/16-head mean was {matched_shared_k16_ms:.2f} ms and 16 repeated base-model forwards took {k16['repeated_forward_mean_ms']:.2f} ms. The repeated/shared ratio was {k16['repeated_over_one_forward_ratio']:.2f} (95% CI {k16['repeated_over_one_forward_ci_low']:.2f}–{k16['repeated_over_one_forward_ci_high']:.2f}). This repeated-forward comparator omits task prompts, LM-head scoring, and generation, so it is a lower bound for 16 separate LLM-judge calls.
 
 Peak process RSS was {k16['peak_rss_mib']:.1f} MiB at K=16, a {k16['peak_rss_delta_vs_k1_mib']:+.1f} MiB change from K=1. The saved probe artifacts total {int(k16['cumulative_probe_bytes']):,} bytes at K=16.
 
-{markdown_table(scaling, ['k', 'mean_total_ms', 'mean_heads_ms', 'one_forward_mean_ratio_vs_k1', 'repeated_forward_mean_ms', 'repeated_over_one_forward_ratio', 'peak_rss_mib'])}
+### Shared-path scaling on all 80 inputs
+
+{markdown_table(display_scaling, ['k', 'mean_total_ms', 'mean_heads_ms', 'one_forward_mean_ratio_vs_k1', 'peak_rss_mib'])}
+
+### Both paths on the same ten prompts
+
+{markdown_table(display_scaling, ['k', 'matched_shared_mean_ms', 'repeated_forward_mean_ms', 'repeated_over_one_forward_ratio'])}
+
+`mean_total_ms` uses all 80 shared-path rows. `matched_shared_mean_ms`, `repeated_forward_mean_ms`, and `repeated_over_one_forward_ratio` use the matched ten-prompt comparator. The 80-row and 10-row means belong to different panels and should not be divided to reconstruct a ratio.
 
 ## Quality is task-specific
 

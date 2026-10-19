@@ -4,17 +4,31 @@ Status: **COMPLETE**. All five frozen K cells, the 16-head score-shift panel, an
 
 ## Main result
 
-On this CPU run, one Qwen2.5-0.5B forward plus 16 independently trained activation heads took 73.34 ms per example on average. That was 1.069× the one-head time (paired-bootstrap 95% CI 1.056–1.078). Sixteen repeated base-model forwards took 956.71 ms and were 15.26× slower than the one-forward/16-head path on the matched ten prompts (95% CI 15.04–15.49). This repeated-forward comparator omits task prompts, LM-head scoring, and generation, so it is a lower bound for 16 separate LLM-judge calls.
+Across the 80-row shared-path panel, one Qwen2.5-0.5B forward plus 16 independently trained activation heads took 73.34 ms per example on average. That was 1.069× the one-head time (paired-bootstrap 95% CI 1.056–1.078). In the separate matched ten-prompt comparator, the one-forward/16-head mean was 62.70 ms and 16 repeated base-model forwards took 956.71 ms. The repeated/shared ratio was 15.26 (95% CI 15.04–15.49). This repeated-forward comparator omits task prompts, LM-head scoring, and generation, so it is a lower bound for 16 separate LLM-judge calls.
 
 Peak process RSS was 3617.4 MiB at K=16, a +0.7 MiB change from K=1. The saved probe artifacts total 386,121 bytes at K=16.
 
-| k | mean_total_ms | mean_heads_ms | one_forward_mean_ratio_vs_k1 | repeated_forward_mean_ms | repeated_over_one_forward_ratio | peak_rss_mib |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1.000 | 68.632 | 0.383 | 1.000 | 57.884 | 0.936 | 3616.699 |
-| 2.000 | 69.857 | 0.609 | 1.018 | 120.147 | 1.993 | 3615.488 |
-| 4.000 | 70.729 | 0.729 | 1.031 | 238.731 | 3.947 | 3616.137 |
-| 8.000 | 71.780 | 1.078 | 1.046 | 475.643 | 7.708 | 3614.008 |
-| 16.000 | 73.337 | 1.853 | 1.069 | 956.706 | 15.259 | 3617.430 |
+### Shared-path scaling on all 80 inputs
+
+| k | mean_total_ms | mean_heads_ms | one_forward_mean_ratio_vs_k1 | peak_rss_mib |
+| --- | --- | --- | --- | --- |
+| 1.000 | 68.632 | 0.383 | 1.000 | 3616.699 |
+| 2.000 | 69.857 | 0.609 | 1.018 | 3615.488 |
+| 4.000 | 70.729 | 0.729 | 1.031 | 3616.137 |
+| 8.000 | 71.780 | 1.078 | 1.046 | 3614.008 |
+| 16.000 | 73.337 | 1.853 | 1.069 | 3617.430 |
+
+### Both paths on the same ten prompts
+
+| k | matched_shared_mean_ms | repeated_forward_mean_ms | repeated_over_one_forward_ratio |
+| --- | --- | --- | --- |
+| 1.000 | 61.834 | 57.884 | 0.936 |
+| 2.000 | 60.299 | 120.147 | 1.993 |
+| 4.000 | 60.487 | 238.731 | 3.947 |
+| 8.000 | 61.710 | 475.643 | 7.708 |
+| 16.000 | 62.698 | 956.706 | 15.259 |
+
+`mean_total_ms` uses all 80 shared-path rows. `matched_shared_mean_ms`, `repeated_forward_mean_ms`, and `repeated_over_one_forward_ratio` use the matched ten-prompt comparator. The 80-row and 10-row means belong to different panels and should not be divided to reconstruct a ratio.
 
 ## Quality is task-specific
 

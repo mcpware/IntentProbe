@@ -5,7 +5,7 @@ type: software
 authors:
   - given-names: "Nicole"
     family-names: "BeWater"
-version: 0.1.0-architecture
+version: 0.1.1-architecture
 date-released: 2026-10-18
 license: Apache-2.0
 repository-code: "https://github.com/mcpware/IntentProbe"

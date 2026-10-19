@@ -256,6 +256,14 @@
       16
     ],
     "latency_rows": 80,
+    "matched_k16_comparator": {
+      "repeated_mean_ms": 956.7061062999999,
+      "repeated_over_shared_ci_high": 15.485566980619588,
+      "repeated_over_shared_ci_low": 15.043130537372646,
+      "repeated_over_shared_ratio": 15.258962751202098,
+      "rows": 10,
+      "shared_mean_ms": 62.6979777
+    },
     "ood_rows": 320,
     "runtime_replay_minimum_pearson": 0.9798610259890367,
     "runtime_replay_worst_mean_absolute_difference": 0.006451349534369761

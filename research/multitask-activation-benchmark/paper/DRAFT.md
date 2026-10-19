@@ -1,8 +1,11 @@
 # One Forward, Sixteen Decisions: Task-Specific Hidden-State Readouts from a Small Local Language Model
 
-**Status:** public research manuscript v0.1.0; not peer reviewed<br>
+**Status:** public research manuscript v0.1.1; not peer reviewed<br>
 **Author:** Nicole BeWater<br>
 **Publisher:** MCPware, a product and research brand of GEASS LABS INC.
+
+This manuscript is the empirical systems evaluation of the public [*One Forward, Many Decisions*
+architecture note](../../../docs/ONE_FORWARD_MANY_DECISIONS.md).
 
 ![IntentProbe runs one frozen local model forward pass and reuses the hidden states across many
 small task heads.](../../../docs/one-forward-many-decisions.svg)
@@ -23,13 +26,14 @@ replaceable components instead of being treated as one fixed detector.
 
 Third, we freeze 16 binary heads on one exact Qwen2.5-0.5B revision across five real-text sources:
 toxicity, jailbreak, spam, sentiment, five emotion labels, and seven conversational-pragmatics
-labels. Native heldout AUPRC ranges from 0.0836 to 0.9804, reflecting different tasks and
-prevalences. On one six-core CPU, mean latency rises from 68.63 ms for one forward plus one head to
+labels. Native heldout AUPRC ranges from 0.0836 to 0.9804 because the tasks and prevalences differ.
+On one six-core CPU, mean latency rises from 68.63 ms for one forward plus one head to
 73.34 ms for the same forward plus 16 heads, a ratio of 1.069 (paired-bootstrap 95% CI
-1.056--1.078). Sixteen repeated base-model forwards take 956.71 ms and are 15.26 times slower than
-the shared path on matched prompts (95% CI 15.04--15.49). Peak process memory changes by +0.73 MiB;
-the 16 saved probe artifacts occupy 386,121 bytes. The repeated-forward arm omits prompting,
-LM-head scoring, and generation, so it is a lower bound rather than a complete judge implementation.
+1.056--1.078). In the separate matched ten-prompt comparator, one forward plus 16 heads averages
+62.70 ms and 16 repeated base-model forwards average 956.71 ms, a repeated/shared ratio of 15.26
+(95% CI 15.04--15.49). Peak process memory changes by +0.73 MiB; the 16 saved probe artifacts occupy
+386,121 bytes. The repeated-forward arm omits prompting, LM-head scoring, and generation, so it is a
+lower bound rather than a complete judge implementation.
 These results support a modular one-forward/many-readout runtime. The shared runtime is the stable
 system layer; head quality, calibration, data, and domain specificity can improve independently.
 
@@ -301,17 +305,31 @@ cheaply does not make its threshold production-ready.
 
 ### 5.4 One forward plus K heads stays nearly flat
 
-| K | Mean total ms | Mean head ms | Ratio to K=1 | Repeated-forward lower bound ms | Repeated / shared ratio | Peak RSS MiB |
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | 68.63 | 0.38 | 1.000 | 57.88 | 0.94 | 3616.7 |
-| 2 | 69.86 | 0.61 | 1.018 | 120.15 | 1.99 | 3615.5 |
-| 4 | 70.73 | 0.73 | 1.031 | 238.73 | 3.95 | 3616.1 |
-| 8 | 71.78 | 1.08 | 1.046 | 475.64 | 7.71 | 3614.0 |
-| 16 | 73.34 | 1.85 | 1.069 | 956.71 | 15.26 | 3617.4 |
+The first panel measures shared-path scaling on all 80 held-out inputs.
 
-At K=16, the paired mean-latency ratio to K=1 is 1.069, 95% CI [1.056, 1.078]. The repeated-forward
-ratio to its own K=1 baseline is 16.53, 95% CI [16.39, 16.69]. On the matched ten prompts, 16
-repeated forwards are 15.26 times slower than one forward plus 16 heads, 95% CI [15.04, 15.49].
+| K | Shared mean total ms (n=80) | Mean head ms (n=80) | Ratio to K=1 | Peak RSS MiB |
+| ---: | ---: | ---: | ---: | ---: |
+| 1 | 68.63 | 0.38 | 1.000 | 3616.7 |
+| 2 | 69.86 | 0.61 | 1.018 | 3615.5 |
+| 4 | 70.73 | 0.73 | 1.031 | 3616.1 |
+| 8 | 71.78 | 1.08 | 1.046 | 3614.0 |
+| 16 | 73.34 | 1.85 | 1.069 | 3617.4 |
+
+The second panel compares both paths on the same ten prompts.
+
+| K | One forward + K heads, mean ms (n=10) | K repeated forwards, mean ms (n=10) | Repeated/shared ratio |
+| ---: | ---: | ---: | ---: |
+| 1 | 61.83 | 57.88 | 0.94 |
+| 2 | 60.30 | 120.15 | 1.99 |
+| 4 | 60.49 | 238.73 | 3.95 |
+| 8 | 61.71 | 475.64 | 7.71 |
+| 16 | 62.70 | 956.71 | 15.26 |
+
+At K=16, the paired mean-latency ratio to K=1 on the 80-row shared-path panel is 1.069, 95% CI
+[1.056, 1.078]. The repeated-forward ratio to its own K=1 baseline is 16.53, 95% CI [16.39, 16.69].
+On the matched ten prompts, the shared-path mean is 62.70 ms and the repeated-forward mean is 956.71
+ms. The repeated/shared ratio is therefore 15.26, 95% CI [15.04, 15.49]. The 73.34 ms value in the
+first panel is the mean over all 80 shared-path rows and is not the denominator of that matched ratio.
 
 Head application itself takes 1.85 ms on average at K=16. The recorded K=16 peak RSS is 3617.4 MiB,
 only 0.73 MiB above K=1. Saved probe files total 386,121 bytes. Since the shared path requests all
@@ -361,9 +379,10 @@ task while leaving the activation bus and every unrelated head unchanged. The se
 5.2 is therefore a component-admission test, not a verdict on the architecture.
 
 This separation matters operationally. The shared runtime provides the expensive model pass,
-versioned hidden-state access, head loading, timing, and receipts. Each detector team can improve its
-own task boundary and publish a new manifest. The host can promote, roll back, or disable that head
-without retraining the backbone or disturbing the rest of the detector bank.
+versioned hidden-state access, timing, and receipts. Each detector team can improve its own task
+boundary and publish a new compatible manifest without retraining the backbone or unrelated heads.
+The general registry and hot-loading path that would promote, roll back, or disable heads at runtime
+remain specified rather than shipped in the current PyPI package.
 
 Authorization especially needs a separate deterministic boundary. A probe may estimate whether the
 context looks like authority to act. Exact payload review, recipient binding, scope, expiry, and the
@@ -414,10 +433,11 @@ independently. The 24-cell matrix shows why that modularity is necessary: model,
 pooling, and readout interact rather than collapsing into one universal recipe.
 
 The architecture is therefore modular. Run the backbone once; expose a versioned hidden-state bus;
-let each task install and update its own tested readout manifest; and keep calibration, policy, and
-irreversible action outside the sensor. In the measured CPU setting, this turns 16 repeated model
-forwards into one forward plus 1.85 ms of head work. Later datasets, models, pooling methods, and
-head families can move the quality frontier without replacing that shared runtime.
+give each task a tested readout manifest; and keep calibration, policy, and irreversible action
+outside the sensor. In the measured CPU setting, this turns 16 repeated model forwards into one
+forward plus 1.85 ms of head work. Later datasets, models, pooling methods, and head families can
+move the quality frontier while preserving the shared interface. General hot-loading remains an
+implementation step rather than a measured product feature.
 
 ## Reproducibility and evidence map
 

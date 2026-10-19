@@ -18,8 +18,8 @@ implementation.
 
 All frozen cells are complete. One Qwen2.5-0.5B forward plus 16 heads takes 73.34 ms per example on
 average on the recorded six-core CPU environment, 1.069 times the one-head time (paired-bootstrap
-95% CI 1.056--1.078). Sixteen repeated base-model forwards take 956.71 ms and are 15.26 times slower
-than the shared path on the matched ten prompts (95% CI 15.04--15.49). Peak process RSS changes by
+95% CI 1.056--1.078). On the matched ten prompts, the one-forward/16-head path takes 62.70 ms and 16
+repeated base-model forwards take 956.71 ms, a ratio of 15.26 (95% CI 15.04--15.49). Peak process RSS changes by
 +0.73 MiB from K=1 to K=16, and the 16 saved probe artifacts occupy 386,121 bytes.
 
 This is a systems result, not a claim that every head has equal quality. Native heldout AUPRC ranges

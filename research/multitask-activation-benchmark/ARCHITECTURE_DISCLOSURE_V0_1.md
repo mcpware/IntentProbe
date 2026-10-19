@@ -1,7 +1,7 @@
-# IntentProbe: One Forward, Many Decisions — architecture disclosure v0.1.0
+# IntentProbe: One Forward, Many Decisions — architecture disclosure v0.1.1
 
 Document date: **2026-10-18 (America/Vancouver)**<br>
-Status: **public technical disclosure v0.1.0**<br>
+Status: **public technical disclosure v0.1.1**<br>
 Author: **Nicole BeWater**<br>
 Publisher: **MCPware, a product and research brand of GEASS LABS INC.**
 
@@ -9,6 +9,18 @@ This document specifies the IntentProbe research and product architecture in imp
 It separates components that exist today from proposed components that still require implementation
 and measurement. This version is the citable public technical bridge between the IntentProbe papers,
 runtime, and probe catalog.
+
+The architecture starts from one economic fact: the local-model forward pass dominates the cost.
+IntentProbe performs that pass once, exposes a versioned hidden-state bus, and lets independently
+trained task readouts reuse it. Calibration, host policy and irreversible action remain outside the
+sensor. The measured research runtime serves 16 heads with 6.9% more mean latency than one head in
+the recorded CPU setting.
+
+| Release boundary | v0.1.1 state |
+|---|---|
+| Public product | Single-head PyPI tool-poisoning path; standalone Hugging Face authorization and memory-write scorers |
+| Measured research implementation | One-forward fan-out across 16 frozen heads with timing artifacts and tests |
+| Specified next implementation | General registry, hot-loading and multi-head receipt emission |
 
 For a shorter explanation, start with [the public architecture
 note](../../docs/ONE_FORWARD_MANY_DECISIONS.md).
@@ -64,9 +76,10 @@ layer combinations, normalizations, and feature transformations from the shared 
 
 IntentProbe is the complete serving architecture, not one backbone or one set of probe weights. Its
 stable structure is the versioned input renderer, shared local-model pass, hidden-state activation
-bus, independently loadable readouts, calibration, policy boundary, and receipt. The model, labelled
+bus, readout-manifest contract, calibration, policy boundary, and receipt. The model, labelled
 dataset, layer selection, pooling method, normalization, classifier, and threshold are replaceable
-implementations inside that structure.
+implementations inside that structure. The current research runtime demonstrates fan-out; the
+general independently loadable registry remains a specified implementation step.
 
 This distinction lets the system improve without being rebuilt. New data can update one head. A new
 readout search can move that task to different layers. A stronger local model can replace the
@@ -145,7 +158,7 @@ For one rendered input, the runtime creates an activation envelope containing th
 requested hidden-state outputs, optional token spans, extraction metadata, and timing. The activation
 bus exposes this envelope only to compatible readout manifests.
 
-A compatible multi-head execution groups all installed heads by backbone and renderer contract,
+A compatible multi-head execution groups all admitted heads by backbone and renderer contract,
 computes the union of their requested hidden-state outputs, and performs one backbone forward pass
 per compatible group. A one-backbone installation therefore needs one pass for all compatible heads;
 a two-backbone portfolio needs at most one pass for each participating backbone.
@@ -390,9 +403,10 @@ cost; energy where measurement is reliable; run-to-run stability; AUROC/F1 or ta
 quality; ECE/Brier calibration; and abstention coverage. Quality comparisons must use a defined
 decision parser for generated judges and disclose failed/invalid judge outputs.
 
-The shared-path `K=1,2,4,8,16` curve and repeated-base-forward lower bound are complete. At `K=16`,
-one Qwen2.5-0.5B forward plus one head takes 68.63 ms per input on average. One forward plus 16 heads
-takes 73.34 ms, versus 956.71 ms for 16 repeated base forwards on matched prompts. The
+The shared-path `K=1,2,4,8,16` curve and repeated-base-forward lower bound are complete. Across the
+80-row shared-path panel, one Qwen2.5-0.5B forward plus one head takes 68.63 ms per input on average;
+one forward plus 16 heads takes 73.34 ms. In the separate matched ten-prompt comparator, the
+one-forward/16-head mean is 62.70 ms and the 16-repeated-forward mean is 956.71 ms. The matched
 repeated/shared ratio is 15.26, paired-bootstrap 95% CI `[15.04, 15.49]`. The one-call multi-label
 judge and measured standalone-classifier fleet remain open, so this release does not claim the
 complete systems frontier. It also does not claim that every activation head will match a generated
@@ -481,7 +495,7 @@ citable. They do not create an exclusive patent right.
 ## 15. What this version adds to the existing public record
 
 Existing public IntentProbe material already describes individual activation probes, selected
-layers, artifacts, benchmarks, and the local tool-poisoning runtime. This v0.1.0 release consolidates
+layers, artifacts, benchmarks, and the local tool-poisoning runtime. The v0.1.0 release consolidated
 and specifies the following architecture-level material in one coherent disclosure:
 
 - the GEASS LABS INC. → MCPware → IntentProbe → papers/runtime/products hierarchy;
@@ -498,7 +512,9 @@ consolidated in this release.
 ## 16. Open release work
 
 The public author and publisher identity, schema names, first paper title, shared-path benchmark, and
-repeated-forward lower bound are frozen in v0.1.0. Later versions may add an ORCID, DOI, SWHID,
+repeated-forward lower bound were frozen in v0.1.0. Version 0.1.1 improves the public explanation,
+figures, and panel labelling without changing those measurements. Later versions may add an ORCID,
+DOI, SWHID,
 one-call multi-label judge, standalone-classifier fleet, cold-start and throughput results, and a
 production head registry. Those additions must receive new versioned evidence rather than silently
 changing this record.
@@ -509,3 +525,4 @@ changing this record.
 | --- | --- | --- | --- |
 | 0.1-draft | 2026-10-18 | Local only | First integrated architecture, hierarchy, component contracts, embodiments, evaluation protocol, and public-priority plan |
 | 0.1.0 | 2026-10-18 | Public release | Names Nicole BeWater as author; freezes the IntentProbe one-forward, many-decisions architecture; adds the completed 16-head shared-path result, direct-judge sentinel, schemas, figures, paper draft, and machine-readable evidence |
+| 0.1.1 | 2026-10-18 | Public presentation patch | Leads with the measured architecture, draws the actual multi-head fan-out and policy boundary, separates the 80-row and matched ten-prompt timing panels, and states the shipped/research/specified boundary explicitly |

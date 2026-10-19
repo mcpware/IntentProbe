@@ -47,6 +47,11 @@ def test_derived_ledger_matches_complete_system_artifact() -> None:
     assert derived["shared_qwen_suite"]["heads"] == registry["head_count"] == 16
     assert derived["systems"]["k_values"] == scaling["k_values"] == [1, 2, 4, 8, 16]
     assert derived["systems"]["k16"] == scaling["scaling"][-1]
+    matched = derived["systems"]["matched_k16_comparator"]
+    assert matched["rows"] == 10
+    assert round(matched["shared_mean_ms"], 2) == 62.70
+    assert round(matched["repeated_mean_ms"], 2) == 956.71
+    assert round(matched["repeated_over_shared_ratio"], 2) == 15.26
 
 
 def test_systems_headline_numbers_match_result() -> None:
@@ -61,7 +66,9 @@ def test_systems_headline_numbers_match_result() -> None:
         f"{k16['one_forward_mean_ratio_ci_high']:.3f}"
     ) in paper
     assert f"{k16['repeated_forward_mean_ms']:.2f} ms" in paper
-    assert f"{k16['repeated_over_one_forward_ratio']:.2f} times slower" in paper
+    matched = load(DERIVED)["systems"]["matched_k16_comparator"]
+    assert f"{matched['shared_mean_ms']:.2f} ms" in paper
+    assert f"ratio of {k16['repeated_over_one_forward_ratio']:.2f}" in paper
     assert f"{k16['peak_rss_delta_vs_k1_mib']:+.2f} MiB" in paper
     assert f"{int(k16['cumulative_probe_bytes']):,} bytes" in paper
 
