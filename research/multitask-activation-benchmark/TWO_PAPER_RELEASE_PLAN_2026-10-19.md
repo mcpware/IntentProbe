@@ -35,7 +35,7 @@ after the complete final preview. No main, Pages, HF, or outreach deployment is 
 - [x] Build and inspect both PDFs with the existing installed rendering dependencies.
 - [x] Complete meaning-locked Humanizer composition and frozen-candidate review.
 - [x] Reconcile source ledgers, release notes, plan, links and current-release hashes.
-- [ ] Push the reviewed candidate branch; leave main and deployments unchanged.
+- [x] Push the reviewed candidate branch; leave main and deployments unchanged.
 - [x] Upload exact candidate files to the two unsubmitted drafts and verify downloads.
 - [x] Prepare the complete final publication preview for owner review; stop before Publish.
 
@@ -44,6 +44,11 @@ after the complete final preview. No main, Pages, HF, or outreach deployment is 
 The baseline independent check passed 97 tests, with 5 skipped and 3 dependency warnings.
 All 39 current release hashes passed before this work started. Those are baseline
 results, not a substitute for final-candidate QA. New tests or files can change the counts.
+
+Final candidate: 100 tests passed, 5 skipped, with 3 dependency warnings; all 50
+current-release checksum entries passed. Both public PDF downloads match their local
+candidates byte for byte, and all 19 immutable empirical evidence links return HTTP 200.
+Both Zenodo drafts have three verified attachments and remain unsubmitted.
 
 Zenodo documentation permits metadata edits and new versions; simultaneous publication
 is an editorial convenience rather than a platform requirement. Reserving both DOIs
