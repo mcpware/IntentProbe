@@ -15,8 +15,8 @@ architecture title and presents the system through its implementation and measur
   record (`10.5281/zenodo.19990741`) so both deposits resolve to one author.
 - The article and README explain the extra local pass beside a hosted agent and the reuse across
   the sidecar's own heads.
-- The shared interface is named the Activation Backplane, with a first-use explanation and a
-  cited distinction from cross-model Universal Activation Bus research.
+- The shared interface is named the Activation Backplane, with a first-use explanation across
+  the public release documents.
 - The approved architecture illustration appears in the article, README and six-page PDF.
   Its unchanged pixels, prompt and provenance are recorded with the preprint sources.
 - Related work adds Goodfire × Rakuten, SingProbe, Lion Warden, and Constitutional Classifiers++.
@@ -49,7 +49,7 @@ result JSON have no diff.
 The public article's Humanizer observable-style audit reports no stock phrases or Unicode
 anomalies. Its long-sentence leads include metadata, HTML image markup, link groups and enumerated lists; they were
 inspected in context. Frozen article SHA-256:
-`af94bb00405ed792088c39a0204a4ea0d87e5f7430c42ed236b83f8b79213f2c`.
+`6f259325d3885f5bca42e46a53890d77f038807fdb6c1e418fb9af360d165875`.
 This is a style check, not an AI-authorship detector result.
 
 Jekyll is not installed locally. No packages were installed for this revision. A real Pages build,

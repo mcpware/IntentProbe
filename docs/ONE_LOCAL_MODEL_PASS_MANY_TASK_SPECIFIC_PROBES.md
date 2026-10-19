@@ -72,14 +72,6 @@ runtime object attached to the backplane. **Readout** is the recipe that says wh
 layers, pooling and normalization the head uses. **Detector** is reserved for a security product
 whose job is detection.
 
-The backplane name is deliberate, and it addresses a different problem from the Universal Activation
-Bus of [Kim, Mun and Han](https://arxiv.org/abs/2608.09521). That work builds a shared activation
-space *across different models*, joined by one linear encoder--decoder adapter pair per model, so a
-single probe or SAE feature can travel between them. The IntentProbe activation backplane works
-*within* one model: one pass of one frozen local model into which many independently trained probes
-plug. The two are compatible rather than competing -- cross-model portability and within-model
-fan-out could be combined.
-
 ## The model may know more than it can say
 
 Knowing something and producing the requested answer are different interfaces.

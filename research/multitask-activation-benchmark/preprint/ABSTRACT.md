@@ -1,7 +1,7 @@
 An agent workflow may need several judgments about the same input: toxicity, sentiment, spam,
-permission to act, or what to remember. IntentProbe runs one small frozen local language model and
-shares its hidden states across independently trained activation probes. Each task can choose its
-own layers, token pooling, normalization, classifier and threshold. The model does not have to
+permission to act, or what to remember. IntentProbe makes one forward pass through a small frozen
+local language model. Its activation backplane shares the hidden states across independently trained
+probes. Each task can choose its own layers, token pooling, normalization, classifier and threshold. The model does not have to
 generate a separate verdict for every check.
 
 This preprint explains the architecture, the readout contracts and the implementation that readers

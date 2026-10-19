@@ -20,17 +20,22 @@ the May 2026 Zenodo record so citation indexes resolve both to one author.
 
 ## Publication sequence
 
-1. Review the complete article and deployment preview, then publish the approved GitHub/Pages and
-   model-card revisions. Check the website returns 200, the article and images load, and canonical,
-   Open Graph, description, author and sitemap output are present.
-2. Publish a fixed architecture/software archive with a new DOI and explicit handle metadata.
-   The May paper's DOI remains a reference to that earlier work. Add the new DOI and literal-handle
-   BibTeX across the article, README, CFF and model cards once it exists.
-3. Prepare short, separate introductions for relevant communities and curated lists. Keep each
+1. Keep the architecture candidate public on the review branch while preparing the separate
+   architecture preprint. Its reserved DOI is `10.5281/zenodo.23467859`; its author is
+   `Leung, Wan Sheng`, displayed as Wan Sheng Leung. Align the saved Zenodo draft with the approved
+   six-page PDF, Markdown source and BibTeX, then show the complete final metadata and file preview.
+2. After the exact preview and Nicole's standalone uppercase `SEND`, publish that new preprint
+   first and verify the public DOI, author, files and checksums. The two older tool-poisoning records
+   already publish the legal name; restore their stale handle-only edit drafts without republishing
+   their unchanged articles. The May paper's DOI remains a reference to that earlier work.
+3. Deploy the reviewed GitHub/Pages and model-card revisions. Check the website returns 200, the
+   article and images load, and canonical, Open Graph, description, author and sitemap output are
+   present. Check the new DOI and legal-name BibTeX across the article, README, CFF and model cards.
+4. Prepare short, separate introductions for relevant communities and curated lists. Keep each
    draft concrete: the deployment problem, code/model link, and one measured result. Review the
    actual wording before posting. Track referrals, model downloads and concrete usage reports;
    downloads are not unique users.
-4. Continue the benchmark without holding the initial explanatory article for every future test.
+5. Continue the benchmark without holding the initial explanatory article for every future test.
    Publish each subsequent result with its own source, protocol and version.
 
 ## Highest-value next experiments
@@ -50,7 +55,7 @@ quality results, implementation status and future designs identifiable in every 
 ## Editorial checks
 
 Meaning lock: explain the reusable architecture and engineering choices in plain English; let
-readers inspect and use the work; use the public handle; preserve all measured results. The
+readers inspect and use the work; use the approved legal-name byline; preserve all measured results. The
 article keeps the model-as-sensor explanation and introduces deployment before terminology.
 
 Green review: clarified the hosted-agent sidecar cost, moved model/reproduction links near the
