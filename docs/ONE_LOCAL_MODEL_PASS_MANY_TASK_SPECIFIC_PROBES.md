@@ -21,9 +21,9 @@ many independent heads from a single forward pass, without generating a verdict 
 <figcaption><strong>Figure 1. The activation backplane: one model pass that every probe plugs into.</strong> (a) At runtime the frozen model reads the request and context once. Its hidden states feed independently trained heads. Each head selects its own layers and pooling and returns a score. (b) Offline, labelled data is used to fit each head and produce a versioned artifact. The shared pass and head application are measured; host policy and compatible-head loading are specified integration points.</figcaption>
 </figure>
 
-[Probe models and local scorers](https://github.com/mcpware/IntentProbe/tree/main/probes) ·
+[Probe models and local scorers](https://github.com/mcpware/IntentProbe/tree/25bde58b0702d3853f66795ce6b5cf14ca795287/probes) ·
 [Hugging Face publisher](https://huggingface.co/mcpware) ·
-[Reproduce the 16-head benchmark](https://github.com/mcpware/IntentProbe/tree/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/)
+[Reproduce the 16-head benchmark](https://github.com/mcpware/IntentProbe/tree/25bde58b0702d3853f66795ce6b5cf14ca795287/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/)
 
 **Measured on one six-core CPU:** one Qwen2.5-0.5B forward plus one probe averaged 68.63 ms; the
 same shared path plus 16 probes averaged 73.34 ms, a 6.9% increase (n=80, paired 95% CI
@@ -124,7 +124,7 @@ Across the 80-row scaling panel, applying all 16 heads took 1.85 ms per input. P
 16 heads was 0.73 MiB above the one-head run, and the saved probe artifacts occupied 386,121 bytes.
 
 ![Measured latency stays nearly flat as probes are added, while repeated model forwards rise almost
-linearly.](https://raw.githubusercontent.com/mcpware/IntentProbe/main/docs/one-local-model-pass-many-task-specific-probes-latency.svg)
+linearly.](https://raw.githubusercontent.com/mcpware/IntentProbe/ade288c568161beba2906c2dada3def2422757bf/docs/one-local-model-pass-many-task-specific-probes-latency.svg)
 
 ## One common model does not mean one universal layer
 
@@ -231,11 +231,11 @@ and 16 heads. Its public probe catalog also gives readers weights and scorers to
 ## Evidence and implementation record
 
 - [Empirical paper: *IntentProbe: Many Task-Specific Probes from a Single Frozen Small-Model Forward Pass*](https://doi.org/10.5281/zenodo.23471117)
-- [Complete implementable architecture disclosure](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md)
-- [One-forward scaling result](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
-- [Probe-versus-judge sentinel](https://github.com/mcpware/IntentProbe/blob/main/research/multitask-activation-benchmark/experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
-- [Readout manifest schema](https://github.com/mcpware/IntentProbe/blob/main/research/schemas/intentprobe_readout_manifest.schema.json)
-- [Multi-head receipt schema](https://github.com/mcpware/IntentProbe/blob/main/research/schemas/intentprobe_multihead_receipt.schema.json)
+- [Complete implementable architecture disclosure](https://github.com/mcpware/IntentProbe/blob/25bde58b0702d3853f66795ce6b5cf14ca795287/research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md)
+- [One-forward scaling result](https://github.com/mcpware/IntentProbe/blob/25bde58b0702d3853f66795ce6b5cf14ca795287/research/multitask-activation-benchmark/experiments/ONE-FORWARD-MULTIHEAD-EXP001/RESULT_SUMMARY.md)
+- [Probe-versus-judge sentinel](https://github.com/mcpware/IntentProbe/blob/25bde58b0702d3853f66795ce6b5cf14ca795287/research/multitask-activation-benchmark/experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md)
+- [Readout manifest schema](https://github.com/mcpware/IntentProbe/blob/25bde58b0702d3853f66795ce6b5cf14ca795287/research/schemas/intentprobe_readout_manifest.schema.json)
+- [Multi-head receipt schema](https://github.com/mcpware/IntentProbe/blob/25bde58b0702d3853f66795ce6b5cf14ca795287/research/schemas/intentprobe_multihead_receipt.schema.json)
 
 ## Citation
 

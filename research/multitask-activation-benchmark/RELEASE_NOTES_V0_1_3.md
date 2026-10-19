@@ -59,7 +59,7 @@ result JSON have no diff. The derived-ledger numerical-content comparison also p
 The public article's Humanizer observable-style audit reports no stock phrases or Unicode
 anomalies. Its long-sentence leads include metadata, HTML image markup, link groups and enumerated lists; they were
 inspected in context. Frozen article SHA-256:
-`b946c499464a1d485138bcc5e199b1a4bc7361d49f0125101b8d7900bc393fcf`.
+`0ba94ba656c802cc11efd10f0be3c73086df232265d029cb9a768d3a2a160b3a`.
 This is a style check, not an AI-authorship detector result.
 Both papers underwent a meaning-locked composition/green review followed by frozen-candidate
 factual/style review. The empirical manuscript has the same structural long-sentence leads

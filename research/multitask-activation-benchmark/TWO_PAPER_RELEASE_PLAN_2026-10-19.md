@@ -32,12 +32,12 @@ after the complete final preview. No main, Pages, HF, or outreach deployment is 
 - [x] Reconcile every cited claim with its primary source or narrow it to what is verified.
 - [x] Reserve the empirical paper DOI without publishing (`10.5281/zenodo.23471117`).
 - [x] Cross-reference both papers and supply separate citation metadata.
-- [ ] Build and inspect both PDFs with the existing installed rendering dependencies.
+- [x] Build and inspect both PDFs with the existing installed rendering dependencies.
 - [x] Complete meaning-locked Humanizer composition and frozen-candidate review.
-- [ ] Reconcile source ledgers, release notes, plan, links and current-release hashes.
+- [x] Reconcile source ledgers, release notes, plan, links and current-release hashes.
 - [ ] Push the reviewed candidate branch; leave main and deployments unchanged.
-- [ ] Upload exact candidate files to the two unsubmitted drafts and verify downloads.
-- [ ] Show the complete final publication preview and stop before Publish.
+- [x] Upload exact candidate files to the two unsubmitted drafts and verify downloads.
+- [x] Prepare the complete final publication preview for owner review; stop before Publish.
 
 ## Checks and boundaries
 
