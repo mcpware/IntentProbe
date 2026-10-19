@@ -1,0 +1,37 @@
+{
+  "batch_size": 16,
+  "completed_at": "2026-10-17T21:11:15.025047+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 147.78278308012523,
+  "experiment_id": "SPAM-SMS-UCI-QWEN-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 231123328,
+      "sha256": "39fa1ed66e7f6051f34caeea154c64b0ba90b0bc950d66004f48df4a03cdd9c1"
+    },
+    "masked_max": {
+      "bytes": 231123328,
+      "sha256": "2e0dcbc91b3def8262249c5723681dcee6991dc8a6fb4efc8fc6a9be39d17a84"
+    },
+    "masked_mean": {
+      "bytes": 231123328,
+      "sha256": "cc25578535d75ac839cefeff2a9f59d06e2ff6d3dfef6bced1213d901cf4638e"
+    }
+  },
+  "input_sha256": "0e6b1fd1ce54533dd56ff0129e1ccb5eeac039e0b04633df7201090a94a4baf7",
+  "maximum_tokens_before_truncation": 259,
+  "p50_tokens": 17.0,
+  "p95_tokens": 59.0,
+  "p99_tokens": 75.0,
+  "peak_rss_kib": 4076624,
+  "rows": 5159,
+  "rows_over_cap": 1,
+  "shape_per_pooling": [
+    5159,
+    25,
+    896
+  ],
+  "started_at": "2026-10-17T21:08:47.242266+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0001938360147315371
+}

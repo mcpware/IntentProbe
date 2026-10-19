@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-18T06:04:47.707417+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 599.4925110460026,
+  "experiment_id": "TOXICCHAT0124-QWEN3-06B-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 323152000,
+      "sha256": "96e9b7ea27dc0ff1edca7862d604cc41e49fa5dc2baa82a53c9d1f466d6376e6"
+    },
+    "masked_max": {
+      "bytes": 323152000,
+      "sha256": "4769283389401dc7abc922532e5f4f22d67967ee1b3d6e647b3c77577112b056"
+    },
+    "masked_mean": {
+      "bytes": 323152000,
+      "sha256": "6db5312b3e1eb75b0bd148543eb88fdd592a29470b0ed21555a14be983d172cf"
+    }
+  },
+  "input_sha256": "e3205aeda1ebb1f18847b03fe508869bc60ed0dc7e4868f3a66bb5dd53ffc368",
+  "maximum_tokens_before_truncation": 1248,
+  "p50_tokens": 14.0,
+  "p95_tokens": 237.0,
+  "p99_tokens": 357.60000000000036,
+  "peak_rss_kib": 12839600,
+  "resumed": false,
+  "rows": 5441,
+  "rows_over_cap": 9,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    5441,
+    29,
+    1024
+  ],
+  "started_at": "2026-10-18T05:54:48.214909+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.001654107700790296
+}

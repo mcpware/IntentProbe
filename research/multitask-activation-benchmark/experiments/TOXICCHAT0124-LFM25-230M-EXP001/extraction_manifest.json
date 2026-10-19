@@ -1,0 +1,39 @@
+{
+  "batch_size": 128,
+  "completed_at": "2026-10-18T05:44:52.520358+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 173.06679982599962,
+  "experiment_id": "TOXICCHAT0124-LFM25-230M-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 167147648,
+      "sha256": "d5316988afd329c0daac51186dc1a86c602e28c2f0a499bd9b0ba93147182c75"
+    },
+    "masked_max": {
+      "bytes": 167147648,
+      "sha256": "a842db389e46f45e46b7e42c2a1be6d3f1e373d2cdc29398fcad5ebdf1b9c275"
+    },
+    "masked_mean": {
+      "bytes": 167147648,
+      "sha256": "5102ae865a9b11091295e907b115ea524c41fd0d96af7be5fccc66b0741c6d60"
+    }
+  },
+  "input_sha256": "e3205aeda1ebb1f18847b03fe508869bc60ed0dc7e4868f3a66bb5dd53ffc368",
+  "maximum_tokens_before_truncation": 927,
+  "p50_tokens": 16.0,
+  "p95_tokens": 246.0,
+  "p99_tokens": 373.60000000000036,
+  "peak_rss_kib": 10924548,
+  "resumed": false,
+  "rows": 5441,
+  "rows_over_cap": 13,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    5441,
+    15,
+    1024
+  ],
+  "started_at": "2026-10-18T05:41:59.453561+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0023892666789193163
+}

@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "aadd842e5616df268b5dd66e92efd83016ad6f2f8f3fadf8a45656d797f6c285",
+    "probe_sha256": "adcf98c14db43389013f38c6cb87268d5b1253e3eb7bec15e103b0e2aad2e2ec",
+    "test_scores_sha256": "eece3848aff239ce4f6232bb0b35767ecb308838273f4c6929f2e034b4bfaef1"
+  },
+  "candidate_count": 216,
+  "classes": 77,
+  "elapsed_seconds": 49.90769509295933,
+  "experiment_id": "INTENT-BANKING77-QWEN-EXP001",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "accuracy": 0.6966547580383241,
+        "balanced_accuracy": 0.6967032967032967,
+        "confidence_ece_10_equal_width": 0.009189349155148328,
+        "log_loss": 1.6023839892446505,
+        "macro_f1": 0.781548270541104,
+        "macro_ovr_auprc": 0.7027230495364234,
+        "macro_ovr_auroc": 0.9502623931505704,
+        "multiclass_brier": 0.33387673460976774,
+        "top3_accuracy": 0.7245859045144527
+      },
+      "tfidf_word_char": {
+        "accuracy": 0.9022409873335498,
+        "balanced_accuracy": 0.9022477522477522,
+        "confidence_ece_10_equal_width": 0.4829697417324651,
+        "log_loss": 1.0609744944618131,
+        "macro_f1": 0.9022252450629965,
+        "macro_ovr_auprc": 0.9391199188077474,
+        "macro_ovr_auroc": 0.9980039394370199,
+        "multiclass_brier": 0.4027881158453118,
+        "top3_accuracy": 0.9733679766157843
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "accuracy_difference": -0.20558622929522574,
+      "accuracy_difference_95ci": [
+        -0.22085092562520303,
+        -0.19032153296524845
+      ],
+      "macro_f1_difference": -0.12067697452189252,
+      "macro_f1_difference_95ci": [
+        -0.13482868337584714,
+        -0.10890489757109026
+      ],
+      "resamples": 2000,
+      "seed": 20261017,
+      "unit": "official test utterance"
+    },
+    "rows": 3079
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "selection": {
+    "available_train_rows": 8493,
+    "metric": "macro_F1",
+    "screening_train_rows": 3000,
+    "validation_rows": 1499,
+    "winner": {
+      "end_layer": 1,
+      "normalized_depth": 0.0416666666666666,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 1,
+      "validation_accuracy": 0.8372248165443629,
+      "validation_balanced_accuracy": 0.8342618769861821,
+      "validation_macro_f1": 0.8360981333618257,
+      "width": 1
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_MULTICLASS_TEST",
+  "task": "banking77_intent",
+  "uncertainty_limitation": "BANKING77 releases no user or source-group identifiers, so paired uncertainty is row-level"
+}

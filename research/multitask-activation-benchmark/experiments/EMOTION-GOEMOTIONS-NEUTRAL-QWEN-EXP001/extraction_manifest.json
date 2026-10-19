@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-17T21:34:50.006950+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 390.49496070086025,
+  "experiment_id": "EMOTION-GOEMOTIONS-NEUTRAL-QWEN-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 2414944128,
+      "sha256": "526b0d0ce977eda9a76e2a352d099ad3237af54b7a2db428dbb0999da1d6960a"
+    },
+    "masked_max": {
+      "bytes": 2414944128,
+      "sha256": "7d67a6df5c224a3c28c8f56a19acfd5b009ca833642ac53fee24da593758d328"
+    },
+    "masked_mean": {
+      "bytes": 2414944128,
+      "sha256": "c93b200ec7e1a6454151a40d154e9be81dc7afc0a2f5359d2a1785f03e69920f"
+    }
+  },
+  "input_sha256": "a6e25ab3a7fdd3b2d768a578011996ba8c55921dd2a5742e272bf8e9597b4550",
+  "maximum_tokens_before_truncation": 856,
+  "p50_tokens": 16.0,
+  "p95_tokens": 30.0,
+  "p99_tokens": 35.0,
+  "peak_rss_kib": 14121264,
+  "resumed": true,
+  "rows": 53905,
+  "rows_preexisting_at_start": 42880,
+  "rows_over_cap": 3,
+  "shape_per_pooling": [
+    53905,
+    25,
+    896
+  ],
+  "started_at": "2026-10-17T21:28:19.511991+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 5.5653464428160654e-05
+}

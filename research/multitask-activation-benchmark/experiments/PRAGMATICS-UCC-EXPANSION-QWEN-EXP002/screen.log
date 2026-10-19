@@ -1,0 +1,412 @@
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    8.4s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   13.1s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   21.1s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   22.4s remaining:    4.5s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   26.4s finished
+screened 24/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    7.5s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   10.9s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   18.7s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   22.4s remaining:    4.5s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   25.3s finished
+screened 48/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    7.3s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   12.2s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   19.1s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   22.4s remaining:    4.5s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   25.9s finished
+screened 72/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:   11.1s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   19.1s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   30.9s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   33.2s remaining:    6.6s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   38.6s finished
+screened 96/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:   12.7s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   20.2s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   29.6s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   36.1s remaining:    7.2s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   40.6s finished
+screened 120/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:   12.9s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   20.3s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   31.3s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   37.4s remaining:    7.5s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   40.7s finished
+screened 144/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    8.1s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   15.3s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   27.0s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   30.7s remaining:    6.1s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   32.9s finished
+screened 168/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    9.4s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   16.2s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   28.6s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   29.8s remaining:    6.0s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   33.7s finished
+screened 192/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    9.7s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   16.9s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   29.2s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   31.0s remaining:    6.2s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   34.1s finished
+screened 216/216 candidates
+resuming with 216/216 candidates complete
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+{
+  "artifacts": {
+    "candidate_table_sha256": "2186532fd1488d4bba4a818c072ef6f1b6a6c99e8274dce36f8d6d26e2307d72",
+    "probe_sha256": "cb7429691d335e3260713d15cbe1dd3bc4fa6913dd617d4f40e49bb01530ac70",
+    "test_scores_sha256": "39dc2b90384849090b907444b8bf1af6ffce1694d362c51537bb3ce1613552a4"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 66.22707623199676,
+  "experiment_id": "PRAGMATICS-UCC-EXPANSION-QWEN-EXP002",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.17249796537729828,
+        "auroc": 0.7873499030766877,
+        "balanced_accuracy_at_0_5": 0.7271564999305606,
+        "brier_score": 0.1594799372309191,
+        "ece_10_equal_width": 0.2514996899224405,
+        "log_loss": 0.49248677438214467,
+        "macro_f1_at_0_5": 0.5419979321660326
+      },
+      "tfidf_word_char": {
+        "auprc": 0.1800927425294822,
+        "auroc": 0.7823747786985784,
+        "balanced_accuracy_at_0_5": 0.6252032121821108,
+        "brier_score": 0.07646778715345093,
+        "ece_10_equal_width": 0.14297912987877756,
+        "log_loss": 0.2737565098549003,
+        "macro_f1_at_0_5": 0.597795015257645
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": -0.007594777152183929,
+      "auprc_difference_95ci": [
+        -0.05470659665601812,
+        0.03517257230870053
+      ],
+      "auroc_difference": 0.004975124378109319,
+      "auroc_difference_95ci": [
+        -0.02568677245049005,
+        0.03703154016184659
+      ],
+      "resamples": 2000,
+      "seed": 20261018,
+      "unit": "official test comment"
+    },
+    "positive_prevalence": 0.04588607594936709,
+    "positive_rows": 203,
+    "rows": 4424
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence.",
+  "selection": {
+    "available_train_rows": 35472,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 238,
+    "screening_train_rows": 5000,
+    "validation_positive_rows": 174,
+    "validation_rows": 4427,
+    "winner": {
+      "end_layer": 15,
+      "normalized_depth": 0.625,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 15,
+      "validation_auprc": 0.1100133217936344,
+      "validation_auroc": 0.6905754153254904,
+      "validation_balanced_accuracy_at_0_5": 0.5848440992294823,
+      "width": 1
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "ucc_antagonize",
+  "uncertainty_limitation": "The released files omit author and article/thread IDs, so paired uncertainty is row-level and cannot support an unseen-author or unseen-article claim."
+}
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    5.1s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    7.7s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   12.1s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   13.5s remaining:    2.7s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   15.9s finished
+screened 24/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    4.4s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    7.5s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   12.1s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   12.8s remaining:    2.6s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   15.3s finished
+screened 48/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    4.5s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    6.9s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   11.5s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   13.1s remaining:    2.6s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   15.3s finished
+screened 72/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:   10.2s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   15.1s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   21.7s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   23.9s remaining:    4.8s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   27.5s finished
+screened 96/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    8.7s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   14.4s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   20.2s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   22.7s remaining:    4.5s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   26.0s finished
+screened 120/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    8.6s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   13.3s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   19.6s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   22.2s remaining:    4.4s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   25.2s finished
+screened 144/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    4.8s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    8.1s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   13.6s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   15.5s remaining:    3.1s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   16.5s finished
+screened 168/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    4.7s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    8.4s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   14.3s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   14.5s remaining:    2.9s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   16.4s finished
+screened 192/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    5.3s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    9.0s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   15.1s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   15.4s remaining:    3.1s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   17.4s finished
+screened 216/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    5.5s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    8.6s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   15.7s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   18.6s remaining:    3.7s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   21.1s finished
+{
+  "artifacts": {
+    "candidate_table_sha256": "fa2ed39b436a5a532c97931627f584bae9b179e9d63fa95ac5a0483440091430",
+    "probe_sha256": "3ea83a0718730019c3dbc4e123ba8df12b2bcd0137fde67614054fecbdb89101",
+    "test_scores_sha256": "5eedc43ed1ba95f8e5b2da1da7b65e9677f5fad29608ca8f5b07a0d10852de30"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 225.99181690899422,
+  "experiment_id": "PRAGMATICS-UCC-EXPANSION-QWEN-EXP002",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.10114776527286891,
+        "auroc": 0.8120330791743684,
+        "balanced_accuracy_at_0_5": 0.7202999845964264,
+        "brier_score": 0.13020943618947578,
+        "ece_10_equal_width": 0.19578207456553623,
+        "log_loss": 0.43143253141536575,
+        "macro_f1_at_0_5": 0.5152298627370477
+      },
+      "tfidf_word_char": {
+        "auprc": 0.10048118312293551,
+        "auroc": 0.8177251809919902,
+        "balanced_accuracy_at_0_5": 0.5956273105360443,
+        "brier_score": 0.04013107624646218,
+        "ece_10_equal_width": 0.08928963475200818,
+        "log_loss": 0.161059787214915,
+        "macro_f1_at_0_5": 0.5777196973871697
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": 0.0006665821499333979,
+      "auprc_difference_95ci": [
+        -0.04226860236136189,
+        0.053096343773939556
+      ],
+      "auroc_difference": -0.0056921018176218086,
+      "auroc_difference_95ci": [
+        -0.057001864876744704,
+        0.047040593873721996
+      ],
+      "resamples": 2000,
+      "seed": 20261018,
+      "unit": "official test comment"
+    },
+    "positive_prevalence": 0.0216998191681736,
+    "positive_rows": 96,
+    "rows": 4424
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence.",
+  "selection": {
+    "available_train_rows": 35472,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 106,
+    "screening_train_rows": 5000,
+    "validation_positive_rows": 96,
+    "validation_rows": 4427,
+    "winner": {
+      "end_layer": 17,
+      "normalized_depth": 0.7083333333333334,
+      "pooling": "masked_max",
+      "rank": 1,
+      "start_layer": 17,
+      "validation_auprc": 0.07682239637903973,
+      "validation_auroc": 0.6741081736319556,
+      "validation_balanced_accuracy_at_0_5": 0.5455425517586393,
+      "width": 1
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "ucc_generalisation",
+  "uncertainty_limitation": "The released files omit author and article/thread IDs, so paired uncertainty is row-level and cannot support an unseen-author or unseen-article claim."
+}
+screened 24/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    6.3s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    9.8s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   16.2s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   17.1s remaining:    3.4s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   20.5s finished
+screened 48/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    5.9s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:    9.7s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   16.2s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   17.7s remaining:    3.5s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   21.0s finished
+screened 72/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    8.9s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   16.0s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   23.0s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   26.9s remaining:    5.4s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   30.5s finished
+screened 96/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:   10.2s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   14.6s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   22.0s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   25.3s remaining:    5.1s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   28.8s finished
+screened 120/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    9.7s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   14.8s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   21.8s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   26.9s remaining:    5.4s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   29.4s finished
+screened 144/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    6.2s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   10.2s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   17.8s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   20.3s remaining:    4.1s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   21.5s finished
+screened 168/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    6.3s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   10.5s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   18.3s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   18.7s remaining:    3.7s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   21.1s finished
+screened 192/216 candidates
+[Parallel(n_jobs=4)]: Using backend LokyBackend with 4 concurrent workers.
+[Parallel(n_jobs=4)]: Done   5 tasks      | elapsed:    6.2s
+[Parallel(n_jobs=4)]: Done  10 tasks      | elapsed:   10.6s
+[Parallel(n_jobs=4)]: Done  17 tasks      | elapsed:   18.3s
+[Parallel(n_jobs=4)]: Done  20 out of  24 | elapsed:   19.3s remaining:    3.9s
+[Parallel(n_jobs=4)]: Done  24 out of  24 | elapsed:   21.3s finished
+screened 216/216 candidates
+{
+  "artifacts": {
+    "candidate_table_sha256": "3c845b4451ac7050926113eabd0e0490553da3b76c4db87b16fb157958e135b7",
+    "probe_sha256": "6bb8ca408657676a4e9877b1798282aa5efc2c9bf76367e9693eabce9da84767",
+    "test_scores_sha256": "8c47f42d0007a2420f06392b5785c71a65c61a60dcd74f3c08ea8ae53be7bace"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 281.9080964540044,
+  "experiment_id": "PRAGMATICS-UCC-EXPANSION-QWEN-EXP002",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.09386856185261723,
+        "auroc": 0.7830703154498334,
+        "balanced_accuracy_at_0_5": 0.6884589640613736,
+        "brier_score": 0.13424647507939874,
+        "ece_10_equal_width": 0.19865274789397683,
+        "log_loss": 0.4414554903403799,
+        "macro_f1_at_0_5": 0.5121213063776173
+      },
+      "tfidf_word_char": {
+        "auprc": 0.09791242583944301,
+        "auroc": 0.7832848487968971,
+        "balanced_accuracy_at_0_5": 0.5837838533621666,
+        "brier_score": 0.04520476257197249,
+        "ece_10_equal_width": 0.10418265219055688,
+        "log_loss": 0.18518319608970585,
+        "macro_f1_at_0_5": 0.573916075787516
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": -0.0040438639868257825,
+      "auprc_difference_95ci": [
+        -0.04277576652025722,
+        0.03479932551658421
+      ],
+      "auroc_difference": -0.00021453334706367233,
+      "auroc_difference_95ci": [
+        -0.0397097375173409,
+        0.0410804159022827
+      ],
+      "resamples": 2000,
+      "seed": 20261018,
+      "unit": "official test comment"
+    },
+    "positive_prevalence": 0.024412296564195298,
+    "positive_rows": 108,
+    "rows": 4424
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence.",
+  "selection": {
+    "available_train_rows": 35472,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 130,
+    "screening_train_rows": 5000,
+    "validation_positive_rows": 99,
+    "validation_rows": 4427,
+    "winner": {
+      "end_layer": 17,
+      "normalized_depth": 0.6875,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 16,
+      "validation_auprc": 0.08312209605478167,
+      "validation_auroc": 0.7024659721055285,
+      "validation_balanced_accuracy_at_0_5": 0.5407027763774529,
+      "width": 2
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "ucc_hostile",
+  "uncertainty_limitation": "The released files omit author and article/thread IDs, so paired uncertainty is row-level and cannot support an unseen-author or unseen-article claim."
+}

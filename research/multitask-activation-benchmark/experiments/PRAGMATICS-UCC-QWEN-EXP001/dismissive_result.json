@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "86936154d5312a30438be0f28b01ce2dddd507803709a2d1cdd6693a881c6b18",
+    "probe_sha256": "281b041a7dfe620d7d0cdea66b18c9ee9328bb0f5d5d461a54f9ce9b6b692301",
+    "test_scores_sha256": "3aa7797599c012b6464ef4fd2ced85514c14302c338a097986000e4601c3eec6"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 305.88652731801267,
+  "experiment_id": "PRAGMATICS-UCC-QWEN-EXP001",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.08359061618504855,
+        "auroc": 0.7448229605365779,
+        "balanced_accuracy_at_0_5": 0.6771065356418655,
+        "brier_score": 0.16916238669956843,
+        "ece_10_equal_width": 0.26823557979100987,
+        "log_loss": 0.5286004838294662,
+        "macro_f1_at_0_5": 0.49920682180285214
+      },
+      "tfidf_word_char": {
+        "auprc": 0.12165254150174781,
+        "auroc": 0.7680361878022148,
+        "balanced_accuracy_at_0_5": 0.5945562314771486,
+        "brier_score": 0.05850861524356834,
+        "ece_10_equal_width": 0.11230715049733714,
+        "log_loss": 0.22010997820400338,
+        "macro_f1_at_0_5": 0.575645667969593
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": -0.03806192531669926,
+      "auprc_difference_95ci": [
+        -0.07864198529718905,
+        -0.008896613463072876
+      ],
+      "auroc_difference": -0.023213227265636904,
+      "auroc_difference_95ci": [
+        -0.06064677207738858,
+        0.01573620372544776
+      ],
+      "resamples": 2000,
+      "seed": 20261018,
+      "unit": "official test comment"
+    },
+    "positive_prevalence": 0.033905967450271246,
+    "positive_rows": 150,
+    "rows": 4424
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence.",
+  "selection": {
+    "available_train_rows": 35472,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 151,
+    "screening_train_rows": 5000,
+    "validation_positive_rows": 143,
+    "validation_rows": 4427,
+    "winner": {
+      "end_layer": 13,
+      "normalized_depth": 0.5416666666666666,
+      "pooling": "masked_max",
+      "rank": 1,
+      "start_layer": 13,
+      "validation_auprc": 0.09235457918196394,
+      "validation_auroc": 0.6493653405418112,
+      "validation_balanced_accuracy_at_0_5": 0.5794418000300353,
+      "width": 1
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "ucc_dismissive",
+  "uncertainty_limitation": "The released files omit author and article/thread IDs, so the paired bootstrap is row-level and cannot support an unseen-author or unseen-article claim."
+}

@@ -1,0 +1,114 @@
+{
+  "experiment_id": "TOXICCHAT0124-LFM25-230M-EXP001",
+  "status": "COMPLETE_MULTILABEL_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "tasks": {
+    "jailbreaking": {
+      "heldout_test": {
+        "models": {
+          "activation": {
+            "auprc": 0.7470796753805898,
+            "auroc": 0.9731393699378923,
+            "balanced_accuracy_at_0_5": 0.8360324307684628,
+            "brier_score": 0.017289217227818846,
+            "ece_10_equal_width": 0.017857118749308627,
+            "log_loss": 0.06577405861146297,
+            "macro_f1_at_0_5": 0.8220244716351501
+          },
+          "tfidf_word_char": {
+            "auprc": 0.8263598435630322,
+            "auroc": 0.9816505746935176,
+            "balanced_accuracy_at_0_5": 0.9083256721397401,
+            "brier_score": 0.021809225656356533,
+            "ece_10_equal_width": 0.07692021134122876,
+            "log_loss": 0.11038297383589551,
+            "macro_f1_at_0_5": 0.8594176436583112
+          }
+        },
+        "paired_activation_minus_tfidf": {
+          "attempts": 2000,
+          "auprc_difference": -0.07928016818244232,
+          "auprc_difference_95ci": [
+            -0.1368909705835134,
+            -0.019601819458651425
+          ],
+          "auroc_difference": -0.008511204755625279,
+          "auroc_difference_95ci": [
+            -0.02767513810329096,
+            0.013833920910295708
+          ],
+          "resamples": 2000,
+          "seed": 20261017,
+          "unit": "official test prompt"
+        },
+        "positive_prevalence": 0.03189964157706093,
+        "positive_rows": 89,
+        "rows": 2790
+      },
+      "winner": {
+        "end_layer": 6,
+        "normalized_depth": 0.35714285714285715,
+        "pooling": "masked_max",
+        "rank": 1,
+        "start_layer": 4,
+        "validation_auprc": 0.8837118768013078,
+        "validation_auroc": 0.9851635260991987,
+        "validation_balanced_accuracy_at_0_5": 0.9059454191033138,
+        "width": 3
+      }
+    },
+    "toxicity": {
+      "heldout_test": {
+        "models": {
+          "activation": {
+            "auprc": 0.7491093073703157,
+            "auroc": 0.9287198612154777,
+            "balanced_accuracy_at_0_5": 0.8556364977317636,
+            "brier_score": 0.07767574195063592,
+            "ece_10_equal_width": 0.07160119949427163,
+            "log_loss": 0.3439336360860957,
+            "macro_f1_at_0_5": 0.8072458184400139
+          },
+          "tfidf_word_char": {
+            "auprc": 0.7261890820932974,
+            "auroc": 0.8997952093364133,
+            "balanced_accuracy_at_0_5": 0.8087619325930255,
+            "brier_score": 0.08389977783190106,
+            "ece_10_equal_width": 0.13619805600825727,
+            "log_loss": 0.30159000692061994,
+            "macro_f1_at_0_5": 0.7913810722564243
+          }
+        },
+        "paired_activation_minus_tfidf": {
+          "attempts": 2000,
+          "auprc_difference": 0.022920225277018313,
+          "auprc_difference_95ci": [
+            -0.024976521149754807,
+            0.07098789983580842
+          ],
+          "auroc_difference": 0.028924651879064345,
+          "auroc_difference_95ci": [
+            0.010809444214019751,
+            0.04735787502232676
+          ],
+          "resamples": 2000,
+          "seed": 20261017,
+          "unit": "official test prompt"
+        },
+        "positive_prevalence": 0.12688172043010754,
+        "positive_rows": 354,
+        "rows": 2790
+      },
+      "winner": {
+        "end_layer": 5,
+        "normalized_depth": 0.2857142857142857,
+        "pooling": "masked_mean",
+        "rank": 1,
+        "start_layer": 3,
+        "validation_auprc": 0.7879084268715953,
+        "validation_auroc": 0.9362215728624063,
+        "validation_balanced_accuracy_at_0_5": 0.8824005844238343,
+        "width": 3
+      }
+    }
+  }
+}

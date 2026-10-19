@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-18T00:09:54.577922+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 456.00331556005403,
+  "experiment_id": "SENTIMENT-SST2-MINICPM5-1B-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 737433728,
+      "sha256": "1bc3c280930dbd346d4d8ebd6052624efba02c63718cbc0c8acfa22a06c42bc9"
+    },
+    "masked_max": {
+      "bytes": 737433728,
+      "sha256": "bd78ab82b08ac65fcb2461d2dff7403e5c8a3b213b2162fdee3d2fad03c36df3"
+    },
+    "masked_mean": {
+      "bytes": 737433728,
+      "sha256": "88b38c4fdb04b411ed7f98c85a7b992dbc31ff9418431f1a4f43398aed7d020b"
+    }
+  },
+  "input_sha256": "c2128696c8550aab94aa12131eeb3ecaae09991cb41bde6614d1c44e67af26d4",
+  "maximum_tokens_before_truncation": 61,
+  "p50_tokens": 22.0,
+  "p95_tokens": 41.0,
+  "p99_tokens": 50.0,
+  "peak_rss_kib": 6596168,
+  "resumed": false,
+  "rows": 9602,
+  "rows_over_cap": 0,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    9602,
+    25,
+    1536
+  ],
+  "started_at": "2026-10-18T00:02:18.574607+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0
+}

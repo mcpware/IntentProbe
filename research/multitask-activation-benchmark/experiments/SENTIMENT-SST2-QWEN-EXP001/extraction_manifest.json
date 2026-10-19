@@ -1,0 +1,37 @@
+{
+  "batch_size": 16,
+  "completed_at": "2026-10-17T20:47:25.355242+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 479.18899727007374,
+  "experiment_id": "SENTIMENT-SST2-QWEN-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 430169728,
+      "path": "experiments/SENTIMENT-SST2-QWEN-EXP001/cache/last_nonpadding.npy",
+      "sha256": "3ba48e255ba50cc242b0b1d5b408b7930ec840cd5d043776984d59730e0dfb70"
+    },
+    "masked_max": {
+      "bytes": 430169728,
+      "path": "experiments/SENTIMENT-SST2-QWEN-EXP001/cache/masked_max.npy",
+      "sha256": "bd9329bb0054e22625e0f45dbefebccc2559f34959e156bd4403bbd0b2357219"
+    },
+    "masked_mean": {
+      "bytes": 430169728,
+      "path": "experiments/SENTIMENT-SST2-QWEN-EXP001/cache/masked_mean.npy",
+      "sha256": "6b4278f422c027dbe4ad47e451a3cc1dbc5ddff916724c39ed90bcf5605e5427"
+    }
+  },
+  "input_sha256": "c2128696c8550aab94aa12131eeb3ecaae09991cb41bde6614d1c44e67af26d4",
+  "maximum_tokens": 62,
+  "p95_tokens": 41.0,
+  "peak_rss_kib": 4187548,
+  "rows": 9602,
+  "rows_over_cap": 0,
+  "shape_per_pooling": [
+    9602,
+    25,
+    896
+  ],
+  "started_at": "2026-10-17T20:39:26.166247+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE"
+}

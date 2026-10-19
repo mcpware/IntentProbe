@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-18T06:21:26.592744+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 788.8396250160004,
+  "experiment_id": "TOXICCHAT0124-MINICPM5-1B-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 417868928,
+      "sha256": "8fa641e0cbcba2410d21d4f81aaa6602750f1324f8d8106e40c5fef2e5250d85"
+    },
+    "masked_max": {
+      "bytes": 417868928,
+      "sha256": "75a856acb6ecad793c86113c37f4b29a62bfa6e21267e79cd57038b10ad663f0"
+    },
+    "masked_mean": {
+      "bytes": 417868928,
+      "sha256": "62675e84f14c2f9391e9c50a86e111a6693b277c9c298a188967955b1c0ce1b4"
+    }
+  },
+  "input_sha256": "e3205aeda1ebb1f18847b03fe508869bc60ed0dc7e4868f3a66bb5dd53ffc368",
+  "maximum_tokens_before_truncation": 927,
+  "p50_tokens": 15.0,
+  "p95_tokens": 233.0,
+  "p99_tokens": 354.60000000000036,
+  "peak_rss_kib": 12859268,
+  "resumed": false,
+  "rows": 5441,
+  "rows_over_cap": 9,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    5441,
+    25,
+    1536
+  ],
+  "started_at": "2026-10-18T06:08:17.753118+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.001654107700790296
+}

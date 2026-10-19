@@ -1,0 +1,41 @@
+{
+  "artifacts": {
+    "latency_k2.jsonl": {
+      "bytes": 22122,
+      "sha256": "b93a53f6c0192462e127dd40f6618f6de2c6926e8ca11dc0de2058a4d4ab509e"
+    },
+    "repeated_forward_lower_bound_k2.jsonl": {
+      "bytes": 2015,
+      "sha256": "df501e1917434bdff1cb4ecf64abfe80c028cf9849b3ce5d143c5f8b85c96238"
+    }
+  },
+  "completed_at": "2026-10-19T01:36:23.621917+00:00",
+  "config_sha256": "de4aa906e9c5a3440f5cd434822e415c7dfdcc80fa8faa1f62eaafda4ac05189",
+  "elapsed_seconds": 12.284154034001403,
+  "experiment_id": "ONE-FORWARD-MULTIHEAD-EXP001",
+  "head_names": [
+    "toxicity",
+    "jailbreaking"
+  ],
+  "k": 2,
+  "mode": "latency",
+  "model_id": "Qwen/Qwen2.5-0.5B",
+  "model_load_seconds": 1.505011139990529,
+  "model_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+  "package_versions": {
+    "datasets": "4.8.4",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.8.0"
+  },
+  "peak_rss_kib": 3702260,
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "registry_sha256": "81b2a1dd277493b21cb1c0e6a0ab344b3632c165035eb9c81861e5bf7868b9a2",
+  "rows": 80,
+  "schema_version": 1,
+  "started_at": "2026-10-19T01:36:11.337716+00:00",
+  "torch_num_threads": 6,
+  "workload_sha256": "cd6d5d5fa21bd578985b301167b8e59223eb165741f3412210459f0e9de54ccc"
+}

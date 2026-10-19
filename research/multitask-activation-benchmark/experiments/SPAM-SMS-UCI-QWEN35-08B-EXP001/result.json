@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "030374f939f64b3eb67e97e24729b1ad6bded7c746365d1ada320a99093dbcd7",
+    "probe_sha256": "4a4f36339f239d914e7dbaefcf1882d243f57df77b3d38db1da2525725d26531",
+    "test_scores_sha256": "f0a38ea9d22724a64e547e9fbfe21f5f90c762c05576d6b427b95c1a98189549"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 83.04711108910851,
+  "experiment_id": "SPAM-SMS-UCI-QWEN35-08B-EXP001",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.9822348622757869,
+        "auroc": 0.9956674041297935,
+        "balanced_accuracy_at_0_5": 0.9754793510324484,
+        "brier_score": 0.010162441738679818,
+        "ece_10_equal_width": 0.011624503102573484,
+        "log_loss": 0.04229814798495309,
+        "macro_f1_at_0_5": 0.9733629046135021
+      },
+      "tfidf_word_char": {
+        "auprc": 0.9695889748798868,
+        "auroc": 0.9894911504424778,
+        "balanced_accuracy_at_0_5": 0.9620667404129793,
+        "brier_score": 0.018625121055112312,
+        "ece_10_equal_width": 0.06868020977855169,
+        "log_loss": 0.10557971054379657,
+        "macro_f1_at_0_5": 0.9726294365184455
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": 0.012645887395900113,
+      "auprc_difference_95ci": [
+        -0.008284864620192445,
+        0.037782741107572335
+      ],
+      "auroc_difference": 0.006176253687315669,
+      "auroc_difference_95ci": [
+        -0.0027747034306133734,
+        0.020401476445480578
+      ],
+      "resamples": 2000,
+      "seed": 20261017,
+      "unit": "test message"
+    },
+    "positive_prevalence": 0.12403100775193798,
+    "positive_rows": 96,
+    "rows": 774
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "selection": {
+    "available_train_rows": 3611,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 449,
+    "screening_train_rows": 3611,
+    "validation_positive_rows": 97,
+    "validation_rows": 774,
+    "winner": {
+      "end_layer": 11,
+      "normalized_depth": 0.4375,
+      "pooling": "masked_max",
+      "rank": 1,
+      "start_layer": 10,
+      "validation_auprc": 0.9985449068005612,
+      "validation_auroc": 0.9997868096057501,
+      "validation_balanced_accuracy_at_0_5": 0.977904338424523,
+      "width": 2
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "sms_spam",
+  "uncertainty_limitation": "The merged collection lacks per-message source-corpus, sender, and author identifiers, so the paired bootstrap is row-level"
+}

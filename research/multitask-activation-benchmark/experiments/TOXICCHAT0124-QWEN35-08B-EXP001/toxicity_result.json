@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "945b8f13cab07c44718b5c7bf0abcc47f040a26bdcfbf621e26f4c4ca397391b",
+    "probe_sha256": "98a7df6f41203c733350422f4c8e06391bfd2848b20d516a1cfeedea5115c42c",
+    "test_scores_sha256": "686781973a468906c6fc829209977cd71b2ba33d11b5a2f805a2f7f20cef054c"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 71.14052015100242,
+  "experiment_id": "TOXICCHAT0124-QWEN35-08B-EXP001",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.766520930725523,
+        "auroc": 0.9303282680693553,
+        "balanced_accuracy_at_0_5": 0.8566627703097603,
+        "brier_score": 0.07491706256815318,
+        "ece_10_equal_width": 0.0676935553741882,
+        "log_loss": 0.3476253185631555,
+        "macro_f1_at_0_5": 0.8098250591232203
+      },
+      "tfidf_word_char": {
+        "auprc": 0.7261890820932974,
+        "auroc": 0.8997952093364133,
+        "balanced_accuracy_at_0_5": 0.8087619325930255,
+        "brier_score": 0.08389977783190106,
+        "ece_10_equal_width": 0.13619805600825727,
+        "log_loss": 0.30159000692061994,
+        "macro_f1_at_0_5": 0.7913810722564243
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": 0.04033184863222561,
+      "auprc_difference_95ci": [
+        -0.0002665729672962521,
+        0.08445454123767814
+      ],
+      "auroc_difference": 0.030533058732941987,
+      "auroc_difference_95ci": [
+        0.010274573646744358,
+        0.0510146645006598
+      ],
+      "resamples": 2000,
+      "seed": 20261017,
+      "unit": "official test prompt"
+    },
+    "positive_prevalence": 0.12688172043010754,
+    "positive_rows": 354,
+    "rows": 2790
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "selection": {
+    "available_train_rows": 2120,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 273,
+    "screening_train_rows": 2120,
+    "validation_positive_rows": 68,
+    "validation_rows": 531,
+    "winner": {
+      "end_layer": 9,
+      "normalized_depth": 0.375,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 9,
+      "validation_auprc": 0.8078486931696222,
+      "validation_auroc": 0.9325053995680347,
+      "validation_balanced_accuracy_at_0_5": 0.861834582645153,
+      "width": 1
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "toxicity",
+  "uncertainty_limitation": "ToxicChat does not provide a stable user or source-cluster identifier, so the paired bootstrap is row-level"
+}

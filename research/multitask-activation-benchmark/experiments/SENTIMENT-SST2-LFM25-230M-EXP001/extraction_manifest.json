@@ -1,0 +1,39 @@
+{
+  "batch_size": 128,
+  "completed_at": "2026-10-17T23:02:06.700365+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 372.20593111612834,
+  "experiment_id": "SENTIMENT-SST2-LFM25-230M-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 294973568,
+      "sha256": "bd20fcd5cc2366d9052e7f57aa3838de8627f141453aa99afee62dd19bba9f0f"
+    },
+    "masked_max": {
+      "bytes": 294973568,
+      "sha256": "9a6bb34e1e4f20ba489d419c80515a5c4ce27c4fc495b2e5c2ff8c061678c00f"
+    },
+    "masked_mean": {
+      "bytes": 294973568,
+      "sha256": "207bc6712362ef2854b0a1b00bae6d3d4066e070b93b78c41dd5b96483909151"
+    }
+  },
+  "input_sha256": "c2128696c8550aab94aa12131eeb3ecaae09991cb41bde6614d1c44e67af26d4",
+  "maximum_tokens_before_truncation": 68,
+  "p50_tokens": 23.0,
+  "p95_tokens": 44.0,
+  "p99_tokens": 53.0,
+  "peak_rss_kib": 3250820,
+  "resumed": true,
+  "rows": 9602,
+  "rows_over_cap": 0,
+  "rows_preexisting_at_start": 3968,
+  "shape_per_pooling": [
+    9602,
+    15,
+    1024
+  ],
+  "started_at": "2026-10-17T22:55:54.494435+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0
+}

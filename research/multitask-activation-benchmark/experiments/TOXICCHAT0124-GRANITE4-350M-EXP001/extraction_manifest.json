@@ -1,0 +1,39 @@
+{
+  "batch_size": 64,
+  "completed_at": "2026-10-18T05:51:30.763922+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 294.9031565229998,
+  "experiment_id": "TOXICCHAT0124-GRANITE4-350M-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 323152000,
+      "sha256": "dad7a5c3be340d8f5ba2c07d6d3815e292ec284b519f721f1ee597dc96ba3ed1"
+    },
+    "masked_max": {
+      "bytes": 323152000,
+      "sha256": "4e1e45176b425045ea22803edcc040d8c98e8ec14219edee82b9a6ab5f4fcaa2"
+    },
+    "masked_mean": {
+      "bytes": 323152000,
+      "sha256": "b4cd6fb5da0c5ef380c0afd745ae5a6fdffc59a90d0e3812692242146987abe7"
+    }
+  },
+  "input_sha256": "e3205aeda1ebb1f18847b03fe508869bc60ed0dc7e4868f3a66bb5dd53ffc368",
+  "maximum_tokens_before_truncation": 927,
+  "p50_tokens": 14.0,
+  "p95_tokens": 240.0,
+  "p99_tokens": 368.60000000000036,
+  "peak_rss_kib": 14935804,
+  "resumed": false,
+  "rows": 5441,
+  "rows_over_cap": 11,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    5441,
+    29,
+    1024
+  ],
+  "started_at": "2026-10-18T05:46:35.860767+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0020216871898548062
+}

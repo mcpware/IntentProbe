@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-18T08:21:33.332597+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 811.1920148370009,
+  "experiment_id": "PRAGMATICS-UCC-QWEN-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 1985670528,
+      "sha256": "aaea5451ab7a9f89456281e8f291523227e6502b5937190610d7ca51e3772464"
+    },
+    "masked_max": {
+      "bytes": 1985670528,
+      "sha256": "4cc6d46b63889def39cf517f5464aac847ecfdea37915cbb2c0166a5c6086261"
+    },
+    "masked_mean": {
+      "bytes": 1985670528,
+      "sha256": "a1bcdcd4aa89e9c1b77a4499e1d15fe0f186b7dcb5c7832aeea281f5e3b47acf"
+    }
+  },
+  "input_sha256": "617083fa3662d6371b98cc37cd74ab4fa10c79cc71d6f99cbcd31388c1251d9f",
+  "maximum_tokens_before_truncation": 102,
+  "p50_tokens": 23.0,
+  "p95_tokens": 51.0,
+  "p99_tokens": 59.0,
+  "peak_rss_kib": 11330364,
+  "resumed": true,
+  "rows": 44323,
+  "rows_over_cap": 0,
+  "rows_preexisting_at_start": 28448,
+  "shape_per_pooling": [
+    44323,
+    25,
+    896
+  ],
+  "started_at": "2026-10-18T08:08:02.140583+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0
+}

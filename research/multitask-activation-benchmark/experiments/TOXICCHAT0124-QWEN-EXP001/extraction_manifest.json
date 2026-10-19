@@ -1,0 +1,40 @@
+{
+  "batch_size": 16,
+  "completed_at": "2026-10-17T21:03:12.066529+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 324.95137825002894,
+  "experiment_id": "TOXICCHAT0124-QWEN-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 243756928,
+      "path": "experiments/TOXICCHAT0124-QWEN-EXP001/cache/last_nonpadding.npy",
+      "sha256": "aaac48c42ba96db3adf8a4302269d42d4083b1934cc13efb42c888aabaf1b7ae"
+    },
+    "masked_max": {
+      "bytes": 243756928,
+      "path": "experiments/TOXICCHAT0124-QWEN-EXP001/cache/masked_max.npy",
+      "sha256": "4a4f4efe03e22fecf3c4dab02b0919053719fa5ee0eef79185308d1cbb20b5d2"
+    },
+    "masked_mean": {
+      "bytes": 243756928,
+      "path": "experiments/TOXICCHAT0124-QWEN-EXP001/cache/masked_mean.npy",
+      "sha256": "4787ccba2cda3e04b1afcce009f8f993c56f2e5bbf0060a0f48f4d5424875897"
+    }
+  },
+  "input_sha256": "e3205aeda1ebb1f18847b03fe508869bc60ed0dc7e4868f3a66bb5dd53ffc368",
+  "maximum_tokens_before_truncation": 1248,
+  "p50_tokens": 14.0,
+  "p95_tokens": 237.0,
+  "p99_tokens": 357.60000000000036,
+  "peak_rss_kib": 8277900,
+  "rows": 5441,
+  "rows_over_cap": 9,
+  "shape_per_pooling": [
+    5441,
+    25,
+    896
+  ],
+  "started_at": "2026-10-17T20:57:47.115154+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.001654107700790296
+}

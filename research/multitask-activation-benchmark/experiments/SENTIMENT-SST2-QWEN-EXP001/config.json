@@ -1,0 +1,38 @@
+{
+  "experiment_id": "SENTIMENT-SST2-QWEN-EXP001",
+  "status": "FROZEN_BEFORE_FEATURE_EXTRACTION",
+  "task": {
+    "id": "sentiment_sst2",
+    "input": "data/processed/sst2/sst2_root_sentences.parquet",
+    "primary_selection_metric": "AUROC",
+    "test_use": "one evaluation after readout selection on the official validation split"
+  },
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "hidden_state_outputs": 25,
+    "hidden_size": 896,
+    "max_tokens": 256
+  },
+  "candidate_family": {
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "layer_windows": [1, 2, 3],
+    "candidate_count": 216,
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "random_state": 20261017
+  },
+  "baseline": "word 1-2 plus character 2-5 TF-IDF logistic on identical train rows",
+  "uncertainty": {
+    "resamples": 2000,
+    "unit": "official test sentence",
+    "seed": 20261017,
+    "limitation": "SST does not release author or review identifiers for a stronger clustered bootstrap"
+  },
+  "release_boundary": "Do not redistribute SST raw text or derived weights until dataset licence scope is confirmed. Aggregate metrics and code are publishable."
+}

@@ -1,0 +1,36 @@
+{
+  "batch_size": 8,
+  "config_sha256": "17fe441d1bd4ec47c45e9dee44b147eff4d952f86edb3ba90138eebb6978ce17",
+  "evaluation_manifest_sha256": "1d1c4c4010207cad52630bc7ba18333f2b493b0754b2e50cea02a419847b18e6",
+  "experiment_id": "SENTINEL-JUDGE-VS-PROBE-EXP001",
+  "invalid_outputs": 0,
+  "load_seconds": 2.855224122002255,
+  "method": "generate",
+  "model": {
+    "id": "Qwen/Qwen3.5-0.8B",
+    "loader": "image_text_to_text",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "selection_reason": "Highest-quality locally cached post-trained candidate with completed activation readouts on the two public sentinel controls and a verified constrained-label generation smoke test.",
+    "weight_bytes": 1746942600
+  },
+  "model_alias": "quality_anchor",
+  "packages": {
+    "datasets": "4.8.4",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "torch": "2.11.0",
+    "transformers": "5.8.0"
+  },
+  "peak_rss_kib": 12768420,
+  "positive_rows": 69,
+  "predictions_sha256": "2caf8f5fd38dbcbcff75627000abd356531c4d913e5b4c924dab9dd0541bf3d3",
+  "prompt": "zero_shot",
+  "prompt_sha256": "84eb2b81c9148cba2edac75799bb164e1b1648a05ccd673c5923d1dceef8445b",
+  "python": "3.10.12",
+  "rows": 156,
+  "schema_version": 1,
+  "scoring_seconds": 144.53315121900232,
+  "seconds_per_example": 0.9264945590961687,
+  "task": "authorization_to_execute"
+}

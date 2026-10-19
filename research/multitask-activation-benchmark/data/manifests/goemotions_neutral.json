@@ -1,0 +1,65 @@
+{
+  "cross_split_exact_text_groups": 82,
+  "dataset_id": "goemotions_neutral_label_unique",
+  "dedup_priority": [
+    "test",
+    "validation",
+    "train"
+  ],
+  "excluded_from_model_input": [
+    "neutral_label",
+    "split",
+    "group_id",
+    "comment_id",
+    "label_ids",
+    "emotion_label_count"
+  ],
+  "independent_unit_limitation": "Filtered files retain unique comment IDs but omit author and thread IDs.",
+  "model_input_columns": [
+    "text"
+  ],
+  "neutral_label_conflict_groups_removed": 38,
+  "neutral_label_conflict_rows_removed": 116,
+  "normalized_exact_text_groups": 53943,
+  "official_source": "https://github.com/google-research/google-research/tree/master/goemotions",
+  "output_sha256": "a6e25ab3a7fdd3b2d768a578011996ba8c55921dd2a5742e272bf8e9597b4550",
+  "raw_files": {
+    "dev.tsv": {
+      "bytes": 439059,
+      "sha256": "575489c079c9de1097062a01738f998590d6b7ead66dd1c9fd1d2ba01fd8bc62"
+    },
+    "emotions.txt": {
+      "bytes": 248,
+      "sha256": "45c3ef86782d2a4d7fedcd6d8c111aa0d0e94720689bd164fac94fefb4495a89"
+    },
+    "test.tsv": {
+      "bytes": 436706,
+      "sha256": "0587b2dd8b27b97352adbfc3fb083d46005c8946657fdc2b1ca8b1cc7f1f8be4"
+    },
+    "train.tsv": {
+      "bytes": 3519053,
+      "sha256": "1c254a142be5c00e80d819b9ae1bbd36d94b2eeb8f4b1271846508d57e57d9c5"
+    }
+  },
+  "rows_after_conflict_removal_and_exact_dedup": 53905,
+  "rows_in_duplicate_groups": 506,
+  "source_neutral_positive": 17772,
+  "source_neutral_with_other_labels": 1751,
+  "source_revision": "3ef52111c1fabc301880818f5a547570e926a76b",
+  "source_rows": 54263,
+  "splits": {
+    "test": {
+      "neutral_positive": 1778,
+      "rows": 5409
+    },
+    "train": {
+      "neutral_positive": 14146,
+      "rows": 43095
+    },
+    "validation": {
+      "neutral_positive": 1762,
+      "rows": 5401
+    }
+  },
+  "status": "READY_FOR_FROZEN_BENCHMARK"
+}

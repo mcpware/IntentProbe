@@ -1,0 +1,57 @@
+{
+  "experiment_id": "SPAM-SMS-UCI-QWEN-EXP001",
+  "status": "FROZEN_AFTER_LABEL_BLIND_TOKEN_AUDIT_BEFORE_FEATURE_EXTRACTION",
+  "dataset": {
+    "id": "sms_spam_uci_unique",
+    "input": "data/processed/sms_spam_uci/sms_spam_unique.parquet",
+    "rows": 5159,
+    "splits": {"train": 3611, "validation": 774, "test": 774},
+    "text_column": "text",
+    "id_column": "message_id",
+    "source_archive_sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+    "exact_duplicate_policy": "retain the first source row for each normalized exact-text group before splitting"
+  },
+  "task": {
+    "id": "sms_spam",
+    "label_column": "label",
+    "positive_label": "spam",
+    "primary_selection_metric": "AUPRC",
+    "positive_rows": {"train": 449, "validation": 97, "test": 96}
+  },
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "hidden_state_outputs": 25,
+    "hidden_size": 896,
+    "max_tokens": 256,
+    "truncation_side": "right"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 259,
+    "p50_tokens": 17.0,
+    "p95_tokens": 59.0,
+    "p99_tokens": 75.0,
+    "rows_over_cap": 1
+  },
+  "candidate_family": {
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "layer_windows": [1, 2, 3],
+    "candidate_count": 216,
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "random_state": 20261017
+  },
+  "baseline": "class-weighted word 1-2 plus character 2-5 TF-IDF logistic on identical fit rows",
+  "uncertainty": {
+    "resamples": 2000,
+    "unit": "test message",
+    "seed": 20261017,
+    "limitation": "The merged collection lacks per-message source-corpus, sender, and author identifiers, so the paired bootstrap is row-level"
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision."
+}

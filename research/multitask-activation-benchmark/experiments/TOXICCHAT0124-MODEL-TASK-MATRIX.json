@@ -1,0 +1,106 @@
+{
+  "cells": 12,
+  "depth": {
+    "cross_task_n_models": 6,
+    "cross_task_spearman_pvalue": 0.42466250756136453,
+    "cross_task_spearman_rho": -0.4058397249567139,
+    "descriptive_variance_decomposition": {
+      "interaction_share": 0.5482866043613704,
+      "model_share": 0.4347826086956525,
+      "task_share": 0.016930786942977033,
+      "total_ss": 0.4359764739229024
+    },
+    "maximum": 0.8333333333333334,
+    "median": 0.4375,
+    "minimum": 0.25,
+    "within_model_absolute_task_difference_median": 0.18750000000000003
+  },
+  "inference_boundary": "Task/model shares are descriptive: two tasks provide no replicated interaction error term.",
+  "pooling_counts": {
+    "jailbreaking": {
+      "masked_max": 3,
+      "masked_mean": 3
+    },
+    "toxicity": {
+      "masked_mean": 6
+    }
+  },
+  "status": "COMPLETE_SIX_BACKBONE_TWO_TASK_CROSSED_MATRIX",
+  "test": {
+    "activation_advantage_both_metrics_count": 2,
+    "jailbreak_activation_advantage_both_metrics_count": 0,
+    "toxicity_activation_advantage_both_metrics_count": 2
+  },
+  "validation_policy_comparison": {
+    "limitation": "Policies and regret are descriptive on the same validation cells used to choose them.",
+    "mean_auprc": {
+      "cell_specific": 0.8220032703043391,
+      "model_specific": 0.8078452628688221,
+      "task_specific": 0.7882476462187853,
+      "universal": 0.7871935590683958
+    },
+    "mean_regret_vs_cell_specific": {
+      "model_specific": 0.014158007435516984,
+      "task_specific": 0.03375562408555377,
+      "universal": 0.03480971123594323
+    },
+    "model_specific": {
+      "LiquidAI/LFM2.5-230M": {
+        "mean_validation_auprc": 0.8141319489477047,
+        "pooling": "masked_mean",
+        "target_depth": 0.535,
+        "width": 3
+      },
+      "Qwen/Qwen2.5-0.5B": {
+        "mean_validation_auprc": 0.7788250372354928,
+        "pooling": "masked_mean",
+        "target_depth": 0.47500000000000003,
+        "width": 3
+      },
+      "Qwen/Qwen3-0.6B-Base": {
+        "mean_validation_auprc": 0.8011753835235471,
+        "pooling": "masked_mean",
+        "target_depth": 0.5700000000000001,
+        "width": 2
+      },
+      "Qwen/Qwen3.5-0.8B": {
+        "mean_validation_auprc": 0.8348055726384509,
+        "pooling": "masked_mean",
+        "target_depth": 0.395,
+        "width": 1
+      },
+      "ibm-granite/granite-4.0-350m-base": {
+        "mean_validation_auprc": 0.8114226319789524,
+        "pooling": "masked_mean",
+        "target_depth": 0.64,
+        "width": 2
+      },
+      "openbmb/MiniCPM5-1B-Base": {
+        "mean_validation_auprc": 0.8067110028887843,
+        "pooling": "masked_mean",
+        "target_depth": 0.52,
+        "width": 1
+      }
+    },
+    "task_specific": {
+      "jailbreaking": {
+        "mean_validation_auprc": 0.824798557128905,
+        "pooling": "masked_mean",
+        "target_depth": 0.47500000000000003,
+        "width": 1
+      },
+      "toxicity": {
+        "mean_validation_auprc": 0.7516967353086655,
+        "pooling": "masked_mean",
+        "target_depth": 0.47500000000000003,
+        "width": 3
+      }
+    },
+    "universal": {
+      "mean_validation_auprc": 0.7871935590683958,
+      "pooling": "masked_mean",
+      "target_depth": 0.5,
+      "width": 2
+    }
+  }
+}

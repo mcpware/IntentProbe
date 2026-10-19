@@ -1,0 +1,59 @@
+{
+  "class_count_ranges": {
+    "test": {
+      "maximum_rows_per_class": 40,
+      "minimum_rows_per_class": 39
+    },
+    "train": {
+      "maximum_rows_per_class": 159,
+      "minimum_rows_per_class": 30
+    },
+    "validation": {
+      "maximum_rows_per_class": 28,
+      "minimum_rows_per_class": 5
+    }
+  },
+  "classes": 77,
+  "cross_split_exact_text_groups": 7,
+  "dataset_id": "banking77_unique",
+  "duplicate_groups": 12,
+  "excluded_from_model_input": [
+    "category",
+    "label_id",
+    "split",
+    "group_id",
+    "example_id"
+  ],
+  "label_conflict_groups": 0,
+  "model_input_columns": [
+    "text"
+  ],
+  "official_source": "https://github.com/PolyAI-LDN/task-specific-datasets/tree/master/banking_data",
+  "output_sha256": "1b30ead7dbfaa74e5256d14875975fcc759ce1b607b9d76ac60058b3934e68de",
+  "raw_files": {
+    "categories.json": {
+      "bytes": 2036,
+      "sha256": "53261da888122daf2d120d925458631d9619e15d82e56052e7a42e535ce32b63"
+    },
+    "test.csv": {
+      "bytes": 239961,
+      "sha256": "d12d6e3bc4c3103966ae786dc435913c0c563dfa328f5a3646d0e62cfeeb474d"
+    },
+    "train.csv": {
+      "bytes": 839073,
+      "sha256": "b06e26ac675513959a63135f11b94ea7786ed02da65db93a5650d8838cbc664b"
+    }
+  },
+  "rows_after_exact_dedup": 13071,
+  "rows_in_duplicate_groups": 24,
+  "source_revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+  "source_rows": 13083,
+  "split_seed": 20261017,
+  "splits": {
+    "test": 3079,
+    "train": 8493,
+    "validation": 1499
+  },
+  "status": "READY_FOR_FROZEN_MULTICLASS_BENCHMARK",
+  "validation_protocol": "15% label-stratified split of leakage-clean official train"
+}

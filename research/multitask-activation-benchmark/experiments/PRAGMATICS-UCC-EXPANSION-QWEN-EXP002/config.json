@@ -1,0 +1,88 @@
+{
+  "experiment_id": "PRAGMATICS-UCC-EXPANSION-QWEN-EXP002",
+  "status": "FROZEN_BEFORE_READOUT_SCREEN_USING_EXISTING_LABEL_BLIND_FEATURES",
+  "frozen_at": "2026-10-18",
+  "purpose": "Add three independently trained real-label pragmatics readouts before the K=16 one-forward scaling benchmark; this expansion does not alter EXP001 tasks or results.",
+  "cache_source": "experiments/PRAGMATICS-UCC-QWEN-EXP001/cache",
+  "dataset": {
+    "id": "unhealthy_comments_ucc_unique",
+    "input": "data/processed/unhealthy_comments/ucc_unique.parquet",
+    "rows": 44323,
+    "splits": {
+      "train": 35472,
+      "validation": 4427,
+      "test": 4424
+    },
+    "text_column": "text",
+    "id_column": "comment_id",
+    "source_revision": "55934d0079073095af8b69807d235e40c8aceff4",
+    "exact_duplicate_policy": "remove all exact-text label-conflict groups, then retain test before validation before train for remaining duplicates"
+  },
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "hidden_state_outputs": 25,
+    "hidden_size": 896,
+    "max_tokens": 128,
+    "truncation_side": "right"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 102,
+    "p50_tokens": 23.0,
+    "p95_tokens": 51.0,
+    "p99_tokens": 59.0,
+    "rows_over_cap": 0
+  },
+  "tasks": {
+    "antagonize": {
+      "id": "ucc_antagonize",
+      "label_column": "antagonize",
+      "positive_label": 1,
+      "positive_rows": {"train": 1689, "validation": 174, "test": 203},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "generalisation": {
+      "id": "ucc_generalisation",
+      "label_column": "generalisation",
+      "positive_label": 1,
+      "positive_rows": {"train": 752, "validation": 96, "test": 96},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "hostile": {
+      "id": "ucc_hostile",
+      "label_column": "hostile",
+      "positive_label": 1,
+      "positive_rows": {"train": 923, "validation": 99, "test": 108},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    }
+  },
+  "candidate_family": {
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "layer_windows": [1, 2, 3],
+    "candidate_count_per_task": 216,
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "head": {
+    "type": "class-weighted logistic regression",
+    "C": 1.0,
+    "solver": "liblinear",
+    "max_iter": 2000,
+    "random_state": 20261018
+  },
+  "baseline": "class-weighted word 1-2 plus character 2-5 TF-IDF logistic on identical fit rows",
+  "baseline_class_weight": "balanced",
+  "uncertainty": {
+    "resamples": 2000,
+    "seed": 20261018,
+    "unit": "official test comment",
+    "limitation": "The released files omit author and article/thread IDs, so paired uncertainty is row-level and cannot support an unseen-author or unseen-article claim."
+  },
+  "expected_then_check": {
+    "expected": "The three related pragmatics targets will be detectable above prevalence, but the best pooling and normalized depth may differ by target and TF-IDF may remain stronger for lexical targets.",
+    "check": "Report all 216 validation candidates per target, one-shot official-test metrics, calibration, and paired activation-minus-TF-IDF intervals."
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence."
+}

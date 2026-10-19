@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-17T22:22:25.904383+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 119.69292144104838,
+  "experiment_id": "SPAM-SMS-UCI-GRANITE4-350M-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 306403456,
+      "sha256": "f60a08270a04194eac924390cbc9b97a1202a73e7b756b299c76fd635b2ec09a"
+    },
+    "masked_max": {
+      "bytes": 306403456,
+      "sha256": "153cc6ac9c67a37e190b41184ac90ffafeaee8f93ab9f201bb60cf36e6d42b79"
+    },
+    "masked_mean": {
+      "bytes": 306403456,
+      "sha256": "ca981efbc52ac067c4543c79fe4559144112e01fe3f6713686693ffe9e6241cc"
+    }
+  },
+  "input_sha256": "0e6b1fd1ce54533dd56ff0129e1ccb5eeac039e0b04633df7201090a94a4baf7",
+  "maximum_tokens_before_truncation": 259,
+  "p50_tokens": 17.0,
+  "p95_tokens": 51.0,
+  "p99_tokens": 73.0,
+  "peak_rss_kib": 8443744,
+  "resumed": false,
+  "rows": 5159,
+  "rows_over_cap": 1,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    5159,
+    29,
+    1024
+  ],
+  "started_at": "2026-10-17T22:20:26.211464+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0001938360147315371
+}

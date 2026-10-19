@@ -1,0 +1,85 @@
+{
+  "backbone": {
+    "hidden_size": 1536,
+    "hidden_state_outputs": 25,
+    "id": "openbmb/MiniCPM5-1B-Base",
+    "max_tokens": 512,
+    "model_class": "LlamaModel",
+    "revision": "156170697656c48f69915b33a2fb44110242187c",
+    "truncation_side": "right",
+    "trust_remote_code": true
+  },
+  "baseline": "class-weighted word 1-2 plus character 2-5 TF-IDF logistic on identical fit rows",
+  "candidate_family": {
+    "candidate_count": 216,
+    "candidate_count_per_task": 216,
+    "layer_windows": [
+      1,
+      2,
+      3
+    ],
+    "pooling": [
+      "masked_mean",
+      "last_nonpadding",
+      "masked_max"
+    ],
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "dataset": {
+    "exact_duplicate_policy": "preserve official test, remove normalized exact duplicates from original train before making validation",
+    "human_annotation_only": true,
+    "id": "toxicchat0124_human_unique",
+    "id_column": "conv_id",
+    "input": "data/processed/toxicchat0124/human_unique.parquet",
+    "rows": 5441,
+    "source_license": "CC BY-NC 4.0",
+    "source_revision": "29df8e4dba60e1f4af4b4075c0705c5b313548a8",
+    "splits": {
+      "test": 2790,
+      "train": 2120,
+      "validation": 531
+    },
+    "text_column": "text"
+  },
+  "experiment_id": "TOXICCHAT0124-MINICPM5-1B-EXP001",
+  "head": {
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 20261017,
+    "solver": "liblinear",
+    "type": "class-weighted logistic regression"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 927,
+    "p50_tokens": 15.0,
+    "p95_tokens": 233.0,
+    "p99_tokens": 354.60000000000036,
+    "rows_over_cap": 9
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "status": "FROZEN_AFTER_LABEL_BLIND_TOKEN_AUDIT_BEFORE_FEATURE_EXTRACTION",
+  "tasks": {
+    "jailbreaking": {
+      "positive_rows": {
+        "test": 89,
+        "train": 75,
+        "validation": 18
+      },
+      "primary_selection_metric": "AUPRC"
+    },
+    "toxicity": {
+      "positive_rows": {
+        "test": 354,
+        "train": 273,
+        "validation": 68
+      },
+      "primary_selection_metric": "AUPRC"
+    }
+  },
+  "uncertainty": {
+    "limitation": "ToxicChat does not provide a stable user or source-cluster identifier, so the paired bootstrap is row-level",
+    "resamples": 2000,
+    "seed": 20261017,
+    "unit": "official test prompt"
+  }
+}

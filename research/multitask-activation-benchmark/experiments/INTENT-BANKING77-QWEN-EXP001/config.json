@@ -1,0 +1,61 @@
+{
+  "experiment_id": "INTENT-BANKING77-QWEN-EXP001",
+  "status": "FROZEN_AFTER_MULTICLASS_COMPUTE_PILOT_BEFORE_TEST",
+  "dataset": {
+    "id": "banking77_unique",
+    "input": "data/processed/banking77/banking77_unique.parquet",
+    "rows": 13071,
+    "splits": {"train": 8493, "validation": 1499, "test": 3079},
+    "text_column": "text",
+    "id_column": "example_id",
+    "source_revision": "57ec275d8078af65b7731c2a98be812d844a6d6b",
+    "exact_duplicate_policy": "preserve official test before de-duplication, then split validation from leakage-clean train"
+  },
+  "task": {
+    "id": "banking77_intent",
+    "label_column": "label_id",
+    "classes": 77,
+    "primary_selection_metric": "macro_F1",
+    "selection_train_row_budget": 3000,
+    "selection_train_sampling": "deterministic label-stratified sample from clean train; validation and test remain complete"
+  },
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "hidden_state_outputs": 25,
+    "hidden_size": 896,
+    "max_tokens": 128,
+    "truncation_side": "right"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 97,
+    "p50_tokens": 11.0,
+    "p95_tokens": 33.0,
+    "p99_tokens": 48.0,
+    "rows_over_cap": 0
+  },
+  "candidate_family": {
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "layer_windows": [1, 2, 3],
+    "candidate_count": 216,
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "head": {
+    "type": "averaged SGD one-vs-rest logistic",
+    "loss": "log_loss",
+    "alpha": 0.0001,
+    "class_weight": "balanced",
+    "average": true,
+    "max_iter": 40,
+    "tol": 0.001,
+    "random_state": 20261017
+  },
+  "baseline": "word 1-2 plus character 2-5 TF-IDF with the identical averaged SGD logistic head on identical fit rows",
+  "uncertainty": {
+    "resamples": 2000,
+    "unit": "official test utterance",
+    "seed": 20261017,
+    "limitation": "BANKING77 releases no user or source-group identifiers, so paired uncertainty is row-level"
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision."
+}

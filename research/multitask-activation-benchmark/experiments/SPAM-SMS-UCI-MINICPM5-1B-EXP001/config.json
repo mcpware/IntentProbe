@@ -1,0 +1,75 @@
+{
+  "backbone": {
+    "hidden_size": 1536,
+    "hidden_state_outputs": 25,
+    "id": "openbmb/MiniCPM5-1B-Base",
+    "max_tokens": 256,
+    "model_class": "LlamaModel",
+    "revision": "156170697656c48f69915b33a2fb44110242187c",
+    "truncation_side": "right",
+    "trust_remote_code": true
+  },
+  "baseline": "class-weighted word 1-2 plus character 2-5 TF-IDF logistic on identical fit rows",
+  "candidate_family": {
+    "candidate_count": 216,
+    "layer_windows": [
+      1,
+      2,
+      3
+    ],
+    "pooling": [
+      "masked_mean",
+      "last_nonpadding",
+      "masked_max"
+    ],
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "dataset": {
+    "exact_duplicate_policy": "retain the first source row for each normalized exact-text group before splitting",
+    "id": "sms_spam_uci_unique",
+    "id_column": "message_id",
+    "input": "data/processed/sms_spam_uci/sms_spam_unique.parquet",
+    "rows": 5159,
+    "source_archive_sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+    "splits": {
+      "test": 774,
+      "train": 3611,
+      "validation": 774
+    },
+    "text_column": "text"
+  },
+  "experiment_id": "SPAM-SMS-UCI-MINICPM5-1B-EXP001",
+  "head": {
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 20261017,
+    "solver": "liblinear",
+    "type": "class-weighted logistic regression"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 238,
+    "p50_tokens": 17.0,
+    "p95_tokens": 52.0,
+    "p99_tokens": 72.42000000000007,
+    "rows_over_cap": 0
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "status": "FROZEN_AFTER_LABEL_BLIND_TOKEN_AUDIT_BEFORE_FEATURE_EXTRACTION",
+  "task": {
+    "id": "sms_spam",
+    "label_column": "label",
+    "positive_label": "spam",
+    "positive_rows": {
+      "test": 96,
+      "train": 449,
+      "validation": 97
+    },
+    "primary_selection_metric": "AUPRC"
+  },
+  "uncertainty": {
+    "limitation": "The merged collection lacks per-message source-corpus, sender, and author identifiers, so the paired bootstrap is row-level",
+    "resamples": 2000,
+    "seed": 20261017,
+    "unit": "test message"
+  }
+}

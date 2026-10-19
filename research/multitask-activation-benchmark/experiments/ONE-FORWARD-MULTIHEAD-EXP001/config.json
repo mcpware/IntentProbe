@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "experiment_id": "ONE-FORWARD-MULTIHEAD-EXP001",
+  "status": "FROZEN_BEFORE_SYSTEMS_TIMING",
+  "frozen_at": "2026-10-18",
+  "purpose": "Measure one Qwen2.5 forward followed by K independently trained scalar activation readouts at K=1,2,4,8,16, alongside a K-forward lower bound for separate judge calls.",
+  "seed": 20261018,
+  "backbone": {
+    "id": "Qwen/Qwen2.5-0.5B",
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "hidden_state_outputs": 25,
+    "hidden_size": 896,
+    "max_tokens": 128,
+    "truncation_side": "right"
+  },
+  "k_values": [1, 2, 4, 8, 16],
+  "latency_rows_per_source": 16,
+  "ood_rows_per_source": 64,
+  "repeated_forward_lower_bound_rows": 10,
+  "heads": [
+    {
+      "name": "toxicity",
+      "native_source": "toxicchat",
+      "source_config": "research/multitask-activation-benchmark/experiments/TOXICCHAT0124-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/TOXICCHAT0124-QWEN-EXP001/toxicity_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/TOXICCHAT0124-QWEN-EXP001/toxicity_test_scores.npz"
+    },
+    {
+      "name": "jailbreaking",
+      "native_source": "toxicchat",
+      "source_config": "research/multitask-activation-benchmark/experiments/TOXICCHAT0124-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/TOXICCHAT0124-QWEN-EXP001/jailbreaking_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/TOXICCHAT0124-QWEN-EXP001/jailbreaking_test_scores.npz"
+    },
+    {
+      "name": "spam",
+      "native_source": "sms_spam",
+      "source_config": "research/multitask-activation-benchmark/experiments/SPAM-SMS-UCI-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/SPAM-SMS-UCI-QWEN-EXP001/probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/SPAM-SMS-UCI-QWEN-EXP001/test_scores.npz"
+    },
+    {
+      "name": "sentiment_positive",
+      "native_source": "sst2",
+      "source_config": "research/multitask-activation-benchmark/experiments/SENTIMENT-SST2-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/SENTIMENT-SST2-QWEN-EXP001/sentiment_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/SENTIMENT-SST2-QWEN-EXP001/test_scores.npz"
+    },
+    {
+      "name": "emotion_neutral",
+      "native_source": "goemotions",
+      "source_config": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-NEUTRAL-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-NEUTRAL-QWEN-EXP001/probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-NEUTRAL-QWEN-EXP001/test_scores.npz"
+    },
+    {
+      "name": "emotion_anger",
+      "native_source": "goemotions",
+      "source_config": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/anger_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/anger_test_scores.npz"
+    },
+    {
+      "name": "emotion_sadness",
+      "native_source": "goemotions",
+      "source_config": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/sadness_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/sadness_test_scores.npz"
+    },
+    {
+      "name": "emotion_admiration",
+      "native_source": "goemotions",
+      "source_config": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/admiration_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/admiration_test_scores.npz"
+    },
+    {
+      "name": "emotion_curiosity",
+      "native_source": "goemotions",
+      "source_config": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/curiosity_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001/curiosity_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_condescending",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/condescending_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/condescending_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_dismissive",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/dismissive_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/dismissive_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_unfair_generalisation",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/generalisation_unfair_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/generalisation_unfair_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_sarcastic",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/sarcastic_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-QWEN-EXP001/sarcastic_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_antagonize",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/antagonize_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/antagonize_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_generalisation",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/generalisation_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/generalisation_test_scores.npz"
+    },
+    {
+      "name": "pragmatics_hostile",
+      "native_source": "ucc",
+      "source_config": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/config.json",
+      "probe": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/hostile_probe.npz",
+      "scores": "research/multitask-activation-benchmark/experiments/PRAGMATICS-UCC-EXPANSION-QWEN-EXP002/hostile_test_scores.npz"
+    }
+  ],
+  "workload_sources": {
+    "sst2": {
+      "path": "research/multitask-activation-benchmark/data/processed/sst2/sst2_root_sentences.parquet",
+      "id_column": "example_id",
+      "text_column": "text",
+      "split_column": "split",
+      "split": "test"
+    },
+    "toxicchat": {
+      "path": "research/multitask-activation-benchmark/data/processed/toxicchat0124/human_unique.parquet",
+      "id_column": "conv_id",
+      "text_column": "text",
+      "split_column": "split",
+      "split": "test"
+    },
+    "sms_spam": {
+      "path": "research/multitask-activation-benchmark/data/processed/sms_spam_uci/sms_spam_unique.parquet",
+      "id_column": "message_id",
+      "text_column": "text",
+      "split_column": "split",
+      "split": "test"
+    },
+    "goemotions": {
+      "path": "research/multitask-activation-benchmark/data/processed/goemotions/emotion_panel_unique.parquet",
+      "id_column": "comment_id",
+      "text_column": "text",
+      "split_column": "split",
+      "split": "test"
+    },
+    "ucc": {
+      "path": "research/multitask-activation-benchmark/data/processed/unhealthy_comments/ucc_unique.parquet",
+      "id_column": "comment_id",
+      "text_column": "text",
+      "split_column": "split",
+      "split": "test"
+    }
+  },
+  "latency": {
+    "batch_size": 1,
+    "warmup_rows": 2,
+    "includes_tokenization": true,
+    "repeated_forward_baseline": "K repeated AutoModel forwards on identical tokenized input without an LM head; this is a lower bound for K separate LLM-judge calls."
+  },
+  "ood": {
+    "batch_size": 8,
+    "interpretation": "Unlabelled cross-domain score-shift diagnostic only. Native heldout labels determine accuracy and calibration; non-native source scores are not called errors."
+  },
+  "uncertainty": {
+    "resamples": 2000,
+    "seed": 20261018,
+    "latency_unit": "identical real heldout text paired across K"
+  },
+  "expected_then_check": {
+    "expected": "One-forward total latency and peak memory will remain nearly flat from K=1 to K=16 because linear readout cost is small relative to the backbone, while the K-forward lower bound will grow approximately linearly.",
+    "check": "Report paired bootstrap intervals for latency ratios, per-K head-only latency, peak RSS, native heldout quality/calibration for every head, and descriptive cross-domain score shifts."
+  }
+}

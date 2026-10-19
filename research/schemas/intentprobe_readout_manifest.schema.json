@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mcpware.dev/schemas/intentprobe-readout-manifest-v1.schema.json",
+  "title": "IntentProbe Readout Manifest v1",
+  "description": "Versioned contract binding one task head to its renderer, frozen backbone, activation readout, fitted transforms, calibration, and runtime compatibility.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "probe_id",
+    "probe_version",
+    "task_contract",
+    "backbone",
+    "renderer",
+    "readout",
+    "head",
+    "calibration",
+    "operating_points",
+    "artifacts",
+    "compatibility"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "probe_id": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "probe_version": {
+      "$ref": "#/$defs/non_empty_string"
+    },
+    "task_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "task_type", "labels", "positive_label", "intended_decision", "excluded_interpretations"],
+      "properties": {
+        "task_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "task_type": {
+          "type": "string",
+          "enum": ["binary", "multiclass", "multilabel", "ordinal", "regression"]
+        },
+        "labels": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        },
+        "positive_label": {
+          "type": ["string", "null"]
+        },
+        "intended_decision": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "excluded_interpretations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        }
+      }
+    },
+    "backbone": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_id", "model_revision", "tokenizer_id", "tokenizer_revision", "hidden_state_indexing", "dtype"],
+      "properties": {
+        "model_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "model_revision": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "tokenizer_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "tokenizer_revision": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "hidden_state_indexing": {
+          "type": "string",
+          "enum": ["embedding_is_output_0", "first_block_is_output_0", "adapter_defined"]
+        },
+        "dtype": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "attention_implementation": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "renderer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["renderer_id", "renderer_version", "max_length", "truncation_side", "field_order", "special_token_policy"],
+      "properties": {
+        "renderer_id": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "renderer_version": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "truncation_side": {
+          "type": "string",
+          "enum": ["left", "right", "error"]
+        },
+        "field_order": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        },
+        "special_token_policy": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "chat_template": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "readout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["token_region", "pooling", "hidden_outputs", "normalized_depths", "layer_combination", "normalization"],
+      "properties": {
+        "token_region": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "pooling": {
+          "type": "string",
+          "enum": ["masked_mean", "masked_max", "last_nonpadding", "named_span", "top_k", "attention_weighted", "custom"]
+        },
+        "pooling_parameters": {
+          "type": "object"
+        },
+        "hidden_outputs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "normalized_depths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "layer_combination": {
+          "type": "string",
+          "enum": ["single", "mean", "concatenate", "learned_mixture", "trajectory", "custom"]
+        },
+        "normalization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["method", "fit_split"],
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": ["none", "standardize", "pca", "whiten", "custom"]
+            },
+            "fit_split": {
+              "type": ["string", "null"]
+            },
+            "artifact": {
+              "type": ["string", "null"]
+            }
+          }
+        }
+      }
+    },
+    "head": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "artifact", "output_kind"],
+      "properties": {
+        "family": {
+          "type": "string",
+          "enum": ["logistic_regression", "linear_svm", "kernel_svm", "shallow_mlp", "gradient_boosting", "trajectory_head", "custom"]
+        },
+        "artifact": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "output_kind": {
+          "type": "string",
+          "enum": ["logit", "score", "probability", "class_scores", "regression_value"]
+        }
+      }
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "fit_split", "artifact"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["none", "platt", "isotonic", "temperature", "vector", "custom"]
+        },
+        "fit_split": {
+          "type": ["string", "null"]
+        },
+        "artifact": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "operating_points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "threshold", "comparison", "selected_on"],
+        "properties": {
+          "name": {
+            "$ref": "#/$defs/non_empty_string"
+          },
+          "threshold": {
+            "type": "number"
+          },
+          "comparison": {
+            "type": "string",
+            "enum": [">", ">=", "<", "<="]
+          },
+          "selected_on": {
+            "$ref": "#/$defs/non_empty_string"
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/non_empty_string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["runtime_schema", "minimum_runtime_version"],
+      "properties": {
+        "runtime_schema": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "minimum_runtime_version": {
+          "$ref": "#/$defs/non_empty_string"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "selection_record": {
+          "type": "string"
+        },
+        "benchmark_record": {
+          "type": "string"
+        },
+        "provenance_record": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "7f81e2506f3c85b25c75f19d58f685e21e35514c3c40631013fd3cb17352afae",
+    "probe_sha256": "42c09dcdabee168e35f43d7916635451c5b04d2bccdc755f7c68b74f62208eea",
+    "test_scores_sha256": "b014a776b6aecd943e96becc599bbbb413375e6e18ddd48d8fca55d045d631fd"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 564.3464939499972,
+  "experiment_id": "EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.3373387809145616,
+        "auroc": 0.9108897479828377,
+        "balanced_accuracy_at_0_5": 0.8295040196810615,
+        "brier_score": 0.08925712947022835,
+        "ece_10_equal_width": 0.13631307810641796,
+        "log_loss": 0.32293231552409446,
+        "macro_f1_at_0_5": 0.6094866796621182
+      },
+      "tfidf_word_char": {
+        "auprc": 0.48230178595272216,
+        "auroc": 0.9162224760454343,
+        "balanced_accuracy_at_0_5": 0.7719306916194408,
+        "brier_score": 0.03381886854449654,
+        "ece_10_equal_width": 0.07633815215568585,
+        "log_loss": 0.14281204055161892,
+        "macro_f1_at_0_5": 0.7212483864261876
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": -0.14496300503816056,
+      "auprc_difference_95ci": [
+        -0.21323459151594185,
+        -0.06895232122015481
+      ],
+      "auroc_difference": -0.005332728062596548,
+      "auroc_difference_95ci": [
+        -0.02842638965008698,
+        0.01803652545636719
+      ],
+      "resamples": 2000,
+      "seed": 20261018,
+      "unit": "official test comment"
+    },
+    "positive_prevalence": 0.028840820854132,
+    "positive_rows": 156,
+    "rows": 5409
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "selection": {
+    "available_train_rows": 43095,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 153,
+    "screening_train_rows": 5000,
+    "validation_positive_rows": 143,
+    "validation_rows": 5401,
+    "winner": {
+      "end_layer": 16,
+      "normalized_depth": 0.6666666666666666,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 16,
+      "validation_auprc": 0.26605837336287513,
+      "validation_auroc": 0.8351722450238996,
+      "validation_balanced_accuracy_at_0_5": 0.6908666647160371,
+      "width": 1
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "goemotions_sadness_present",
+  "uncertainty_limitation": "Filtered GoEmotions files omit author and thread IDs, so the paired bootstrap is row-level and cannot support an unseen-user claim."
+}

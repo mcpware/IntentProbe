@@ -1,0 +1,58 @@
+{
+  "dataset_id": "goemotions_preregistered_four_emotion_panel",
+  "excluded_from_model_input": [
+    "admiration",
+    "anger",
+    "curiosity",
+    "sadness",
+    "split",
+    "group_id",
+    "comment_id",
+    "label_ids",
+    "emotion_label_count"
+  ],
+  "model_input_columns": [
+    "text"
+  ],
+  "output_sha256": "1bddf8692dde12f25304a51dc34e076d97dd33860ca70f795d3b8a9d15770e78",
+  "positive_rows": {
+    "admiration": {
+      "test": 504,
+      "train": 4106,
+      "validation": 487
+    },
+    "anger": {
+      "test": 198,
+      "train": 1561,
+      "validation": 194
+    },
+    "curiosity": {
+      "test": 283,
+      "train": 2183,
+      "validation": 246
+    },
+    "sadness": {
+      "test": 156,
+      "train": 1318,
+      "validation": 143
+    }
+  },
+  "row_order_identity": "identical comment_id order to the frozen neutral-label snapshot",
+  "rows": 53905,
+  "selection_lock": "Targets were fixed before activation screening to cover distinct emotion families while requiring at least 150 positive examples in the untouched test split.",
+  "source_revision": "3ef52111c1fabc301880818f5a547570e926a76b",
+  "source_snapshot": "data/processed/goemotions/neutral_label_unique.parquet",
+  "source_snapshot_sha256": "a6e25ab3a7fdd3b2d768a578011996ba8c55921dd2a5742e272bf8e9597b4550",
+  "splits": {
+    "test": 5409,
+    "train": 43095,
+    "validation": 5401
+  },
+  "status": "READY_FOR_FROZEN_BENCHMARK",
+  "targets": {
+    "admiration": 0,
+    "anger": 2,
+    "curiosity": 7,
+    "sadness": 25
+  }
+}

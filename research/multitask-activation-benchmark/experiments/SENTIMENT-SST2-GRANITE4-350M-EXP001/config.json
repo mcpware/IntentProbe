@@ -1,0 +1,78 @@
+{
+  "backbone": {
+    "hidden_size": 1024,
+    "hidden_state_outputs": 29,
+    "id": "ibm-granite/granite-4.0-350m-base",
+    "max_tokens": 256,
+    "model_class": "GraniteMoeHybridModel",
+    "revision": "a50b46cef21c8a86b15f0496cb794487a78a910b",
+    "truncation_side": "right",
+    "trust_remote_code": true
+  },
+  "baseline": "word 1-2 plus character 2-5 TF-IDF logistic on identical train rows",
+  "baseline_class_weight": null,
+  "candidate_family": {
+    "candidate_count": 252,
+    "layer_windows": [
+      1,
+      2,
+      3
+    ],
+    "pooling": [
+      "masked_mean",
+      "last_nonpadding",
+      "masked_max"
+    ],
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "dataset": {
+    "exact_duplicate_policy": "use the leakage-clean processed snapshot frozen by the source experiment",
+    "id": "sentiment_sst2",
+    "id_column": "example_id",
+    "input": "data/processed/sst2/sst2_root_sentences.parquet",
+    "rows": 9602,
+    "splits": {
+      "test": 1821,
+      "train": 6909,
+      "validation": 872
+    },
+    "text_column": "text"
+  },
+  "experiment_id": "SENTIMENT-SST2-GRANITE4-350M-EXP001",
+  "head": {
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 20261017,
+    "solver": "liblinear",
+    "type": "class-weighted logistic regression"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 63,
+    "p50_tokens": 22.0,
+    "p95_tokens": 42.0,
+    "p99_tokens": 51.0,
+    "rows_over_cap": 0
+  },
+  "release_boundary": "Do not redistribute SST raw text or derived weights until dataset licence scope is confirmed. Aggregate metrics and code are publishable.",
+  "research_scope": "Do not redistribute SST raw text or derived weights until dataset licence scope is confirmed. Aggregate metrics and code are publishable.",
+  "status": "FROZEN_AFTER_LABEL_BLIND_TOKEN_AUDIT_BEFORE_FEATURE_EXTRACTION",
+  "task": {
+    "id": "sentiment_sst2",
+    "input": "data/processed/sst2/sst2_root_sentences.parquet",
+    "label_column": "label",
+    "positive_label": 1,
+    "positive_rows": {
+      "test": 909,
+      "train": 3605,
+      "validation": 444
+    },
+    "primary_selection_metric": "AUROC",
+    "test_use": "one evaluation after readout selection on the official validation split"
+  },
+  "uncertainty": {
+    "limitation": "SST does not release author or review identifiers for a stronger clustered bootstrap",
+    "resamples": 2000,
+    "seed": 20261017,
+    "unit": "official test sentence"
+  }
+}

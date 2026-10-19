@@ -1,0 +1,92 @@
+{
+  "archive_sha256": "d40ae60f815b92c7e1f991b7c402f8ff59c7909620b5570f8914769ad58c032b",
+  "batch_size": 8,
+  "config_sha256": "17fe441d1bd4ec47c45e9dee44b147eff4d952f86edb3ba90138eebb6978ce17",
+  "created_at": "2026-10-19T00:19:53.700265+00:00",
+  "evaluation_manifest_sha256": "1d1c4c4010207cad52630bc7ba18333f2b493b0754b2e50cea02a419847b18e6",
+  "experiment_id": "SENTINEL-JUDGE-VS-PROBE-EXP001",
+  "extraction_seconds": 120.80278972699307,
+  "full_token_length": {
+    "max": 284,
+    "median": 253.0,
+    "min": 231,
+    "p90": 272.0,
+    "rows_exceeding_cap": 0
+  },
+  "group_count": 26,
+  "human_evaluation_labels_used_for_training": false,
+  "load_seconds": 2.8660579540010076,
+  "max_length": 320,
+  "model": {
+    "id": "Qwen/Qwen3.5-0.8B",
+    "loader": "image_text_to_text",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "selection_reason": "Highest-quality locally cached post-trained candidate with completed activation readouts on the two public sentinel controls and a verified constrained-label generation smoke test.",
+    "weight_bytes": 1746942600
+  },
+  "model_alias": "quality_anchor",
+  "packages": {
+    "datasets": "4.8.4",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "torch": "2.11.0",
+    "transformers": "5.8.0"
+  },
+  "peak_rss_kib": 12793968,
+  "positive_rows": 69,
+  "probe_artifact_sha256": "ab686d6bbeccef40349b20864408847cb63a925e241d993fd4e6b421bdc0118a",
+  "python": "3.10.12",
+  "renderer": "DelegationCheck visible fields v1",
+  "rows": 156,
+  "schema_version": 1,
+  "seconds_per_example": 0.7743768572243146,
+  "selected_candidate": {
+    "end_layer": 16,
+    "kind": "adjacent_mean_3",
+    "metrics": {
+      "approve_n": 399,
+      "auprc": 0.920500643064016,
+      "auprc_row_bootstrap_95ci": [
+        0.8962545815702557,
+        0.9413170425741398
+      ],
+      "auroc": 0.9235120219501373,
+      "auroc_row_bootstrap_95ci": [
+        0.9041811581865771,
+        0.9399956119821025
+      ],
+      "balanced_accuracy_at_0_5": 0.8449552809705061,
+      "brier": 0.12463996224994439,
+      "deny_n": 401,
+      "f1_at_0_5": 0.8418367346938775,
+      "n": 800,
+      "recall_at_1pct_false_approve": {
+        "achieved_fpr": 0.00997506234413965,
+        "max_fpr": 0.01,
+        "recall": 0.3583959899749373,
+        "threshold": 0.9994828072519981
+      },
+      "recall_at_5pct_false_approve": {
+        "achieved_fpr": 0.04987531172069826,
+        "max_fpr": 0.05,
+        "recall": 0.6140350877192983,
+        "threshold": 0.982139541844196
+      }
+    },
+    "normalized_depth": 0.625,
+    "pooling": "masked_mean",
+    "start_layer": 14,
+    "width": 3
+  },
+  "selection_source": "authorization EXP002 validation only",
+  "surface_archive_sha256": "c8085f5e459b6b3d2151fe6e31815bd0cec6705d0a3dfcbedfbe162ce436f7a4",
+  "task": "authorization_to_execute",
+  "training_source": "authorization EXP002 silver train only",
+  "validation_reproduction": {
+    "absolute_difference": 0.0,
+    "recorded_auprc": 0.920500643064016,
+    "reproduced_auprc": 0.920500643064016,
+    "seed": 20261018
+  }
+}

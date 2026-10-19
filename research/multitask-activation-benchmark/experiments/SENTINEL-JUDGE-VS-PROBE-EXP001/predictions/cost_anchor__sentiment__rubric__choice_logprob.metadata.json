@@ -1,0 +1,36 @@
+{
+  "batch_size": 16,
+  "config_sha256": "17fe441d1bd4ec47c45e9dee44b147eff4d952f86edb3ba90138eebb6978ce17",
+  "evaluation_manifest_sha256": "1d1c4c4010207cad52630bc7ba18333f2b493b0754b2e50cea02a419847b18e6",
+  "experiment_id": "SENTINEL-JUDGE-VS-PROBE-EXP001",
+  "invalid_outputs": 0,
+  "load_seconds": 1.036328952992335,
+  "method": "choice_logprob",
+  "model": {
+    "id": "LiquidAI/LFM2.5-230M",
+    "loader": "causal_lm",
+    "revision": "40cb2ad3b3044d5a41eee083a6103c8b523afa45",
+    "selection_reason": "Smallest completed activation-screen backbone and a verified constrained-label generation smoke test.",
+    "weight_bytes": 459401112
+  },
+  "model_alias": "cost_anchor",
+  "packages": {
+    "datasets": "4.8.4",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "torch": "2.11.0",
+    "transformers": "5.8.0"
+  },
+  "peak_rss_kib": 4015972,
+  "positive_rows": 256,
+  "predictions_sha256": "5cfbff96692f1dadfea7fed03aa8a198698bda43a8e5635131f231a3b4177ba4",
+  "prompt": "rubric",
+  "prompt_sha256": "7eeac019d16c27b8feb4caa83e6075e42c2ee99538e21f00ba29a89b3134e01d",
+  "python": "3.10.12",
+  "rows": 512,
+  "schema_version": 1,
+  "scoring_seconds": 91.87888150099025,
+  "seconds_per_example": 0.17945094043162158,
+  "task": "sentiment"
+}

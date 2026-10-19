@@ -25,6 +25,44 @@
   <img src="docs/diagram.png" width="700" alt="Text scanners read words. IntentProbe reads activations." />
 </p>
 
+## One forward, many decisions
+
+A language model can carry a useful pattern in its hidden states without turning that pattern into a
+reliable `YES` or `NO` answer. IntentProbe reads the pattern directly.
+
+Think of the local model as a brain and each activation head as a small meter attached to it. The
+model reads an input once. While it reads, its hidden layers react to toxicity, sentiment, spam,
+jailbreak attempts, hostility and other concepts. Separately trained heads read different parts of
+that reaction and turn them into calibrated scores.
+
+<p align="center">
+  <img src="docs/one-forward-many-decisions.svg" width="900" alt="One input passes through one frozen local model. A shared activation bus feeds many small task heads, followed by calibrated decisions and a receipt." />
+</p>
+
+In the first measured Qwen2.5-0.5B CPU system, one forward plus one head took **68.63 ms**. One
+forward plus 16 heads took **73.34 ms**. Repeating the base-model forward 16 times took **956.71 ms**
+and was **15.26 times slower** than the shared path on matched prompts. The repeated-forward arm is a
+conservative lower bound because it excludes task prompting, output scoring and generation.
+
+Accuracy remains task-specific. The trained activation heads beat both tested same-backbone judge
+prompts on toxicity, matched the strongest Qwen3.5 sentiment judge, and lost to the Qwen3.5 judge on
+the current human-labelled authorization transfer. A cheap head is promoted only when its own
+held-out quality and calibration are good enough.
+
+Read the plain-English public note, [**IntentProbe: One Forward, Many
+Decisions**](docs/ONE_FORWARD_MANY_DECISIONS.md), the research manuscript [*One Forward, Sixteen
+Decisions*](research/multitask-activation-benchmark/paper/DRAFT.md), or the [complete technical
+disclosure](research/multitask-activation-benchmark/ARCHITECTURE_DISCLOSURE_V0_1.md).
+
+```text
+GEASS LABS INC.
+  └── MCPware                         publisher; GitHub/Hugging Face organization
+      └── IntentProbe                 research and product umbrella
+          ├── Papers                  readout benchmark + shared-runtime architecture
+          ├── Runtime                 activation extraction, policy, and receipts
+          └── Probe products / heads  poisoning, authorization, memory, and future tasks
+```
+
 ## Three detectors, one project
 
 IntentProbe is a family of small classifiers that read the internal activations of frozen local

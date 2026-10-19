@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "3c845b4451ac7050926113eabd0e0490553da3b76c4db87b16fb157958e135b7",
+    "probe_sha256": "6bb8ca408657676a4e9877b1798282aa5efc2c9bf76367e9693eabce9da84767",
+    "test_scores_sha256": "8c47f42d0007a2420f06392b5785c71a65c61a60dcd74f3c08ea8ae53be7bace"
+  },
+  "candidate_count": 216,
+  "elapsed_seconds": 281.9080964540044,
+  "experiment_id": "PRAGMATICS-UCC-EXPANSION-QWEN-EXP002",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.09386856185261723,
+        "auroc": 0.7830703154498334,
+        "balanced_accuracy_at_0_5": 0.6884589640613736,
+        "brier_score": 0.13424647507939874,
+        "ece_10_equal_width": 0.19865274789397683,
+        "log_loss": 0.4414554903403799,
+        "macro_f1_at_0_5": 0.5121213063776173
+      },
+      "tfidf_word_char": {
+        "auprc": 0.09791242583944301,
+        "auroc": 0.7832848487968971,
+        "balanced_accuracy_at_0_5": 0.5837838533621666,
+        "brier_score": 0.04520476257197249,
+        "ece_10_equal_width": 0.10418265219055688,
+        "log_loss": 0.18518319608970585,
+        "macro_f1_at_0_5": 0.573916075787516
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": -0.0040438639868257825,
+      "auprc_difference_95ci": [
+        -0.04277576652025722,
+        0.03479932551658421
+      ],
+      "auroc_difference": -0.00021453334706367233,
+      "auroc_difference_95ci": [
+        -0.0397097375173409,
+        0.0410804159022827
+      ],
+      "resamples": 2000,
+      "seed": 20261018,
+      "unit": "official test comment"
+    },
+    "positive_prevalence": 0.024412296564195298,
+    "positive_rows": 108,
+    "rows": 4424
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence.",
+  "selection": {
+    "available_train_rows": 35472,
+    "metric": "AUPRC",
+    "screening_train_positive_rows": 130,
+    "screening_train_rows": 5000,
+    "validation_positive_rows": 99,
+    "validation_rows": 4427,
+    "winner": {
+      "end_layer": 17,
+      "normalized_depth": 0.6875,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 16,
+      "validation_auprc": 0.08312209605478167,
+      "validation_auroc": 0.7024659721055285,
+      "validation_balanced_accuracy_at_0_5": 0.5407027763774529,
+      "width": 2
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "ucc_hostile",
+  "uncertainty_limitation": "The released files omit author and article/thread IDs, so paired uncertainty is row-level and cannot support an unseen-author or unseen-article claim."
+}

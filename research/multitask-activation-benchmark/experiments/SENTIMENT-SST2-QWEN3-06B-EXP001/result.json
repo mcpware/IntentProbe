@@ -1,0 +1,74 @@
+{
+  "artifacts": {
+    "candidate_table_sha256": "8a230187a074e44b2675c4500950b8bd054f5f4af9fb9c67c2d744b1274adb46",
+    "probe_sha256": "9e69b56e53c6404d39fabf058bc64cd8c511069dc96e254f4971999170fe9c5a",
+    "test_scores_sha256": "83a7115bce10e72da1f379ce9fc49cf13ab8ed1c7d23f50bb9a4bb8e35157613"
+  },
+  "candidate_count": 252,
+  "elapsed_seconds": 500.6814776030369,
+  "experiment_id": "SENTIMENT-SST2-QWEN3-06B-EXP001",
+  "heldout_test": {
+    "models": {
+      "activation": {
+        "auprc": 0.9544176331596369,
+        "auroc": 0.9558460231988112,
+        "balanced_accuracy_at_0_5": 0.8885360575531238,
+        "brier_score": 0.0882518293567903,
+        "ece_10_equal_width": 0.06338206662402233,
+        "log_loss": 0.36714128631678766,
+        "macro_f1_at_0_5": 0.8885179485370022
+      },
+      "tfidf_word_char": {
+        "auprc": 0.9124065981822452,
+        "auroc": 0.9050841487657537,
+        "balanced_accuracy_at_0_5": 0.8275812778646285,
+        "brier_score": 0.1382542725803101,
+        "ece_10_equal_width": 0.11488547388240786,
+        "log_loss": 0.44067218480824344,
+        "macro_f1_at_0_5": 0.827558482353963
+      }
+    },
+    "paired_activation_minus_tfidf": {
+      "attempts": 2000,
+      "auprc_difference": 0.04201103497739167,
+      "auprc_difference_95ci": [
+        0.028755786175366848,
+        0.05742471908816461
+      ],
+      "auroc_difference": 0.05076187443305746,
+      "auroc_difference_95ci": [
+        0.03804515453880327,
+        0.06517090276403638
+      ],
+      "resamples": 2000,
+      "seed": 20261017,
+      "unit": "official test sentence"
+    },
+    "positive_prevalence": 0.49917627677100496,
+    "positive_rows": 909,
+    "rows": 1821
+  },
+  "research_scope": "Do not redistribute SST raw text or derived weights until dataset licence scope is confirmed. Aggregate metrics and code are publishable.",
+  "selection": {
+    "available_train_rows": 6909,
+    "metric": "AUROC",
+    "screening_train_positive_rows": 3605,
+    "screening_train_rows": 6909,
+    "validation_positive_rows": 444,
+    "validation_rows": 872,
+    "winner": {
+      "end_layer": 15,
+      "normalized_depth": 0.5178571428571429,
+      "pooling": "masked_mean",
+      "rank": 1,
+      "start_layer": 14,
+      "validation_auprc": 0.9518571976780017,
+      "validation_auroc": 0.9471931043192726,
+      "validation_balanced_accuracy_at_0_5": 0.8667171844741939,
+      "width": 2
+    }
+  },
+  "status": "COMPLETE_VALIDATION_SCREEN_AND_ONE_SHOT_TEST",
+  "task": "sentiment_sst2",
+  "uncertainty_limitation": "SST does not release author or review identifiers for a stronger clustered bootstrap"
+}

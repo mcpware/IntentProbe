@@ -1,0 +1,44 @@
+{
+  "archive_bytes": 203415,
+  "archive_sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+  "dataset_doi": "10.24432/C5CC84",
+  "dataset_id": "sms_spam_uci_unique",
+  "duplicate_groups": 290,
+  "excluded_from_model_input": [
+    "label",
+    "split",
+    "group_id",
+    "source_row",
+    "message_id"
+  ],
+  "independent_unit_limitation": "The merged collection does not retain per-message source corpus, author, or sender IDs.",
+  "label_conflict_groups": 0,
+  "model_input_columns": [
+    "text"
+  ],
+  "official_source": "https://archive.ics.uci.edu/dataset/228/sms+spam+collection",
+  "output_sha256": "0e6b1fd1ce54533dd56ff0129e1ccb5eeac039e0b04633df7201090a94a4baf7",
+  "rows_after_exact_dedup": 5159,
+  "rows_in_duplicate_groups": 705,
+  "source_ham": 4827,
+  "source_rows": 5574,
+  "source_spam": 747,
+  "split_protocol": "70/15/15 stratified split after normalized exact-text de-duplication",
+  "split_seed": 20261017,
+  "splits": {
+    "test": {
+      "rows": 774,
+      "spam_positive": 96
+    },
+    "train": {
+      "rows": 3611,
+      "spam_positive": 449
+    },
+    "validation": {
+      "rows": 774,
+      "spam_positive": 97
+    }
+  },
+  "status": "READY_FOR_FROZEN_BENCHMARK",
+  "uci_id": 228
+}

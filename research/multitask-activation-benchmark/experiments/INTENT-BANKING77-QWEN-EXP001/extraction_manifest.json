@@ -1,0 +1,39 @@
+{
+  "batch_size": 32,
+  "completed_at": "2026-10-17T21:50:08.547836+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 212.15193363279104,
+  "experiment_id": "INTENT-BANKING77-QWEN-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 585580928,
+      "sha256": "18168bbd88282f29429dce9bd5cd3e2df39c531d0143e5dd53472c82f438a854"
+    },
+    "masked_max": {
+      "bytes": 585580928,
+      "sha256": "1ccceab1a3cc01e2b641672f407f61fe34a4ce5e1cec0b476235919ae84d7a91"
+    },
+    "masked_mean": {
+      "bytes": 585580928,
+      "sha256": "cfe5d19ed7aa42c32b24db83e18353845f134393b1d7ef967fec0c977338c61d"
+    }
+  },
+  "input_sha256": "1b30ead7dbfaa74e5256d14875975fcc759ce1b607b9d76ac60058b3934e68de",
+  "maximum_tokens_before_truncation": 97,
+  "p50_tokens": 11.0,
+  "p95_tokens": 33.0,
+  "p99_tokens": 48.0,
+  "peak_rss_kib": 5587188,
+  "resumed": false,
+  "rows": 13071,
+  "rows_over_cap": 0,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    13071,
+    25,
+    896
+  ],
+  "started_at": "2026-10-17T21:46:36.395906+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0
+}

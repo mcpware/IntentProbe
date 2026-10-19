@@ -1,0 +1,22 @@
+{
+  "status": "POST_TEST_DIAGNOSTIC_NOT_CONFIRMATORY",
+  "question": "Did refitting the selected readout on all train plus validation rows cause the activation test drop?",
+  "selected_readout": {
+    "pooling": "masked_mean",
+    "start_layer": 1,
+    "end_layer": 1
+  },
+  "same_3000_selection_rows_scored_on_test": {
+    "accuracy": 0.6076648262422865,
+    "balanced_accuracy": 0.6076839826839827,
+    "macro_f1": 0.7134672459541491,
+    "maximum_predicted_class_count": 1087
+  },
+  "full_train_plus_validation_refit_scored_on_test": {
+    "accuracy": 0.6966547580383241,
+    "balanced_accuracy": 0.6967032967032967,
+    "macro_f1": 0.781548270541104,
+    "maximum_predicted_class_count": 815
+  },
+  "interpretation": "The full-data refit improves every recorded classification metric. It does not explain the gap from validation or the matched TF-IDF baseline. The remaining gap is consistent with external-test difficulty, validation-selection optimism, and fixed-budget SGD limitations; this diagnostic does not separate those causes."
+}

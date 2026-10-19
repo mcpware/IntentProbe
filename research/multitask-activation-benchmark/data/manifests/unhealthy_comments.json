@@ -1,0 +1,107 @@
+{
+  "cross_split_exact_text_groups": 7,
+  "dataset_id": "unhealthy_comments_ucc_unique",
+  "dedup_priority": [
+    "test",
+    "validation",
+    "train"
+  ],
+  "excluded_from_model_input": [
+    "antagonize",
+    "condescending",
+    "dismissive",
+    "generalisation",
+    "generalisation_unfair",
+    "healthy",
+    "hostile",
+    "sarcastic",
+    "split",
+    "group_id",
+    "comment_id",
+    "_trusted_judgments",
+    "antagonize:confidence",
+    "condescending:confidence",
+    "dismissive:confidence",
+    "generalisation:confidence",
+    "generalisation_unfair:confidence",
+    "healthy:confidence",
+    "hostile:confidence",
+    "sarcastic:confidence"
+  ],
+  "independent_unit_limitation": "The released benchmark exposes comment IDs but no author or article/thread grouping.",
+  "label_conflict_groups_removed": 2,
+  "licence": "CC BY-NC-SA 4.0",
+  "model_input_columns": [
+    "text"
+  ],
+  "normalized_exact_text_groups": 44325,
+  "official_source": "https://github.com/conversationai/unhealthy-conversations",
+  "output_sha256": "617083fa3662d6371b98cc37cd74ab4fa10c79cc71d6f99cbcd31388c1251d9f",
+  "positive_rows": {
+    "antagonize": {
+      "test": 203,
+      "train": 1689,
+      "validation": 174
+    },
+    "condescending": {
+      "test": 269,
+      "train": 1927,
+      "validation": 238
+    },
+    "dismissive": {
+      "test": 150,
+      "train": 1071,
+      "validation": 143
+    },
+    "generalisation": {
+      "test": 96,
+      "train": 752,
+      "validation": 96
+    },
+    "generalisation_unfair": {
+      "test": 91,
+      "train": 711,
+      "validation": 88
+    },
+    "healthy": {
+      "test": 4105,
+      "train": 32818,
+      "validation": 4091
+    },
+    "hostile": {
+      "test": 108,
+      "train": 923,
+      "validation": 99
+    },
+    "sarcastic": {
+      "test": 201,
+      "train": 1501,
+      "validation": 195
+    }
+  },
+  "raw_files": {
+    "test.csv": {
+      "bytes": 805078,
+      "sha256": "e657c55978bd67290c1867b04dc64a0ee8c868073979953656349d54cacb1758"
+    },
+    "train.csv": {
+      "bytes": 6488593,
+      "sha256": "8ed2018ae06b9f3b44e3642a8fe05aab45475a3dc07726a8d5af097e5fac7513"
+    },
+    "val.csv": {
+      "bytes": 809611,
+      "sha256": "4968adb126904bb8778ff4da5c91db5e98f065a8ce3d11026017f227bf47ee69"
+    }
+  },
+  "rows_after_conflict_removal_and_exact_dedup": 44323,
+  "rows_in_duplicate_groups": 55,
+  "rows_with_missing_text_excluded": 1,
+  "source_revision": "55934d0079073095af8b69807d235e40c8aceff4",
+  "source_rows": 44355,
+  "splits": {
+    "test": 4424,
+    "train": 35472,
+    "validation": 4427
+  },
+  "status": "READY_FOR_FROZEN_BENCHMARK"
+}

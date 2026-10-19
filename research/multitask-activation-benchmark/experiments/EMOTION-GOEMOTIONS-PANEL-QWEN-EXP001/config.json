@@ -1,0 +1,95 @@
+{
+  "activation_cache_reuse": {
+    "reason": "The panel snapshot has identical comment_id order and text to the previously extracted neutral-label snapshot.",
+    "source_experiment": "EMOTION-GOEMOTIONS-NEUTRAL-QWEN-EXP001",
+    "source_snapshot_sha256": "a6e25ab3a7fdd3b2d768a578011996ba8c55921dd2a5742e272bf8e9597b4550",
+    "target_snapshot_sha256": "1bddf8692dde12f25304a51dc34e076d97dd33860ca70f795d3b8a9d15770e78"
+  },
+  "backbone": {
+    "hidden_size": 896,
+    "hidden_state_outputs": 25,
+    "id": "Qwen/Qwen2.5-0.5B",
+    "max_tokens": 256,
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "truncation_side": "right"
+  },
+  "baseline": "class-weighted word 1-2 plus character 2-5 TF-IDF logistic on identical fit rows",
+  "baseline_class_weight": "balanced",
+  "candidate_family": {
+    "candidate_count_per_task": 216,
+    "layer_windows": [1, 2, 3],
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "dataset": {
+    "exact_duplicate_policy": "reuse the leakage-clean frozen GoEmotions row set and official splits",
+    "id": "goemotions_preregistered_four_emotion_panel",
+    "id_column": "comment_id",
+    "input": "data/processed/goemotions/emotion_panel_unique.parquet",
+    "rows": 53905,
+    "source_revision": "3ef52111c1fabc301880818f5a547570e926a76b",
+    "splits": {
+      "test": 5409,
+      "train": 43095,
+      "validation": 5401
+    },
+    "text_column": "text"
+  },
+  "experiment_id": "EMOTION-GOEMOTIONS-PANEL-QWEN-EXP001",
+  "head": {
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 20261018,
+    "solver": "liblinear",
+    "type": "class-weighted logistic regression"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 856,
+    "p50_tokens": 16.0,
+    "p95_tokens": 30.0,
+    "p99_tokens": 35.0,
+    "rows_over_cap": 3
+  },
+  "research_scope": "Internal research benchmark. Any later public release is a separate project-owner decision.",
+  "status": "FROZEN_BEFORE_FIRST_EMOTION_PANEL_SCREEN",
+  "tasks": {
+    "admiration": {
+      "id": "goemotions_admiration_present",
+      "label_column": "admiration",
+      "positive_label": 1,
+      "positive_rows": {"test": 504, "train": 4106, "validation": 487},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "anger": {
+      "id": "goemotions_anger_present",
+      "label_column": "anger",
+      "positive_label": 1,
+      "positive_rows": {"test": 198, "train": 1561, "validation": 194},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "curiosity": {
+      "id": "goemotions_curiosity_present",
+      "label_column": "curiosity",
+      "positive_label": 1,
+      "positive_rows": {"test": 283, "train": 2183, "validation": 246},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "sadness": {
+      "id": "goemotions_sadness_present",
+      "label_column": "sadness",
+      "positive_label": 1,
+      "positive_rows": {"test": 156, "train": 1318, "validation": 143},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    }
+  },
+  "uncertainty": {
+    "limitation": "Filtered GoEmotions files omit author and thread IDs, so the paired bootstrap is row-level and cannot support an unseen-user claim.",
+    "resamples": 2000,
+    "seed": 20261018,
+    "unit": "official test comment"
+  }
+}

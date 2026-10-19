@@ -1,0 +1,89 @@
+{
+  "backbone": {
+    "hidden_size": 896,
+    "hidden_state_outputs": 25,
+    "id": "Qwen/Qwen2.5-0.5B",
+    "max_tokens": 128,
+    "revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "truncation_side": "right"
+  },
+  "baseline": "class-weighted word 1-2 plus character 2-5 TF-IDF logistic on identical fit rows",
+  "baseline_class_weight": "balanced",
+  "candidate_family": {
+    "candidate_count_per_task": 216,
+    "layer_windows": [1, 2, 3],
+    "pooling": ["masked_mean", "last_nonpadding", "masked_max"],
+    "window_operation": "standardize each hidden output on the fit split, then mean adjacent standardized outputs"
+  },
+  "dataset": {
+    "exact_duplicate_policy": "remove all exact-text label-conflict groups, then retain test before validation before train for remaining duplicates",
+    "id": "unhealthy_comments_ucc_unique",
+    "id_column": "comment_id",
+    "input": "data/processed/unhealthy_comments/ucc_unique.parquet",
+    "rows": 44323,
+    "source_revision": "55934d0079073095af8b69807d235e40c8aceff4",
+    "splits": {
+      "test": 4424,
+      "train": 35472,
+      "validation": 4427
+    },
+    "text_column": "text"
+  },
+  "experiment_id": "PRAGMATICS-UCC-QWEN-EXP001",
+  "head": {
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 20261018,
+    "solver": "liblinear",
+    "type": "class-weighted logistic regression"
+  },
+  "label_blind_token_audit": {
+    "maximum_tokens": 102,
+    "p50_tokens": 23.0,
+    "p95_tokens": 51.0,
+    "p99_tokens": 59.0,
+    "rows_over_cap": 0
+  },
+  "research_scope": "Internal non-commercial research benchmark. Public redistribution remains a separate project-owner decision under the source licence.",
+  "status": "FROZEN_AFTER_LABEL_BLIND_TOKEN_AUDIT_BEFORE_FEATURE_EXTRACTION",
+  "tasks": {
+    "condescending": {
+      "id": "ucc_condescending",
+      "label_column": "condescending",
+      "positive_label": 1,
+      "positive_rows": {"test": 269, "train": 1927, "validation": 238},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "dismissive": {
+      "id": "ucc_dismissive",
+      "label_column": "dismissive",
+      "positive_label": 1,
+      "positive_rows": {"test": 150, "train": 1071, "validation": 143},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "generalisation_unfair": {
+      "id": "ucc_unfair_generalisation",
+      "label_column": "generalisation_unfair",
+      "positive_label": 1,
+      "positive_rows": {"test": 91, "train": 711, "validation": 88},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    },
+    "sarcastic": {
+      "id": "ucc_sarcastic",
+      "label_column": "sarcastic",
+      "positive_label": 1,
+      "positive_rows": {"test": 201, "train": 1501, "validation": 195},
+      "primary_selection_metric": "AUPRC",
+      "selection_train_row_budget": 5000
+    }
+  },
+  "uncertainty": {
+    "limitation": "The released files omit author and article/thread IDs, so the paired bootstrap is row-level and cannot support an unseen-author or unseen-article claim.",
+    "resamples": 2000,
+    "seed": 20261018,
+    "unit": "official test comment"
+  }
+}

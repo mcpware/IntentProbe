@@ -1,0 +1,39 @@
+{
+  "batch_size": 64,
+  "completed_at": "2026-10-17T23:29:28.080569+00:00",
+  "dtype": "float16",
+  "elapsed_seconds": 415.09991004597396,
+  "experiment_id": "SENTIMENT-SST2-QWEN3-06B-EXP001",
+  "files": {
+    "last_nonpadding": {
+      "bytes": 570282112,
+      "sha256": "beb2d494b98cfc0cdb3ebd6e714342c5b4727269cc8e91aeed9edc96568f4ed8"
+    },
+    "masked_max": {
+      "bytes": 570282112,
+      "sha256": "90bbbbdc927738f21625e03985d0f72d1be42fef065690a4d9b05ec8975b6d27"
+    },
+    "masked_mean": {
+      "bytes": 570282112,
+      "sha256": "ffac88f7f4d1997035964ae1115bb2efbaeea710840561aa64c02964c7f4fbac"
+    }
+  },
+  "input_sha256": "c2128696c8550aab94aa12131eeb3ecaae09991cb41bde6614d1c44e67af26d4",
+  "maximum_tokens_before_truncation": 62,
+  "p50_tokens": 22.0,
+  "p95_tokens": 41.0,
+  "p99_tokens": 50.0,
+  "peak_rss_kib": 6314788,
+  "resumed": false,
+  "rows": 9602,
+  "rows_over_cap": 0,
+  "rows_preexisting_at_start": 0,
+  "shape_per_pooling": [
+    9602,
+    29,
+    1024
+  ],
+  "started_at": "2026-10-17T23:22:32.980658+00:00",
+  "status": "ALL_POOLING_FEATURES_COMPLETE",
+  "truncation_rate": 0.0
+}

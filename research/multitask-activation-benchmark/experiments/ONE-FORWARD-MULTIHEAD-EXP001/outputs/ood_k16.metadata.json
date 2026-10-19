@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "ood_scores_k16.jsonl": {
+      "bytes": 209859,
+      "sha256": "4984e46efdf3f3327a307322618fa2cbbe800d965d003885f621b93dc7c42b9d"
+    }
+  },
+  "completed_at": "2026-10-19T01:38:10.521182+00:00",
+  "config_sha256": "de4aa906e9c5a3440f5cd434822e415c7dfdcc80fa8faa1f62eaafda4ac05189",
+  "elapsed_seconds": 25.5992020029953,
+  "experiment_id": "ONE-FORWARD-MULTIHEAD-EXP001",
+  "head_names": [
+    "toxicity",
+    "jailbreaking",
+    "spam",
+    "sentiment_positive",
+    "emotion_neutral",
+    "emotion_anger",
+    "emotion_sadness",
+    "emotion_admiration",
+    "emotion_curiosity",
+    "pragmatics_condescending",
+    "pragmatics_dismissive",
+    "pragmatics_unfair_generalisation",
+    "pragmatics_sarcastic",
+    "pragmatics_antagonize",
+    "pragmatics_generalisation",
+    "pragmatics_hostile"
+  ],
+  "k": 16,
+  "mode": "ood",
+  "model_id": "Qwen/Qwen2.5-0.5B",
+  "model_load_seconds": 1.568030701004318,
+  "model_revision": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+  "package_versions": {
+    "datasets": "4.8.4",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.8.0"
+  },
+  "peak_rss_kib": 7728368,
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "registry_sha256": "81b2a1dd277493b21cb1c0e6a0ab344b3632c165035eb9c81861e5bf7868b9a2",
+  "rows": 320,
+  "schema_version": 1,
+  "started_at": "2026-10-19T01:37:44.921938+00:00",
+  "torch_num_threads": 6,
+  "workload_sha256": "cd6d5d5fa21bd578985b301167b8e59223eb165741f3412210459f0e9de54ccc"
+}

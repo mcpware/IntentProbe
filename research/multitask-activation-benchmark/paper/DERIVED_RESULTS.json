@@ -1,0 +1,263 @@
+{
+  "claim_boundaries": {
+    "missing_system_arms": [
+      "one prompted multi-label judge call",
+      "measured fleet of compact task-specific classifiers"
+    ],
+    "ood": "Unlabelled cross-domain score-shift diagnostic only. Native heldout labels determine accuracy and calibration; non-native source scores are not called errors.",
+    "repeated_forward": "K repeated AutoModel forwards on identical tokenized input without an LM head; this is a lower bound for K separate LLM-judge calls."
+  },
+  "cross_backbone": {
+    "backbones": 6,
+    "binary_cells": 24,
+    "sentiment": {
+      "cells": 6,
+      "normalized_depth_range": [
+        0.5,
+        0.6071428571428571
+      ],
+      "planned_comparison_counts": {
+        "activation_advantage_both_metrics": 6,
+        "unresolved": 0
+      },
+      "readout_counts": {
+        "last_nonpadding": 1,
+        "masked_max": 0,
+        "masked_mean": 5
+      }
+    },
+    "spam": {
+      "cells": 6,
+      "normalized_depth_range": [
+        0.4375,
+        0.75
+      ],
+      "planned_comparison_counts": {
+        "activation_advantage_both_metrics": 2,
+        "unresolved": 4
+      },
+      "readout_counts": {
+        "last_nonpadding": 0,
+        "masked_max": 3,
+        "masked_mean": 3
+      }
+    },
+    "tasks": 4,
+    "toxicchat": {
+      "cells": 12,
+      "depth": {
+        "cross_task_n_models": 6,
+        "cross_task_spearman_pvalue": 0.42466250756136453,
+        "cross_task_spearman_rho": -0.4058397249567139,
+        "descriptive_variance_decomposition": {
+          "interaction_share": 0.5482866043613704,
+          "model_share": 0.4347826086956525,
+          "task_share": 0.016930786942977033,
+          "total_ss": 0.4359764739229024
+        },
+        "maximum": 0.8333333333333334,
+        "median": 0.4375,
+        "minimum": 0.25,
+        "within_model_absolute_task_difference_median": 0.18750000000000003
+      },
+      "inference_boundary": "Task/model shares are descriptive: two tasks provide no replicated interaction error term.",
+      "pooling_counts": {
+        "jailbreaking": {
+          "masked_max": 3,
+          "masked_mean": 3
+        },
+        "toxicity": {
+          "masked_mean": 6
+        }
+      },
+      "status": "COMPLETE_SIX_BACKBONE_TWO_TASK_CROSSED_MATRIX",
+      "test": {
+        "activation_advantage_both_metrics_count": 2,
+        "jailbreak_activation_advantage_both_metrics_count": 0,
+        "toxicity_activation_advantage_both_metrics_count": 2
+      },
+      "validation_policy_comparison": {
+        "limitation": "Policies and regret are descriptive on the same validation cells used to choose them.",
+        "mean_auprc": {
+          "cell_specific": 0.8220032703043391,
+          "model_specific": 0.8078452628688221,
+          "task_specific": 0.7882476462187853,
+          "universal": 0.7871935590683958
+        },
+        "mean_regret_vs_cell_specific": {
+          "model_specific": 0.014158007435516984,
+          "task_specific": 0.03375562408555377,
+          "universal": 0.03480971123594323
+        },
+        "model_specific": {
+          "LiquidAI/LFM2.5-230M": {
+            "mean_validation_auprc": 0.8141319489477047,
+            "pooling": "masked_mean",
+            "target_depth": 0.535,
+            "width": 3
+          },
+          "Qwen/Qwen2.5-0.5B": {
+            "mean_validation_auprc": 0.7788250372354928,
+            "pooling": "masked_mean",
+            "target_depth": 0.47500000000000003,
+            "width": 3
+          },
+          "Qwen/Qwen3-0.6B-Base": {
+            "mean_validation_auprc": 0.8011753835235471,
+            "pooling": "masked_mean",
+            "target_depth": 0.5700000000000001,
+            "width": 2
+          },
+          "Qwen/Qwen3.5-0.8B": {
+            "mean_validation_auprc": 0.8348055726384509,
+            "pooling": "masked_mean",
+            "target_depth": 0.395,
+            "width": 1
+          },
+          "ibm-granite/granite-4.0-350m-base": {
+            "mean_validation_auprc": 0.8114226319789524,
+            "pooling": "masked_mean",
+            "target_depth": 0.64,
+            "width": 2
+          },
+          "openbmb/MiniCPM5-1B-Base": {
+            "mean_validation_auprc": 0.8067110028887843,
+            "pooling": "masked_mean",
+            "target_depth": 0.52,
+            "width": 1
+          }
+        },
+        "task_specific": {
+          "jailbreaking": {
+            "mean_validation_auprc": 0.824798557128905,
+            "pooling": "masked_mean",
+            "target_depth": 0.47500000000000003,
+            "width": 1
+          },
+          "toxicity": {
+            "mean_validation_auprc": 0.7516967353086655,
+            "pooling": "masked_mean",
+            "target_depth": 0.47500000000000003,
+            "width": 3
+          }
+        },
+        "universal": {
+          "mean_validation_auprc": 0.7871935590683958,
+          "pooling": "masked_mean",
+          "target_depth": 0.5,
+          "width": 2
+        }
+      }
+    }
+  },
+  "paper": "one-forward-sixteen-decisions",
+  "schema_version": 1,
+  "sentinel": {
+    "completed_cells": 6,
+    "expected_cells": 6,
+    "fdr": {
+      "alpha": 0.05,
+      "family_size": 12,
+      "method": "Benjamini-Hochberg",
+      "outcome": "activation-versus-zero-shot/rubric choice-logprob AUPRC",
+      "rejections": 6
+    },
+    "summary_artifact": "../experiments/SENTINEL-JUDGE-VS-PROBE-EXP001/RESULT_SUMMARY.md"
+  },
+  "shared_qwen_suite": {
+    "heads": 16,
+    "native_auprc_range": [
+      0.08359061618504855,
+      0.9804126912560603
+    ],
+    "native_auroc_range": [
+      0.7329902700563015,
+      0.9958824975417896
+    ],
+    "native_prevalence_range": [
+      0.020569620253164556,
+      0.49917627677100496
+    ],
+    "normalized_depth_range": [
+      0.125,
+      0.7916666666666666
+    ],
+    "pooling_counts": {
+      "masked_max": 5,
+      "masked_mean": 11
+    },
+    "sources": [
+      "goemotions",
+      "sms_spam",
+      "sst2",
+      "toxicchat",
+      "ucc"
+    ]
+  },
+  "status": "DERIVED_FROM_COMPLETE_FROZEN_ARTIFACTS",
+  "systems": {
+    "k1": {
+      "cumulative_probe_bytes": 31917,
+      "k": 1,
+      "mean_forward_ms": 67.845894475,
+      "mean_heads_ms": 0.38320042499999996,
+      "mean_tokenization_ms": 0.4026045625,
+      "mean_total_ms": 68.6316994625,
+      "median_total_ms": 62.925655500000005,
+      "one_forward_mean_ratio_ci_high": 1.0,
+      "one_forward_mean_ratio_ci_low": 1.0,
+      "one_forward_mean_ratio_vs_k1": 1.0,
+      "one_forward_median_ratio_ci_high": 1.0,
+      "one_forward_median_ratio_ci_low": 1.0,
+      "one_forward_median_ratio_vs_k1": 1.0,
+      "p95_total_ms": 94.82186714999999,
+      "peak_rss_delta_vs_k1_mib": 0.0,
+      "peak_rss_mib": 3616.69921875,
+      "repeated_forward_mean_ms": 57.883513400000005,
+      "repeated_forward_ratio_ci_high": 1.0,
+      "repeated_forward_ratio_ci_low": 1.0,
+      "repeated_forward_ratio_vs_k1": 1.0,
+      "repeated_over_one_forward_ci_high": 0.9819564200669765,
+      "repeated_over_one_forward_ci_low": 0.8733960998507322,
+      "repeated_over_one_forward_ratio": 0.9361129013012959,
+      "rows": 80
+    },
+    "k16": {
+      "cumulative_probe_bytes": 386121,
+      "k": 16,
+      "mean_forward_ms": 71.0710611625,
+      "mean_heads_ms": 1.8532177874999998,
+      "mean_tokenization_ms": 0.41238748750000004,
+      "mean_total_ms": 73.3366664375,
+      "median_total_ms": 67.4629615,
+      "one_forward_mean_ratio_ci_high": 1.0780151028005578,
+      "one_forward_mean_ratio_ci_low": 1.055503368502766,
+      "one_forward_mean_ratio_vs_k1": 1.0685538462816409,
+      "one_forward_median_ratio_ci_high": 1.0800459174650845,
+      "one_forward_median_ratio_ci_low": 1.0495171603192806,
+      "one_forward_median_ratio_vs_k1": 1.0721058201769547,
+      "p95_total_ms": 106.6025942,
+      "peak_rss_delta_vs_k1_mib": 0.73046875,
+      "peak_rss_mib": 3617.4296875,
+      "repeated_forward_mean_ms": 956.7061062999999,
+      "repeated_forward_ratio_ci_high": 16.693826274948034,
+      "repeated_forward_ratio_ci_low": 16.38721647826092,
+      "repeated_forward_ratio_vs_k1": 16.528127788110385,
+      "repeated_over_one_forward_ci_high": 15.485566980619588,
+      "repeated_over_one_forward_ci_low": 15.043130537372646,
+      "repeated_over_one_forward_ratio": 15.258962751202098,
+      "rows": 80
+    },
+    "k_values": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "latency_rows": 80,
+    "ood_rows": 320,
+    "runtime_replay_minimum_pearson": 0.9798610259890367,
+    "runtime_replay_worst_mean_absolute_difference": 0.006451349534369761
+  }
+}
