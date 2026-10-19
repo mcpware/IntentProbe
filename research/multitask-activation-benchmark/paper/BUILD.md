@@ -4,13 +4,13 @@ Canonical source: `DRAFT.md`. Author: Wan Sheng Leung. Reserved DOI:
 `10.5281/zenodo.23471117`. Publication remains a separately approved action.
 
 The PDF's relative evidence links are pinned to source commit
-`d490a5d71ae43973748dfea0d1b06d69209eb8d9`, which includes the revised manuscript, three figure
+`fe548ae70da40f7d25dd988e1e6642763ff4abb1`, which includes the revised manuscript, three figure
 sources, source ledger, derived results, training/extraction code and original frozen experiments.
 The final PDF and release checksum ledger are committed separately after rendering.
 
 From the repository root, using the installed Markdown 3.10.2 and WeasyPrint 69.0:
 
-`python3 scripts/build_multitask_preprint.py --output research/multitask-activation-benchmark/paper/intentprobe-empirical-v0.1.3.pdf --evidence-ref d490a5d71ae43973748dfea0d1b06d69209eb8d9`
+`python3 scripts/build_multitask_preprint.py --output research/multitask-activation-benchmark/paper/intentprobe-empirical-v0.1.3.pdf --evidence-ref fe548ae70da40f7d25dd988e1e6642763ff4abb1`
 
 To regenerate the selected-window SVG and 300-DPI PNG before rendering:
 

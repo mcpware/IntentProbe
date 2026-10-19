@@ -64,8 +64,14 @@ the architecture candidate remains unchanged. The refreshed release ledger has 5
 
 - [x] Bridge normalized midpoint depth and actual window coverage, including the 25-output count.
 - [x] Build a separate two-panel latency SVG/PNG; keep companion architecture assets unchanged.
-- [ ] Complete full tests, code/style review, PDF inspection and refreshed release hashes.
-- [ ] Synchronize the reviewed PDF/source and replace the exact publication preview; stop before Publish.
+- [x] Complete full tests, code/style review, PDF inspection and refreshed release hashes.
+- [x] Synchronize the reviewed PDF/source and replace the exact publication preview; stop before Publish.
+
+The dual-panel candidate remains 15 pages with three figures and the same abstract. All 107 tests
+pass with five skipped and three dependency warnings; one fresh CodeRabbit review reported zero
+findings. The new SVG reproduces byte for byte. The revised source/PDF have been saved to the
+same unsubmitted draft and downloaded for verification; metadata and the architecture candidate
+remain unchanged. The current-release ledger contains 60 entries.
 
 ### Initial two-paper checks
 
