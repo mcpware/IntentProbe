@@ -26,7 +26,7 @@ This changes presentation, not experiments, weights, datasets, task scores or co
   census. The existing validation-selection regret and task comparisons have their own stated scope.
 - Turn the repeated-forward ratio into a full LLM-judge speedup claim: the missing comparator work remains explicit.
 
-## Checks
+## Initial presentation checks
 
 The full suite passes 104 tests with five skipped and three dependency warnings. The new renderer
 checks manifest integrity and matrix encoding before plotting. Two fresh SVG renders produced
@@ -38,3 +38,20 @@ The final PDF has 15 pages. The abstract, illustration, readout census, latency 
 tables and public evidence links are checked during candidate preparation. Both records remain
 unsubmitted; the prior publication preview is replaced with exact revised files before any Publish
 authorization is requested. No new experiment, package installation or deployment is part of this revision.
+
+## Depth-definition and dual-panel follow-up
+
+A subsequent author-approved clarification defines normalized depth as the window midpoint divided
+by final output index 24. Midpoints 3–19 yield 0.125–0.792; the actual windows span indices 2–20
+among 25 outputs (0–24). These values use different summaries of the same selected windows.
+
+The empirical latency figure now has two equally sized panels with true linear K axes. Panel (a)
+shows the 80-input shared-path overhead in percent, with the archived paired mean-ratio intervals
+transformed into percent. Panel (b) shows matched ten-input absolute times and mean-time intervals.
+It does not reuse the 80-input endpoint as the matched comparator's denominator. The earlier
+architecture latency asset is retained unchanged; only the empirical paper uses the new figure.
+
+The full suite now passes 107 tests with five skipped and three dependency warnings, including
+checks of the distinct samples, interval transformation, equal-sized linear axes, percentage
+labels, absence of insets and explicit midpoint/coverage wording. The new SVG reproduces exactly
+within the installed rendering environment. The paper remains 15 pages with three figures.

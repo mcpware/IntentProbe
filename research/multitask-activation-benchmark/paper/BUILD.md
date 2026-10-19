@@ -16,8 +16,12 @@ To regenerate the selected-window SVG and 300-DPI PNG before rendering:
 
 `python3 scripts/render_multitask_readouts.py`
 
+To regenerate the separate scaling and matched-cost panels:
+
+`python3 scripts/render_multitask_latency.py`
+
 No model or experiment is rerun to build the PDF. The renderer reads the approved local
-illustration, unchanged latency curve and registry-derived readout-window figure. It rejects absent
+illustration, empirical-only two-panel latency figure and registry-derived readout-window figure. It rejects absent
 relative targets, out-of-repository paths, mutable evidence
 refs, remote images and non-public anchor schemes. The generated PDF contains public links,
 not local filesystem paths. Font/rendering environment changes may alter PDF bytes; the

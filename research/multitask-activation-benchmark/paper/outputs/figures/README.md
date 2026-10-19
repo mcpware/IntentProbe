@@ -1,4 +1,6 @@
-# Selected readout windows
+# Empirical paper figures
+
+## Selected readout windows
 
 Figure 2 answers one question: which hidden-state windows and token-pooling rules were selected
 for the 16 frozen heads served by the shared Qwen2.5-0.5B runtime?
@@ -26,6 +28,29 @@ could work. The paper separately reports validation-selection regret and native 
 It reuses the repository's existing Matplotlib style rather than a generic bar-chart helper,
 because this figure encodes selected discrete intervals instead of a magnitude per category.
 
-Figure 3 reuses the existing latency SVG unchanged from `docs/`. It plots the matched ten-input
-comparison and its row-bootstrap intervals, not the separate 80-input scaling means. Its caption
-preserves the repeated-forward lower-bound and run-order uncertainty boundaries.
+## Two-panel latency figure
+
+Figure 3 uses `latency-panels.svg` and a 300-DPI `latency-panels.png`, generated with:
+
+`python3 scripts/render_multitask_latency.py`
+
+The two equally sized panels answer different questions and use true linear K axes:
+
+- Panel (a): how much does shared-path cost increase when more heads are attached? It uses all
+  80 matched inputs per K and plots `100 * (mean_total_ms(K) / mean_total_ms(1) - 1)`. Error bars
+  transform the archived paired mean-ratio 95% intervals in `SCALING-SUMMARY.csv` by the same
+  subtraction and multiplication. They are not intervals for individual timing observations.
+- Panel (b): how does shared inference compare with repeating the backbone? It uses the same
+  ten inputs in both paths and plots mean milliseconds with the existing 2,000-resample
+  row-bootstrap mean-time intervals and fixed seeds. The repeated/shared endpoint ratio is
+  15.26, using 62.70 ms rather than the 80-input mean of 73.34 ms as its denominator.
+
+The renderer verifies row identity, panel sizes, the summary means/ratios and ratio-interval
+bounds before plotting. Both y axes are linear: percentage increase on the left, absolute
+milliseconds from zero on the right. Marker shape and line style distinguish the right-hand
+series as well as colour. There is no inset. These are reformatted frozen measurements, not a
+new timing experiment. Intervals capture prompt variation, not repeated-run or run-order
+uncertainty. The repeated-forward comparator omits prompting, output scoring and generation.
+
+The architecture companion's earlier latency SVG under `docs/` is unchanged; this paper-only
+asset does not modify or rebuild the architecture PDF.

@@ -299,9 +299,11 @@ exposes the cost of silver-to-human transfer mismatch.
 
 ### 5.3 Sixteen native heldout heads
 
-The shared Qwen suite contains 11 masked-mean and five masked-max winners. Selected normalized depth
-spans 0.125--0.792. Native AUPRC spans 0.0836--0.9804 and AUROC 0.7330--0.9959; positive prevalence
-spans 0.0206--0.4992.
+The shared Qwen suite contains 11 masked-mean and five masked-max winners. Normalized depth is the
+window midpoint divided by the final output index, 24. Selected midpoints range from output 3 to 19,
+giving normalized depths of 0.125--0.792; the windows themselves span output indices 2--20.
+There are 25 hidden-state outputs, indexed 0--24. Native AUPRC spans 0.0836--0.9804 and AUROC
+0.7330--0.9959; positive prevalence spans 0.0206--0.4992.
 
 <figure>
 <img src="outputs/figures/selected-readout-windows.svg" alt="Sixteen head rows mark selected windows across hidden-state outputs 0 to 24. Eleven use masked mean and five use masked maximum. Selected outputs span 2 to 20; none includes final output 24. Pooling is also labelled in text." />
@@ -354,8 +356,8 @@ The second panel compares both paths on the same ten prompts.
 | 16 | 62.70 | 956.71 | 15.26 |
 
 <figure>
-<img src="../../../docs/one-local-model-pass-many-task-specific-probes-latency.svg" alt="On the matched ten-input panel, latency for one forward plus K heads remains around 60 to 63 milliseconds as K grows from 1 to 16, while K repeated backbone forwards rise from 57.88 to 956.71 milliseconds. Error bars show row-bootstrap 95 percent confidence intervals." />
-<figcaption><strong>Figure 3. Shared inference avoids repeated backbone work.</strong> Both curves use the same ten inputs from the second table, with 2,000-resample row-bootstrap 95% confidence intervals. At K=16, shared inference takes 62.70 ms versus 956.71 ms for repeated forwards, a ratio of 15.26. The repeated-forward arm omits task prompts, output scoring and generation; it is not a full LLM-judge implementation. The separate 80-input scaling panel in the first table gives 68.63 to 73.34 ms; those values are not the plotted ten-input means. Intervals capture prompt variation, not repeated-run or run-order uncertainty.</figcaption>
+<img src="outputs/figures/latency-panels.svg" alt="Two equally sized panels use linear K axes at 1, 2, 4, 8 and 16. Panel a shows the 80-input shared-path mean-latency increase relative to K=1, reaching 6.9 percent at K=16, with paired ratio confidence intervals. Panel b shows the matched ten-input mean times: 62.70 milliseconds shared versus 956.71 milliseconds for repeated backbone forwards at K=16, with mean-time confidence intervals." />
+<figcaption><strong>Figure 3. Shared-path scaling and matched inference cost.</strong> (a) The 80-input panel plots the mean-latency increase relative to K=1, using the archived 2,000-resample paired row-bootstrap ratio intervals. The mean rises from 68.63 to 73.34 ms (+6.9%). (b) Both paths use the same ten inputs: at K=16, shared inference takes 62.70 ms versus 956.71 ms for repeated forwards, a ratio of 15.26. Error bars here are 2,000-resample row-bootstrap intervals for each mean time. All intervals are 95%; both K axes are linear, and the panels use different labelled y units. Repeated forwards omit task prompts, output scoring and generation, so they are not a full LLM-judge implementation. Intervals capture prompt variation, not repeated-run or run-order uncertainty.</figcaption>
 </figure>
 
 At K=16, the paired mean-latency ratio to K=1 on the 80-row shared-path panel is 1.069, 95% CI

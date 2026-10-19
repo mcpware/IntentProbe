@@ -39,9 +39,12 @@ architecture title and presents the system through its implementation and measur
   review branch. The source ref and reproducible command are recorded in `paper/BUILD.md`.
 - The empirical abstract now leads with measured serving cost and is shortened from 363 to 220
   whitespace-delimited words. Broader project-task scope is retained in Section 3.2.
-- The empirical paper keeps the architecture illustration and adds the unchanged matched-panel
-  latency SVG plus a reproducible 16-head selected-window census. Captions distinguish the
-  ten-input comparison from the 80-input scaling means and selection counts from performance.
+- The empirical paper keeps the architecture illustration and adds a reproducible 16-head
+  selected-window census plus an equally sized two-panel latency figure. The latter separates
+  80-input shared-path percentage overhead from ten-input absolute inference costs, with true
+  linear K axes and their own labelled y units and confidence intervals. No inset is needed.
+- Section 5.3 defines normalized depth as window midpoint divided by final output index 24,
+  distinguishing midpoint outputs 3–19 from covered output indices 2–20 among 25 outputs.
 
 No benchmark dataset, weights, predictions, frozen experiment result JSON, confidence interval, or measured value is
 changed. The current 16-head runtime remains research code. General registry, hot-loading, and
@@ -55,8 +58,9 @@ they are not regenerated to match the changing main branch.
 
 ## Candidate checks
 
-The full test suite passes (104 tests; 5 skipped), including three figure-preservation checks,
-the two-paper citation/durable-link/rendering checks, and four added abstract/readout-figure checks.
+The full test suite passes (107 tests; 5 skipped), including three figure-preservation checks,
+the two-paper citation/durable-link/rendering checks, four abstract/readout-figure checks, and three
+added depth-definition / separate-latency-panel checks.
 The CFF validates against the official 1.2.0 schema. YAML front matter and site configuration parse,
 and the new GitHub blob links resolve to local source files. Benchmark artifacts and derived
 result JSON have no diff. The derived-ledger numerical-content comparison also passes.

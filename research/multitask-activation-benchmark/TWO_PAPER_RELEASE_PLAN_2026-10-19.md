@@ -60,7 +60,14 @@ warnings. A fresh CodeRabbit review reported zero findings. Revised empirical so
 and description have been saved to the same unsubmitted draft and downloaded for byte checks;
 the architecture candidate remains unchanged. The refreshed release ledger has 56 entries.
 
-### Initial two-paper candidate
+### Depth and two-panel follow-up
+
+- [x] Bridge normalized midpoint depth and actual window coverage, including the 25-output count.
+- [x] Build a separate two-panel latency SVG/PNG; keep companion architecture assets unchanged.
+- [ ] Complete full tests, code/style review, PDF inspection and refreshed release hashes.
+- [ ] Synchronize the reviewed PDF/source and replace the exact publication preview; stop before Publish.
+
+### Initial two-paper checks
 
 The baseline independent check passed 97 tests, with 5 skipped and 3 dependency warnings.
 All 39 current release hashes passed before this work started. Those are baseline

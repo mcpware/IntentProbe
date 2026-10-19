@@ -82,7 +82,7 @@ def test_empirical_pdf_uses_the_approved_local_figure(
     assert "Wan Sheng Leung" in text
     assert EMPIRICAL_DOI in text and ARCHITECTURE_DOI in text
     assert (ROOT / "docs/intentprobe-architecture-overview.png").as_uri() in text
-    assert (ROOT / "docs/one-local-model-pass-many-task-specific-probes-latency.svg").as_uri() in text
+    assert (BENCH / "paper/outputs/figures/latency-panels.svg").as_uri() in text
     assert (BENCH / "paper/outputs/figures/selected-readout-windows.svg").as_uri() in text
     assert text.count("<figure>") == 3
     assert 'href="file:' not in text
